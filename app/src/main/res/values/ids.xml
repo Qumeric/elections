@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="usernameEditText" type="id" />
+    <item name="passwordEditText" type="id" />
+    <item name="signInButton" type="id" />
+    <item name="formLogin" type="id" />
+    <item name="yesButton" type="id" />
+    <item name="noButton" type="id" />
+</resources>

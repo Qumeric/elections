@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Elections</string>
+    <string name="sign_in_username">Username</string>
+    <string name="sign_in_password">Password</string>
+    <string name="sign_in_button">Sign In</string>
+    <string name="sign_in_alert_invalid_user_title">Sign In Failed!</string>
+    <string name="sign_in_alert_invalid_user_message">Invalid username or password.</string>
+    <string name="dialog_button_close">Close</string>
+    <string name="sign_in_alert_access_denied_title">Access Denied</string>
+    <string name="sign_in_alert_access_denied_msg">You do not have permission to access this application!</string>
+    <string name="no_button">No</string>
+    <string name="yes_button">Yes</string>
+
+    <!--
+        Lists of questions in each question category
+        FIXME unused
+    -->
+    <string-array name="party_questions">
+        <item>Test party</item>
+    </string-array>
+    <string-array name="public_questions">
+        <item>Test public</item>
+    </string-array>
+    <string-array name="media_questions">
+        <item>Test media</item>
+    </string-array>
+    <string-array name="foreign_questions">
+        <item>Test foreign</item>
+    </string-array>
+    <string-array name="business_questions">
+        <item>Test business</item>
+    </string-array>
+    <string-array name="staff_questions">
+        <item>Test staff</item>
+    </string-array>
+</resources>
