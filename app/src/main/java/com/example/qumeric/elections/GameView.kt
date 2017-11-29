@@ -13,6 +13,10 @@ class GameView : AnkoComponent<GameActivity> {
 
         verticalLayout {
             gravity = Gravity.CENTER
+            textView {
+                gravity = Gravity.CENTER
+                text = String.format("Day: %d", gamestate.step)
+            }
             for ((group, opinion) in gamestate.opinions) {
                 textView {
                     gravity = Gravity.CENTER

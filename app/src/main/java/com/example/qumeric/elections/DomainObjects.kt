@@ -87,47 +87,7 @@ class Gamestate(candidate: Candidate, val questions: HashMap<String, QuestionGro
     var step = 1
     val opinions: Opinions = candidate.opinions
     init {
-        Log.d("GAMESTATE", "Gamestate init")
-        /*val groups = mapOf(
-                "party" to mutableListOf(
-                        Question("party question", listOf(
-                                Answer("yes", mapOf("party" to 1)),
-                                Answer("no", mapOf("party" to -1)))
-                        )
-                ),
-                "public" to mutableListOf(
-                        Question("public question", listOf(
-                                Answer("yes", mapOf("public" to 1)),
-                                Answer("no", mapOf("public" to -1)))
-                        )
-                ),
-                "media" to mutableListOf(
-                        Question("media question", listOf(
-                                Answer("yes", mapOf("media" to 1)),
-                                Answer("no", mapOf("media" to -1)))
-                        )
-                ),
-                "foreign" to mutableListOf(
-                        Question("foreign question", listOf(
-                                Answer("yes", mapOf("foreign" to 1)),
-                                Answer("no", mapOf("foreign" to -1)))
-                        )
-                ),
-                "business" to mutableListOf(
-                        Question("business question", listOf(
-                                Answer("yes", mapOf("business" to 1)),
-                                Answer("no", mapOf("business" to -1)))
-                        )
-                ),
-                "staff" to mutableListOf(
-                        Question("staff question", listOf(
-                                Answer("yes", mapOf("staff" to 1)),
-                                Answer("no", mapOf("staff" to -1)))
-                        )
-                ))
-        for ((group, qList) in groups) {
-            questions[group] = QuestionGroup(qList)
-        }*/
+        Log.d("Gamestate", "Gamestate init")
     }
 
     fun getQuestion(group: String) : Question {
