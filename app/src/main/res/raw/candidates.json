@@ -1,0 +1,19 @@
+[
+  {
+    "name": "Нэвэльный",
+    "descripition": "Make Russia blet again",
+    "basicStats": {
+      "party": 50,
+      "public": 50,
+      "foreign": 50,
+      "media": 50,
+      "business": 50,
+      "staff": 50
+    },
+    "basicLevels": {
+      "liberal": 50,
+      "postive": 50,
+      "peaceful": 50
+    }
+  }
+]
