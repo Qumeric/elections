@@ -6,8 +6,9 @@ import java.util.*
 
 typealias Opinions = HashMap<String, Opinion>
 
-class Candidate(val name: String, val description: String, _opinions: Map<String, Int>) {
+class Candidate(val name: String, val description: String, _opinions: Map<String, Int>, _levels: Map<String, Int>) {
     val opinions: Opinions = hashMapOf()
+    val levels = _levels
     init {
         for ((group, value) in _opinions) {
             opinions[group] = Opinion()
@@ -16,18 +17,9 @@ class Candidate(val name: String, val description: String, _opinions: Map<String
     }
 }
 
-val candidates = listOf(Candidate(
-        "Нэвэльный",
-        "Make Russia блэт again",
-        mapOf("party" to 50,
-                "public" to 50,
-                "foreign" to 50,
-                "media" to 50,
-                "business" to 50,
-                "staff" to 50)))
 
 // default value (while candidate is unset)
-val fakeCandidate = Candidate("Fake", "Something went wrong", mapOf())
+val fakeCandidate = Candidate("Fake", "Something went wrong", mapOf(), mapOf())
 
 class Question(val text:String, val answers: List<Answer>): Serializable {
     fun selectAnswer(answer: Int) {

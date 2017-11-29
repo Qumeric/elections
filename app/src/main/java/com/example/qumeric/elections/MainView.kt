@@ -14,7 +14,7 @@ class MainView : AnkoComponent<MainActivity> {
             gravity = Gravity.CENTER
             id = R.id.formLogin
 
-            for (candidate in candidates) {
+            for (candidate in loadCandidates(context.resources)) {
                 val b = button {
                     onClick {
                         gamestate = Gamestate(candidate)
