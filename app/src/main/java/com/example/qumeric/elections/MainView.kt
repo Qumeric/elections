@@ -14,10 +14,10 @@ class MainView : AnkoComponent<MainActivity> {
             gravity = Gravity.CENTER
             id = R.id.formLogin
 
-            for (candidate in loadCandidates(context.resources)) {
+            for (candidate in loadCandidates(resources)) {
                 val b = button {
                     onClick {
-                        gamestate = Gamestate(candidate)
+                        gamestate = Gamestate(candidate, loadQuestions(resources))
                         ctx.startActivity(ctx.intentFor<GameActivity>())
                     }
                 }.lparams(width= matchParent, height = wrapContent)

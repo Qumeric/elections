@@ -3,12 +3,13 @@ package com.example.qumeric.elections
 import android.util.Log
 import java.io.Serializable
 import java.util.*
+import kotlin.collections.HashMap
 
 typealias Opinions = HashMap<String, Opinion>
 
-class Candidate(val name: String, val description: String, _opinions: Map<String, Int>, _levels: Map<String, Int>) {
+// Candidates is a candidate which player can/does play.
+class Candidate(val name: String, val description: String, _opinions: Map<String, Int>, val levels: Map<String, Int>) {
     val opinions: Opinions = hashMapOf()
-    val levels = _levels
     init {
         for ((group, value) in _opinions) {
             opinions[group] = Opinion()
@@ -21,7 +22,7 @@ class Candidate(val name: String, val description: String, _opinions: Map<String
 // default value (while candidate is unset)
 val fakeCandidate = Candidate("Fake", "Something went wrong", mapOf(), mapOf())
 
-class Question(val text:String, val answers: List<Answer>): Serializable {
+class Question(val text:String, val description: String, val answers: List<Answer>): Serializable {
     fun selectAnswer(answer: Int) {
         answers[answer].select()
     }
@@ -31,6 +32,7 @@ class Answer(val statement:String, val impact:Map<String, Int>): Serializable {
     fun select() {
         gamestate.step += 1
         for ((groupName, delta) in impact) {
+            Log.e("Answer", groupName)
             gamestate.opinions[groupName]!!.add(delta)
         }
     }
@@ -59,6 +61,8 @@ class Opinion() : Serializable{
     }
 }
 
+// QuestionGroup is a wrapper around list of questions.
+// It shuffles data and provides getter to get random unused answer from the list.
 class QuestionGroup(val questions: MutableList<Question>) {
     var nextQuestionIndex = 0
     init {
@@ -77,13 +81,14 @@ class QuestionGroup(val questions: MutableList<Question>) {
     }
 }
 
-class Gamestate(candidate: Candidate) {
+// Gamestate is a class which stores global game state.
+// It should be loaded/created once and used as a singleton.
+class Gamestate(candidate: Candidate, val questions: HashMap<String, QuestionGroup>) {
     var step = 1
-    val questions: HashMap<String, QuestionGroup> = hashMapOf()
     val opinions: Opinions = candidate.opinions
     init {
         Log.d("GAMESTATE", "Gamestate init")
-        val groups = mapOf(
+        /*val groups = mapOf(
                 "party" to mutableListOf(
                         Question("party question", listOf(
                                 Answer("yes", mapOf("party" to 1)),
@@ -122,7 +127,7 @@ class Gamestate(candidate: Candidate) {
                 ))
         for ((group, qList) in groups) {
             questions[group] = QuestionGroup(qList)
-        }
+        }*/
     }
 
     fun getQuestion(group: String) : Question {
@@ -130,4 +135,4 @@ class Gamestate(candidate: Candidate) {
     }
 }
 
-var gamestate: Gamestate = Gamestate(fakeCandidate)
+var gamestate: Gamestate = Gamestate(fakeCandidate, HashMap())
