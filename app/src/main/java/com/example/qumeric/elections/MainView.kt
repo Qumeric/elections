@@ -17,7 +17,8 @@ class MainView : AnkoComponent<MainActivity> {
             for (candidate in loadCandidates(resources)) {
                 val b = button {
                     onClick {
-                        gamestate = Gamestate(candidate, loadQuestions(resources))
+                        gamestate = Gamestate(candidate, loadQuestions(resources),
+                                loadFakeCandidates(resources))
                         ctx.startActivity(ctx.intentFor<GameActivity>())
                     }
                 }.lparams(width= matchParent, height = wrapContent)

@@ -2,6 +2,7 @@ package com.example.qumeric.elections
 
 import android.content.Context
 import android.content.res.Resources
+import android.util.Log
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -33,6 +34,29 @@ fun loadCandidates(resources: Resources): List<Candidate> {
                 JSONcandiate.getString("name"),
                 JSONcandiate.getString("description"),
                 opinions, levels)
+
+        candidates.add(candidate)
+    }
+    return candidates
+}
+
+fun loadFakeCandidates(resources: Resources): MutableList<FakeCandidate> {
+    val jsonString = resources.openRawResource(R.raw.fakecandidates)
+            .bufferedReader().use { it.readText() }
+    val reader = JSONArray(jsonString)
+
+    val candidates = mutableListOf<FakeCandidate>()
+
+    for (i in 0 until reader.length()) {
+        val JSONcandidate = reader.getJSONObject(i)
+
+        Log.d("loadFakeCandidates", "Name is: " + JSONcandidate.getString("name"))
+
+        val candidate = FakeCandidate(
+                JSONcandidate.getString("name"),
+                JSONcandidate.getString("description"),
+                JSONcandidate.getInt("level")
+        )
 
         candidates.add(candidate)
     }

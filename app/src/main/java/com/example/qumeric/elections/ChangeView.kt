@@ -20,7 +20,11 @@ class ChangeView(val oldOpinions: Map<String, Int>): AnkoComponent<ChangeActivit
             }
             button("OK") {
                 onClick {
-                    ctx.startActivity(ctx.intentFor<GameActivity>())
+                    if (gamestate.isPollTime()) {
+                        ctx.startActivity(ctx.intentFor<PollActivity>())
+                    } else {
+                        ctx.startActivity(ctx.intentFor<GameActivity>())
+                    }
                 }
             }
         }

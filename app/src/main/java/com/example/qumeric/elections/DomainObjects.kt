@@ -16,6 +16,22 @@ class Candidate(val name: String, val description: String, _opinions: Map<String
             opinions[group]!!.add(value)
         }
     }
+
+    fun getGeneralOpinion(): Double {
+        var total: Double = 0.toDouble()
+        for ((_, value) in opinions) {
+            total += value.value
+        }
+        return total/opinions.size
+    }
+}
+
+class FakeCandidate(val name: String, val description: String, var generalOpinion: Int) {
+    val random = Random()
+
+    fun update() {
+        generalOpinion += random.nextInt(5 + 1);
+    }
 }
 
 
@@ -29,10 +45,12 @@ class Question(val text:String, val description: String, val answers: List<Answe
 }
 
 class Answer(val statement:String, val impact:Map<String, Int>): Serializable {
+    // This function updates global gamestate.
+    // An example of bad design...
     fun select() {
-        gamestate.step += 1
+        gamestate.update()
         for ((groupName, delta) in impact) {
-            Log.e("Answer", groupName)
+            Log.d("Answer", groupName)
             gamestate.opinions[groupName]!!.add(delta)
         }
     }
@@ -83,8 +101,10 @@ class QuestionGroup(val questions: MutableList<Question>) {
 
 // Gamestate is a class which stores global game state.
 // It should be loaded/created once and used as a singleton.
-class Gamestate(candidate: Candidate, val questions: HashMap<String, QuestionGroup>) {
-    var step = 1
+class Gamestate(val candidate: Candidate, val questions: HashMap<String, QuestionGroup>,
+                val candidates: MutableList<FakeCandidate>) {
+    val poll_frequency = 5
+    var step = 0
     val opinions: Opinions = candidate.opinions
     init {
         Log.d("Gamestate", "Gamestate init")
@@ -93,6 +113,45 @@ class Gamestate(candidate: Candidate, val questions: HashMap<String, QuestionGro
     fun getQuestion(group: String) : Question {
         return questions[group]!!.getQuestion()
     }
+
+    fun isPollTime() : Boolean {
+        return step != 0 && step % poll_frequency == 0
+    }
+
+    fun isLost() : Boolean {
+        val opinionOnPlayer = candidate.getGeneralOpinion()
+        for (c in candidates) {
+            if (c.generalOpinion < opinionOnPlayer) {
+                return false
+            }
+        }
+        return true
+    }
+
+    fun isWon() : Boolean {
+        val opinionOnPlayer = candidate.getGeneralOpinion()
+        return candidates.size == 1 && opinionOnPlayer > candidates[0].generalOpinion
+    }
+
+    // Removes the weakest candidate.
+    // Returns its name.
+    fun expel(): String {
+        var weakestId = 0
+        for (id in 0 until candidates.size) {
+            if (candidates[id].generalOpinion < candidates[weakestId].generalOpinion) {
+                weakestId = id
+            }
+        }
+        val removed = candidates.removeAt(weakestId)
+        return removed.name
+    }
+
+    fun update() {
+        step++
+        for (c in candidates) {
+            c.update()
+        }
+    }
 }
 
-var gamestate: Gamestate = Gamestate(fakeCandidate, HashMap())
+var gamestate: Gamestate = Gamestate(fakeCandidate, HashMap(), mutableListOf())
