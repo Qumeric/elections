@@ -55,7 +55,7 @@ fun loadFakeCandidates(resources: Resources): MutableList<FakeCandidate> {
         val candidate = FakeCandidate(
                 JSONcandidate.getString("name"),
                 JSONcandidate.getString("description"),
-                JSONcandidate.getInt("level")
+                JSONcandidate.getDouble("level")
         )
 
         candidates.add(candidate)

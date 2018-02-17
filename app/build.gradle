@@ -49,4 +49,7 @@ dependencies {
 
     // Anko Listeners
     compile "org.jetbrains.anko:anko-sdk25-listeners:$anko_version"
+
+    // AndroidPlot
+    compile "com.androidplot:androidplot-core:1.5.2"
 }

@@ -24,6 +24,12 @@ class MainView : AnkoComponent<MainActivity> {
                 }.lparams(width= matchParent, height = wrapContent)
                 b.setText(candidate.name)
             }
+            button {
+                text = "catcher"
+                onClick {
+                    ctx.startActivity(ctx.intentFor<CatcherGameActivity>())
+                }
+            }
         }
     }
 

@@ -30,6 +30,10 @@
         <activity android:name=".PollActivity">
 
         </activity>
+
+        <activity android:name=".CatcherGameActivity">
+
+        </activity>
     </application>
 
 </manifest>

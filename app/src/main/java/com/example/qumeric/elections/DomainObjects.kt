@@ -10,11 +10,14 @@ typealias Opinions = HashMap<String, Opinion>
 // Candidates is a candidate which player can/does play.
 class Candidate(val name: String, val description: String, _opinions: Map<String, Int>, val levels: Map<String, Int>) {
     val opinions: Opinions = hashMapOf()
+    val history = mutableListOf<Double>();
+
     init {
         for ((group, value) in _opinions) {
             opinions[group] = Opinion()
             opinions[group]!!.add(value)
         }
+        history.add(getGeneralOpinion());
     }
 
     fun getGeneralOpinion(): Double {
@@ -24,13 +27,23 @@ class Candidate(val name: String, val description: String, _opinions: Map<String
         }
         return total/opinions.size
     }
-}
-
-class FakeCandidate(val name: String, val description: String, var generalOpinion: Int) {
-    val random = Random()
 
     fun update() {
-        generalOpinion += random.nextInt(5 + 1);
+        history.add(getGeneralOpinion());
+    }
+}
+
+class FakeCandidate(val name: String, val description: String, var generalOpinion: Double) {
+    val random = Random()
+    val history = mutableListOf<Double>();
+
+    init {
+        history.add(generalOpinion);
+    }
+
+    fun update() {
+        generalOpinion += random.nextInt(5 + 1)
+        history.add(generalOpinion);
     }
 }
 
@@ -148,6 +161,7 @@ class Gamestate(val candidate: Candidate, val questions: HashMap<String, Questio
 
     fun update() {
         step++
+        candidate.update()
         for (c in candidates) {
             c.update()
         }

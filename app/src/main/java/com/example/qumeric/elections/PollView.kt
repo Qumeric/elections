@@ -1,11 +1,13 @@
 package com.example.qumeric.elections
 
 import android.view.Gravity
+import android.widget.LinearLayout
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
 
 class PollView(): AnkoComponent<PollActivity> {
     private lateinit var ankoContext: AnkoContext<PollActivity>
+    lateinit var plotView: LinearLayout
 
     override fun createView(ui: AnkoContext<PollActivity>) = with(ui) {
         ankoContext = ui
@@ -16,13 +18,17 @@ class PollView(): AnkoComponent<PollActivity> {
             textView {
                 gravity = Gravity.CENTER
                 text = String.format("Poll results on day %d", gamestate.step)
-            }
+            }.lparams(weight = 1f)
+
+            plotView = include<LinearLayout>(R.layout.rating_plot) {
+
+            }.lparams(weight = 1f)
 
             for (canditate in gamestate.candidates) {
                 textView {
                     gravity = Gravity.CENTER
-                    text = String.format("%s: %d", canditate.name, canditate.generalOpinion)
-                }
+                    text = String.format("%s: %d", canditate.name, Math.round(canditate.generalOpinion))
+                }.lparams(weight = 1f)
             }
 
             if (gamestate.isWon()) {
