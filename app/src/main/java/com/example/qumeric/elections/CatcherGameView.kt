@@ -21,12 +21,9 @@ class CatcherGameView() : AnkoComponent<CatcherGameActivity> {
     public lateinit var scoreText: TextView
     public lateinit var cart: ImageButton
 
-    val displayMetrics = DisplayMetrics()
 
     override fun createView(ui: AnkoContext<CatcherGameActivity>) = with(ui) {
         ankoContext = ui
-
-        ui.ctx.windowManager.defaultDisplay.getMetrics(displayMetrics)
 
         val cartDrawable = ui.ctx.resources.getDrawable(R.drawable.ic_cart)
         val strawberryDrawable = ui.ctx.resources.getDrawable(R.drawable.ic_strawberry)

@@ -1,6 +1,5 @@
 package com.example.qumeric.elections
 
-import android.databinding.DataBindingUtil
 import android.graphics.Rect
 import android.os.Bundle
 import android.os.Handler

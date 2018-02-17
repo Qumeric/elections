@@ -34,6 +34,10 @@
         <activity android:name=".CatcherGameActivity">
 
         </activity>
+
+        <activity android:name=".DucksGameActivity">
+
+        </activity>
     </application>
 
 </manifest>
