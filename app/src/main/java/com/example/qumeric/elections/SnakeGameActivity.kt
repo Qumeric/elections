@@ -22,11 +22,9 @@ data class Position(val y: Int, val x: Int) {
         // d == Direction.EAST
         return Position(y, x+1)
     }
-    fun equals(p: Position): Boolean {
-        return (x == p.x && y == p.y)
-    }
-    fun isInvalid(yLimit: Int, xLimit: Int): Boolean {
-        return (x >= 0 && y >= 0 && x < xLimit && y < yLimit)
+
+    fun isValid(yLimit: Int, xLimit: Int): Boolean {
+        return x >= 0 && y >= 0 && x < xLimit && y < yLimit
     }
 }
 
@@ -37,34 +35,34 @@ enum class Direction {
 class SnakeGameActivity : AppCompatActivity() {
     private lateinit var view: SnakeGameView
 
+    private val snake: Deque<Position> = LinkedList()
+    private val handler = Handler();
+    var d = Direction.EAST
+
+    private lateinit var apple: Position
     private var score = 0
-    val snake: Deque<Position> = LinkedList()
-    var apple: Position = Position(10, 10)
-    var d: Direction = Direction.EAST
 
     fun eat() {
-        score += 1
+        score++
         apple = genApple()
     }
 
-    val handler = Handler();
-
-    val update = object : Runnable {
+    private val update = object : Runnable {
         override fun run() {
             view.scoreText.text = score.toString()
 
-            for (row in view.field) {
-                for (elem in row) {
-                    elem.backgroundResource = R.color.grass
-                }
-            }
+            view.field
+                    .flatMap { it }
+                    .forEach { it.backgroundResource = R.color.grass }
 
-            snake.addFirst(snake.first.plus(d))
-            if (snake.first.isInvalid(view.rowCnt, view.colCnt)) {
+            val nextHeadPos = snake.first.plus(d);
+            if (!nextHeadPos.isValid(view.rowCnt, view.colCnt) || inSnake(nextHeadPos)) {
                 lose()
                 return
             }
-            if (!snake.first.equals(apple)) {
+            snake.addFirst(nextHeadPos)
+
+            if (snake.first != apple) {
                 snake.removeLast()
             } else {
                 eat()
@@ -82,12 +80,7 @@ class SnakeGameActivity : AppCompatActivity() {
     }
 
     private fun inSnake(obj: Position): Boolean {
-        for (pos in snake) {
-            if (pos.equals(obj)) {
-                return true
-            }
-        }
-        return false
+        return snake.any { it == obj }
     }
 
     private fun genApple(): Position {
@@ -112,5 +105,4 @@ class SnakeGameActivity : AppCompatActivity() {
     fun lose() {
         Log.d("SnakeGameActivity", "LOSE")
     }
-
 }

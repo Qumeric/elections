@@ -1,10 +1,8 @@
 package com.example.qumeric.elections
 
 import android.view.Gravity
-import android.view.View
 import android.widget.*
 import org.jetbrains.anko.*
-import org.jetbrains.anko.sdk25.listeners.onClick
 import java.util.*
 
 class SnakeGameView() : AnkoComponent<SnakeGameActivity> {
@@ -21,11 +19,7 @@ class SnakeGameView() : AnkoComponent<SnakeGameActivity> {
     override fun createView(ui: AnkoContext<SnakeGameActivity>) = with(ui) {
         ankoContext = ui
 
-        ui.ctx.windowManager.defaultDisplay.getMetrics(displayMetrics)
-
         linearLayout {
-            gravity = Gravity.NO_GRAVITY
-
             setOnTouchListener(object: OnSwipeTouchListener(ctx) {
                 val activity = ctx as SnakeGameActivity
                 override fun onSwipeTop() {
@@ -33,7 +27,7 @@ class SnakeGameView() : AnkoComponent<SnakeGameActivity> {
                         activity.d = Direction.NORTH
                     }
                 }
-                 override fun onSwipeRight() {
+                override fun onSwipeRight() {
                      if (activity.d != Direction.WEST) {
                          activity.d = Direction.EAST
                      }
@@ -53,7 +47,6 @@ class SnakeGameView() : AnkoComponent<SnakeGameActivity> {
             orientation = LinearLayout.VERTICAL
 
             relativeLayout {
-                backgroundResource = R.color.white
                 scoreText = textView { }.lparams(height= wrapContent)
             }.lparams(weight = 0.1f, width = matchParent)
 
@@ -82,17 +75,7 @@ class SnakeGameView() : AnkoComponent<SnakeGameActivity> {
                     }
                 }
 
-            }.lparams(weight = 0.2f, width = matchParent)
-
-            relativeLayout {
-                backgroundResource = R.color.sand
-            }.lparams(weight = 0.05f, width = matchParent)
-
-            relativeLayout {
-                gravity = Gravity.CENTER
-                backgroundResource = R.color.grass
-
-            }.lparams(weight = 0.1f, width = matchParent)
+            }.lparams(weight = 0.9f, width = matchParent)
         }
     }
 }

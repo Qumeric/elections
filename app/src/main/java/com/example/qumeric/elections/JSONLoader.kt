@@ -1,6 +1,5 @@
 package com.example.qumeric.elections
 
-import android.content.Context
 import android.content.res.Resources
 import android.util.Log
 import org.json.JSONArray
@@ -30,9 +29,12 @@ fun loadCandidates(resources: Resources): List<Candidate> {
             levels[level] = basicLevels.getInt(level)
         }
 
+        val resName = JSONcandiate.getString("imgResource")
+
         val candidate = Candidate(
                 JSONcandiate.getString("name"),
                 JSONcandiate.getString("description"),
+                resources.getIdentifier(resName, "drawable", "com.example.qumeric.elections"),
                 opinions, levels)
 
         candidates.add(candidate)

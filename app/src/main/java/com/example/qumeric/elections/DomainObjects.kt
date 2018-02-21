@@ -8,7 +8,7 @@ import kotlin.collections.HashMap
 typealias Opinions = HashMap<String, Opinion>
 
 // Candidates is a candidate which player can/does play.
-class Candidate(val name: String, val description: String, _opinions: Map<String, Int>, val levels: Map<String, Int>) {
+class Candidate(val name: String, val description: String, val resource: Int, _opinions: Map<String, Int>, val levels: Map<String, Int>) {
     val opinions: Opinions = hashMapOf()
     val history = mutableListOf<Double>()
 
@@ -49,7 +49,7 @@ class FakeCandidate(val name: String, val description: String, var generalOpinio
 
 
 // default value (while candidate is unset)
-val fakeCandidate = Candidate("Fake", "Something went wrong", mapOf(), mapOf())
+val fakeCandidate = Candidate("Fake", "Something went wrong", 1, mapOf(), mapOf())
 
 class Quote(val text:String, val author: String): Serializable { }
 

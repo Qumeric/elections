@@ -7,4 +7,5 @@
     <string name="win_message">Congratulations! You won!</string>
     <string name="try_again">Try again!</string>
     <string name="next">Next</string>
+    <string name="choose_candidate">Choose candidate</string>
 </resources>

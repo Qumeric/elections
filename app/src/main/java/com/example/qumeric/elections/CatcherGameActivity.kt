@@ -9,39 +9,30 @@ import android.widget.ImageView
 import org.jetbrains.anko.ctx
 import org.jetbrains.anko.setContentView
 import java.lang.Math.random
-import java.lang.Math.sqrt
 
 class CatcherGameActivity : AppCompatActivity() {
     private lateinit var view: CatcherGameView
-
+    private val handler = Handler()
     private var score = 0
 
-    public val strawberries: MutableSet<ImageView> = mutableSetOf()
+    val strawberries: MutableSet<ImageView> = mutableSetOf()
 
-    val handler = Handler();
     val createStrawberry = object : Runnable {
         override fun run() {
-
             val strawberryView = ImageView(ctx)
 
-            val x: Float = (random()*(view.layout.width-strawberryView.width*2)).toFloat()
-
             strawberryView.setImageResource(R.drawable.ic_strawberry)
-            strawberryView.setX(x)
+            strawberryView.x = (random()*(view.layout.width-strawberryView.width*2)).toFloat()
 
             view.layout.addView(strawberryView)
             strawberries.add(strawberryView)
 
-            Log.d("CatcherGameActivity", "added strawberry, size now is " + strawberries.size.toString())
-
-            //handler.postDelayed(this, (1000/(score+1)).toLong())
             handler.postDelayed(this, (1000/Math.sqrt(1+score.toDouble())).toLong())
         }
     }
 
     val update = object : Runnable {
         override fun run() {
-
             val cart_rc = Rect()
             view.cart.getHitRect(cart_rc)
 
@@ -78,7 +69,6 @@ class CatcherGameActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
         view = CatcherGameView()
         view.setContentView(this)
 
@@ -89,5 +79,4 @@ class CatcherGameActivity : AppCompatActivity() {
     fun lose() {
         Log.d("CatcherGameActivity", "LOSE")
     }
-
 }

@@ -10,15 +10,14 @@ import org.jetbrains.anko.sdk25.listeners.onTouch
 class CatcherGameView() : AnkoComponent<CatcherGameActivity> {
     private lateinit var ankoContext: AnkoContext<CatcherGameActivity>
 
-    public lateinit var layout: RelativeLayout
-    public lateinit var scoreText: TextView
-    public lateinit var cart: ImageButton
+    lateinit var layout: RelativeLayout
+    lateinit var scoreText: TextView
+    lateinit var cart: ImageButton
 
     override fun createView(ui: AnkoContext<CatcherGameActivity>) = with(ui) {
         ankoContext = ui
 
-        val cartDrawable = ui.ctx.resources.getDrawable(R.drawable.ic_cart)
-        val strawberryDrawable = ui.ctx.resources.getDrawable(R.drawable.ic_strawberry)
+        val cartDrawable = ui.ctx.resources.getDrawable(R.drawable.ic_cart, ctx.theme)
 
         layout = relativeLayout {
             gravity = Gravity.NO_GRAVITY
@@ -31,15 +30,11 @@ class CatcherGameView() : AnkoComponent<CatcherGameActivity> {
                 y = (displayMetrics.heightPixels-cartDrawable.intrinsicHeight).toFloat()
             }
 
-            onTouch { view, e ->
-                cart.x = e.getX()
-
+            onTouch { _, e ->
+                cart.x = e.x
                 true
             }
         }
         layout
-    }
-
-    fun setScore(score: Int) {
     }
 }

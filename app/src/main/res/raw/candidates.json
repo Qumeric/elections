@@ -13,7 +13,11 @@
       "liberal": 50,
       "positive": 50,
       "peaceful": 50
-    }
+    },
+    "perks": {
+
+    },
+    "imgResource": "navalny"
   },
   {
     "name": "Ксюшечка",
@@ -29,6 +33,90 @@
       "liberal": 50,
       "positive": 50,
       "peaceful": 50
-    }
+    },
+    "perks": {
+
+    },
+    "imgResource": "sobchak"
+  },
+  {
+    "name": "Жирный",
+    "description": "Буш, ты ковбой!",
+    "basicStats": {
+      "military": 50,
+      "workers": 0,
+      "foreign": 50,
+      "media": 50,
+      "business": 50
+    },
+    "basicLevels": {
+      "liberal": 50,
+      "positive": 50,
+      "peaceful": 50
+    },
+    "perks": {
+
+    },
+    "imgResource": "zhirinovsky"
+  },
+  {
+    "name": "Мутин",
+    "description": "",
+    "basicStats": {
+      "military": 50,
+      "workers": 0,
+      "foreign": 50,
+      "media": 50,
+      "business": 50
+    },
+    "basicLevels": {
+      "liberal": 50,
+      "positive": 50,
+      "peaceful": 50
+    },
+    "perks": {
+
+    },
+    "imgResource": "putin"
+  },
+  {
+    "name": "Клубникин",
+    "description": "Совок",
+    "basicStats": {
+      "military": 50,
+      "workers": 0,
+      "foreign": 50,
+      "media": 50,
+      "business": 50
+    },
+    "basicLevels": {
+      "liberal": 50,
+      "positive": 50,
+      "peaceful": 50
+    },
+    "perks": {
+
+    },
+    "imgResource": "grudinin"
+  },
+  {
+    "name": "Жулинский",
+    "description": "...",
+    "basicStats": {
+      "military": 50,
+      "workers": 0,
+      "foreign": 50,
+      "media": 50,
+      "business": 50
+    },
+    "basicLevels": {
+      "liberal": 50,
+      "positive": 50,
+      "peaceful": 50
+    },
+    "perks": {
+
+    },
+    "imgResource": "yavlinsky"
   }
 ]
