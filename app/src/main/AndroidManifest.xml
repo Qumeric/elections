@@ -46,6 +46,10 @@
         <activity android:name=".LadderGameActivity">
 
         </activity>
+
+        <activity android:name=".SnakeGameActivity">
+
+        </activity>
     </application>
 
 </manifest>
