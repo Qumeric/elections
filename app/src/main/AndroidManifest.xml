@@ -42,6 +42,10 @@
         <activity android:name=".HammerGameActivity">
 
         </activity>
+
+        <activity android:name=".LadderGameActivity">
+
+        </activity>
     </application>
 
 </manifest>

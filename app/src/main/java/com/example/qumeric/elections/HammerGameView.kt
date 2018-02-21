@@ -10,15 +10,15 @@ import java.util.*
 class HammerGameView() : AnkoComponent<HammerGameActivity> {
     private lateinit var ankoContext: AnkoContext<HammerGameActivity>
 
-    public lateinit var layout: GridLayout
-    public lateinit var scoreText: TextView
+    lateinit var layout: GridLayout
+    lateinit var scoreText: TextView
 
-    private val rowCnt = 3
-    private val colCnt = 3
+    val rowCnt = 3
+    val colCnt = 3
 
-    public var field: ArrayList<ArrayList<ImageButton>> = arrayListOf();
+    var field: ArrayList<ArrayList<ImageButton>> = arrayListOf();
 
-    public fun pickRandomEnemyResource(): Int {
+    fun pickRandomEnemyResource(): Int {
         val enemyResources: List<Int> = listOf(R.drawable.grudinin, R.drawable.navalny,
                 R.drawable.putin, R.drawable.sobchak, R.drawable.yavlinsky, R.drawable.zhirinovsky)
         return enemyResources[Random().nextInt(enemyResources.size)]
@@ -36,7 +36,7 @@ class HammerGameView() : AnkoComponent<HammerGameActivity> {
 
             relativeLayout {
                 backgroundResource = R.color.white
-                scoreText = textView { }.lparams(height= matchParent)
+                scoreText = textView { }.lparams(height= wrapContent)
             }.lparams(weight = 0.1f, width = matchParent)
 
             relativeLayout {

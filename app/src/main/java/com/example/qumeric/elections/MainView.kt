@@ -42,6 +42,12 @@ class MainView : AnkoComponent<MainActivity> {
                     ctx.startActivity(ctx.intentFor<HammerGameActivity>())
                 }
             }
+            button {
+                text = "ladder"
+                onClick {
+                    ctx.startActivity(ctx.intentFor<LadderGameActivity>())
+                }
+            }
         }
     }
 
