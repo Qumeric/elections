@@ -35,7 +35,7 @@ class CatcherGameActivity : AppCompatActivity() {
             Log.d("CatcherGameActivity", "added strawberry, size now is " + strawberries.size.toString())
 
             //handler.postDelayed(this, (1000/(score+1)).toLong())
-            handler.postDelayed(this, (1000).toLong())
+            handler.postDelayed(this, (1000/Math.sqrt(1+score.toDouble())).toLong())
         }
     }
 
@@ -48,7 +48,7 @@ class CatcherGameActivity : AppCompatActivity() {
             val toRemove: MutableList<ImageView> = mutableListOf()
 
             for (s in strawberries) {
-                s.y += Math.sqrt(10.toDouble()+score).toFloat()
+                s.y += (10.toDouble()+score).toFloat()
                 s.invalidate()
 
                 val s_rc = Rect()

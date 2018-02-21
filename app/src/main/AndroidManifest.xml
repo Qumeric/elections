@@ -38,6 +38,10 @@
         <activity android:name=".DucksGameActivity">
 
         </activity>
+
+        <activity android:name=".HammerGameActivity">
+
+        </activity>
     </application>
 
 </manifest>

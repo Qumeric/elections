@@ -36,6 +36,12 @@ class MainView : AnkoComponent<MainActivity> {
                     ctx.startActivity(ctx.intentFor<DucksGameActivity>())
                 }
             }
+            button {
+                text = "hammer"
+                onClick {
+                    ctx.startActivity(ctx.intentFor<HammerGameActivity>())
+                }
+            }
         }
     }
 

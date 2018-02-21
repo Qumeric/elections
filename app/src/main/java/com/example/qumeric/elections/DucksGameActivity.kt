@@ -9,8 +9,6 @@ import android.widget.ImageView
 import org.jetbrains.anko.ctx
 import org.jetbrains.anko.displayMetrics
 import org.jetbrains.anko.setContentView
-import java.lang.Math.random
-import java.lang.Math.sqrt
 
 class DucksGameActivity : AppCompatActivity() {
     private lateinit var view: DucksGameView
