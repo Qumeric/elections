@@ -94,7 +94,6 @@ fun loadQuestions(resources: Resources): HashMap<String, QuestionGroup> {
 
             questionList.add(Question(
                     JSONquestion.getString("statement"),
-                    JSONquestion.getString("description"),
                     answers
             ))
         }
@@ -102,4 +101,19 @@ fun loadQuestions(resources: Resources): HashMap<String, QuestionGroup> {
         questions[categoryName] = QuestionGroup(questionList)
     }
     return questions
+}
+
+fun loadQuotes(resources: Resources): List<Quote> {
+    val jsonString = resources.openRawResource(R.raw.quotes)
+            .bufferedReader().use { it.readText() }
+    val JSONquotes = JSONArray(jsonString)
+
+    val quotes = mutableListOf<Quote>()
+
+    for (q in 0 until JSONquotes.length()) {
+        val JSONquote = JSONquotes.getJSONObject(q)
+        quotes.add(Quote(JSONquote.getString("quote"), JSONquote.getString("author")))
+    }
+
+    return quotes
 }

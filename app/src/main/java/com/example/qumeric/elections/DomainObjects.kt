@@ -10,14 +10,14 @@ typealias Opinions = HashMap<String, Opinion>
 // Candidates is a candidate which player can/does play.
 class Candidate(val name: String, val description: String, _opinions: Map<String, Int>, val levels: Map<String, Int>) {
     val opinions: Opinions = hashMapOf()
-    val history = mutableListOf<Double>();
+    val history = mutableListOf<Double>()
 
     init {
         for ((group, value) in _opinions) {
             opinions[group] = Opinion()
             opinions[group]!!.add(value)
         }
-        history.add(getGeneralOpinion());
+        history.add(getGeneralOpinion())
     }
 
     fun getGeneralOpinion(): Double {
@@ -29,21 +29,21 @@ class Candidate(val name: String, val description: String, _opinions: Map<String
     }
 
     fun update() {
-        history.add(getGeneralOpinion());
+        history.add(getGeneralOpinion())
     }
 }
 
 class FakeCandidate(val name: String, val description: String, var generalOpinion: Double) {
     val random = Random()
-    val history = mutableListOf<Double>();
+    val history = mutableListOf<Double>()
 
     init {
-        history.add(generalOpinion);
+        history.add(generalOpinion)
     }
 
     fun update() {
         generalOpinion += random.nextInt(5 + 1)
-        history.add(generalOpinion);
+        history.add(generalOpinion)
     }
 }
 
@@ -51,7 +51,9 @@ class FakeCandidate(val name: String, val description: String, var generalOpinio
 // default value (while candidate is unset)
 val fakeCandidate = Candidate("Fake", "Something went wrong", mapOf(), mapOf())
 
-class Question(val text:String, val description: String, val answers: List<Answer>): Serializable {
+class Quote(val text:String, val author: String): Serializable { }
+
+class Question(val text:String, val answers: List<Answer>): Serializable {
     fun selectAnswer(answer: Int) {
         answers[answer].select()
     }
@@ -64,7 +66,9 @@ class Answer(val statement:String, val impact:Map<String, Int>): Serializable {
         gamestate.update()
         for ((groupName, delta) in impact) {
             Log.d("Answer", groupName)
-            gamestate.opinions[groupName]!!.add(delta)
+            if (groupName in gamestate.opinions.keys) {
+                gamestate.opinions[groupName]!!.add(delta)
+            }
         }
     }
 }

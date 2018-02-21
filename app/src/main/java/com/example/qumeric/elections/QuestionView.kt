@@ -20,14 +20,14 @@ class QuestionView(val question: Question) : AnkoComponent<QuestionActivity> {
             }
 
             linearLayout {
-                orientation = LinearLayout.HORIZONTAL
+                orientation = LinearLayout.VERTICAL
 
                 for (answer in question.answers) {
                      val b = button {
                         onClick {
                             ctx.startActivity(ctx.intentFor<ChangeActivity>("answer" to answer))
                         }
-                    }.lparams(width = wrapContent, height = wrapContent)
+                    }.lparams(width = matchParent, height = wrapContent)
                     b.setText(answer.statement)
                 }
             }

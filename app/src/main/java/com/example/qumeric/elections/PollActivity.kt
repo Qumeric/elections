@@ -16,6 +16,8 @@ import java.util.*
 class PollActivity : AppCompatActivity() {
     private lateinit var view: PollView
 
+    val colors = listOf(Color.RED, Color.YELLOW, Color.BLUE, Color.WHITE, Color.CYAN, Color.MAGENTA)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -30,16 +32,18 @@ class PollActivity : AppCompatActivity() {
         val ratings = mutableListOf<XYSeries>()
         val formatters = mutableListOf<LineAndPointFormatter>()
 
+        var colorPtr = 0
+
         ratings.add(SimpleXYSeries(gamestate.candidate.history,
                 SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, gamestate.candidate.name))
         Log.d("PollActivity", "user history len:" + gamestate.candidate.history.size.toString())
-        formatters.add(LineAndPointFormatter(Color.RED, Color.GREEN, Color.BLUE, null))
+        formatters.add(LineAndPointFormatter(colors[colorPtr++], Color.GREEN, Color.TRANSPARENT, null))
         plot.addSeries(ratings[0], formatters[0])
         for (c in gamestate.candidates) {
             ratings.add(SimpleXYSeries(c.history,
                     SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, c.name))
             Log.d("PollActivity", "opponent history len:" + c.history.size.toString())
-            formatters.add(LineAndPointFormatter(Color.RED, Color.GREEN, Color.BLUE, null))
+            formatters.add(LineAndPointFormatter(colors[colorPtr++], Color.GREEN, Color.TRANSPARENT, null))
             plot.addSeries(ratings.last(), formatters.last())
         }
 
@@ -47,13 +51,17 @@ class PollActivity : AppCompatActivity() {
         Log.d("PollActivity", "ra: " + ratings.size.toString())
         Log.d("PollActivity", "fo: " + formatters.size.toString())
 
+        if (!gamestate.isLost()) {
+            view.expelledTV.text = String.format("Candidate %s has been expelled from elections", gamestate.expel())
+        }
+
         plot.getGraph().getLineLabelStyle(XYGraphWidget.Edge.BOTTOM).setFormat(object: Format() {
             override fun format(obj: Any, toAppendTo: StringBuffer, pos: FieldPosition): StringBuffer {
-                val i: Int = Math.round((obj as Number).toFloat());
-                return toAppendTo.append(domainLabels[i]);
+                val i: Int = Math.round((obj as Number).toFloat())
+                return toAppendTo.append(domainLabels[i])
             }
             override fun parseObject(source: String, pos: ParsePosition): Any? {
-                return null;
+                return null
             }
         })
 

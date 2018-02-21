@@ -3,16 +3,15 @@
     "name": "Нэвэльный",
     "description": "Make Russia blet again",
     "basicStats": {
-      "party": 50,
-      "public": 50,
+      "military": 50,
+      "workers": 50,
       "foreign": 50,
       "media": 50,
-      "business": 50,
-      "staff": 50
+      "business": 50
     },
     "basicLevels": {
       "liberal": 50,
-      "postive": 50,
+      "positive": 50,
       "peaceful": 50
     }
   },
@@ -20,16 +19,15 @@
     "name": "Ксюшечка",
     "description": "Против всех лол)))",
     "basicStats": {
-      "party": 50,
-      "public": 0,
+      "military": 50,
+      "workers": 0,
       "foreign": 50,
       "media": 50,
-      "business": 50,
-      "staff": 50
+      "business": 50
     },
     "basicLevels": {
       "liberal": 50,
-      "postive": 50,
+      "positive": 50,
       "peaceful": 50
     }
   }

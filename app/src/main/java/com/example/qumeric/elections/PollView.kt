@@ -2,12 +2,15 @@ package com.example.qumeric.elections
 
 import android.view.Gravity
 import android.widget.LinearLayout
+import android.widget.TextView
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
 
 class PollView(): AnkoComponent<PollActivity> {
     private lateinit var ankoContext: AnkoContext<PollActivity>
     lateinit var plotView: LinearLayout
+
+    lateinit var expelledTV: TextView
 
     override fun createView(ui: AnkoContext<PollActivity>) = with(ui) {
         ankoContext = ui
@@ -57,10 +60,8 @@ class PollView(): AnkoComponent<PollActivity> {
                     }
                 }
             } else {
-                val lostCandidateName = gamestate.expel()
-                textView {
+                expelledTV = textView {
                     gravity = Gravity.CENTER
-                    text = String.format("Candidate %s has been expelled from elections", lostCandidateName)
                 }
                 button {
                     textResource = R.string.next
