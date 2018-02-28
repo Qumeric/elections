@@ -5,7 +5,7 @@ import android.widget.*
 import org.jetbrains.anko.*
 import java.util.*
 
-class SnakeGameView() : AnkoComponent<SnakeGameActivity> {
+class SnakeGameView : AnkoComponent<SnakeGameActivity> {
     private lateinit var ankoContext: AnkoContext<SnakeGameActivity>
 
     lateinit var layout: GridLayout
@@ -14,29 +14,32 @@ class SnakeGameView() : AnkoComponent<SnakeGameActivity> {
     val rowCnt = 20
     val colCnt = 20
 
-    var field: ArrayList<ArrayList<ImageButton>> = arrayListOf();
+    var field: ArrayList<ArrayList<ImageButton>> = arrayListOf()
 
     override fun createView(ui: AnkoContext<SnakeGameActivity>) = with(ui) {
         ankoContext = ui
 
         linearLayout {
-            setOnTouchListener(object: OnSwipeTouchListener(ctx) {
+            setOnTouchListener(object : OnSwipeTouchListener(ctx) {
                 val activity = ctx as SnakeGameActivity
                 override fun onSwipeTop() {
                     if (activity.d != Direction.SOUTH) {
                         activity.d = Direction.NORTH
                     }
                 }
+
                 override fun onSwipeRight() {
-                     if (activity.d != Direction.WEST) {
-                         activity.d = Direction.EAST
-                     }
+                    if (activity.d != Direction.WEST) {
+                        activity.d = Direction.EAST
+                    }
                 }
+
                 override fun onSwipeLeft() {
                     if (activity.d != Direction.EAST) {
                         activity.d = Direction.WEST
                     }
                 }
+
                 override fun onSwipeBottom() {
                     if (activity.d != Direction.NORTH) {
                         activity.d = Direction.SOUTH
@@ -47,7 +50,7 @@ class SnakeGameView() : AnkoComponent<SnakeGameActivity> {
             orientation = LinearLayout.VERTICAL
 
             relativeLayout {
-                scoreText = textView { }.lparams(height= wrapContent)
+                scoreText = textView { }.lparams(height = wrapContent)
             }.lparams(weight = 0.1f, width = matchParent)
 
             relativeLayout {
@@ -57,21 +60,20 @@ class SnakeGameView() : AnkoComponent<SnakeGameActivity> {
                     columnCount = colCnt
                     rowCount = rowCnt
 
-                    for (row in 1..rowCount) {
-                        val rowElems: ArrayList<ImageButton> = arrayListOf();
-                        for (column in 1..columnCount) {
-                            val e = imageButton {
-                                backgroundResource = R.color.grass
+                    for (row in 0 until rowCount) {
+                        val rowElems: ArrayList<ImageButton> = arrayListOf()
+                        (0 until columnCount).mapTo(rowElems) {
+                            imageButton {
+                                backgroundResource = R.color.green
                                 scaleType = ImageView.ScaleType.FIT_CENTER
                             }.lparams {
-                                rowSpec = GridLayout.spec(row-1)
-                                columnSpec = GridLayout.spec(column-1)
+                                rowSpec = GridLayout.spec(row)
+                                columnSpec = GridLayout.spec(it)
                                 width = 20
                                 height = 20
                             }
-                            rowElems.add(e);
                         }
-                        field.add(rowElems);
+                        field.add(rowElems)
                     }
                 }
 

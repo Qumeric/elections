@@ -27,7 +27,7 @@ class CatcherGameView() : AnkoComponent<CatcherGameActivity> {
 
             cart = imageButton {
                 backgroundDrawable = cartDrawable
-                y = (displayMetrics.heightPixels-cartDrawable.intrinsicHeight).toFloat()
+                y = (displayMetrics.heightPixels - cartDrawable.intrinsicHeight).toFloat()
             }
 
             onTouch { _, e ->

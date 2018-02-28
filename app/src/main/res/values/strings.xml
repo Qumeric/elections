@@ -8,4 +8,11 @@
     <string name="try_again">Try again!</string>
     <string name="next">Next</string>
     <string name="choose_candidate">Choose candidate</string>
+    <string name="choose_category">Choose category</string>
+    <string name="support">Support</string>
+    <string name="results">Results</string>
+    <string name="ducks_welcome">Shoot all the ducks!</string>
+    <string name="exit_game">Exit game</string>
+    <string name="end_game_dialog_title">Exit game?</string>
+    <string name="end_game_dialog_message">Are you sure that you want to finish this game? All progress will be lost.</string>
 </resources>

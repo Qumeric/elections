@@ -1,16 +1,15 @@
 package com.example.qumeric.elections
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import org.jetbrains.anko.setContentView
 
-class GameActivity : DefaultActivity() {
-    private lateinit var view: GameView
+class SpendMoneyActivity : DefaultActivity() {
+    private lateinit var view: SpendMoneyView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        view = GameView()
+        view = SpendMoneyView()
         view.setContentView(this)
     }
 }

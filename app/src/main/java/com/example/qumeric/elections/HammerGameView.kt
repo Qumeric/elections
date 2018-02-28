@@ -4,7 +4,6 @@ import android.view.Gravity
 import android.view.View
 import android.widget.*
 import org.jetbrains.anko.*
-import org.jetbrains.anko.sdk25.listeners.onClick
 import java.util.*
 
 class HammerGameView() : AnkoComponent<HammerGameActivity> {
@@ -16,7 +15,7 @@ class HammerGameView() : AnkoComponent<HammerGameActivity> {
     val rowCnt = 3
     val colCnt = 3
 
-    var field: ArrayList<ArrayList<ImageButton>> = arrayListOf();
+    var field: ArrayList<ArrayList<ImageButton>> = arrayListOf()
 
     fun pickRandomEnemyResource(): Int {
         val enemyResources: List<Int> = listOf(R.drawable.grudinin, R.drawable.navalny,
@@ -36,12 +35,12 @@ class HammerGameView() : AnkoComponent<HammerGameActivity> {
 
             relativeLayout {
                 backgroundResource = R.color.white
-                scoreText = textView { }.lparams(height= wrapContent)
+                scoreText = textView { }.lparams(height = wrapContent)
             }.lparams(weight = 0.1f, width = matchParent)
 
             relativeLayout {
                 gravity = Gravity.CENTER
-                backgroundResource = R.color.brightBlue
+                backgroundResource = R.color.blue
 
 
                 layout = gridLayout {
@@ -49,33 +48,33 @@ class HammerGameView() : AnkoComponent<HammerGameActivity> {
                     rowCount = rowCnt
 
                     for (row in 1..rowCount) {
-                        val rowElems: ArrayList<ImageButton> = arrayListOf();
+                        val rowElems: ArrayList<ImageButton> = arrayListOf()
                         for (column in 1..columnCount) {
                             val e = imageButton {
                                 background = null
                                 visibility = View.INVISIBLE
                                 scaleType = ImageView.ScaleType.FIT_CENTER
                             }.lparams {
-                                rowSpec = GridLayout.spec(row-1)
-                                columnSpec = GridLayout.spec(column-1)
+                                rowSpec = GridLayout.spec(row - 1)
+                                columnSpec = GridLayout.spec(column - 1)
                                 width = 160
                                 height = 160
                             }
-                            rowElems.add(e);
+                            rowElems.add(e)
                         }
-                        field.add(rowElems);
+                        field.add(rowElems)
                     }
                 }
 
             }.lparams(weight = 0.2f, width = matchParent)
 
             relativeLayout {
-                backgroundResource = R.color.sand
+                backgroundResource = R.color.yellow
             }.lparams(weight = 0.05f, width = matchParent)
 
             relativeLayout {
                 gravity = Gravity.CENTER
-                backgroundResource = R.color.grass
+                backgroundResource = R.color.green
 
             }.lparams(weight = 0.1f, width = matchParent)
         }

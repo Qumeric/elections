@@ -10,44 +10,85 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/MainTheme">
-        <activity android:name=".MainActivity">
+
+        <activity
+            android:name=".NewGameActivity"
+            android:screenOrientation="portrait">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".GameActivity">
+
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".GameActivity"
+            android:screenOrientation="portrait">
 
         </activity>
-        <activity android:name=".QuestionActivity">
+        <activity
+            android:name=".QuestionActivity"
+            android:screenOrientation="portrait">
+
 
         </activity>
-        <activity android:name=".ChangeActivity">
-
-        </activity>
-
-        <activity android:name=".PollActivity">
-
-        </activity>
-
-        <activity android:name=".CatcherGameActivity">
-
-        </activity>
-
-        <activity android:name=".DucksGameActivity">
-
-        </activity>
-
-        <activity android:name=".HammerGameActivity">
+        <activity
+            android:name=".ChangeActivity"
+            android:screenOrientation="portrait">
 
         </activity>
 
-        <activity android:name=".LadderGameActivity">
+        <activity
+            android:name=".PollActivity"
+            android:screenOrientation="portrait">
 
         </activity>
 
-        <activity android:name=".SnakeGameActivity">
+
+        <activity
+            android:name=".CatcherGameActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity
+            android:name=".DucksGameActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity
+            android:name=".HammerGameActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity
+            android:name=".LadderGameActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity
+            android:name=".SnakeGameActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity
+            android:name=".RunnerGameActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity
+            android:name=".SpendMoneyActivity"
+            android:screenOrientation="portrait">
 
         </activity>
     </application>

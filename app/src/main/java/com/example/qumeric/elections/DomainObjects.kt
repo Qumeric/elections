@@ -25,7 +25,7 @@ class Candidate(val name: String, val description: String, val resource: Int, _o
         for ((_, value) in opinions) {
             total += value.value
         }
-        return total/opinions.size
+        return total / opinions.size
     }
 
     fun update() {
@@ -47,19 +47,18 @@ class FakeCandidate(val name: String, val description: String, var generalOpinio
     }
 }
 
-
 // default value (while candidate is unset)
 val fakeCandidate = Candidate("Fake", "Something went wrong", 1, mapOf(), mapOf())
 
-class Quote(val text:String, val author: String): Serializable { }
+data class Quote(val text: String, val author: String) : Serializable {}
 
-class Question(val text:String, val answers: List<Answer>): Serializable {
+class Question(val text: String, val answers: List<Answer>) : Serializable {
     fun selectAnswer(answer: Int) {
         answers[answer].select()
     }
 }
 
-class Answer(val statement:String, val impact:Map<String, Int>): Serializable {
+class Answer(val statement: String, val impact: Map<String, Int>) : Serializable {
     // This function updates global gamestate.
     // An example of bad design...
     fun select() {
@@ -75,7 +74,7 @@ class Answer(val statement:String, val impact:Map<String, Int>): Serializable {
 
 // Opinion is a wrapper around integer.
 // It represents level of support from the specific group.
-class Opinion() : Serializable{
+class Opinion() : Serializable {
     var value = 0
     private var _limit = 100
     private var limit: Int
@@ -84,15 +83,15 @@ class Opinion() : Serializable{
             _limit = value
         }
 
-    fun add(x : Int) {
+    fun add(x: Int) {
         Log.d("OPINION", String.format("old value: %d", value))
-        value = minOf(value+x, limit)
+        value = minOf(value + x, limit)
         value = maxOf(value, 0)
         Log.d("OPINION", String.format("new value: %d", value))
     }
 
-    fun calcAdded(x: Int): Int{
-        return maxOf(minOf(value+x, limit), 0)
+    fun calcAdded(x: Int): Int {
+        return maxOf(minOf(value + x, limit), 0)
     }
 }
 
@@ -100,6 +99,7 @@ class Opinion() : Serializable{
 // It shuffles data and provides getter to get random unused answer from the list.
 class QuestionGroup(val questions: MutableList<Question>) {
     var nextQuestionIndex = 0
+
     init {
         // Shuffle list of questions
         val rg = Random()
@@ -110,7 +110,8 @@ class QuestionGroup(val questions: MutableList<Question>) {
             questions[randomPosition] = tmp
         }
     }
-    fun getQuestion() : Question {
+
+    fun getQuestion(): Question {
         nextQuestionIndex %= questions.size
         return questions[nextQuestionIndex++]
     }
@@ -123,19 +124,20 @@ class Gamestate(val candidate: Candidate, val questions: HashMap<String, Questio
     val poll_frequency = 5
     var step = 0
     val opinions: Opinions = candidate.opinions
+
     init {
         Log.d("Gamestate", "Gamestate init")
     }
 
-    fun getQuestion(group: String) : Question {
+    fun getQuestion(group: String): Question {
         return questions[group]!!.getQuestion()
     }
 
-    fun isPollTime() : Boolean {
+    fun isPollTime(): Boolean {
         return step != 0 && step % poll_frequency == 0
     }
 
-    fun isLost() : Boolean {
+    fun isLost(): Boolean {
         val opinionOnPlayer = candidate.getGeneralOpinion()
         for (c in candidates) {
             if (c.generalOpinion < opinionOnPlayer) {
@@ -145,7 +147,7 @@ class Gamestate(val candidate: Candidate, val questions: HashMap<String, Questio
         return true
     }
 
-    fun isWon() : Boolean {
+    fun isWon(): Boolean {
         val opinionOnPlayer = candidate.getGeneralOpinion()
         return candidates.size == 1 && opinionOnPlayer > candidates[0].generalOpinion
     }

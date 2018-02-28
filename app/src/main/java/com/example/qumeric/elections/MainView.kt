@@ -78,7 +78,7 @@ class MainView : AnkoComponent<MainActivity> {
 
                             button {
                                 text = candidate.name
-                                backgroundResource = R.color.brightBlue
+                                backgroundResource = R.color.blue
                                 onClick {
                                     gamestate = Gamestate(candidate, loadQuestions(resources),
                                             loadFakeCandidates(resources))
@@ -106,36 +106,6 @@ class MainView : AnkoComponent<MainActivity> {
                         row++
                     }
                 }
-                /*button {
-                    text = "catcher"
-                    onClick {
-                        ctx.startActivity(ctx.intentFor<CatcherGameActivity>())
-                    }
-                }
-                button {
-                    text = "ducks"
-                    onClick {
-                        ctx.startActivity(ctx.intentFor<DucksGameActivity>())
-                    }
-                }
-                button {
-                    text = "hammer"
-                    onClick {
-                        ctx.startActivity(ctx.intentFor<HammerGameActivity>())
-                    }
-                }
-                button {
-                    text = "ladder"
-                    onClick {
-                        ctx.startActivity(ctx.intentFor<LadderGameActivity>())
-                    }
-                }
-                button {
-                    text = "snake"
-                    onClick {
-                        ctx.startActivity(ctx.intentFor<SnakeGameActivity>())
-                    }
-                }*/
             }.lparams {
                 width = matchParent
                 height = matchParent

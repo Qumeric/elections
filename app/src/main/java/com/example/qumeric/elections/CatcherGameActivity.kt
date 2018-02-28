@@ -7,27 +7,30 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.ImageView
 import org.jetbrains.anko.ctx
+import org.jetbrains.anko.displayMetrics
+import org.jetbrains.anko.image
 import org.jetbrains.anko.setContentView
 import java.lang.Math.random
 
-class CatcherGameActivity : AppCompatActivity() {
+class CatcherGameActivity : DefaultActivity() {
     private lateinit var view: CatcherGameView
     private val handler = Handler()
     private var score = 0
 
     val strawberries: MutableSet<ImageView> = mutableSetOf()
 
-    val createStrawberry = object : Runnable {
+    private val createStrawberry = object : Runnable {
         override fun run() {
             val strawberryView = ImageView(ctx)
 
             strawberryView.setImageResource(R.drawable.ic_strawberry)
-            strawberryView.x = (random()*(view.layout.width-strawberryView.width*2)).toFloat()
+            val sWidth = strawberryView.image!!.intrinsicWidth
+            strawberryView.x = (displayMetrics.widthPixels - sWidth) * random().toFloat()
 
             view.layout.addView(strawberryView)
             strawberries.add(strawberryView)
 
-            handler.postDelayed(this, (1000/Math.sqrt(1+score.toDouble())).toLong())
+            handler.postDelayed(this, (1000 / Math.sqrt(1.0 + score)).toLong())
         }
     }
 
@@ -39,17 +42,18 @@ class CatcherGameActivity : AppCompatActivity() {
             val toRemove: MutableList<ImageView> = mutableListOf()
 
             for (s in strawberries) {
-                s.y += (10.toDouble()+score).toFloat()
+                s.y += 10f + score
                 s.invalidate()
 
                 val s_rc = Rect()
                 s.getHitRect(s_rc)
 
                 if (cart_rc.intersect(s_rc)) {
+                    score++
                     toRemove.add(s)
                 }
 
-                if (s.y+s.height >= view.layout.height) {
+                if (s.y + s.height >= view.layout.height) {
                     lose()
                 }
             }
@@ -57,12 +61,11 @@ class CatcherGameActivity : AppCompatActivity() {
             for (s in toRemove) {
                 strawberries.remove(s)
                 view.layout.removeView(s)
-                score += 1
             }
 
-            view.scoreText.setText(score.toString())
+            view.scoreText.text = score.toString()
 
-            handler.postDelayed(this, (1000/50).toLong())
+            handler.postDelayed(this, (1000 / 50).toLong())
         }
     }
 
@@ -78,5 +81,6 @@ class CatcherGameActivity : AppCompatActivity() {
 
     fun lose() {
         Log.d("CatcherGameActivity", "LOSE")
+        handler.removeCallbacksAndMessages(null)
     }
 }

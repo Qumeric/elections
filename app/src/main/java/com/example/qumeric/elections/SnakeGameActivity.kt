@@ -11,16 +11,16 @@ import java.util.*
 data class Position(val y: Int, val x: Int) {
     fun plus(d: Direction): Position {
         if (d == Direction.NORTH) {
-            return Position(y-1, x)
+            return Position(y - 1, x)
         }
         if (d == Direction.SOUTH) {
-            return Position(y+1, x)
+            return Position(y + 1, x)
         }
         if (d == Direction.WEST) {
-            return Position(y, x-1)
+            return Position(y, x - 1)
         }
         // d == Direction.EAST
-        return Position(y, x+1)
+        return Position(y, x + 1)
     }
 
     fun isValid(yLimit: Int, xLimit: Int): Boolean {
@@ -32,11 +32,11 @@ enum class Direction {
     NORTH, SOUTH, WEST, EAST
 }
 
-class SnakeGameActivity : AppCompatActivity() {
+class SnakeGameActivity : DefaultActivity() {
     private lateinit var view: SnakeGameView
 
     private val snake: Deque<Position> = LinkedList()
-    private val handler = Handler();
+    private val handler = Handler()
     var d = Direction.EAST
 
     private lateinit var apple: Position
@@ -53,9 +53,9 @@ class SnakeGameActivity : AppCompatActivity() {
 
             view.field
                     .flatMap { it }
-                    .forEach { it.backgroundResource = R.color.grass }
+                    .forEach { it.backgroundResource = R.color.green }
 
-            val nextHeadPos = snake.first.plus(d);
+            val nextHeadPos = snake.first.plus(d)
             if (!nextHeadPos.isValid(view.rowCnt, view.colCnt) || inSnake(nextHeadPos)) {
                 lose()
                 return
@@ -70,7 +70,7 @@ class SnakeGameActivity : AppCompatActivity() {
 
             for (pos in snake) {
                 val elem = view.field[pos.y][pos.x]
-                elem.backgroundResource = R.color.darkBlue
+                elem.backgroundResource = R.color.navy
             }
 
             view.field[apple.y][apple.x].backgroundResource = R.color.red
@@ -87,7 +87,7 @@ class SnakeGameActivity : AppCompatActivity() {
         var apple: Position
         do {
             apple = Position(Random().nextInt(view.rowCnt), Random().nextInt(view.colCnt))
-        } while(inSnake(apple))
+        } while (inSnake(apple))
         return apple
     }
 
@@ -96,9 +96,9 @@ class SnakeGameActivity : AppCompatActivity() {
 
         view = SnakeGameView()
         view.setContentView(this)
-        snake.addLast(Position(0, 0));
+        snake.addLast(Position(0, 0))
 
-        apple = genApple();
+        apple = genApple()
         handler.postDelayed(update, 1)
     }
 

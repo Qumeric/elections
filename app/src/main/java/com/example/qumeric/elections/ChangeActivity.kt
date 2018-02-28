@@ -4,15 +4,15 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import org.jetbrains.anko.setContentView
 
-class ChangeActivity : AppCompatActivity() {
+class ChangeActivity : DefaultActivity() {
     private lateinit var view: ChangeView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val answer : Answer = intent.extras.getSerializable("answer") as Answer
+        val answer: Answer = intent.extras.getSerializable("answer") as Answer
 
-        val oldValues = gamestate.opinions.mapValues{it.value.value}
+        val oldValues = gamestate.opinions.mapValues { it.value.value }
         answer.select()
 
         view = ChangeView(oldValues)
