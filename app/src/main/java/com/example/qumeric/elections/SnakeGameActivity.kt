@@ -32,15 +32,15 @@ enum class Direction {
     NORTH, SOUTH, WEST, EAST
 }
 
-class SnakeGameActivity : DefaultActivity() {
+class SnakeGameActivity : MiniGameActivity() {
     private lateinit var view: SnakeGameView
 
+    private val startLength = 5
+
     private val snake: Deque<Position> = LinkedList()
-    private val handler = Handler()
     var d = Direction.EAST
 
     private lateinit var apple: Position
-    private var score = 0
 
     fun eat() {
         score++
@@ -96,13 +96,15 @@ class SnakeGameActivity : DefaultActivity() {
 
         view = SnakeGameView()
         view.setContentView(this)
-        snake.addLast(Position(0, 0))
 
+        for (i in 1..startLength) {
+            snake.addLast(Position(0, startLength-i))
+        }
         apple = genApple()
-        handler.postDelayed(update, 1)
-    }
 
-    fun lose() {
-        Log.d("SnakeGameActivity", "LOSE")
+        drawInformationDialog(getString(R.string.snake_info_title), getString(R.string.snake_info_message),
+                {
+                    handler.postDelayed(update, 1)
+                }, view.ankoContext)
     }
 }

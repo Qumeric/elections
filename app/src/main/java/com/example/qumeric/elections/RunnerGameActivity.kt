@@ -3,7 +3,7 @@ package com.example.qumeric.elections
 import android.os.Bundle
 import org.jetbrains.anko.setContentView
 
-class RunnerGameActivity : DefaultActivity() {
+class RunnerGameActivity : MiniGameActivity() {
     private lateinit var view: RunnerGameView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -11,5 +11,10 @@ class RunnerGameActivity : DefaultActivity() {
 
         view = RunnerGameView()
         view.setContentView(this)
+
+
+        drawInformationDialog(getString(R.string.runner_info_title), getString(R.string.runner_info_message),
+                {
+                }, view.ankoContext)
     }
 }

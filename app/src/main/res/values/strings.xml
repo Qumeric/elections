@@ -15,4 +15,20 @@
     <string name="exit_game">Exit game</string>
     <string name="end_game_dialog_title">Exit game?</string>
     <string name="end_game_dialog_message">Are you sure that you want to finish this game? All progress will be lost.</string>
+    <string name="not_enough_money">Not enough money!</string>
+    <string name="finish">Finish</string>
+
+    <!-- Minigames description -->
+    <string name="ducks_info_title">A</string>
+    <string name="ducks_info_message">A</string>
+    <string name="runner_info_title">A</string>
+    <string name="runner_info_message">A</string>
+    <string name="catcher_info_title">A</string>
+    <string name="catcher_info_message">A</string>
+    <string name="hammer_info_title">A</string>
+    <string name="hammer_info_message">A</string>
+    <string name="snake_info_title">A</string>
+    <string name="snake_info_message">A</string>
+    <string name="ladder_info_title">A</string>
+    <string name="ladder_info_message">A</string>
 </resources>

@@ -6,7 +6,7 @@ import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
 
 class LadderGameView() : AnkoComponent<LadderGameActivity> {
-    private lateinit var ankoContext: AnkoContext<LadderGameActivity>
+    lateinit var ankoContext: AnkoContext<LadderGameActivity>
 
     lateinit var layout: GridLayout
     lateinit var scoreText: TextView

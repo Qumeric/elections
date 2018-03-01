@@ -3,7 +3,6 @@ package com.example.qumeric.elections
 import android.graphics.RectF
 import android.support.v4.content.ContextCompat.getColor
 import android.support.v4.content.res.ResourcesCompat
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewManager
@@ -82,7 +81,7 @@ class PollView(val h: Map<String, List<Double>>) : AnkoComponent<PollActivity> {
                     textResource = R.string.try_again
                     onClick {
                         // FIXME check is this working properly
-                        ctx.startActivity(ctx.intentFor<MainActivity>())
+                        ctx.startActivity(ctx.intentFor<ChooseCandidateActivity>())
                     }
                 }
             }
@@ -95,7 +94,7 @@ class PollView(val h: Map<String, List<Double>>) : AnkoComponent<PollActivity> {
                     textResource = R.string.try_again
                     onClick {
                         // FIXME check is this working properly
-                        ctx.startActivity(ctx.intentFor<MainActivity>())
+                        ctx.startActivity(ctx.intentFor<ChooseCandidateActivity>())
                     }
                 }
             } else {

@@ -6,7 +6,6 @@ import android.view.Gravity
 import android.view.View
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
-import android.widget.Toast
 
 class GameView : AnkoComponent<GameActivity> {
     private lateinit var ankoContext: AnkoContext<GameActivity>
@@ -49,38 +48,8 @@ class GameView : AnkoComponent<GameActivity> {
                 weight = 0.3f
             }
 
-            // FIXME TEMP
             verticalLayout {
-                button {
-                    text = "c"
-                    onClick {
-                        ctx.startActivity(ctx.intentFor<CatcherGameActivity>())
-                    }
-                }
-                button {
-                    text = "d"
-                    onClick {
-                        ctx.startActivity(ctx.intentFor<DucksGameActivity>())
-                    }
-                }
-                button {
-                    text = "h"
-                    onClick {
-                        ctx.startActivity(ctx.intentFor<HammerGameActivity>())
-                    }
-                }
-                button {
-                    text = "l"
-                    onClick {
-                        ctx.startActivity(ctx.intentFor<LadderGameActivity>())
-                    }
-                }
-                button {
-                    text = "s"
-                    onClick {
-                        ctx.startActivity(ctx.intentFor<SnakeGameActivity>())
-                    }
-                }
+
                 button {
                     textResource = R.string.exit_game;
                     onClick {
@@ -89,13 +58,20 @@ class GameView : AnkoComponent<GameActivity> {
                         simpleAlert.setMessage(ctx.getString(R.string.end_game_dialog_message))
 
                         simpleAlert.setButton(AlertDialog.BUTTON_POSITIVE, ctx.getString(R.string.yes_button), {
-                            _, _ -> ctx.startActivity(ctx.intentFor<MainActivity>())
+                            _, _ -> ctx.startActivity(ctx.intentFor<NewGameActivity>())
                        })
                         simpleAlert.setButton(AlertDialog.BUTTON_NEGATIVE, ctx.getString(R.string.no_button), {
                             _, _ -> // do Nothing
                         });
 
                         simpleAlert.show()
+                    }
+                }
+
+                button {
+                    text = "spend money"
+                    onClick {
+                        ctx.startActivity(ctx.intentFor<SpendMoneyActivity>())
                     }
                 }
             }

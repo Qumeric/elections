@@ -16,7 +16,37 @@ class NewGameView : AnkoComponent<NewGameActivity> {
             imageButton {
                 imageResource = R.drawable.play
                 onClick {
-                    ctx.startActivity(ctx.intentFor<MainActivity>())
+                    ctx.startActivity(ctx.intentFor<ChooseCandidateActivity>())
+                }
+            }
+              button {
+                text = "c"
+                onClick {
+                    ctx.startActivity(ctx.intentFor<CatcherGameActivity>())
+                }
+            }
+            button {
+                text = "d"
+                onClick {
+                    ctx.startActivity(ctx.intentFor<DucksGameActivity>())
+                }
+            }
+            button {
+                text = "h"
+                onClick {
+                    ctx.startActivity(ctx.intentFor<HammerGameActivity>())
+                }
+            }
+            button {
+                text = "l"
+                onClick {
+                    ctx.startActivity(ctx.intentFor<LadderGameActivity>())
+                }
+            }
+            button {
+                text = "s"
+                onClick {
+                    ctx.startActivity(ctx.intentFor<SnakeGameActivity>())
                 }
             }
         }

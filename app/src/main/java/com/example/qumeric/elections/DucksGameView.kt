@@ -7,7 +7,7 @@ import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
 
 class DucksGameView() : AnkoComponent<DucksGameActivity> {
-    private lateinit var ankoContext: AnkoContext<DucksGameActivity>
+    lateinit var ankoContext: AnkoContext<DucksGameActivity>
 
     lateinit var layout: RelativeLayout
     lateinit var scoreText: TextView

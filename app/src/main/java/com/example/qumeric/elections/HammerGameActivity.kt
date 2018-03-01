@@ -1,24 +1,19 @@
 package com.example.qumeric.elections
 
 import android.os.Bundle
-import android.os.Handler
-import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import org.jetbrains.anko.sdk25.listeners.onClick
 import org.jetbrains.anko.setContentView
 
-class HammerGameActivity : DefaultActivity() {
+class HammerGameActivity : MiniGameActivity() {
     private lateinit var view: HammerGameView
 
-    private var score = 0
     private lateinit var gonnaShow: Array<BooleanArray>
 
     fun kill(imgResource: Int) {
         score += 1
     }
-
-    val handler = Handler()
 
     fun createEnemy(row: Int, col: Int): Runnable {
         val elem = view.field[row][col]
@@ -63,11 +58,11 @@ class HammerGameActivity : DefaultActivity() {
             gonnaShow[row] = rowValue
         }
 
-        handler.postDelayed(update, 1)
-    }
 
-    fun lose() {
-        Log.d("HammerGameActivity", "LOSE")
-    }
+        drawInformationDialog(getString(R.string.hammer_info_title), getString(R.string.hammer_info_message),
+                {
+                    handler.postDelayed(update, 1)
+                }, view.ankoContext)
 
+    }
 }

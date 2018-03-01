@@ -11,16 +11,14 @@ import org.jetbrains.anko.displayMetrics
 import org.jetbrains.anko.setContentView
 import java.lang.Math.random
 
-class DucksGameActivity : DefaultActivity() {
+class DucksGameActivity : MiniGameActivity() {
     private lateinit var view: DucksGameView
 
-    private var score = 0
     private var missedShots = 0
     private var missedDucks = 0
 
     val ducks: MutableSet<ImageView> = mutableSetOf()
 
-    val handler = Handler()
     private val createDuck = object : Runnable {
         override fun run() {
             val duckView = ImageView(ctx)
@@ -69,8 +67,11 @@ class DucksGameActivity : DefaultActivity() {
         view = DucksGameView()
         view.setContentView(this)
 
-        handler.postDelayed(createDuck, 1)
-        handler.postDelayed(update, 1)
+        drawInformationDialog(getString(R.string.ducks_info_title), getString(R.string.ducks_info_message),
+                {
+                    handler.postDelayed(createDuck, 1)
+                    handler.postDelayed(update, 1)
+                }, view.ankoContext)
     }
 
     fun shoot() {
@@ -104,10 +105,5 @@ class DucksGameActivity : DefaultActivity() {
         if (!isHit) {
             missedShots++
         }
-    }
-
-    fun lose() {
-        Log.d("DuckGameActivity", "LOSE")
-        handler.removeCallbacksAndMessages(null)
     }
 }

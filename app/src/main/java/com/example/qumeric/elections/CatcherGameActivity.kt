@@ -12,10 +12,8 @@ import org.jetbrains.anko.image
 import org.jetbrains.anko.setContentView
 import java.lang.Math.random
 
-class CatcherGameActivity : DefaultActivity() {
+class CatcherGameActivity : MiniGameActivity() {
     private lateinit var view: CatcherGameView
-    private val handler = Handler()
-    private var score = 0
 
     val strawberries: MutableSet<ImageView> = mutableSetOf()
 
@@ -75,12 +73,10 @@ class CatcherGameActivity : DefaultActivity() {
         view = CatcherGameView()
         view.setContentView(this)
 
-        handler.postDelayed(createStrawberry, 1)
-        handler.postDelayed(update, 1)
-    }
-
-    fun lose() {
-        Log.d("CatcherGameActivity", "LOSE")
-        handler.removeCallbacksAndMessages(null)
+        drawInformationDialog(getString(R.string.ducks_info_title), getString(R.string.ducks_info_message),
+                {
+                    handler.postDelayed(createStrawberry, 1)
+                    handler.postDelayed(update, 1)
+                }, view.ankoContext)
     }
 }

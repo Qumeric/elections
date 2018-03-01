@@ -23,7 +23,7 @@
         </activity>
 
         <activity
-            android:name=".MainActivity"
+            android:name=".ChooseCandidateActivity"
             android:screenOrientation="portrait">
         </activity>
         <activity

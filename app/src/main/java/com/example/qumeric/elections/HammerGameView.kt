@@ -7,7 +7,7 @@ import org.jetbrains.anko.*
 import java.util.*
 
 class HammerGameView() : AnkoComponent<HammerGameActivity> {
-    private lateinit var ankoContext: AnkoContext<HammerGameActivity>
+    lateinit var ankoContext: AnkoContext<HammerGameActivity>
 
     lateinit var layout: GridLayout
     lateinit var scoreText: TextView

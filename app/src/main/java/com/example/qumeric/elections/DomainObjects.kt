@@ -124,6 +124,7 @@ class Gamestate(val candidate: Candidate, val questions: HashMap<String, Questio
     val poll_frequency = 5
     var step = 0
     val opinions: Opinions = candidate.opinions
+    var money = 0
 
     init {
         Log.d("Gamestate", "Gamestate init")

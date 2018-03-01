@@ -14,10 +14,10 @@ inline fun ViewManager.cardView(init: CardView.() -> Unit): CardView {
     return ankoView({ CardView(it) }, theme = 0, init = init)
 }
 
-class MainView : AnkoComponent<MainActivity> {
-    private lateinit var ankoContext: AnkoContext<MainActivity>
+class MainView : AnkoComponent<ChooseCandidateActivity> {
+    private lateinit var ankoContext: AnkoContext<ChooseCandidateActivity>
 
-    override fun createView(ui: AnkoContext<MainActivity>) = with(ui) {
+    override fun createView(ui: AnkoContext<ChooseCandidateActivity>) = with(ui) {
         ankoContext = ui
 
         var row = 0

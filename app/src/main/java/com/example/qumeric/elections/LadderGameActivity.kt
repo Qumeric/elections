@@ -6,14 +6,10 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import org.jetbrains.anko.setContentView
 
-class LadderGameActivity : DefaultActivity() {
+class LadderGameActivity : MiniGameActivity() {
     private lateinit var view: LadderGameView
 
-    private var score = 0
-
     private val length = 30 // in seconds
-
-    private val handler = Handler()
 
     fun tap() {
         score++
@@ -30,13 +26,12 @@ class LadderGameActivity : DefaultActivity() {
         view = LadderGameView()
         view.setContentView(this)
 
-        handler.postDelayed({ update() }, 1)
-        handler.postDelayed({ lose() }, 1000 * length.toLong())
-    }
 
-    fun lose() {
-        Log.d("LadderGameActivity", "LOSE")
-        handler.removeCallbacksAndMessages(null)
-    }
+        drawInformationDialog(getString(R.string.ladder_info_title), getString(R.string.ladder_info_message),
+                {
+                    handler.postDelayed({update()}, 1)
+                    handler.postDelayed({lose()}, 1000 * length.toLong())
+                }, view.ankoContext)
 
+    }
 }
