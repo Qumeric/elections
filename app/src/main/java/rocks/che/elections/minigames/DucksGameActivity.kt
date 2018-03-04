@@ -2,7 +2,6 @@ package rocks.che.elections.minigames
 
 import android.graphics.Rect
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageView
 import im.delight.android.audio.MusicManager
 import org.jetbrains.anko.ctx
@@ -17,7 +16,7 @@ class DucksGameActivity : MiniGameActivity() {
     private var missedShots = 0
     private var missedDucks = 0
 
-    val ducks: MutableSet<ImageView> = mutableSetOf()
+    private val ducks: MutableSet<ImageView> = mutableSetOf()
 
     private fun createDuck() {
         val duckView = ImageView(ctx)
@@ -75,28 +74,28 @@ class DucksGameActivity : MiniGameActivity() {
     }
 
     fun shoot() {
-        MusicManager.getInstance().play(this, R.raw.shot_sound);
+        MusicManager.getInstance().play(this, R.raw.shot_sound)
 
-        val ch_rc = Rect()
-        view.crosshair.getHitRect(ch_rc)
+        val chRC = Rect()
+        view.crosshair.getHitRect(chRC)
 
         val coef = 0.1
 
-        ch_rc.bottom = ch_rc.centerY() + (ch_rc.bottom - ch_rc.centerY()) * coef.toInt()
-        ch_rc.top = ch_rc.centerY() + (ch_rc.top - ch_rc.centerY()) * coef.toInt()
-        ch_rc.left = ch_rc.centerX() + (ch_rc.left - ch_rc.centerX()) * coef.toInt()
-        ch_rc.right = ch_rc.centerX() + (ch_rc.right - ch_rc.centerX()) * coef.toInt()
+        chRC.bottom = chRC.centerY() + (chRC.bottom - chRC.centerY()) * coef.toInt()
+        chRC.top = chRC.centerY() + (chRC.top - chRC.centerY()) * coef.toInt()
+        chRC.left = chRC.centerX() + (chRC.left - chRC.centerX()) * coef.toInt()
+        chRC.right = chRC.centerX() + (chRC.right - chRC.centerX()) * coef.toInt()
 
         var isHit = false
         for (duck in ducks) {
-            val duck_rc = Rect()
-            duck.getHitRect(duck_rc)
+            val duckRC = Rect()
+            duck.getHitRect(duckRC)
 
             // Constants are hardcoded for the specific duck drawable
-            val realDuckCenterX = duck_rc.left + (duck_rc.right - duck_rc.left) * 312 / 512
-            val realDuckCenterY = duck_rc.top + (duck_rc.bottom - duck_rc.top) * 287 / 512
+            val realDuckCenterX = duckRC.left + (duckRC.right - duckRC.left) * 312 / 512
+            val realDuckCenterY = duckRC.top + (duckRC.bottom - duckRC.top) * 287 / 512
 
-            if (ch_rc.contains(realDuckCenterX, realDuckCenterY)) {
+            if (chRC.contains(realDuckCenterX, realDuckCenterY)) {
                 ducks.remove(duck)
                 view.layout.removeView(duck)
                 score++

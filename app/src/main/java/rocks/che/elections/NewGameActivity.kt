@@ -12,12 +12,12 @@ class NewGameActivity: DefaultActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // FIXME temp
-        gamestate = Gamestate(fakeCandidate, loadQuestions(resources),
-                loadFakeCandidates(resources) as MutableList<FakeCandidate>)
+        if (BuildConfig.DEBUG) {
+            delete(this, secretFilename)
+        }
 
         try {
-            gamestate = loadGame(this)!!
+            gamestate = loadGame(this)
             // FIXME saveGame last activity
             startActivity(intentFor<GameActivity>())
         } catch (e: Exception) {

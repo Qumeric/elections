@@ -94,7 +94,7 @@ class DebateViewGroups : AnkoComponent<DebateActivity> {
                 onClick {
                     val activity = ctx as DebateActivity
                     if (amountVals.sum() == activity.groupMinutes) {
-                        activity.setOpponentDistribution(amountVals)
+                        activity.setGroupDistribution(amountVals)
                         activity.nextStage()
                     } else {
                         Toast.makeText(ctx, ctx.getString(R.string.debate_spend_minutes_first), Toast.LENGTH_SHORT).show()

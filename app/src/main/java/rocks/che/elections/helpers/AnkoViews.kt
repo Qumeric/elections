@@ -10,6 +10,7 @@ import android.view.ViewManager
 import android.widget.TextView
 import com.robinhood.spark.SparkAdapter
 import com.robinhood.spark.SparkView
+import nl.dionsegijn.konfetti.KonfettiView
 import org.jetbrains.anko._GridLayout
 import org.jetbrains.anko.custom.ankoView
 import org.jetbrains.anko.textColor
@@ -30,7 +31,7 @@ class SquareGridLayout(ctx: Context): _GridLayout(ctx) {
         super.onMeasure(
                 MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY),
                 MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY)
-        );
+        )
     }
 }
 
@@ -50,21 +51,24 @@ inline fun ViewManager.gifImageView(init: GifImageView.() -> Unit): GifImageView
     return ankoView({ GifImageView(it) }, theme = 0, init = init)
 }
 
-val NO_STRING = "\b\nxa\t" // never occurs
-inline fun ViewManager.gameTextView(size: Int = 0, color: Int = 0, text: String=NO_STRING, init: TextView.() -> Unit) : TextView {
+inline fun ViewManager.konfettiView(init: KonfettiView.() -> Unit): KonfettiView {
+    return ankoView({ KonfettiView(it)}, theme = 0, init = init)
+}
+
+inline fun ViewManager.gameTextView(size: Int = 0, color: Int = 0, text: String?=null, init: TextView.() -> Unit) : TextView {
     return ankoView({
         val tv = TextView(it)
         tv.typeface = ResourcesCompat.getFont(it, R.font.mfred)
         tv.textAlignment = View.TEXT_ALIGNMENT_CENTER
         if (size > 0)   tv.textSize = size.toFloat()
         if (color != 0) tv.textColor = ContextCompat.getColor(it, color)
-        if (text != NO_STRING) tv.text = text
+        if (text != null) tv.text = text
         tv.elevation = 100f
         tv
     }, theme = 0, init = init)
 }
 
-class MyAdapter(val yData: FloatArray) : SparkAdapter() {
+class MyAdapter(private val yData: FloatArray) : SparkAdapter() {
     override fun getCount(): Int {
         return yData.size
     }

@@ -38,8 +38,7 @@ class DebateViewOpponents : AnkoComponent<DebateActivity> {
             }.lparams(weight = 0.1f, height = 0)
 
             var isGray = true
-            var pos = 0
-            for (candidate in gamestate.candidates.filter { it.name != gamestate.candidate.name }) {
+            for ((pos, candidate) in gamestate.candidates.withIndex()) {
                 linearLayout {
                     gravity = Gravity.CENTER
                     backgroundResource = if (isGray) {
@@ -53,20 +52,19 @@ class DebateViewOpponents : AnkoComponent<DebateActivity> {
 
                     seekBar {
                         max = (ctx as DebateActivity).opponentMinutes
-                        val p = pos // capture value
                         onSeekBarChangeListener {
                             onProgressChanged({ sb, progress, _ ->
                                 var spendMinutes = (0 until amountVals.size)
-                                        .filter { it != p }
+                                        .filter { it != pos }
                                         .sumBy { amountVals[it] }
 
                                 sb!!.progress =  Math.min(max-spendMinutes, progress)
-                                amountVals[p] = sb.progress
+                                amountVals[pos] = sb.progress
 
                                 spendMinutes += sb.progress
 
                                 minutesTextView.text = ctx.getString(R.string.debate_minutes_left_template).format(max-spendMinutes)
-                                amounts[p].text = sb.progress.toString()
+                                amounts[pos].text = sb.progress.toString()
                             })
                         }
                     }.lparams(width=dip(200))
@@ -75,7 +73,6 @@ class DebateViewOpponents : AnkoComponent<DebateActivity> {
                     amountVals.add(0)
                 }.lparams(weight = 0.1f, height = 0, width = matchParent)
                 isGray = !isGray
-                pos++
             }
 
             themedButton(theme = R.style.button) {

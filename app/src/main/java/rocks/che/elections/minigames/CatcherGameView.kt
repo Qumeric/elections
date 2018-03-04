@@ -9,7 +9,7 @@ import org.jetbrains.anko.sdk25.listeners.onTouch
 import rocks.che.elections.R
 import rocks.che.elections.helpers.gameTextView
 
-class CatcherGameView() : AnkoComponent<CatcherGameActivity> {
+class CatcherGameView : AnkoComponent<CatcherGameActivity> {
     lateinit var ankoContext: AnkoContext<CatcherGameActivity>
 
     lateinit var layout: RelativeLayout
@@ -52,7 +52,7 @@ class CatcherGameView() : AnkoComponent<CatcherGameActivity> {
                 backgroundDrawable = cartDrawable
                 y = (displayMetrics.heightPixels - cartDrawable.intrinsicHeight).toFloat()
 
-                isClickable = false;
+                isClickable = false
             }
 
 

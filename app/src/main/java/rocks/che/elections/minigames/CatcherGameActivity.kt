@@ -14,7 +14,7 @@ import java.lang.Math.random
 class CatcherGameActivity : MiniGameActivity() {
     private lateinit var view: CatcherGameView
 
-    var missedStrawberries = 0
+    private var missedStrawberries = 0
 
     val strawberries: MutableSet<ImageView> = mutableSetOf()
 
@@ -33,48 +33,46 @@ class CatcherGameActivity : MiniGameActivity() {
         }
     }
 
-    val update = object : Runnable {
-        override fun run() {
-            val cart_rc = Rect()
-            view.cart.getHitRect(cart_rc)
+    private fun update() {
+        val cartRC = Rect()
+        view.cart.getHitRect(cartRC)
 
-            val toRemove: MutableList<ImageView> = mutableListOf()
+        val toRemove: MutableList<ImageView> = mutableListOf()
 
-            for (s in strawberries) {
-                s.y += 10f + score
-                s.invalidate()
+        for (s in strawberries) {
+            s.y += 10f + score
+            s.invalidate()
 
-                val s_rc = Rect()
-                s.getHitRect(s_rc)
+            val sRC = Rect()
+            s.getHitRect(sRC)
 
-                if (cart_rc.intersect(s_rc)) {
-                    MusicManager.getInstance().play(ctx, R.raw.catch_strawberry_sound)
-                    score++
-                    toRemove.add(s)
-                }
-
-                if (s.y + s.height >= view.layout.height) {
-                    MusicManager.getInstance().play(ctx, R.raw.catch_miss_sound)
-                    missedStrawberries++
-                    toRemove.add(s)
-                }
+            if (cartRC.intersect(sRC)) {
+                MusicManager.getInstance().play(ctx, R.raw.catch_strawberry_sound)
+                score++
+                toRemove.add(s)
             }
 
-            for (s in toRemove) {
-                strawberries.remove(s)
-                view.layout.removeView(s)
+            if (s.y + s.height >= view.layout.height) {
+                MusicManager.getInstance().play(ctx, R.raw.catch_miss_sound)
+                missedStrawberries++
+                toRemove.add(s)
             }
-
-            view.scoreText.text = score.toString()
-            view.missedText.text = missedStrawberries.toString()
-
-            if (missedStrawberries >= maxLose) {
-                lose()
-                return
-            }
-
-            handler.postDelayed(this, (1000 / 50).toLong())
         }
+
+        for (s in toRemove) {
+            strawberries.remove(s)
+            view.layout.removeView(s)
+        }
+
+        view.scoreText.text = score.toString()
+        view.missedText.text = missedStrawberries.toString()
+
+        if (missedStrawberries >= maxLose) {
+            lose()
+            return
+        }
+
+        handler.postDelayed({update()}, (1000 / 50).toLong())
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -86,7 +84,7 @@ class CatcherGameActivity : MiniGameActivity() {
         drawInformationDialog(getString(R.string.ducks_info_title), getString(R.string.ducks_info_message),
                 {
                     handler.postDelayed(createStrawberry, 1)
-                    handler.postDelayed(update, 1)
+                    handler.postDelayed({update()}, 1)
                 }, view.ankoContext)
     }
 

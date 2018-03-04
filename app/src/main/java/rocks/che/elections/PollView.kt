@@ -1,10 +1,7 @@
 package rocks.che.elections
 
 import android.support.v4.content.ContextCompat.getColor
-import android.support.v4.content.res.ResourcesCompat
 import android.view.Gravity
-import android.view.View
-import android.widget.TextView
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
 import rocks.che.elections.helpers.MyAdapter
@@ -13,13 +10,9 @@ import rocks.che.elections.helpers.sparkView
 import rocks.che.elections.logic.gamestate
 
 
-class PollView(val h: Map<String, List<Double>>) : AnkoComponent<PollActivity> {
+class PollView(private val h: Map<String, List<Double>>) : AnkoComponent<PollActivity> {
     private lateinit var ankoContext: AnkoContext<PollActivity>
-
-    lateinit var expelledTV: TextView
-
     private val colors = listOf(R.color.red, R.color.green, R.color.blue, R.color.yellow, R.color.teal, R.color.orange)
-
     private val candidateToColor = mutableMapOf<String, Int>()
 
     override fun createView(ui: AnkoContext<PollActivity>) = with(ui) {
@@ -45,50 +38,37 @@ class PollView(val h: Map<String, List<Double>>) : AnkoComponent<PollActivity> {
 
             linearLayout {
                 val c = gamestate.candidate
-                backgroundResource = candidateToColor[c.name]!!
-                alpha = 0.5f
-                gameTextView {
-                    text = String.format("%s: %d", c.name, Math.round(c.getGeneralOpinion()))
+                gameTextView(dip(14), candidateToColor[c.name]!!) {
+                    text = String.format("%s: %d", c.name, Math.round(c.generalOpinion()))
                 }.lparams(weight = 1f)
-            }
 
-            for (c in gamestate.candidates) {
-                linearLayout {
-                    backgroundResource = candidateToColor[c.name]!!
-                    alpha = 0.5f
-                    gameTextView {
-                        text = String.format("%s: %d", c.name, Math.round(c.generalOpinion))
+                for (oc in gamestate.candidates) {
+                    gameTextView(dip(14), candidateToColor[oc.name]!!) {
+                        text = String.format("%s: %d", oc.name, Math.round(oc.generalOpinion()))
                     }.lparams(weight = 1f)
                 }
             }
-
-            if (gamestate.isWon()) {
-                gameTextView {
-                    textResource = R.string.win_message
-                }
-                button {
-                    textResource = R.string.try_again
-                    onClick {
-                        // FIXME check is this working properly
-                        ctx.startActivity(ctx.intentFor<ChooseCandidateActivity>())
+            if (gamestate.isWon() || gamestate.isLost()) {
+                gameTextView(dip(12)) {
+                    textResource = if (gamestate.isWon()) {
+                        R.string.win_message
+                    } else {
+                        R.string.lost_message
                     }
                 }
-            }
-            if (gamestate.isLost()) {
-                textView {
-                    gravity = Gravity.CENTER
-                    textResource = R.string.lost_message
-                }
-                button {
+                themedButton(theme = R.style.button) {
                     textResource = R.string.try_again
                     onClick {
-                        // FIXME check is this working properly
                         ctx.startActivity(ctx.intentFor<ChooseCandidateActivity>())
                     }
                 }
             } else {
-                expelledTV = gameTextView { }
-                button {
+                if (gamestate.isPollTime()) {
+                    gameTextView(dip(12)) {
+                        text = String.format("Candidate %s has been expelled from elections", gamestate.expel())
+                    }
+                }
+                themedButton(theme = R.style.button) {
                     textResource = R.string.next
                     onClick {
                         ctx.startActivity(ctx.intentFor<GameActivity>())

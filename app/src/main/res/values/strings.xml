@@ -17,6 +17,9 @@
     <string name="end_game_dialog_message">Are you sure that you want to finish this game? All progress will be lost.</string>
     <string name="not_enough_money">Not enough money!</string>
     <string name="finish">Finish</string>
+    <string name="congratulations">Congratulations!</string>
+    <string name="need_unblock">You have to unblock this candidate first</string>
+    <string name="secret_candidate_name">Нэвэльный</string>
 
     <!-- Debate description -->
     <string name="debate">Debate</string>

@@ -1,8 +1,6 @@
 package rocks.che.elections.debate
 
-import android.support.v4.content.res.ResourcesCompat
 import android.view.Gravity
-import android.view.View
 import android.widget.SeekBar
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick

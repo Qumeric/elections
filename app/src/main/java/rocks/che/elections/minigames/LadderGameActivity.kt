@@ -14,7 +14,7 @@ class LadderGameActivity : MiniGameActivity() {
         view.scoreText.text = score.toString()
     }
 
-    fun danger() {
+    private fun danger() {
         view.enemyView.x += 10
         handler.postDelayed({danger()}, 2000)
     }

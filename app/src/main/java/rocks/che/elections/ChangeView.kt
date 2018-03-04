@@ -1,15 +1,15 @@
 package rocks.che.elections
 
-import android.support.v4.content.res.ResourcesCompat
 import android.view.Gravity
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
+import rocks.che.elections.debate.DebateActivity
 import rocks.che.elections.helpers.gameTextView
 import rocks.che.elections.logic.gamestate
 import rocks.che.elections.logic.getGroupResource
 import java.util.*
 
-class ChangeView(val oldOpinions: Map<String, Int>) : AnkoComponent<ChangeActivity> {
+class ChangeView(private val oldOpinions: Map<String, Int>) : AnkoComponent<ChangeActivity> {
     private lateinit var ankoContext: AnkoContext<ChangeActivity>
 
     override fun createView(ui: AnkoContext<ChangeActivity>) = with(ui) {
@@ -54,9 +54,9 @@ class ChangeView(val oldOpinions: Map<String, Int>) : AnkoComponent<ChangeActivi
                 backgroundResource = R.color.blue
                 onClick {
                     if (gamestate.isPollTime()) {
-                        ctx.startActivity(ctx.intentFor<PollActivity>())
+                        ctx.startActivity(ctx.intentFor<DebateActivity>())
                     } else {
-                        ctx.startActivity(ctx.intentFor<GameActivity>())
+                        ctx.startActivity(ctx.intentFor<PollActivity>())
                     }
                 }
             }.lparams(width = dip(150), height = dip(60))

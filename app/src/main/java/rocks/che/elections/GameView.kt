@@ -1,9 +1,7 @@
 package rocks.che.elections
 
-import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.app.AlertDialog
 import android.view.Gravity
-import android.view.View
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
 import rocks.che.elections.helpers.cardView
@@ -29,10 +27,9 @@ class GameView : AnkoComponent<GameActivity> {
                 weight = 0.2f
             }
 
-            /*gameTextView {
-                gravity = Gravity.CENTER
-                statement = String.format("Day: %d", gamestate.step)
-            }*/
+            gameTextView {
+                text = String.format("Day: %d", gamestate.step)
+            } // FIXME lparams
 
             val row1 = linearLayout {
                 space().lparams(width = dip(20), height = matchParent)
@@ -47,7 +44,6 @@ class GameView : AnkoComponent<GameActivity> {
                 height = 0
                 weight = 0.3f
             }
-
 
             var leftInRow = 3
 
@@ -89,7 +85,7 @@ class GameView : AnkoComponent<GameActivity> {
             linearLayout {
                 gravity = Gravity.CENTER
                 themedButton(theme = R.style.button) {
-                    textResource = R.string.exit_game;
+                    textResource = R.string.exit_game
                     onClick {
                         val simpleAlert = AlertDialog.Builder(ctx as GameActivity).create()
                         simpleAlert.setTitle(ctx.getString(R.string.end_game_dialog_title))
@@ -101,7 +97,7 @@ class GameView : AnkoComponent<GameActivity> {
                         })
                         simpleAlert.setButton(AlertDialog.BUTTON_NEGATIVE, ctx.getString(R.string.no_button), { _, _ ->
                             // do Nothing
-                        });
+                        })
 
                         simpleAlert.show()
                     }

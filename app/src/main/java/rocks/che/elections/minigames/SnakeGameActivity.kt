@@ -51,7 +51,7 @@ class SnakeGameActivity : MiniGameActivity() {
 
     private var appleResource = R.drawable.ic_apple_1
     private fun randomAppleResource() {
-        appleResource = listOf<Int>(R.drawable.ic_apple_1, R.drawable.ic_apple_2,
+        appleResource = listOf(R.drawable.ic_apple_1, R.drawable.ic_apple_2,
                 R.drawable.ic_apple_3)[Random().nextInt(3)]
     }
 

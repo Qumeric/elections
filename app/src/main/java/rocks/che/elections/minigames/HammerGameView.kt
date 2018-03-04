@@ -2,15 +2,16 @@ package rocks.che.elections.minigames
 
 import android.view.Gravity
 import android.view.View
-import android.widget.*
+import android.widget.GridLayout
+import android.widget.ImageView
+import android.widget.TextView
 import org.jetbrains.anko.*
 import rocks.che.elections.R
-import rocks.che.elections.helpers.SquareGridLayout
 import rocks.che.elections.helpers.gameTextView
 import rocks.che.elections.helpers.squareGridLayout
 import java.util.*
 
-class HammerGameView() : AnkoComponent<HammerGameActivity> {
+class HammerGameView : AnkoComponent<HammerGameActivity> {
     lateinit var ankoContext: AnkoContext<HammerGameActivity>
 
     lateinit var layout: GridLayout
@@ -20,7 +21,7 @@ class HammerGameView() : AnkoComponent<HammerGameActivity> {
     val rowCnt = 3
     val colCnt = 3
 
-    var field: ArrayList<ArrayList<ImageButton>> = arrayListOf()
+    var field: ArrayList<ArrayList<ImageView>> = arrayListOf()
 
     fun pickRandomEnemyResource(): Int {
         return listOf(R.drawable.grudinin, R.drawable.navalny, R.drawable.sobchak,
@@ -57,8 +58,8 @@ class HammerGameView() : AnkoComponent<HammerGameActivity> {
                 rowCount = rowCnt
 
                 for (row in 0 until rowCount) {
-                    val rowElems: List<ImageButton> = (0 until columnCount).map {
-                        imageButton {
+                    val rowElems: List<ImageView> = (0 until columnCount).map {
+                        imageView {
                             background = null
                             visibility = View.INVISIBLE
                             scaleType = ImageView.ScaleType.FIT_CENTER
@@ -69,7 +70,7 @@ class HammerGameView() : AnkoComponent<HammerGameActivity> {
                             width = 20
                         }
                     }
-                    field.add(rowElems as ArrayList<ImageButton>)
+                    field.add(rowElems as ArrayList<ImageView>)
                 }
             }.lparams(weight=9/16f, width= matchParent, height = 0)
 

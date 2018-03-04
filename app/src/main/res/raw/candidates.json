@@ -14,9 +14,11 @@
       "positive": 50,
       "peaceful": 50
     },
-    "perks": {
-
-    },
+    "perks": [
+      "Любимчик народа",
+      "Мировая поддержка",
+      "Черный список прессы"
+    ],
     "history": [],
     "imgResource": "navalny"
   },
@@ -35,9 +37,11 @@
       "positive": 50,
       "peaceful": 50
     },
-    "perks": {
-
-    },
+    "perks": [
+      "Красноречивость",
+      "Поддержка прессы",
+      "Либерализм"
+    ],
     "history": [],
     "imgResource": "sobchak"
   },
@@ -56,9 +60,11 @@
       "positive": 50,
       "peaceful": 50
     },
-    "perks": {
-
-    },
+    "perks": [
+      "Высокая узнаваемость",
+      "Завсегдатай СМИ",
+      "Экспрессивность"
+    ],
     "history": [],
     "imgResource": "zhirinovsky"
   },
@@ -77,9 +83,11 @@
       "positive": 50,
       "peaceful": 50
     },
-    "perks": {
-
-    },
+    "perks": [
+      "Контроль СМИ",
+      "Влияние на военных",
+      "Поддержка трудящихся"
+    ],
     "history": [],
     "imgResource": "putin"
   },
@@ -98,9 +106,11 @@
       "positive": 50,
       "peaceful": 50
     },
-    "perks": {
-
-    },
+    "perks": [
+      "Есть бабки (да, именно так)",
+      "Поддержка трудящихся",
+      "Хайпоголик"
+    ],
     "history": [],
     "imgResource": "grudinin"
   },
@@ -119,9 +129,11 @@
       "positive": 50,
       "peaceful": 50
     },
-    "perks": {
-
-    },
+    "perks": [
+      "Поддержка трудящихся",
+      "Неконфликтность",
+      "Завсегдатай выборов"
+    ],
     "history": [],
     "imgResource": "yavlinsky"
   }

@@ -17,11 +17,5 @@ class PollActivity : DefaultActivity() {
 
         view = PollView(h)
         view.setContentView(this)
-
-
-        if (!gamestate.isLost()) {
-            view.expelledTV.text = String.format("Candidate %s has been expelled from elections", gamestate.expel())
-        }
     }
 }
-

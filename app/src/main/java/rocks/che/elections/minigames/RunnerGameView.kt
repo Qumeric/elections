@@ -22,6 +22,7 @@ class RunnerGameView : AnkoComponent<RunnerGameActivity> {
     @SuppressLint("RtlHardcoded")
     override fun createView(ui: AnkoContext<RunnerGameActivity>) = with(ui) {
         stickmanDrawable = GifDrawable(resources, R.drawable.runner_anim)
+        ankoContext = ui
 
         verticalLayout {
             gravity = Gravity.CENTER
@@ -36,7 +37,6 @@ class RunnerGameView : AnkoComponent<RunnerGameActivity> {
             }.lparams(weight = 0.15f, height = 0, width = matchParent)
 
             layout = relativeLayout {
-                ankoContext = ui
                 gravity = Gravity.BOTTOM or Gravity.LEFT
                 onClick {
                     stickmanDrawable.seekToFrame((stickmanDrawable.currentFrameIndex + 1) % stickmanDrawable.numberOfFrames)

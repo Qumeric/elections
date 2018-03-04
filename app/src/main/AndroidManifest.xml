@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="rocks.che.elections">
 
-    <!-- allowBackup is temporary disabled to suppress warning -->
+    <!-- FIXME: allowBackup is temporary disabled to suppress warning, also what is action.VIEW/action.MAIN? -->
     <application
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
@@ -13,90 +13,59 @@
         >
 
         <activity
-            android:name="rocks.che.elections.NewGameActivity"
+            android:name=".NewGameActivity"
             android:screenOrientation="portrait">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <activity
-            android:name="rocks.che.elections.ChooseCandidateActivity"
-            android:screenOrientation="portrait">
-        </activity>
+            android:name=".ChooseCandidateActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:name="rocks.che.elections.GameActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:name=".GameActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:name="rocks.che.elections.QuestionActivity"
-            android:screenOrientation="portrait">
-
-
-        </activity>
+            android:name=".QuestionActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:name="rocks.che.elections.ChangeActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
-
+            android:name=".ChangeActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:name="rocks.che.elections.PollActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
-
-
+            android:name=".PollActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:name="rocks.che.elections.minigames.CatcherGameActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
-
+            android:name=".minigames.CatcherGameActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:name="rocks.che.elections.minigames.DucksGameActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
-
+            android:name=".minigames.DucksGameActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:name="rocks.che.elections.minigames.HammerGameActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
-
+            android:name=".minigames.HammerGameActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:name="rocks.che.elections.minigames.LadderGameActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
-
+            android:name=".minigames.LadderGameActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:name="rocks.che.elections.minigames.SnakeGameActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
-
+            android:name=".minigames.SnakeGameActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:name="rocks.che.elections.minigames.RunnerGameActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
-
+            android:name=".minigames.RunnerGameActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:name="rocks.che.elections.SpendMoneyActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
-
-        <activity android:name=".debate.DebateActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:name=".SpendMoneyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".debate.DebateActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".EndGameActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

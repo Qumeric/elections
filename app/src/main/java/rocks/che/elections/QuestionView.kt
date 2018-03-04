@@ -1,6 +1,5 @@
 package rocks.che.elections
 
-import android.support.v4.content.res.ResourcesCompat
 import android.view.Gravity
 import android.widget.LinearLayout
 import org.jetbrains.anko.*
@@ -9,7 +8,7 @@ import rocks.che.elections.helpers.gameTextView
 import rocks.che.elections.logic.Question
 import rocks.che.elections.logic.getGroupResource
 
-class QuestionView(val question: Question, val group: String) : AnkoComponent<QuestionActivity> {
+class QuestionView(private val question: Question, val group: String) : AnkoComponent<QuestionActivity> {
     private lateinit var ankoContext: AnkoContext<QuestionActivity>
 
     override fun createView(ui: AnkoContext<QuestionActivity>) = with(ui) {

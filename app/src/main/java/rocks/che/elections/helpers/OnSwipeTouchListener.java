@@ -7,7 +7,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 
-public class OnSwipeTouchListener implements OnTouchListener {
+public abstract class OnSwipeTouchListener implements OnTouchListener {
     private final GestureDetector gestureDetector;
 
     public OnSwipeTouchListener(Context ctx) {
@@ -16,6 +16,7 @@ public class OnSwipeTouchListener implements OnTouchListener {
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
+        v.performClick(); // FIXME check
         return gestureDetector.onTouchEvent(event);
     }
 
@@ -59,15 +60,11 @@ public class OnSwipeTouchListener implements OnTouchListener {
         }
     }
 
-    public void onSwipeRight() {
-    }
+    public abstract void onSwipeRight();
 
-    public void onSwipeLeft() {
-    }
+    public abstract void onSwipeLeft();
 
-    public void onSwipeTop() {
-    }
+    public abstract void onSwipeTop();
 
-    public void onSwipeBottom() {
-    }
+    public abstract void onSwipeBottom();
 }

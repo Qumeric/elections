@@ -56,4 +56,7 @@ dependencies {
 
     // Gif-drawable
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.11'
+
+    // Konfetti
+    compile 'nl.dionsegijn:konfetti:1.1.1'
 }

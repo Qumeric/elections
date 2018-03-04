@@ -6,7 +6,7 @@ import rocks.che.elections.DefaultActivity
 import rocks.che.elections.NewGameActivity
 import rocks.che.elections.logic.gamestate
 
-abstract class MiniGameActivity(val nextActivity: Class<out DefaultActivity> = NewGameActivity::class.java) : DefaultActivity() {
+abstract class MiniGameActivity(private val nextActivity: Class<out DefaultActivity> = NewGameActivity::class.java) : DefaultActivity() {
     protected val handler = Handler()
     protected var score = 0
     protected val maxLose = 5

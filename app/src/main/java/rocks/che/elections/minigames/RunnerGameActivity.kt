@@ -17,9 +17,9 @@ class RunnerGameActivity : MiniGameActivity() {
     private val gravity = 12
     private var currentVelocity = 0
 
-    val cars: MutableSet<ImageView> = mutableSetOf()
+    private val cars: MutableSet<ImageView> = mutableSetOf()
 
-    fun createCar() {
+    private fun createCar() {
         val carView = ImageView(ctx)
 
         carView.setImageResource(R.drawable.ic_police_car)
@@ -35,14 +35,14 @@ class RunnerGameActivity : MiniGameActivity() {
     }
 
     private fun isLost(): Boolean {
-        val sm_rc = Rect()
-        view.stickmanView.getHitRect(sm_rc)
+        val smRC = Rect()
+        view.stickmanView.getHitRect(smRC)
 
         for (car in cars) {
-            val car_rc = Rect()
-            car.getHitRect(car_rc)
+            val carRC = Rect()
+            car.getHitRect(carRC)
 
-            if (sm_rc.intersect(car_rc)) {
+            if (smRC.intersect(carRC)) {
                 MusicManager.getInstance().play(ctx, R.raw.siren_sound)
                 lose()
                 return true

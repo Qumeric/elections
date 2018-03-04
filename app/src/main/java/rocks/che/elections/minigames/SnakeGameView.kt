@@ -8,7 +8,7 @@ import rocks.che.elections.helpers.gameTextView
 import rocks.che.elections.helpers.squareGridLayout
 import java.util.*
 
-class SnakeGameView(val onTouchListener: View.OnTouchListener) : AnkoComponent<SnakeGameActivity> {
+class SnakeGameView(private val onTouchListener: View.OnTouchListener) : AnkoComponent<SnakeGameActivity> {
     lateinit var ankoContext: AnkoContext<SnakeGameActivity>
 
     lateinit var layout: GridLayout

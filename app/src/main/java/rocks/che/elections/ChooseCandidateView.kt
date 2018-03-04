@@ -1,8 +1,7 @@
 package rocks.che.elections
 
-import android.support.v4.content.res.ResourcesCompat
+import android.util.Log
 import android.view.Gravity
-import android.view.View
 import android.widget.GridLayout
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
@@ -69,10 +68,15 @@ class ChooseCandidateView : AnkoComponent<ChooseCandidateActivity> {
 
                             button {
                                 text = candidate.name
-                                backgroundResource = R.color.blue
+                                if (candidate.name != ctx.getString(R.string.secret_candidate_name) ||
+                                checkExistence(ctx, secretFilename)) {
+                                    Log.d("ChooseCandidateView",
+                                            "there is a secret candidate and he's blocked because " + checkExistence(ctx, secretFilename))
+                                    backgroundResource = R.color.blue
+                                }
                                 onClick {
                                     gamestate = Gamestate(candidate, loadQuestions(resources),
-                                            loadFakeCandidates(resources) as MutableList<FakeCandidate>)
+                                            loadCandidates(resources) as MutableList<Candidate>)
                                     ctx.startActivity(ctx.intentFor<GameActivity>())
                                 }
                             }.lparams {

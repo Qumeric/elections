@@ -8,7 +8,7 @@ import org.jetbrains.anko.sdk25.listeners.onClick
 import rocks.che.elections.R
 import rocks.che.elections.helpers.gameTextView
 
-class DucksGameView() : AnkoComponent<DucksGameActivity> {
+class DucksGameView : AnkoComponent<DucksGameActivity> {
     lateinit var ankoContext: AnkoContext<DucksGameActivity>
 
     lateinit var layout: RelativeLayout

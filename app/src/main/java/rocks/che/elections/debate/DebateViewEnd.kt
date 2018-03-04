@@ -1,8 +1,6 @@
 package rocks.che.elections.debate
 
-import android.support.v4.content.res.ResourcesCompat
 import android.view.Gravity
-import android.view.View
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
 import rocks.che.elections.R
@@ -72,7 +70,6 @@ class DebateViewEnd : AnkoComponent<DebateActivity> {
                     onClick {(ctx as DebateActivity).nextStage() }
                 }.lparams(weight = 0.14f, height = 0, width = dip(180))
             }.lparams(weight = 0.75f, height = 0)
-
 
             space {
             }.lparams(weight = 0.125f, height = 0)

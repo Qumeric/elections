@@ -2,8 +2,6 @@ package rocks.che.elections.minigames
 
 import android.os.Bundle
 import android.view.View
-import im.delight.android.audio.MusicManager
-import im.delight.android.audio.SoundManager
 import org.jetbrains.anko.sdk25.listeners.onClick
 import org.jetbrains.anko.setContentView
 import rocks.che.elections.R
@@ -14,7 +12,7 @@ class HammerGameActivity : MiniGameActivity() {
     private var missedHeads = 0
 
     private fun kill() {
-        MusicManager.getInstance().play(this, R.raw.hammer_sound)
+        playSound(R.raw.hammer_sound)
         score += 1
         view.scoreText.text = score.toString()
     }
@@ -22,7 +20,7 @@ class HammerGameActivity : MiniGameActivity() {
     private fun removeEnemy(row: Int, col: Int){
         val elem = view.field[row][col]
         if (elem.visibility != View.INVISIBLE) {
-            MusicManager.getInstance().play(this, R.raw.hammer_miss_sound)
+            playSound(R.raw.hammer_miss_sound)
             missedHeads++
             view.missedText.text = missedHeads.toString()
             elem.visibility = View.INVISIBLE

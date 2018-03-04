@@ -1,8 +1,9 @@
 package rocks.che.elections.minigames
 
-import android.util.Log
+import android.annotation.SuppressLint
 import android.view.Gravity
-import android.widget.*
+import android.widget.ImageView
+import android.widget.TextView
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
 import pl.droidsonroids.gif.GifDrawable
@@ -11,14 +12,15 @@ import rocks.che.elections.R
 import rocks.che.elections.helpers.gameTextView
 import rocks.che.elections.helpers.gifImageView
 
-class LadderGameView() : AnkoComponent<LadderGameActivity> {
+class LadderGameView : AnkoComponent<LadderGameActivity> {
     lateinit var ankoContext: AnkoContext<LadderGameActivity>
-    lateinit var stickmanDrawable: GifDrawable
+    private lateinit var stickmanDrawable: GifDrawable
     lateinit var stickmanView: GifImageView
     lateinit var ladderView: ImageView
     lateinit var scoreText: TextView
     lateinit var enemyView: ImageView
 
+    @SuppressLint("RtlHardcoded")
     override fun createView(ui: AnkoContext<LadderGameActivity>) = with(ui) {
         ankoContext = ui
         stickmanDrawable = GifDrawable(resources, R.drawable.ladder_anim)

@@ -24,7 +24,7 @@ class SpendMoneyView : AnkoComponent<SpendMoneyActivity> {
                 imageView {
                     onClick {
                         if (gamestate.money >= moneyToUp) {
-                            gamestate.opinions[group]!!.add(1)
+                            gamestate.opinions[group]!! += 1
                             gamestate.money -= 5
                             moneyTextView.text = gamestate.money.toString()
                         } else {

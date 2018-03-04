@@ -64,6 +64,12 @@ class NewGameView : AnkoComponent<NewGameActivity> {
                     ctx.startActivity(ctx.intentFor<DebateActivity>())
                 }
             }
+            themedButton(theme = R.style.button) {
+                text = "endGameView"
+                onClick {
+                    ctx.startActivity(ctx.intentFor<EndGameActivity>())
+                }
+            }
         }
     }
 }

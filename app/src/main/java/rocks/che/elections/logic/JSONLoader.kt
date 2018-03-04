@@ -1,7 +1,6 @@
 package rocks.che.elections.logic
 
 import android.content.res.Resources
-import android.util.Log
 import org.json.JSONArray
 import org.json.JSONObject
 import rocks.che.elections.R
@@ -43,31 +42,6 @@ fun loadCandidates(resources: Resources): List<Candidate> {
     val jsonString = resources.openRawResource(R.raw.candidates)
             .bufferedReader().use { it.readText() }
     return loadCandidates(JSONArray(jsonString))
-}
-
-fun loadFakeCandidate(json: JSONObject): FakeCandidate {
-    val candidate = FakeCandidate(
-            json.getString("name"),
-            json.getString("description"),
-            json.getDouble("generalOpinion")
-    )
-
-    val jsonHistory = json.getJSONArray("history")
-    for (i in 0 until jsonHistory.length()) {
-        candidate.history.add(jsonHistory.getDouble(i))
-    }
-
-    return candidate
-}
-
-fun loadFakeCandidates(json: JSONArray): List<FakeCandidate> {
-    return (0 until json.length()).map { loadFakeCandidate(json.getJSONObject(it)) }
-}
-
-fun loadFakeCandidates(resources: Resources): List<FakeCandidate> {
-    val jsonString = resources.openRawResource(R.raw.fakecandidates)
-            .bufferedReader().use { it.readText() }
-    return loadFakeCandidates(JSONArray(jsonString))
 }
 
 fun loadQuestion(json: JSONObject): Question {
@@ -124,13 +98,13 @@ fun loadQuestions(resources: Resources): HashMap<String, QuestionGroup> {
 fun loadQuotes(resources: Resources): List<Quote> {
     val jsonString = resources.openRawResource(R.raw.quotes)
             .bufferedReader().use { it.readText() }
-    val JSONquotes = JSONArray(jsonString)
+    val jsonQuotes = JSONArray(jsonString)
 
     val quotes = mutableListOf<Quote>()
 
-    for (q in 0 until JSONquotes.length()) {
-        val JSONquote = JSONquotes.getJSONObject(q)
-        quotes.add(Quote(JSONquote.getString("quote"), JSONquote.getString("author")))
+    for (q in 0 until jsonQuotes.length()) {
+        val jsonQuote = jsonQuotes.getJSONObject(q)
+        quotes.add(Quote(jsonQuote.getString("quote"), jsonQuote.getString("author")))
     }
 
     return quotes
@@ -143,9 +117,9 @@ fun loadGameState(json: JSONObject): Gamestate {
     val questions = loadQuestions(jsonQuestions)
 
     val jsonCandidates = json.getJSONArray("candidates")
-    val candidates = mutableListOf<FakeCandidate>()
+    val candidates = mutableListOf<Candidate>()
     for (i in 0 until jsonCandidates.length()) {
-        candidates.add(loadFakeCandidate(jsonCandidates.getJSONObject(i)))
+        candidates.add(loadCandidate(jsonCandidates.getJSONObject(i)))
     }
 
     val gs = Gamestate(candidate, questions, candidates)
