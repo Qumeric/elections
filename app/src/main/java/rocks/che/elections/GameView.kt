@@ -6,7 +6,9 @@ import android.view.Gravity
 import android.view.View
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
+import rocks.che.elections.helpers.cardView
 import rocks.che.elections.logic.gamestate
+import rocks.che.elections.logic.getGroupResource
 
 class GameView : AnkoComponent<GameActivity> {
     private lateinit var ankoContext: AnkoContext<GameActivity>
@@ -15,7 +17,6 @@ class GameView : AnkoComponent<GameActivity> {
         ankoContext = ui
 
         verticalLayout {
-            weightSum = 1f
             gravity = Gravity.CENTER
             verticalLayout {
                 gravity = Gravity.CENTER
@@ -32,7 +33,7 @@ class GameView : AnkoComponent<GameActivity> {
 
             /*textView {
                 gravity = Gravity.CENTER
-                text = String.format("Day: %d", gamestate.step)
+                statement = String.format("Day: %d", gamestate.step)
             }*/
 
             val row1 = linearLayout {
@@ -49,33 +50,6 @@ class GameView : AnkoComponent<GameActivity> {
                 weight = 0.3f
             }
 
-            verticalLayout {
-
-                button {
-                    textResource = R.string.exit_game;
-                    onClick {
-                        val simpleAlert = AlertDialog.Builder(ctx as GameActivity).create()
-                        simpleAlert.setTitle(ctx.getString(R.string.end_game_dialog_title))
-                        simpleAlert.setMessage(ctx.getString(R.string.end_game_dialog_message))
-
-                        simpleAlert.setButton(AlertDialog.BUTTON_POSITIVE, ctx.getString(R.string.yes_button), {
-                            _, _ -> ctx.startActivity(ctx.intentFor<NewGameActivity>())
-                       })
-                        simpleAlert.setButton(AlertDialog.BUTTON_NEGATIVE, ctx.getString(R.string.no_button), {
-                            _, _ -> // do Nothing
-                        });
-
-                        simpleAlert.show()
-                    }
-                }
-
-                button {
-                    text = "spend money"
-                    onClick {
-                        ctx.startActivity(ctx.intentFor<SpendMoneyActivity>())
-                    }
-                }
-            }
 
             var leftInRow = 3
 
@@ -88,7 +62,7 @@ class GameView : AnkoComponent<GameActivity> {
                     }
                     verticalLayout {
                         imageView {
-                            imageResource = resources.getIdentifier(group, "drawable", "com.example.qumeric.elections")
+                            imageResource = getGroupResource(ctx, group)
                         }.lparams {
                             height = dip(70)
                             width = dip(70)
@@ -100,9 +74,6 @@ class GameView : AnkoComponent<GameActivity> {
                             typeface = ResourcesCompat.getFont(ctx, R.font.mfred)
                         }
                     }
-                }.lparams {
-                    width = matchParent
-                    height = matchParent
                 }
                 removeView(v)
                 if (leftInRow > 0) {
@@ -118,6 +89,35 @@ class GameView : AnkoComponent<GameActivity> {
                 }
                 leftInRow--
             }
+
+            linearLayout {
+                gravity = Gravity.CENTER
+                themedButton(theme = R.style.button) {
+                    textResource = R.string.exit_game;
+                    onClick {
+                        val simpleAlert = AlertDialog.Builder(ctx as GameActivity).create()
+                        simpleAlert.setTitle(ctx.getString(R.string.end_game_dialog_title))
+                        simpleAlert.setMessage(ctx.getString(R.string.end_game_dialog_message))
+
+                        simpleAlert.setButton(AlertDialog.BUTTON_POSITIVE, ctx.getString(R.string.yes_button), { _, _ ->
+
+                            ctx.startActivity(ctx.intentFor<NewGameActivity>())
+                        })
+                        simpleAlert.setButton(AlertDialog.BUTTON_NEGATIVE, ctx.getString(R.string.no_button), { _, _ ->
+                            // do Nothing
+                        });
+
+                        simpleAlert.show()
+                    }
+                }
+
+                themedButton(theme = R.style.button) {
+                    text = "spend money"
+                    onClick {
+                        ctx.startActivity(ctx.intentFor<SpendMoneyActivity>())
+                    }
+                }
+            }.lparams(weight = 0.2f, height = 0)
         }
     }
 }

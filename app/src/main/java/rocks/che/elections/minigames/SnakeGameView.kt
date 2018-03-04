@@ -1,38 +1,16 @@
 package rocks.che.elections.minigames
 
-import android.content.Context
-import android.view.ViewManager
+import android.view.View
 import android.widget.*
 import org.jetbrains.anko.*
-import org.jetbrains.anko.custom.ankoView
-import rocks.che.elections.OnSwipeTouchListener
+import rocks.che.elections.helpers.OnSwipeTouchListener
 import rocks.che.elections.R
+import rocks.che.elections.helpers.squareGridLayout
 import java.util.*
 
-class SquareGridLayout(ctx: Context): _GridLayout(ctx) {
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        var width = MeasureSpec.getSize(widthMeasureSpec)
-        var height = MeasureSpec.getSize(heightMeasureSpec)
-
-        if (width > height) {
-            width = height
-        } else {
-            height = width
-        }
-
-        super.onMeasure(
-                MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY),
-                MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY)
-        );
-    }
-}
 
 
-inline fun ViewManager.squareGridLayout(init: SquareGridLayout.() -> Unit): SquareGridLayout {
-    return ankoView({ SquareGridLayout(it) }, theme = 0, init = init)
-}
-
-class SnakeGameView : AnkoComponent<SnakeGameActivity> {
+class SnakeGameView(val onTouchListener: View.OnTouchListener) : AnkoComponent<SnakeGameActivity> {
     lateinit var ankoContext: AnkoContext<SnakeGameActivity>
 
     lateinit var layout: GridLayout
@@ -48,32 +26,7 @@ class SnakeGameView : AnkoComponent<SnakeGameActivity> {
         ankoContext = ui
 
         verticalLayout {
-            setOnTouchListener(object : OnSwipeTouchListener(ctx) {
-                val activity = ctx as SnakeGameActivity
-                override fun onSwipeTop() {
-                    if (activity.d != Direction.SOUTH) {
-                        activity.d = Direction.NORTH
-                    }
-                }
-
-                override fun onSwipeRight() {
-                    if (activity.d != Direction.WEST) {
-                        activity.d = Direction.EAST
-                    }
-                }
-
-                override fun onSwipeLeft() {
-                    if (activity.d != Direction.EAST) {
-                        activity.d = Direction.WEST
-                    }
-                }
-
-                override fun onSwipeBottom() {
-                    if (activity.d != Direction.NORTH) {
-                        activity.d = Direction.SOUTH
-                    }
-                }
-            })
+            setOnTouchListener(onTouchListener)
 
             relativeLayout {
                 scoreText = textView { }.lparams(height = wrapContent)

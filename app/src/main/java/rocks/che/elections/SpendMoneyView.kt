@@ -5,6 +5,7 @@ import android.widget.Toast
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
 import rocks.che.elections.logic.gamestate
+import rocks.che.elections.logic.getGroupResource
 
 class SpendMoneyView : AnkoComponent<SpendMoneyActivity> {
     private lateinit var ankoContext: AnkoContext<SpendMoneyActivity>
@@ -31,11 +32,11 @@ class SpendMoneyView : AnkoComponent<SpendMoneyActivity> {
                             Toast.makeText(ctx, ctx.getString(R.string.not_enough_money), Toast.LENGTH_SHORT).show()
                         }
                     }
-                    imageResource = resources.getIdentifier(group, "drawable", "com.example.qumeric.elections")
+                    imageResource = getGroupResource(ctx, group)
                 }
             }
 
-            button {
+            themedButton(theme = R.style.button) {
                 textResource = R.string.finish
                 onClick {
                     ctx.startActivity(ctx.intentFor<GameActivity>())

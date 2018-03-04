@@ -18,17 +18,74 @@
     <string name="not_enough_money">Not enough money!</string>
     <string name="finish">Finish</string>
 
-    <!-- Minigames description -->
+    <!-- Debate description -->
+    <string name="debate">Debate</string>
+    <string name="debate_description">
+        Вы можете потратить время, чтобы улучшить свое положение в разных группах населения или атаковать своих оппонентов
+    </string>
+    <string name="debate_choose_description">
+        Распределите время между разговорами про группы населения и атакоЙ на оппонентов
+    </string>
+    <string name="debate_groups">
+        Распределите время, рассказывая о группах населения
+    </string>
+    <string name="debate_opponents">
+        Распределите время атаки на следующих оппонентов
+    </string>
+    <string name="debate_minutes_left_template">
+        Minutes left %d
+    </string>
+    <string name="debate_finish">
+        Debate is finished
+    </string>
+    <string name="debate_good_group_template">
+        Ypu speech was praised by %s
+    </string>
+    <string name="debate_bad_group_template">
+        Ypu speech was disliked by %s
+    </string>
+    <string name="debate_opponent_attack_success">
+        Attack on the opponent was successful
+    </string>
+    <string name="debate_opponent_attack_fail">
+        Attack on the opponent was unsuccessful
+    </string>
+
+    <!-- Minigames -->
     <string name="ducks_info_title">A</string>
     <string name="ducks_info_message">A</string>
+    <string name="ducks_end_title">Minigame is finished</string>
+    <string name="ducks_end_message_template">
+        You have scored %d points
+    </string>
     <string name="runner_info_title">A</string>
     <string name="runner_info_message">A</string>
+    <string name="runner_end_title">Minigame is finished</string>
+    <string name="runner_end_message_template">
+        You have scored %d points
+    </string>
     <string name="catcher_info_title">A</string>
     <string name="catcher_info_message">A</string>
+    <string name="catcher_end_title">Minigame is finished</string>
+    <string name="catcher_end_message_template">
+        You have scored %d points
+    </string>
     <string name="hammer_info_title">A</string>
     <string name="hammer_info_message">A</string>
+    <string name="hammer_end_title">Minigame is finished</string>
+    <string name="hammer_end_message_template">
+        You have scored %d points
+    </string>
     <string name="snake_info_title">A</string>
     <string name="snake_info_message">A</string>
+    <string name="snake_end_title">Minigame is finished</string>
+    <string name="snake_end_message_template">
+        You have scored %d points
+    </string>
     <string name="ladder_info_title">A</string>
     <string name="ladder_info_message">A</string>
+    <string name="ladder_end_title">Minigame is finished</string>
+    <string name="ladder_end_message_template">
+        You have scored %d points
+    </string>
 </resources>

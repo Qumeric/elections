@@ -1,21 +1,15 @@
 package rocks.che.elections
 
 import android.support.v4.content.res.ResourcesCompat
-import android.support.v7.widget.CardView
 import android.view.Gravity
 import android.view.View
-import android.view.ViewManager
 import android.widget.GridLayout
 import org.jetbrains.anko.*
-import org.jetbrains.anko.custom.ankoView
 import org.jetbrains.anko.sdk25.listeners.onClick
+import rocks.che.elections.helpers.cardView
 import rocks.che.elections.logic.*
 
-inline fun ViewManager.cardView(init: CardView.() -> Unit): CardView {
-    return ankoView({ CardView(it) }, theme = 0, init = init)
-}
-
-class MainView : AnkoComponent<ChooseCandidateActivity> {
+class ChooseCandidateView : AnkoComponent<ChooseCandidateActivity> {
     private lateinit var ankoContext: AnkoContext<ChooseCandidateActivity>
 
     override fun createView(ui: AnkoContext<ChooseCandidateActivity>) = with(ui) {
@@ -58,7 +52,7 @@ class MainView : AnkoComponent<ChooseCandidateActivity> {
                                 gravity = Gravity.CENTER
 
                                 imageView {
-                                    imageResource = candidate.resource
+                                    imageResource = candidate.getResource(ctx)
                                 }.lparams {
                                     width = dip(80)
                                 }
@@ -82,7 +76,7 @@ class MainView : AnkoComponent<ChooseCandidateActivity> {
                                 backgroundResource = R.color.blue
                                 onClick {
                                     gamestate = Gamestate(candidate, loadQuestions(resources),
-                                            loadFakeCandidates(resources))
+                                            loadFakeCandidates(resources) as MutableList<FakeCandidate>)
                                     ctx.startActivity(ctx.intentFor<GameActivity>())
                                 }
                             }.lparams {

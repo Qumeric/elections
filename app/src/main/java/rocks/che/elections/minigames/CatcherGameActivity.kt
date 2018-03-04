@@ -78,4 +78,13 @@ class CatcherGameActivity : MiniGameActivity() {
                     handler.postDelayed(update, 1)
                 }, view.ankoContext)
     }
+
+    override fun lose() {
+        drawInformationDialog(
+                getString(R.string.catcher_end_title),
+                getString(R.string.catcher_end_message_template).format(score),
+                { super.lose() },
+                view.ankoContext
+        )
+    }
 }

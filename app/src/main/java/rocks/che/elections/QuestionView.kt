@@ -6,6 +6,7 @@ import android.widget.LinearLayout
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
 import rocks.che.elections.logic.Question
+import rocks.che.elections.logic.getGroupResource
 
 class QuestionView(val question: Question, val group: String) : AnkoComponent<QuestionActivity> {
     private lateinit var ankoContext: AnkoContext<QuestionActivity>
@@ -17,7 +18,7 @@ class QuestionView(val question: Question, val group: String) : AnkoComponent<Qu
             gravity = Gravity.CENTER
 
             imageView {
-                imageResource = resources.getIdentifier(group, "drawable", "com.example.qumeric.elections")
+                imageResource = getGroupResource(ctx, group)
             }.lparams {
                 width = dip(70)
                 height = dip(70)
@@ -25,7 +26,7 @@ class QuestionView(val question: Question, val group: String) : AnkoComponent<Qu
 
             textView {
                 gravity = Gravity.CENTER
-                text = question.text
+                text = question.statement
                 typeface = ResourcesCompat.getFont(ctx, R.font.mfred)
                 textSize = dip(15).toFloat()
             }

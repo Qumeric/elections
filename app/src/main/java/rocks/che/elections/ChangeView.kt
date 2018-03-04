@@ -5,6 +5,7 @@ import android.view.Gravity
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
 import rocks.che.elections.logic.gamestate
+import rocks.che.elections.logic.getGroupResource
 import java.util.*
 
 class ChangeView(val oldOpinions: Map<String, Int>) : AnkoComponent<ChangeActivity> {
@@ -34,7 +35,7 @@ class ChangeView(val oldOpinions: Map<String, Int>) : AnkoComponent<ChangeActivi
                         backgroundResource = R.color.silver
                     }
                     imageView {
-                        imageResource = resources.getIdentifier(group, "drawable", "com.example.qumeric.elections")
+                        imageResource = getGroupResource(ctx, group)
                     }.lparams {
                         width = dip(50)
                         height = dip(50)

@@ -9,7 +9,8 @@ import rocks.che.elections.logic.gamestate
 abstract class MiniGameActivity(val nextActivity: Class<out DefaultActivity> = NewGameActivity::class.java) : DefaultActivity() {
     protected val handler = Handler()
     protected var score = 0
-    fun lose() {
+    protected val maxLose = 5
+    open fun lose() {
         gamestate.money += score
         handler.removeCallbacksAndMessages(null)
         startActivity(Intent(this, nextActivity))

@@ -1,4 +1,4 @@
-package rocks.che.elections;
+package rocks.che.elections.helpers;
 
 import android.content.Context;
 import android.view.GestureDetector;

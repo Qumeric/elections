@@ -1,10 +1,12 @@
 <resources>
-
     <style name="button" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:gravity">center_vertical|center_horizontal</item>
         <item name="android:textColor">#FFFFFFFF</item>
         <item name="android:textSize">16dip</item>
         <item name="android:textStyle">bold</item>
         <item name="android:colorButtonNormal">@color/blue</item>
+    </style>
+    <style name="blue_space" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="android:background">@color/blue</item>
     </style>
 </resources>

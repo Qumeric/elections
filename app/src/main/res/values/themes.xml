@@ -5,6 +5,10 @@
         <item name="colorAccent">@color/colorAccent</item>
 
         <item name="android:windowBackground">@drawable/bg</item>
-        <item name="android:buttonStyle">@style/button</item>
+        <!--
+            With this line unstyled (by anko) buttons become transparent.
+            I have no idea why!
+            <item name="android:buttonStyle">@style/button</item>
+        -->
     </style>
 </resources>

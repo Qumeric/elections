@@ -32,4 +32,12 @@ class LadderGameActivity : MiniGameActivity() {
                 }, view.ankoContext)
 
     }
+        override fun lose() {
+        drawInformationDialog(
+                getString(R.string.ladder_end_title),
+                getString(R.string.ladder_end_message_template).format(score),
+                { super.lose() },
+                view.ankoContext
+        )
+    }
 }

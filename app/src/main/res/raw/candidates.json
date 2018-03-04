@@ -17,6 +17,7 @@
     "perks": {
 
     },
+    "history": [],
     "imgResource": "navalny"
   },
   {
@@ -37,6 +38,7 @@
     "perks": {
 
     },
+    "history": [],
     "imgResource": "sobchak"
   },
   {
@@ -57,6 +59,7 @@
     "perks": {
 
     },
+    "history": [],
     "imgResource": "zhirinovsky"
   },
   {
@@ -77,6 +80,7 @@
     "perks": {
 
     },
+    "history": [],
     "imgResource": "putin"
   },
   {
@@ -97,6 +101,7 @@
     "perks": {
 
     },
+    "history": [],
     "imgResource": "grudinin"
   },
   {
@@ -117,6 +122,7 @@
     "perks": {
 
     },
+    "history": [],
     "imgResource": "yavlinsky"
   }
 ]

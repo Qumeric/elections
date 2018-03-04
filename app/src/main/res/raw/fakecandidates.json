@@ -2,16 +2,19 @@
   {
     "name": "Путэн",
     "description": "СЛЫШ РАБОТАТЬ",
-    "level": 80
+    "generalOpinion": 80,
+    "history": []
   },
   {
     "name": "Дедушка Зю",
     "description": "От каждого по его способностям, каждому по его потребностям",
-    "level": 20
+    "generalOpinion": 20,
+    "history": []
   },
   {
     "name": "Жирный",
     "description": "Понял, ты, Джордж, сраный ковбой?",
-    "level": 30
+    "generalOpinion": 30,
+    "history": []
   }
 ]

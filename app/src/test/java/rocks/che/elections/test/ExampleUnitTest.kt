@@ -1,4 +1,4 @@
-package rocks.che.elections
+package rocks.che.elections.test
 
 import org.junit.Test
 

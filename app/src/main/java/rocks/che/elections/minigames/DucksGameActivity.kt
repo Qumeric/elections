@@ -2,7 +2,9 @@ package rocks.che.elections.minigames
 
 import android.graphics.Rect
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
+import im.delight.android.audio.MusicManager
 import org.jetbrains.anko.ctx
 import org.jetbrains.anko.displayMetrics
 import org.jetbrains.anko.setContentView
@@ -28,7 +30,7 @@ class DucksGameActivity : MiniGameActivity() {
             view.layout.addView(duckView)
             ducks.add(duckView)
 
-            handler.postDelayed(this, ((10000 * (1 + random())) / Math.sqrt(10.0 + score)).toLong())
+            handler.postDelayed(this, ((5000 * (0.7 + random())) / Math.sqrt(10.0 + score)).toLong())
         }
     }
 
@@ -37,14 +39,12 @@ class DucksGameActivity : MiniGameActivity() {
             val toRemove: MutableList<ImageView> = mutableListOf()
 
             for (s in ducks) {
-                s.x -= Math.sqrt(10.0 + score).toFloat()
+                s.x -= 3f + Math.sqrt(5f+score.toDouble()).toFloat()
                 s.invalidate()
 
                 if (s.x <= -s.drawable.intrinsicWidth) {
                     toRemove.add(s)
                     missedDucks++
-                    lose()
-                    return
                 }
             }
 
@@ -55,6 +55,11 @@ class DucksGameActivity : MiniGameActivity() {
 
             view.scoreText.text = "Score: %d, missed ducks: %d, missed shots: %d".format(
                     score, missedDucks, missedShots)
+
+            if (missedDucks + missedShots >= maxLose) {
+                lose()
+                return
+            }
 
             handler.postDelayed(this, (1000 / 50).toLong())
         }
@@ -74,6 +79,8 @@ class DucksGameActivity : MiniGameActivity() {
     }
 
     fun shoot() {
+        MusicManager.getInstance().play(this, R.raw.shot_sound);
+
         val ch_rc = Rect()
         view.crosshair.getHitRect(ch_rc)
 
@@ -89,7 +96,7 @@ class DucksGameActivity : MiniGameActivity() {
             val duck_rc = Rect()
             duck.getHitRect(duck_rc)
 
-            // Constants hardcoded for the specific asset
+            // Constants are hardcoded for the specific duck drawable
             val realDuckCenterX = duck_rc.left + (duck_rc.right - duck_rc.left) * 312 / 512
             val realDuckCenterY = duck_rc.top + (duck_rc.bottom - duck_rc.top) * 287 / 512
 
@@ -104,5 +111,14 @@ class DucksGameActivity : MiniGameActivity() {
         if (!isHit) {
             missedShots++
         }
+    }
+
+    override fun lose() {
+        drawInformationDialog(
+                getString(R.string.ducks_end_title),
+                getString(R.string.ducks_end_message_template).format(score),
+                { super.lose() },
+                view.ankoContext
+        )
     }
 }

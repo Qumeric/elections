@@ -1,22 +1,16 @@
 package rocks.che.elections
 
-import android.graphics.RectF
 import android.support.v4.content.ContextCompat.getColor
 import android.support.v4.content.res.ResourcesCompat
 import android.view.Gravity
 import android.view.View
-import android.view.ViewManager
 import android.widget.TextView
-import com.robinhood.spark.SparkAdapter
-import com.robinhood.spark.SparkView
 import org.jetbrains.anko.*
-import org.jetbrains.anko.custom.ankoView
 import org.jetbrains.anko.sdk25.listeners.onClick
+import rocks.che.elections.helpers.MyAdapter
+import rocks.che.elections.helpers.sparkView
 import rocks.che.elections.logic.gamestate
 
-inline fun ViewManager.sparkView(init: SparkView.() -> Unit): SparkView {
-    return ankoView({ SparkView(it) }, theme = 0, init = init)
-}
 
 class PollView(val h: Map<String, List<Double>>) : AnkoComponent<PollActivity> {
     private lateinit var ankoContext: AnkoContext<PollActivity>
@@ -113,23 +107,3 @@ class PollView(val h: Map<String, List<Double>>) : AnkoComponent<PollActivity> {
     }
 }
 
-class MyAdapter(val yData: FloatArray) : SparkAdapter() {
-    override fun getCount(): Int {
-        return yData.size
-    }
-
-    override fun getItem(index: Int): Any? {
-        return yData[index]
-    }
-
-    override fun getY(index: Int): Float {
-        return yData[index]
-    }
-
-    override fun getDataBounds(): RectF {
-        val bounds = super.getDataBounds()
-        bounds.bottom = 100f
-        bounds.top = 0f
-        return bounds
-    }
-}

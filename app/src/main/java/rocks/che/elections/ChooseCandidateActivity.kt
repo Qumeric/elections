@@ -4,12 +4,12 @@ import android.os.Bundle
 import org.jetbrains.anko.setContentView
 
 class ChooseCandidateActivity : DefaultActivity() {
-    private lateinit var view: MainView
+    private lateinit var view: ChooseCandidateView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        view = MainView()
+        view = ChooseCandidateView()
         view.setContentView(this)
     }
 }

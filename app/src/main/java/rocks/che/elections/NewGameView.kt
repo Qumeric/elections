@@ -4,6 +4,7 @@ import android.view.Gravity
 import android.widget.LinearLayout
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
+import rocks.che.elections.debate.DebateActivity
 import rocks.che.elections.minigames.*
 
 class NewGameView : AnkoComponent<NewGameActivity> {
@@ -27,28 +28,40 @@ class NewGameView : AnkoComponent<NewGameActivity> {
                     ctx.startActivity(ctx.intentFor<CatcherGameActivity>())
                 }
             }
-            button {
-                text = "d"
+            themedButton(theme = R.style.button) {
+                text = "ducks"
                 onClick {
                     ctx.startActivity(ctx.intentFor<DucksGameActivity>())
                 }
             }
-            button {
-                text = "h"
+            themedButton(theme = R.style.button) {
+                text = "hammer"
                 onClick {
                     ctx.startActivity(ctx.intentFor<HammerGameActivity>())
                 }
             }
-            button {
-                text = "l"
+            themedButton(theme = R.style.button) {
+                text = "ladder"
                 onClick {
                     ctx.startActivity(ctx.intentFor<LadderGameActivity>())
                 }
             }
-            button {
-                text = "s"
+            themedButton(theme = R.style.button) {
+                text = "snake"
                 onClick {
                     ctx.startActivity(ctx.intentFor<SnakeGameActivity>())
+                }
+            }
+            themedButton(theme = R.style.button) {
+                text = "runner"
+                onClick {
+                    ctx.startActivity(ctx.intentFor<SnakeGameActivity>())
+                }
+            }
+            themedButton(theme = R.style.button) {
+                text = "debate"
+                onClick {
+                    ctx.startActivity(ctx.intentFor<DebateActivity>())
                 }
             }
         }
