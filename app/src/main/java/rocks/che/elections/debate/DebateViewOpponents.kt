@@ -1,13 +1,13 @@
 package rocks.che.elections.debate
 
-import android.support.v4.content.res.ResourcesCompat
 import android.view.Gravity
-import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
 import org.jetbrains.anko.sdk25.listeners.onSeekBarChangeListener
 import rocks.che.elections.R
+import rocks.che.elections.helpers.gameTextView
 import rocks.che.elections.logic.gamestate
 
 class DebateViewOpponents : AnkoComponent<DebateActivity> {
@@ -21,29 +21,20 @@ class DebateViewOpponents : AnkoComponent<DebateActivity> {
         verticalLayout {
             gravity = Gravity.CENTER
 
-            textView {
+            gameTextView(dip(20)) {
                 textResource = R.string.debate
-                typeface = ResourcesCompat.getFont(ctx, R.font.mfred)
-                textSize = dip(20).toFloat()
-                textAlignment = View.TEXT_ALIGNMENT_CENTER
             }.lparams(weight = 0.09f, height = 0)
 
             imageView {
                 backgroundResource = R.color.blue
             }.lparams(weight = 0.012f, height = 0, width = dip(120))
 
-            textView {
+            gameTextView(dip(12)) {
                 textResource = R.string.debate_opponents
-                typeface = ResourcesCompat.getFont(ctx, R.font.mfred)
-                textSize = dip(12).toFloat()
-                textAlignment = View.TEXT_ALIGNMENT_CENTER
             }.lparams(weight = 0.15f, height = 0)
 
-            val minutesTextView = textView {
-                text = ctx.getString(R.string.debate_minutes_left_template).format((ctx as DebateActivity).maxMinutes)
-                typeface = ResourcesCompat.getFont(ctx, R.font.mfred)
-                textSize = dip(18).toFloat()
-                textAlignment = View.TEXT_ALIGNMENT_CENTER
+            val minutesTextView = gameTextView(dip(18)) {
+                text = ctx.getString(R.string.debate_minutes_left_template).format((ctx as DebateActivity).opponentMinutes)
             }.lparams(weight = 0.1f, height = 0)
 
             var isGray = true
@@ -57,11 +48,11 @@ class DebateViewOpponents : AnkoComponent<DebateActivity> {
                         R.color.silver
                     }
 
-                    textView(candidate.name) {
+                    gameTextView(text=candidate.name) {
                     }
 
                     seekBar {
-                        max = (ctx as DebateActivity).minutes
+                        max = (ctx as DebateActivity).opponentMinutes
                         val p = pos // capture value
                         onSeekBarChangeListener {
                             onProgressChanged({ sb, progress, fromUser ->
@@ -91,10 +82,11 @@ class DebateViewOpponents : AnkoComponent<DebateActivity> {
                 textResource = R.string.next
                 onClick {
                     val activity = ctx as DebateActivity
-                    if (amountVals.sum() == activity.minutes) {
-                        activity.minutes = 0
+                    if (amountVals.sum() == activity.opponentMinutes) {
                         activity.setOpponentDistribution(amountVals)
                         activity.nextStage()
+                    } else {
+                        Toast.makeText(ctx, ctx.getString(R.string.debate_spend_minutes_first), Toast.LENGTH_SHORT).show()
                     }
                 }
             }.lparams(weight = 0.08f, height = 0, width = dip(180))

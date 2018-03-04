@@ -5,6 +5,7 @@ import android.view.Gravity
 import android.widget.LinearLayout
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
+import rocks.che.elections.helpers.gameTextView
 import rocks.che.elections.logic.Question
 import rocks.che.elections.logic.getGroupResource
 
@@ -24,11 +25,8 @@ class QuestionView(val question: Question, val group: String) : AnkoComponent<Qu
                 height = dip(70)
             }
 
-            textView {
-                gravity = Gravity.CENTER
+            gameTextView(dip(15)) {
                 text = question.statement
-                typeface = ResourcesCompat.getFont(ctx, R.font.mfred)
-                textSize = dip(15).toFloat()
             }
 
             space().lparams(width = matchParent, height = dip(20))

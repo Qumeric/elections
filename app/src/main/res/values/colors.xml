@@ -23,4 +23,7 @@
     <color name="gray">#AAAAAA</color>
     <color name="silver">#DDDDDD</color>
     <color name="white">#FFFFFF</color>
+
+    <!-- additional -->
+    <color name="ducksBackground">@color/aqua</color>
 </resources>

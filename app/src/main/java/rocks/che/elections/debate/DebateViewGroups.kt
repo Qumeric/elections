@@ -1,18 +1,20 @@
 package rocks.che.elections.debate
 
-import android.support.v4.content.res.ResourcesCompat
 import android.view.Gravity
-import android.view.View
+import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
 import org.jetbrains.anko.sdk25.listeners.onSeekBarChangeListener
 import rocks.che.elections.R
+import rocks.che.elections.helpers.gameTextView
 import rocks.che.elections.logic.gamestate
 import rocks.che.elections.logic.getGroupResource
 
 class DebateViewGroups : AnkoComponent<DebateActivity> {
     private lateinit var ankoContext: AnkoContext<DebateActivity>
+    private lateinit var nextButton: Button
     private val amounts = mutableListOf<TextView>()
     private val amountVals = mutableListOf<Int>()
 
@@ -22,29 +24,20 @@ class DebateViewGroups : AnkoComponent<DebateActivity> {
         verticalLayout {
             gravity = Gravity.CENTER
 
-            textView {
+            gameTextView(dip(20)) {
                 textResource = R.string.debate
-                typeface = ResourcesCompat.getFont(ctx, R.font.mfred)
-                textSize = dip(20).toFloat()
-                textAlignment = View.TEXT_ALIGNMENT_CENTER
             }.lparams(weight = 0.09f, height = 0)
 
             imageView {
                 backgroundResource = R.color.blue
             }.lparams(weight = 0.012f, height = 0, width = dip(120))
 
-            textView {
+            gameTextView(dip(12)) {
                 textResource = R.string.debate_groups
-                typeface = ResourcesCompat.getFont(ctx, R.font.mfred)
-                textSize = dip(12).toFloat()
-                textAlignment = View.TEXT_ALIGNMENT_CENTER
             }.lparams(weight = 0.15f, height = 0)
 
-            val minutesTextView = textView {
-                text = ctx.getString(R.string.debate_minutes_left_template).format((ctx as DebateActivity).maxMinutes)
-                typeface = ResourcesCompat.getFont(ctx, R.font.mfred)
-                textSize = dip(18).toFloat()
-                textAlignment = View.TEXT_ALIGNMENT_CENTER
+            val minutesTextView = gameTextView(dip(18)) {
+                text = ctx.getString(R.string.debate_minutes_left_template).format((ctx as DebateActivity).groupMinutes)
             }.lparams(weight = 0.1f, height = 0)
 
             var isGray = true
@@ -65,11 +58,12 @@ class DebateViewGroups : AnkoComponent<DebateActivity> {
                         width = dip(30)
                     }
 
-                    textView(group) {
+                    gameTextView {
+                        text = group
                     }
 
                     seekBar {
-                        max = (ctx as DebateActivity).minutes
+                        max = (ctx as DebateActivity).groupMinutes
                         val p = pos // capture value
                         onSeekBarChangeListener {
                             onProgressChanged({ sb, progress, fromUser ->
@@ -88,20 +82,23 @@ class DebateViewGroups : AnkoComponent<DebateActivity> {
                         }
                     }.lparams(width=dip(200))
 
-                    amounts.add(textView("0"))
+                    amounts.add(gameTextView(text="0") {})
                     amountVals.add(0)
                 }.lparams(weight = 0.1f, height = 0, width = matchParent)
                 isGray = !isGray
                 pos++
             }
 
-            themedButton(theme = R.style.button) {
+            nextButton = themedButton(theme = R.style.button) {
                 textResource = R.string.next
                 onClick {
                     val activity = ctx as DebateActivity
-                    activity.minutes -= amountVals.sum()
-                    activity.setGroupDistribution(amountVals)
-                    activity.nextStage()
+                    if (amountVals.sum() == activity.groupMinutes) {
+                        activity.setOpponentDistribution(amountVals)
+                        activity.nextStage()
+                    } else {
+                        Toast.makeText(ctx, ctx.getString(R.string.debate_spend_minutes_first), Toast.LENGTH_SHORT).show()
+                    }
                 }
             }.lparams(weight = 0.08f, height = 0, width = dip(180))
         }

@@ -32,6 +32,9 @@
     <string name="debate_opponents">
         Распределите время атаки на следующих оппонентов
     </string>
+    <string name="debate_spend_minutes_first">
+        You have to spend all available minutes!
+    </string>
     <string name="debate_minutes_left_template">
         Minutes left %d
     </string>
@@ -52,6 +55,8 @@
     </string>
 
     <!-- Minigames -->
+    <string name="score_template">Score: %d</string>
+
     <string name="ducks_info_title">A</string>
     <string name="ducks_info_message">A</string>
     <string name="ducks_end_title">Minigame is finished</string>

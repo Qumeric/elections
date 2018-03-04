@@ -3,12 +3,10 @@ package rocks.che.elections.minigames
 import android.view.View
 import android.widget.*
 import org.jetbrains.anko.*
-import rocks.che.elections.helpers.OnSwipeTouchListener
 import rocks.che.elections.R
+import rocks.che.elections.helpers.gameTextView
 import rocks.che.elections.helpers.squareGridLayout
 import java.util.*
-
-
 
 class SnakeGameView(val onTouchListener: View.OnTouchListener) : AnkoComponent<SnakeGameActivity> {
     lateinit var ankoContext: AnkoContext<SnakeGameActivity>
@@ -19,8 +17,7 @@ class SnakeGameView(val onTouchListener: View.OnTouchListener) : AnkoComponent<S
     val rowCnt = 20
     val colCnt = 20
 
-    var field: ArrayList<ArrayList<ImageButton>> = arrayListOf()
-
+    var field: ArrayList<ArrayList<ImageView>> = arrayListOf()
 
     override fun createView(ui: AnkoContext<SnakeGameActivity>) = with(ui) {
         ankoContext = ui
@@ -29,35 +26,32 @@ class SnakeGameView(val onTouchListener: View.OnTouchListener) : AnkoComponent<S
             setOnTouchListener(onTouchListener)
 
             relativeLayout {
-                scoreText = textView { }.lparams(height = wrapContent)
-            }.lparams(weight = 0.1f, width = matchParent)
-
+                scoreText = gameTextView(dip(18)) { }
+                //?lengthText = gameTextView {}
+            }.lparams(weight = 7/32f, width = matchParent, height = 0)
 
             layout = squareGridLayout {
-
                 isClickable = false
-
                 columnCount = colCnt
                 rowCount = rowCnt
 
-
                 for (row in 0 until rowCount) {
-                    val rowElems: ArrayList<ImageButton> = arrayListOf()
+                    val rowElems: ArrayList<ImageView> = arrayListOf()
                     (0 until columnCount).mapTo(rowElems) {
-                        imageButton {
+                        imageView {
                             isClickable = false
                             backgroundResource = R.color.green
                             scaleType = ImageView.ScaleType.FIT_CENTER
                         }.lparams {
                             rowSpec = GridLayout.spec(row, 1f)
                             columnSpec = GridLayout.spec(it, 1f)
-                            width = 20
-                            height = 20
+                            height = 40
+                            width = 40
                         }
                     }
                     field.add(rowElems)
                 }
-            }.lparams(weight = 0.9f, width = matchParent)
+            }.lparams(weight = 9/16f, width = matchParent, height = 0)
         }
     }
 }

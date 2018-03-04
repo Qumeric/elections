@@ -18,7 +18,8 @@ class RunnerGameActivity : MiniGameActivity() {
                 {
                 }, view.ankoContext)
     }
-        override fun lose() {
+    override fun lose() {
+        handler.removeCallbacksAndMessages(null)
         drawInformationDialog(
                 getString(R.string.runner_end_title),
                 getString(R.string.runner_end_message_template).format(score),

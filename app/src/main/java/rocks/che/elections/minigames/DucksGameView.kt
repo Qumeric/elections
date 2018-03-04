@@ -6,11 +6,14 @@ import android.widget.*
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
 import rocks.che.elections.R
+import rocks.che.elections.helpers.gameTextView
 
 class DucksGameView() : AnkoComponent<DucksGameActivity> {
     lateinit var ankoContext: AnkoContext<DucksGameActivity>
 
     lateinit var layout: RelativeLayout
+    lateinit var missedDucksText: TextView
+    lateinit var missedShotsText: TextView
     lateinit var scoreText: TextView
     lateinit var crosshair: ImageView
 
@@ -25,18 +28,33 @@ class DucksGameView() : AnkoComponent<DucksGameActivity> {
 
             orientation = LinearLayout.VERTICAL
 
-            linearLayout {
-                scoreText = textView {
-                    textResource = R.string.ducks_welcome
-                    textColor = ContextCompat.getColor(ctx, R.color.white)
-                }
+            relativeLayout {
+                backgroundResource = R.color.ducksBackground
                 gravity = Gravity.CENTER
-                backgroundResource = R.color.navy
-            }.lparams(weight = 0.1f, width = matchParent, height = 0)
+                missedDucksText = gameTextView(dip(18), color = R.color.red) {
+                }.lparams {
+                    alignParentLeft()
+                    centerVertically()
+                }
+                scoreText = gameTextView(dip(18), color = R.color.white) {
+                    textResource = R.string.ducks_welcome
+                }.lparams {
+                    centerInParent()
+                }
+                missedShotsText = gameTextView(dip(18), color = R.color.red) {
+                }.lparams {
+                    alignParentRight()
+                    centerVertically()
+                }
+            }.lparams(weight = 0.08f, width = matchParent, height = 0)
+
+            linearLayout {
+                backgroundResource = R.color.white
+            }.lparams(weight = 0.12f, width = matchParent, height = 0)
 
             layout = relativeLayout {
                 gravity = Gravity.CENTER
-                backgroundResource = R.color.white
+                backgroundResource = R.drawable.ic_ducks_grass
 
                 crosshair = imageView {
                     backgroundDrawable = crosshairDrawable
@@ -45,12 +63,8 @@ class DucksGameView() : AnkoComponent<DucksGameActivity> {
             }.lparams(weight = 0.2f, width = matchParent, height = 0)
 
             linearLayout {
-                backgroundResource = R.color.green
-            }.lparams(weight = 0.05f, width = matchParent, height = 0)
-
-            linearLayout {
                 gravity = Gravity.CENTER
-                backgroundResource = R.color.blue
+                backgroundResource = R.color.ducksBackground
 
                 imageButton {
                     backgroundDrawable = bulletDrawable
@@ -59,7 +73,7 @@ class DucksGameView() : AnkoComponent<DucksGameActivity> {
                         (ctx as DucksGameActivity).shoot()
                     }
                 }
-            }.lparams(weight = 0.55f, width = matchParent, height = 0)
+            }.lparams(weight = 0.50f, width = matchParent, height = 0)
         }
     }
 }

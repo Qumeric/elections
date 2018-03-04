@@ -6,6 +6,7 @@ import android.view.View
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
 import rocks.che.elections.R
+import rocks.che.elections.helpers.gameTextView
 import rocks.che.elections.logic.gamestate
 
 class DebateViewEnd : AnkoComponent<DebateActivity> {
@@ -26,11 +27,8 @@ class DebateViewEnd : AnkoComponent<DebateActivity> {
                     imageResource = gamestate.candidate.getResource(ctx)
                 }.lparams(weight = 0.35f, height = 0)
 
-                textView {
+                gameTextView(dip(20)) {
                     textResource = R.string.debate
-                    typeface = ResourcesCompat.getFont(ctx, R.font.mfred)
-                    textSize = dip(20).toFloat()
-                    textAlignment = View.TEXT_ALIGNMENT_CENTER
                 }.lparams(weight = 0.15f, height = 0)
 
                 imageView {
@@ -42,12 +40,8 @@ class DebateViewEnd : AnkoComponent<DebateActivity> {
                     imageView {
                         imageResource = R.drawable.ic_add
                     }
-                    textView {
-                        gravity = Gravity.CENTER
+                    gameTextView(dip(10)) {
                         text= ctx.getString(R.string.debate_good_group_template).format((ctx as DebateActivity).winGroup())
-                        typeface = ResourcesCompat.getFont(ctx, R.font.mfred)
-                        textSize = dip(10).toFloat()
-                        textAlignment = View.TEXT_ALIGNMENT_CENTER
                     }
                 }
                 linearLayout {
@@ -55,12 +49,8 @@ class DebateViewEnd : AnkoComponent<DebateActivity> {
                     imageView {
                         imageResource = R.drawable.ic_substract
                     }
-                    textView {
-                        gravity = Gravity.CENTER
+                    gameTextView(dip(10)) {
                         text= ctx.getString(R.string.debate_bad_group_template).format((ctx as DebateActivity).loseGroup())
-                        typeface = ResourcesCompat.getFont(ctx, R.font.mfred)
-                        textSize = dip(10).toFloat()
-                        textAlignment = View.TEXT_ALIGNMENT_CENTER
                     }
                 }.lparams(weight = 0.1f, height = 0, width = matchParent)
                 linearLayout {
@@ -68,16 +58,12 @@ class DebateViewEnd : AnkoComponent<DebateActivity> {
                     imageView {
                         imageResource = R.drawable.ic_flash
                     }
-                    textView {
-                        gravity = Gravity.CENTER
+                    gameTextView(dip(10)) {
                         textResource = if ((ctx as DebateActivity).attackResult()) {
                             R.string.debate_opponent_attack_success
                         } else {
                             R.string.debate_opponent_attack_fail
                         }
-                        typeface = ResourcesCompat.getFont(ctx, R.font.mfred)
-                        textSize = dip(10).toFloat()
-                        textAlignment = View.TEXT_ALIGNMENT_CENTER
                     }
                 }.lparams(weight = 0.1f, height = 0, width = matchParent)
 

@@ -7,6 +7,7 @@ import android.view.View
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
 import rocks.che.elections.helpers.cardView
+import rocks.che.elections.helpers.gameTextView
 import rocks.che.elections.logic.gamestate
 import rocks.che.elections.logic.getGroupResource
 
@@ -20,18 +21,15 @@ class GameView : AnkoComponent<GameActivity> {
             gravity = Gravity.CENTER
             verticalLayout {
                 gravity = Gravity.CENTER
-                textView {
+                gameTextView(dip(20)) {
                     textResource = R.string.choose_category
-                    typeface = ResourcesCompat.getFont(ctx, R.font.mfred)
-                    textSize = dip(20).toFloat()
-                    textAlignment = View.TEXT_ALIGNMENT_CENTER
                 }
             }.lparams {
                 height = 0
                 weight = 0.2f
             }
 
-            /*textView {
+            /*gameTextView {
                 gravity = Gravity.CENTER
                 statement = String.format("Day: %d", gamestate.step)
             }*/
@@ -67,11 +65,9 @@ class GameView : AnkoComponent<GameActivity> {
                             height = dip(70)
                             width = dip(70)
                         }
-                        textView {
+                        gameTextView(color = R.color.white) {
                             backgroundResource = R.color.navy
                             text = group
-                            textColor = R.color.white
-                            typeface = ResourcesCompat.getFont(ctx, R.font.mfred)
                         }
                     }
                 }

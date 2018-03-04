@@ -4,6 +4,7 @@ import android.support.v4.content.res.ResourcesCompat
 import android.view.Gravity
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
+import rocks.che.elections.helpers.gameTextView
 import rocks.che.elections.logic.gamestate
 import rocks.che.elections.logic.getGroupResource
 import java.util.*
@@ -19,11 +20,8 @@ class ChangeView(val oldOpinions: Map<String, Int>) : AnkoComponent<ChangeActivi
         verticalLayout {
             gravity = Gravity.CENTER
 
-            textView {
-                gravity = Gravity.CENTER
+            gameTextView(dip(15)) {
                 textResource = R.string.support
-                typeface = ResourcesCompat.getFont(ctx, R.font.mfred)
-                textSize = dip(15).toFloat()
             }
 
             space().lparams(height = dip(40), width = matchParent)
@@ -43,12 +41,9 @@ class ChangeView(val oldOpinions: Map<String, Int>) : AnkoComponent<ChangeActivi
 
                     space().lparams(width = dip(15), height = matchParent)
 
-                    textView {
-                        gravity = Gravity.CENTER
+                    gameTextView(dip(10)) {
                         text = String.format("%s  %d(%s)", group, opinion.value,
                                 Formatter().format(Locale.US, "%+d", opinion.value - oldOpinions[group]!!))
-                        typeface = ResourcesCompat.getFont(ctx, R.font.mfred)
-                        textSize = dip(10).toFloat()
                     }
                 }.lparams(height = dip(70), width = matchParent)
                 pos++

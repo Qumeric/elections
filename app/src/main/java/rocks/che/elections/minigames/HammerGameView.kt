@@ -5,6 +5,9 @@ import android.view.View
 import android.widget.*
 import org.jetbrains.anko.*
 import rocks.che.elections.R
+import rocks.che.elections.helpers.SquareGridLayout
+import rocks.che.elections.helpers.gameTextView
+import rocks.che.elections.helpers.squareGridLayout
 import java.util.*
 
 class HammerGameView() : AnkoComponent<HammerGameActivity> {
@@ -12,6 +15,7 @@ class HammerGameView() : AnkoComponent<HammerGameActivity> {
 
     lateinit var layout: GridLayout
     lateinit var scoreText: TextView
+    lateinit var missedText: TextView
 
     val rowCnt = 3
     val colCnt = 3
@@ -19,9 +23,8 @@ class HammerGameView() : AnkoComponent<HammerGameActivity> {
     var field: ArrayList<ArrayList<ImageButton>> = arrayListOf()
 
     fun pickRandomEnemyResource(): Int {
-        val enemyResources: List<Int> = listOf(R.drawable.grudinin, R.drawable.navalny,
-                R.drawable.putin, R.drawable.sobchak, R.drawable.yavlinsky, R.drawable.zhirinovsky)
-        return enemyResources[Random().nextInt(enemyResources.size)]
+        return listOf(R.drawable.grudinin, R.drawable.navalny, R.drawable.sobchak,
+                R.drawable.yavlinsky, R.drawable.zhirinovsky)[Random().nextInt(5)]
     }
 
     override fun createView(ui: AnkoContext<HammerGameActivity>) = with(ui) {
@@ -29,55 +32,54 @@ class HammerGameView() : AnkoComponent<HammerGameActivity> {
 
         ui.ctx.windowManager.defaultDisplay.getMetrics(displayMetrics)
 
-        linearLayout {
+        verticalLayout {
             gravity = Gravity.NO_GRAVITY
-
-            orientation = LinearLayout.VERTICAL
 
             relativeLayout {
                 backgroundResource = R.color.white
-                scoreText = textView { }.lparams(height = wrapContent)
-            }.lparams(weight = 0.1f, width = matchParent)
-
-            relativeLayout {
-                gravity = Gravity.CENTER
-                backgroundResource = R.color.blue
-
-
-                layout = gridLayout {
-                    columnCount = colCnt
-                    rowCount = rowCnt
-
-                    for (row in 1..rowCount) {
-                        val rowElems: ArrayList<ImageButton> = arrayListOf()
-                        for (column in 1..columnCount) {
-                            val e = imageButton {
-                                background = null
-                                visibility = View.INVISIBLE
-                                scaleType = ImageView.ScaleType.FIT_CENTER
-                            }.lparams {
-                                rowSpec = GridLayout.spec(row - 1)
-                                columnSpec = GridLayout.spec(column - 1)
-                                width = 160
-                                height = 160
-                            }
-                            rowElems.add(e)
-                        }
-                        field.add(rowElems)
-                    }
+                scoreText = gameTextView(dip(18), color = R.color.black) {
+                    text = "0"
+                }.lparams {
+                    alignParentLeft()
+                    centerVertically()
                 }
+                missedText = gameTextView(dip(18), color = R.color.maroon) {
+                    text = "0"
+                }.lparams {
+                    alignParentRight()
+                    centerVertically()
+                }
+            }.lparams(weight = 0.1f, width = matchParent, height = 0)
 
-            }.lparams(weight = 0.2f, width = matchParent)
+            layout = squareGridLayout {
+                backgroundResource = R.color.blue
+                columnCount = colCnt
+                rowCount = rowCnt
+
+                for (row in 0 until rowCount) {
+                    val rowElems: List<ImageButton> = (0 until columnCount).map {
+                        imageButton {
+                            background = null
+                            visibility = View.INVISIBLE
+                            scaleType = ImageView.ScaleType.FIT_CENTER
+                        }.lparams {
+                            rowSpec = GridLayout.spec(row, 1f)
+                            columnSpec = GridLayout.spec(it, 1f)
+                            height = 20
+                            width = 20
+                        }
+                    }
+                    field.add(rowElems as ArrayList<ImageButton>)
+                }
+            }.lparams(weight=9/16f, width= matchParent, height = 0)
 
             relativeLayout {
                 backgroundResource = R.color.yellow
-            }.lparams(weight = 0.05f, width = matchParent)
+            }.lparams(weight = 0.1f, width = matchParent, height = 0)
 
             relativeLayout {
-                gravity = Gravity.CENTER
                 backgroundResource = R.color.green
-
-            }.lparams(weight = 0.1f, width = matchParent)
+            }.lparams(weight = 0.05f, width = matchParent, height = 0)
         }
     }
 }

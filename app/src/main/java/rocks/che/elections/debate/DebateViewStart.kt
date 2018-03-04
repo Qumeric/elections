@@ -6,6 +6,7 @@ import android.view.View
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
 import rocks.che.elections.R
+import rocks.che.elections.helpers.gameTextView
 import rocks.che.elections.logic.gamestate
 
 class DebateViewStart : AnkoComponent<DebateActivity> {
@@ -26,24 +27,17 @@ class DebateViewStart : AnkoComponent<DebateActivity> {
                     imageResource = gamestate.candidate.getResource(ctx)
                 }.lparams(weight = 0.35f, height = 0)
 
-                textView {
+                gameTextView(dip(20)) {
                     textResource = R.string.debate
-                    typeface = ResourcesCompat.getFont(ctx, R.font.mfred)
-                    textSize = dip(20).toFloat()
-                    textAlignment = View.TEXT_ALIGNMENT_CENTER
                 }.lparams(weight = 0.15f, height = 0)
 
                 imageView {
                     backgroundResource = R.color.blue
                 }.lparams(weight = 0.012f, height = 0, width = dip(120))
 
-                textView {
-                    gravity = Gravity.CENTER
-                    padding = dip(20)
+                gameTextView (dip(14)) {
+                    padding = dip(15)
                     textResource = R.string.debate_description
-                    typeface = ResourcesCompat.getFont(ctx, R.font.mfred)
-                    textSize = dip(10).toFloat()
-                    textAlignment = View.TEXT_ALIGNMENT_CENTER
                 }.lparams(weight = 0.4f, height = 0)
 
                 themedButton(theme = R.style.button) {

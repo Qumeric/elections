@@ -7,12 +7,14 @@ import android.widget.TextView
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onTouch
 import rocks.che.elections.R
+import rocks.che.elections.helpers.gameTextView
 
 class CatcherGameView() : AnkoComponent<CatcherGameActivity> {
     lateinit var ankoContext: AnkoContext<CatcherGameActivity>
 
     lateinit var layout: RelativeLayout
     lateinit var scoreText: TextView
+    lateinit var missedText: TextView
     lateinit var cart: ImageButton
 
 
@@ -23,9 +25,21 @@ class CatcherGameView() : AnkoComponent<CatcherGameActivity> {
 
         layout = relativeLayout  {
             gravity = Gravity.NO_GRAVITY
+            backgroundResource = R.color.aqua
 
-            scoreText = textView {
-            }
+            relativeLayout {
+                backgroundResource = R.color.black
+                background.alpha = 33
+                gravity = Gravity.CENTER
+                scoreText = gameTextView(dip(18)) {
+                }.lparams {
+                    alignParentLeft()
+                }
+                missedText = gameTextView(dip(18), R.color.maroon) {
+                }.lparams {
+                    alignParentRight()
+                }
+            }.lparams(height = dip(50), width = matchParent)
 
             onTouch {_, e ->
                 val cartWidth = cartDrawable.intrinsicWidth.toFloat()

@@ -7,6 +7,7 @@ import android.widget.GridLayout
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
 import rocks.che.elections.helpers.cardView
+import rocks.che.elections.helpers.gameTextView
 import rocks.che.elections.logic.*
 
 class ChooseCandidateView : AnkoComponent<ChooseCandidateActivity> {
@@ -23,11 +24,8 @@ class ChooseCandidateView : AnkoComponent<ChooseCandidateActivity> {
             gravity = Gravity.CENTER
             verticalLayout {
                 gravity = Gravity.CENTER
-                textView {
+                gameTextView(dip(20)) {
                     textResource = R.string.choose_candidate
-                    typeface = ResourcesCompat.getFont(ctx, R.font.mfred)
-                    textSize = dip(20).toFloat()
-                    textAlignment = View.TEXT_ALIGNMENT_CENTER
                 }
             }.lparams {
                 height = matchParent
@@ -59,10 +57,8 @@ class ChooseCandidateView : AnkoComponent<ChooseCandidateActivity> {
 
                                 verticalLayout {
                                     for ((group, value) in candidate.opinions) {
-                                        textView {
+                                        gameTextView(dip(8)) {
                                             text = "%s: %d".format(group, value.value)
-                                            typeface = ResourcesCompat.getFont(ctx, R.font.mfred)
-                                            textSize = dip(8).toFloat()
                                         }
                                     }
                                 }

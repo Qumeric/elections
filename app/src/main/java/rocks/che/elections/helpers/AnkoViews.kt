@@ -2,12 +2,18 @@ package rocks.che.elections.helpers
 
 import android.content.Context
 import android.graphics.RectF
+import android.support.v4.content.ContextCompat
+import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.CardView
+import android.view.View
 import android.view.ViewManager
+import android.widget.TextView
 import com.robinhood.spark.SparkAdapter
 import com.robinhood.spark.SparkView
 import org.jetbrains.anko._GridLayout
 import org.jetbrains.anko.custom.ankoView
+import org.jetbrains.anko.textColor
+import rocks.che.elections.R
 
 class SquareGridLayout(ctx: Context): _GridLayout(ctx) {
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -38,6 +44,19 @@ inline fun ViewManager.sparkView(init: SparkView.() -> Unit): SparkView {
 
 inline fun ViewManager.cardView(init: CardView.() -> Unit): CardView {
     return ankoView({ CardView(it) }, theme = 0, init = init)
+}
+
+val NO_STRING = "\b\nxa\t" // never occurs
+inline fun ViewManager.gameTextView(size: Int = 0, color: Int = 0, text: String=NO_STRING, init: TextView.() -> Unit) : TextView {
+    return ankoView({
+        val tv = TextView(it)
+        tv.typeface = ResourcesCompat.getFont(it, R.font.mfred)
+        tv.textAlignment = View.TEXT_ALIGNMENT_CENTER
+        if (size > 0)   tv.textSize = size.toFloat()
+        if (color != 0) tv.textColor = ContextCompat.getColor(it, color)
+        if (text != NO_STRING) tv.text = text
+        tv
+    }, theme = 0, init = init)
 }
 
 class MyAdapter(val yData: FloatArray) : SparkAdapter() {

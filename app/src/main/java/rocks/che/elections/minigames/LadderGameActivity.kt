@@ -11,11 +11,7 @@ class LadderGameActivity : MiniGameActivity() {
 
     fun tap() {
         score++
-    }
-
-    private fun update() {
         view.scoreText.text = score.toString()
-        handler.postDelayed({ update() }, 1000 / 50)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,12 +23,12 @@ class LadderGameActivity : MiniGameActivity() {
 
         drawInformationDialog(getString(R.string.ladder_info_title), getString(R.string.ladder_info_message),
                 {
-                    handler.postDelayed({update()}, 1)
-                    handler.postDelayed({lose()}, 1000 * length.toLong())
+                    handler.postDelayed({lose()}, 130 * length.toLong())
                 }, view.ankoContext)
 
     }
-        override fun lose() {
+    override fun lose() {
+        handler.removeCallbacksAndMessages(null)
         drawInformationDialog(
                 getString(R.string.ladder_end_title),
                 getString(R.string.ladder_end_message_template).format(score),

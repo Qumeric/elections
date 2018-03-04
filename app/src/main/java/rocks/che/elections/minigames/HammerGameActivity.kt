@@ -2,48 +2,52 @@ package rocks.che.elections.minigames
 
 import android.os.Bundle
 import android.view.View
+import im.delight.android.audio.MusicManager
+import im.delight.android.audio.SoundManager
 import org.jetbrains.anko.sdk25.listeners.onClick
 import org.jetbrains.anko.setContentView
 import rocks.che.elections.R
+import java.util.*
 
 class HammerGameActivity : MiniGameActivity() {
     private lateinit var view: HammerGameView
+    private var missedHeads = 0
 
-    private lateinit var gonnaShow: Array<BooleanArray>
-
-    fun kill(imgResource: Int) {
+    private fun kill(imgResource: Int) {
+        MusicManager.getInstance().play(this, R.raw.hammer_sound)
         score += 1
+        view.scoreText.text = score.toString()
     }
 
-    fun createEnemy(row: Int, col: Int): Runnable {
+    private fun removeEnemy(row: Int, col: Int){
         val elem = view.field[row][col]
-        return Runnable {
-            val r = view.pickRandomEnemyResource()
-            elem.setImageResource(r)
-            elem.visibility = View.VISIBLE
-            elem.onClick {
-                elem.visibility = View.INVISIBLE
-                kill(r)
-                gonnaShow[row][col] = false
+        if (elem.visibility != View.INVISIBLE) {
+            MusicManager.getInstance().play(this, R.raw.hammer_miss_sound)
+            missedHeads++
+            view.missedText.text = missedHeads.toString()
+            elem.visibility = View.INVISIBLE
+            elem.invalidate()
+            if (missedHeads >= maxLose) {
+                lose()
+                return
             }
         }
+        handler.postDelayed({createEnemy(row, col)}, 3000*(1+Random().nextDouble()).toLong())
     }
 
-    val update = object : Runnable {
-        override fun run() {
-            view.scoreText.text = score.toString()
-
-            for (row in 0 until view.rowCnt) {
-                for (col in 0 until view.colCnt) {
-                    if (view.field[row][col].visibility == View.INVISIBLE && !gonnaShow[row][col]) {
-                        gonnaShow[row][col] = true
-                        handler.postDelayed(createEnemy(row, col), (1000 / (10 + score)).toLong())
-                    }
-                }
-            }
-
-            handler.postDelayed(this, (1000 / 50).toLong())
+    private fun createEnemy(row: Int, col: Int){
+        val elem = view.field[row][col]
+        val r = view.pickRandomEnemyResource()
+        elem.setImageResource(r)
+        elem.visibility = View.VISIBLE
+        elem.invalidate()
+        elem.onClick {
+            elem.visibility = View.INVISIBLE
+            elem.invalidate()
+            kill(r)
         }
+
+        handler.postDelayed({removeEnemy(row, col)}, 3000*(1+Random().nextDouble()).toLong())
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,21 +56,21 @@ class HammerGameActivity : MiniGameActivity() {
         view = HammerGameView()
         view.setContentView(this)
 
-        gonnaShow = Array(view.rowCnt, { booleanArrayOf() })
-        for (row in 0 until view.rowCnt) {
-            val rowValue = BooleanArray(view.colCnt)
-            gonnaShow[row] = rowValue
-        }
-
-
-        drawInformationDialog(getString(R.string.hammer_info_title), getString(R.string.hammer_info_message),
+        drawInformationDialog(
+                getString(R.string.hammer_info_title),
+                getString(R.string.hammer_info_message),
                 {
-                    handler.postDelayed(update, 1)
-                }, view.ankoContext)
-
+                    for (row in 0 until view.rowCnt) {
+                        (0 until view.colCnt).forEach {
+                            handler.postDelayed({createEnemy(row, it)}, (5000*Random().nextDouble()).toLong())
+                        }
+                    }
+                },
+                view.ankoContext)
     }
 
     override fun lose() {
+        handler.removeCallbacksAndMessages(null)
         drawInformationDialog(
                 getString(R.string.catcher_end_title),
                 getString(R.string.catcher_end_message_template).format(score),

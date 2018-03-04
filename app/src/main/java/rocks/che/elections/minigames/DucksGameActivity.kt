@@ -53,8 +53,9 @@ class DucksGameActivity : MiniGameActivity() {
                 view.layout.removeView(s)
             }
 
-            view.scoreText.text = "Score: %d, missed ducks: %d, missed shots: %d".format(
-                    score, missedDucks, missedShots)
+            view.scoreText.text = score.toString()
+            view.missedDucksText.text = missedDucks.toString()
+            view.missedShotsText.text = missedShots.toString()
 
             if (missedDucks + missedShots >= maxLose) {
                 lose()
@@ -114,6 +115,7 @@ class DucksGameActivity : MiniGameActivity() {
     }
 
     override fun lose() {
+        handler.removeCallbacksAndMessages(null)
         drawInformationDialog(
                 getString(R.string.ducks_end_title),
                 getString(R.string.ducks_end_message_template).format(score),

@@ -5,6 +5,7 @@ import android.widget.*
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
 import rocks.che.elections.R
+import rocks.che.elections.helpers.gameTextView
 
 class LadderGameView() : AnkoComponent<LadderGameActivity> {
     lateinit var ankoContext: AnkoContext<LadderGameActivity>
@@ -22,7 +23,7 @@ class LadderGameView() : AnkoComponent<LadderGameActivity> {
 
             relativeLayout {
                 backgroundResource = R.color.white
-                scoreText = textView { }.lparams(height = wrapContent)
+                scoreText = gameTextView(dip(18)) {  }
             }.lparams(weight = 0.1f, width = matchParent)
 
             relativeLayout {

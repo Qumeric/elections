@@ -1,9 +1,9 @@
 package rocks.che.elections
 
-import android.support.v4.content.res.ResourcesCompat
 import android.widget.Toast
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
+import rocks.che.elections.helpers.gameTextView
 import rocks.che.elections.logic.gamestate
 import rocks.che.elections.logic.getGroupResource
 
@@ -16,9 +16,8 @@ class SpendMoneyView : AnkoComponent<SpendMoneyActivity> {
         ankoContext = ui
 
         verticalLayout {
-            val moneyTextView = textView {
+            val moneyTextView = gameTextView {
                 text = gamestate.money.toString()
-                typeface = ResourcesCompat.getFont(ctx, R.font.mfred)
             }
 
             for ((group, qGroup) in gamestate.questions) {

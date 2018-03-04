@@ -3,6 +3,7 @@ package rocks.che.elections.minigames
 import android.graphics.Rect
 import android.os.Bundle
 import android.widget.ImageView
+import im.delight.android.audio.MusicManager
 import org.jetbrains.anko.ctx
 import org.jetbrains.anko.displayMetrics
 import org.jetbrains.anko.image
@@ -12,6 +13,8 @@ import java.lang.Math.random
 
 class CatcherGameActivity : MiniGameActivity() {
     private lateinit var view: CatcherGameView
+
+    var missedStrawberries = 0
 
     val strawberries: MutableSet<ImageView> = mutableSetOf()
 
@@ -45,13 +48,15 @@ class CatcherGameActivity : MiniGameActivity() {
                 s.getHitRect(s_rc)
 
                 if (cart_rc.intersect(s_rc)) {
+                    MusicManager.getInstance().play(ctx, R.raw.catch_strawberry_sound)
                     score++
                     toRemove.add(s)
                 }
 
                 if (s.y + s.height >= view.layout.height) {
-                    lose()
-                    return
+                    MusicManager.getInstance().play(ctx, R.raw.catch_miss_sound)
+                    missedStrawberries++
+                    toRemove.add(s)
                 }
             }
 
@@ -61,6 +66,12 @@ class CatcherGameActivity : MiniGameActivity() {
             }
 
             view.scoreText.text = score.toString()
+            view.missedText.text = missedStrawberries.toString()
+
+            if (missedStrawberries >= maxLose) {
+                lose()
+                return
+            }
 
             handler.postDelayed(this, (1000 / 50).toLong())
         }
@@ -80,6 +91,7 @@ class CatcherGameActivity : MiniGameActivity() {
     }
 
     override fun lose() {
+        handler.removeCallbacksAndMessages(null)
         drawInformationDialog(
                 getString(R.string.catcher_end_title),
                 getString(R.string.catcher_end_message_template).format(score),

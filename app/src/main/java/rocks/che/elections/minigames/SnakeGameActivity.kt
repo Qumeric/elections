@@ -1,13 +1,13 @@
 package rocks.che.elections.minigames
 
 import android.os.Bundle
+import im.delight.android.audio.MusicManager
 import org.jetbrains.anko.backgroundResource
+import org.jetbrains.anko.imageResource
 import org.jetbrains.anko.setContentView
 import rocks.che.elections.R
 import rocks.che.elections.helpers.OnSwipeTouchListener
 import java.util.*
-
-
 
 class SnakeGameActivity : MiniGameActivity() {
     data class Position(val y: Int, val x: Int) {
@@ -41,20 +41,23 @@ class SnakeGameActivity : MiniGameActivity() {
     private val snake: Deque<Position> = LinkedList()
     var d = Direction.EAST
 
-    private lateinit var apple: Position
+    private var apple: Position? = null
 
     fun eat() {
         score++
+        MusicManager.getInstance().play(this, R.raw.eat_apple_sound)
         apple = genApple()
+    }
+
+    private var appleResource = R.drawable.ic_apple_1
+    private fun randomAppleResource() {
+        appleResource = listOf<Int>(R.drawable.ic_apple_1, R.drawable.ic_apple_2,
+                R.drawable.ic_apple_3)[Random().nextInt(3)]
     }
 
     private val update = object : Runnable {
         override fun run() {
             view.scoreText.text = score.toString()
-
-            view.field
-                    .flatMap { it }
-                    .forEach { it.backgroundResource = R.color.green }
 
             val nextHeadPos = snake.first.plus(d)
             if (!nextHeadPos.isValid(view.rowCnt, view.colCnt) || inSnake(nextHeadPos)) {
@@ -64,6 +67,7 @@ class SnakeGameActivity : MiniGameActivity() {
             snake.addFirst(nextHeadPos)
 
             if (snake.first != apple) {
+                view.field[snake.last.y][snake.last.x].backgroundResource = R.color.green
                 snake.removeLast()
             } else {
                 eat()
@@ -74,9 +78,9 @@ class SnakeGameActivity : MiniGameActivity() {
                 elem.backgroundResource = R.color.navy
             }
 
-            view.field[apple.y][apple.x].backgroundResource = R.color.red
+            view.field[apple!!.y][apple!!.x].imageResource = appleResource
 
-            handler.postDelayed(this, 500L)
+            handler.postDelayed(this, 300L)
         }
     }
 
@@ -85,10 +89,15 @@ class SnakeGameActivity : MiniGameActivity() {
     }
 
     private fun genApple(): Position {
+        if (apple != null) {
+            view.field[apple!!.y][apple!!.x].imageResource = 0
+        }
         var apple: Position
         do {
             apple = Position(Random().nextInt(view.rowCnt), Random().nextInt(view.colCnt))
         } while (inSnake(apple))
+        randomAppleResource()
+        view.field[apple.y][apple.x].imageResource = appleResource
         return apple
     }
 
@@ -101,19 +110,16 @@ class SnakeGameActivity : MiniGameActivity() {
                         d = Direction.NORTH
                     }
                 }
-
                 override fun onSwipeRight() {
                     if (d != Direction.WEST) {
                         d = Direction.EAST
                     }
                 }
-
                 override fun onSwipeLeft() {
                     if (d != Direction.EAST) {
                         d = Direction.WEST
                     }
                 }
-
                 override fun onSwipeBottom() {
                     if (d != Direction.NORTH) {
                         d = Direction.SOUTH
@@ -123,17 +129,17 @@ class SnakeGameActivity : MiniGameActivity() {
         )
         view.setContentView(this)
 
+
         for (i in 1..startLength) {
             snake.addLast(Position(0, startLength - i))
         }
         apple = genApple()
 
         drawInformationDialog(getString(R.string.snake_info_title), getString(R.string.snake_info_message),
-                {
-                    handler.postDelayed(update, 1)
-                }, view.ankoContext)
+                {handler.postDelayed(update, 1)}, view.ankoContext)
     }
     override fun lose() {
+        handler.removeCallbacksAndMessages(null)
         drawInformationDialog(
                 getString(R.string.snake_end_title),
                 getString(R.string.snake_end_message_template).format(score),

@@ -8,6 +8,7 @@ import android.widget.TextView
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
 import rocks.che.elections.helpers.MyAdapter
+import rocks.che.elections.helpers.gameTextView
 import rocks.che.elections.helpers.sparkView
 import rocks.che.elections.logic.gamestate
 
@@ -27,11 +28,7 @@ class PollView(val h: Map<String, List<Double>>) : AnkoComponent<PollActivity> {
         verticalLayout {
             gravity = Gravity.CENTER
 
-            textView {
-                gravity = Gravity.CENTER
-                typeface = ResourcesCompat.getFont(ctx, R.font.mfred)
-                textSize = dip(20).toFloat()
-                textAlignment = View.TEXT_ALIGNMENT_CENTER
+            gameTextView(dip(20)) {
                 text = String.format("Poll results on day %d", gamestate.step)
             }.lparams(weight = 1f)
 
@@ -50,8 +47,7 @@ class PollView(val h: Map<String, List<Double>>) : AnkoComponent<PollActivity> {
                 val c = gamestate.candidate
                 backgroundResource = candidateToColor[c.name]!!
                 alpha = 0.5f
-                textView {
-                    gravity = Gravity.CENTER
+                gameTextView {
                     text = String.format("%s: %d", c.name, Math.round(c.getGeneralOpinion()))
                 }.lparams(weight = 1f)
             }
@@ -60,16 +56,14 @@ class PollView(val h: Map<String, List<Double>>) : AnkoComponent<PollActivity> {
                 linearLayout {
                     backgroundResource = candidateToColor[c.name]!!
                     alpha = 0.5f
-                    textView {
-                        gravity = Gravity.CENTER
+                    gameTextView {
                         text = String.format("%s: %d", c.name, Math.round(c.generalOpinion))
                     }.lparams(weight = 1f)
                 }
             }
 
             if (gamestate.isWon()) {
-                textView {
-                    gravity = Gravity.CENTER
+                gameTextView {
                     textResource = R.string.win_message
                 }
                 button {
@@ -93,9 +87,7 @@ class PollView(val h: Map<String, List<Double>>) : AnkoComponent<PollActivity> {
                     }
                 }
             } else {
-                expelledTV = textView {
-                    gravity = Gravity.CENTER
-                }
+                expelledTV = gameTextView { }
                 button {
                     textResource = R.string.next
                     onClick {

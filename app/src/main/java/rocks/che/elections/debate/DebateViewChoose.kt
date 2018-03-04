@@ -8,6 +8,7 @@ import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
 import org.jetbrains.anko.sdk25.listeners.onTouch
 import rocks.che.elections.R
+import rocks.che.elections.helpers.gameTextView
 
 enum class SourceSlider { OPPONENTS, GROUPS}
 
@@ -22,22 +23,16 @@ class DebateViewChoose : AnkoComponent<DebateActivity> {
         verticalLayout {
             gravity = Gravity.CENTER
 
-            textView {
+            gameTextView(dip(20)) {
                 textResource = R.string.debate
-                typeface = ResourcesCompat.getFont(ctx, R.font.mfred)
-                textSize = dip(20).toFloat()
-                textAlignment = View.TEXT_ALIGNMENT_CENTER
             }.lparams(weight = 0.06f, height = 0)
 
             imageView {
                 backgroundResource = R.color.blue
             }.lparams(weight = 0.012f, height = 0, width = dip(120))
 
-            textView {
+            gameTextView(dip(12)) {
                 textResource = R.string.debate_choose_description
-                typeface = ResourcesCompat.getFont(ctx, R.font.mfred)
-                textSize = dip(12).toFloat()
-                textAlignment = View.TEXT_ALIGNMENT_CENTER
             }.lparams(weight = 0.1f, height = 0)
 
             groupsBar = seekBar {
@@ -59,16 +54,21 @@ class DebateViewChoose : AnkoComponent<DebateActivity> {
 
             themedButton(theme = R.style.button) {
                 textResource = R.string.next
-                onClick { (ctx as DebateActivity).nextStage() }
+                onClick {
+                    val activity = ctx as DebateActivity
+                    activity.groupMinutes = groupsBar.progress
+                    activity.opponentMinutes = opponentsBar.progress
+                    activity.nextStage()
+                }
             }.lparams(weight = 0.14f, height = 0, width = dip(180))
         }
     }
 
     private fun handleSliders(slider: SourceSlider, ctx: DebateActivity) {
         if (slider == SourceSlider.GROUPS) {
-            opponentsBar.progress = ((ctx.minutes-groupsBar.progress.toFloat()/groupsBar.max*ctx.maxMinutes)/ctx.maxMinutes*opponentsBar.max).toInt()
+            opponentsBar.progress = ((ctx.maxMinutes-groupsBar.progress.toFloat()/groupsBar.max*ctx.maxMinutes)/ctx.maxMinutes*opponentsBar.max).toInt()
         } else {
-            groupsBar.progress = ((ctx.minutes-opponentsBar.progress.toFloat()/opponentsBar.max*ctx.maxMinutes)/ctx.maxMinutes*groupsBar.max).toInt()
+            groupsBar.progress = ((ctx.maxMinutes-opponentsBar.progress.toFloat()/opponentsBar.max*ctx.maxMinutes)/ctx.maxMinutes*groupsBar.max).toInt()
         }
     }
 }
