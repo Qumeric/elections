@@ -20,7 +20,7 @@ class SpendMoneyView : AnkoComponent<SpendMoneyActivity> {
                 text = gamestate.money.toString()
             }
 
-            for ((group, qGroup) in gamestate.questions) {
+            for (group in gamestate.questions.keys) {
                 imageView {
                     onClick {
                         if (gamestate.money >= moneyToUp) {
@@ -31,7 +31,7 @@ class SpendMoneyView : AnkoComponent<SpendMoneyActivity> {
                             Toast.makeText(ctx, ctx.getString(R.string.not_enough_money), Toast.LENGTH_SHORT).show()
                         }
                     }
-                    imageResource = getGroupResource(ctx, group)
+                    imageResource = getGroupResource(group)
                 }
             }
 

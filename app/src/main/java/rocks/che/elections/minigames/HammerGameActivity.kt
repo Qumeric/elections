@@ -13,7 +13,7 @@ class HammerGameActivity : MiniGameActivity() {
     private lateinit var view: HammerGameView
     private var missedHeads = 0
 
-    private fun kill(imgResource: Int) {
+    private fun kill() {
         MusicManager.getInstance().play(this, R.raw.hammer_sound)
         score += 1
         view.scoreText.text = score.toString()
@@ -40,11 +40,9 @@ class HammerGameActivity : MiniGameActivity() {
         val r = view.pickRandomEnemyResource()
         elem.setImageResource(r)
         elem.visibility = View.VISIBLE
-        elem.invalidate()
         elem.onClick {
             elem.visibility = View.INVISIBLE
-            elem.invalidate()
-            kill(r)
+            kill()
         }
 
         handler.postDelayed({removeEnemy(row, col)}, 3000*(1+Random().nextDouble()).toLong())

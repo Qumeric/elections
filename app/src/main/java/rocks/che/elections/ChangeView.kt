@@ -33,7 +33,7 @@ class ChangeView(val oldOpinions: Map<String, Int>) : AnkoComponent<ChangeActivi
                         backgroundResource = R.color.silver
                     }
                     imageView {
-                        imageResource = getGroupResource(ctx, group)
+                        imageResource = getGroupResource(group)
                     }.lparams {
                         width = dip(50)
                         height = dip(50)

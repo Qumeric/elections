@@ -16,6 +16,16 @@ typealias Opinions = HashMap<String, Opinion>
 class Candidate(val name: String, val description: String, val imgResource: String, _opinions: Map<String, Int>, val levels: Map<String, Int>) {
     val opinions: Opinions = hashMapOf()
     val history = mutableListOf<Double>()
+    var resource: Int = 0
+        get () = when(imgResource) {
+            "navalny" -> R.drawable.navalny
+            "sobchak" -> R.drawable.sobchak
+            "zhirinovsky" -> R.drawable.zhirinovsky
+            "putin" -> R.drawable.putin
+            "grudinin" -> R.drawable.grudinin
+            "yavlinksy" -> R.drawable.yavlinsky
+            else -> 0 // should never be reached
+        }
 
     init {
         for ((group, value) in _opinions) {
@@ -37,17 +47,6 @@ class Candidate(val name: String, val description: String, val imgResource: Stri
         history.add(getGeneralOpinion())
     }
 
-    fun getResource(ctx: Context): Int {
-        return when(imgResource) {
-            "navalny" -> R.drawable.navalny
-            "sobchak" -> R.drawable.sobchak
-            "zhirinovsky" -> R.drawable.zhirinovsky
-            "putin" -> R.drawable.putin
-            "grudinin" -> R.drawable.grudinin
-            "yavlinksy" -> R.drawable.yavlinsky
-            else -> 0 // should never be reached
-        }
-    }
 
     fun toJSON(): JSONObject {
         val json = JSONObject()
@@ -295,7 +294,7 @@ class Gamestate(val candidate: Candidate, val questions: Map<String, QuestionGro
 
 var gamestate: Gamestate = Gamestate(fakeCandidate, HashMap(), mutableListOf())
 
-fun getGroupResource(ctx: Context, group: String): Int {
+fun getGroupResource(group: String): Int {
     return when(group) {
         "media" -> R.drawable.media
         "business" -> R.drawable.business

@@ -60,7 +60,7 @@ class GameView : AnkoComponent<GameActivity> {
                     }
                     verticalLayout {
                         imageView {
-                            imageResource = getGroupResource(ctx, group)
+                            imageResource = getGroupResource(group)
                         }.lparams {
                             height = dip(70)
                             width = dip(70)

@@ -1,51 +1,72 @@
 package rocks.che.elections.minigames
 
+import android.util.Log
 import android.view.Gravity
 import android.widget.*
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
+import pl.droidsonroids.gif.GifDrawable
+import pl.droidsonroids.gif.GifImageView
 import rocks.che.elections.R
 import rocks.che.elections.helpers.gameTextView
+import rocks.che.elections.helpers.gifImageView
 
 class LadderGameView() : AnkoComponent<LadderGameActivity> {
     lateinit var ankoContext: AnkoContext<LadderGameActivity>
-
-    lateinit var layout: GridLayout
+    lateinit var stickmanDrawable: GifDrawable
+    lateinit var stickmanView: GifImageView
+    lateinit var ladderView: ImageView
     lateinit var scoreText: TextView
+    lateinit var enemyView: ImageView
 
     override fun createView(ui: AnkoContext<LadderGameActivity>) = with(ui) {
         ankoContext = ui
+        stickmanDrawable = GifDrawable(resources, R.drawable.ladder_anim)
+        stickmanDrawable.stop()
 
-        linearLayout {
-            gravity = Gravity.CENTER
-
-            orientation = LinearLayout.VERTICAL
-
-            relativeLayout {
-                backgroundResource = R.color.white
-                scoreText = gameTextView(dip(18)) {  }
-            }.lparams(weight = 0.1f, width = matchParent)
-
+        frameLayout {
             relativeLayout {
                 gravity = Gravity.CENTER
-                backgroundResource = R.color.blue
-
-                button("click") {
-                    onClick {
-                        (ctx as LadderGameActivity).tap()
-                    }
+                onClick {
+                    stickmanDrawable.seekToFrame((stickmanDrawable.currentFrameIndex + 1) % stickmanDrawable.numberOfFrames)
+                    ladderView.y += 5
+                    (ctx as LadderGameActivity).tap()
                 }
-            }.lparams(weight = 0.7f, width = matchParent)
 
+                scoreText = gameTextView(dip(18)) {
+                    text = "0"
+                }.lparams {
+                    alignParentTop()
+                    centerHorizontally()
+                }
+
+                ladderView = imageView {
+                    isClickable = false
+                    imageResource = R.drawable.ladder
+                }.lparams {
+                    centerInParent()
+                    width = dip(100)
+                }
+
+                stickmanView = gifImageView {
+                    isClickable = false
+                    setImageDrawable(stickmanDrawable)
+                }.lparams {
+                    centerInParent()
+                    width = dip(80)
+                }
+            }
             relativeLayout {
-                backgroundResource = R.color.yellow
-            }.lparams(weight = 0.05f, width = matchParent)
-
-            relativeLayout {
-                gravity = Gravity.CENTER
-                backgroundResource = R.color.green
-
-            }.lparams(weight = 0.1f, width = matchParent)
+                gravity = Gravity.LEFT
+                enemyView = imageView {
+                    isClickable = false
+                    imageResource = R.drawable.putin
+                    rotation = 90f
+                }.lparams {
+                    width = dip(100)
+                    x = -width.toFloat()
+                }
+            }
         }
     }
 }

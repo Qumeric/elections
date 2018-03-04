@@ -37,7 +37,7 @@ class DebateViewChoose : AnkoComponent<DebateActivity> {
 
             groupsBar = seekBar {
                 progress = max/2
-                onTouch { v, event ->
+                onTouch { _, _ ->
                     handleSliders(SourceSlider.GROUPS, ctx as DebateActivity)
                     false
                 }
@@ -45,7 +45,7 @@ class DebateViewChoose : AnkoComponent<DebateActivity> {
 
             opponentsBar = seekBar {
                 progress = max/2
-                onTouch { v, event ->
+                onTouch { _, _ ->
                     handleSliders(SourceSlider.OPPONENTS, ctx as DebateActivity)
                     false
                 }

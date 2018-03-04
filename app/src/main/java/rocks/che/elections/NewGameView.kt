@@ -55,7 +55,7 @@ class NewGameView : AnkoComponent<NewGameActivity> {
             themedButton(theme = R.style.button) {
                 text = "runner"
                 onClick {
-                    ctx.startActivity(ctx.intentFor<SnakeGameActivity>())
+                    ctx.startActivity(ctx.intentFor<RunnerGameActivity>())
                 }
             }
             themedButton(theme = R.style.button) {

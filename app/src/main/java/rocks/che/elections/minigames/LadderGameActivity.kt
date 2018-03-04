@@ -14,6 +14,11 @@ class LadderGameActivity : MiniGameActivity() {
         view.scoreText.text = score.toString()
     }
 
+    fun danger() {
+        view.enemyView.x += 10
+        handler.postDelayed({danger()}, 2000)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -23,7 +28,8 @@ class LadderGameActivity : MiniGameActivity() {
 
         drawInformationDialog(getString(R.string.ladder_info_title), getString(R.string.ladder_info_message),
                 {
-                    handler.postDelayed({lose()}, 130 * length.toLong())
+                    handler.postDelayed({danger()}, 2000)
+                    handler.postDelayed({lose()}, 1000 * length.toLong())
                 }, view.ankoContext)
 
     }

@@ -19,51 +19,46 @@ class DucksGameActivity : MiniGameActivity() {
 
     val ducks: MutableSet<ImageView> = mutableSetOf()
 
-    private val createDuck = object : Runnable {
-        override fun run() {
-            val duckView = ImageView(ctx)
+    private fun createDuck() {
+        val duckView = ImageView(ctx)
 
-            duckView.x = displayMetrics.widthPixels.toFloat()
+        duckView.x = displayMetrics.widthPixels.toFloat()
 
-            duckView.setImageResource(R.drawable.ic_duck)
+        duckView.setImageResource(R.drawable.ic_duck)
 
-            view.layout.addView(duckView)
-            ducks.add(duckView)
+        view.layout.addView(duckView)
+        ducks.add(duckView)
 
-            handler.postDelayed(this, ((5000 * (0.7 + random())) / Math.sqrt(10.0 + score)).toLong())
-        }
+        handler.postDelayed({createDuck()}, ((5000 * (0.7 + random())) / Math.sqrt(10.0 + score)).toLong())
     }
 
-    private val update = object : Runnable {
-        override fun run() {
-            val toRemove: MutableList<ImageView> = mutableListOf()
+    private fun update() {
+        val toRemove: MutableList<ImageView> = mutableListOf()
 
-            for (s in ducks) {
-                s.x -= 3f + Math.sqrt(5f+score.toDouble()).toFloat()
-                s.invalidate()
+        for (s in ducks) {
+            s.x -= 3f + Math.sqrt(5f+score.toDouble()).toFloat()
 
-                if (s.x <= -s.drawable.intrinsicWidth) {
-                    toRemove.add(s)
-                    missedDucks++
-                }
+            if (s.x <= -s.drawable.intrinsicWidth) {
+                toRemove.add(s)
+                missedDucks++
             }
-
-            for (s in toRemove) {
-                ducks.remove(s)
-                view.layout.removeView(s)
-            }
-
-            view.scoreText.text = score.toString()
-            view.missedDucksText.text = missedDucks.toString()
-            view.missedShotsText.text = missedShots.toString()
-
-            if (missedDucks + missedShots >= maxLose) {
-                lose()
-                return
-            }
-
-            handler.postDelayed(this, (1000 / 50).toLong())
         }
+
+        for (s in toRemove) {
+            ducks.remove(s)
+            view.layout.removeView(s)
+        }
+
+        view.scoreText.text = score.toString()
+        view.missedDucksText.text = missedDucks.toString()
+        view.missedShotsText.text = missedShots.toString()
+
+        if (missedDucks + missedShots >= maxLose) {
+            lose()
+            return
+        }
+
+        handler.postDelayed({update()}, (1000 / 50).toLong())
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,8 +69,8 @@ class DucksGameActivity : MiniGameActivity() {
 
         drawInformationDialog(getString(R.string.ducks_info_title), getString(R.string.ducks_info_message),
                 {
-                    handler.postDelayed(createDuck, 1)
-                    handler.postDelayed(update, 1)
+                    handler.postDelayed({createDuck()}, 1)
+                    handler.postDelayed({update()}, 1)
                 }, view.ankoContext)
     }
 

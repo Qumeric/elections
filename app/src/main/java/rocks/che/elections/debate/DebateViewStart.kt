@@ -24,7 +24,7 @@ class DebateViewStart : AnkoComponent<DebateActivity> {
                 backgroundResource = R.color.white
 
                 imageView {
-                    imageResource = gamestate.candidate.getResource(ctx)
+                    imageResource = gamestate.candidate.resource
                 }.lparams(weight = 0.35f, height = 0)
 
                 gameTextView(dip(20)) {

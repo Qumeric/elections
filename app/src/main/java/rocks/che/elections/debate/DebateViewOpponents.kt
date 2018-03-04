@@ -55,7 +55,7 @@ class DebateViewOpponents : AnkoComponent<DebateActivity> {
                         max = (ctx as DebateActivity).opponentMinutes
                         val p = pos // capture value
                         onSeekBarChangeListener {
-                            onProgressChanged({ sb, progress, fromUser ->
+                            onProgressChanged({ sb, progress, _ ->
                                 var spendMinutes = (0 until amountVals.size)
                                         .filter { it != p }
                                         .sumBy { amountVals[it] }

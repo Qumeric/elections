@@ -52,7 +52,7 @@ class DebateViewGroups : AnkoComponent<DebateActivity> {
                     }
 
                     imageView {
-                        imageResource = getGroupResource(ctx, group)
+                        imageResource = getGroupResource(group)
                     }.lparams {
                         height = dip(30)
                         width = dip(30)
@@ -66,7 +66,7 @@ class DebateViewGroups : AnkoComponent<DebateActivity> {
                         max = (ctx as DebateActivity).groupMinutes
                         val p = pos // capture value
                         onSeekBarChangeListener {
-                            onProgressChanged({ sb, progress, fromUser ->
+                            onProgressChanged({ sb, progress, _ ->
                                 var spendMinutes = (0 until amountVals.size)
                                         .filter { it != p }
                                         .sumBy { amountVals[it] }

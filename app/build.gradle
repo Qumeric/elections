@@ -53,4 +53,7 @@ dependencies {
 
     // Anko Listeners
     compile "org.jetbrains.anko:anko-sdk25-listeners:$anko_version"
+
+    // Gif-drawable
+    compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.11'
 }

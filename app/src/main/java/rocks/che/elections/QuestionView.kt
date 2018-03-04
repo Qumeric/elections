@@ -19,7 +19,7 @@ class QuestionView(val question: Question, val group: String) : AnkoComponent<Qu
             gravity = Gravity.CENTER
 
             imageView {
-                imageResource = getGroupResource(ctx, group)
+                imageResource = getGroupResource(group)
             }.lparams {
                 width = dip(70)
                 height = dip(70)

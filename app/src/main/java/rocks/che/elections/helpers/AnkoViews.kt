@@ -13,6 +13,7 @@ import com.robinhood.spark.SparkView
 import org.jetbrains.anko._GridLayout
 import org.jetbrains.anko.custom.ankoView
 import org.jetbrains.anko.textColor
+import pl.droidsonroids.gif.GifImageView
 import rocks.che.elections.R
 
 class SquareGridLayout(ctx: Context): _GridLayout(ctx) {
@@ -33,7 +34,6 @@ class SquareGridLayout(ctx: Context): _GridLayout(ctx) {
     }
 }
 
-
 inline fun ViewManager.squareGridLayout(init: SquareGridLayout.() -> Unit): SquareGridLayout {
     return ankoView({ SquareGridLayout(it) }, theme = 0, init = init)
 }
@@ -46,6 +46,10 @@ inline fun ViewManager.cardView(init: CardView.() -> Unit): CardView {
     return ankoView({ CardView(it) }, theme = 0, init = init)
 }
 
+inline fun ViewManager.gifImageView(init: GifImageView.() -> Unit): GifImageView {
+    return ankoView({ GifImageView(it) }, theme = 0, init = init)
+}
+
 val NO_STRING = "\b\nxa\t" // never occurs
 inline fun ViewManager.gameTextView(size: Int = 0, color: Int = 0, text: String=NO_STRING, init: TextView.() -> Unit) : TextView {
     return ankoView({
@@ -55,6 +59,7 @@ inline fun ViewManager.gameTextView(size: Int = 0, color: Int = 0, text: String=
         if (size > 0)   tv.textSize = size.toFloat()
         if (color != 0) tv.textColor = ContextCompat.getColor(it, color)
         if (text != NO_STRING) tv.text = text
+        tv.elevation = 100f
         tv
     }, theme = 0, init = init)
 }

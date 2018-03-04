@@ -50,7 +50,7 @@ class ChooseCandidateView : AnkoComponent<ChooseCandidateActivity> {
                                 gravity = Gravity.CENTER
 
                                 imageView {
-                                    imageResource = candidate.getResource(ctx)
+                                    imageResource = candidate.resource
                                 }.lparams {
                                     width = dip(80)
                                 }
