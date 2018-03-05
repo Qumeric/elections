@@ -14,7 +14,7 @@ class HighlightsActivity : DefaultActivity() {
         view = HighlightsView()
         view.setContentView(this)
 
-        // TODO add some animation
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         Handler().postDelayed({startActivity(intentFor<GameActivity>())}, 7000)
     }
 }

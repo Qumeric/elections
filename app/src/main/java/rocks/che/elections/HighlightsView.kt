@@ -39,6 +39,8 @@ class HighlightsView : AnkoComponent<HighlightsActivity> {
                 }
             }.lparams(weight = 0.4f, height = 0)
 
+            space { }.lparams(weight = 0.05f, height = 0)
+
             for (perk in gamestate.candidate.perks) {
                 linearLayout {
                     gravity = Gravity.CENTER
@@ -50,7 +52,7 @@ class HighlightsView : AnkoComponent<HighlightsActivity> {
                     }
                 }.lparams(weight = 0.07f, height = 0)
             }
-            space { }.lparams(weight = 0.25f, height = 0)
+            space { }.lparams(weight = 0.2f, height = 0)
         }
     }
 }

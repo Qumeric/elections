@@ -44,19 +44,19 @@
         {
           "statement": "Да.",
           "media": 5,
-		  "workers": -2,
-		  "military": -1,
-		  "business": 3,
-		  "foreign": 2,
+          "workers": -2,
+          "military": -1,
+          "business": 3,
+          "foreign": 2,
           "authority": -2
         },
         {
           "statement": "Нет.",
           "media": 2,
-		  "workers": 1,
-		  "military": 2,
-		  "business": -1,
-		  "foreign": -1,
+          "workers": 1,
+          "military": 2,
+          "business": -1,
+          "foreign": -1,
           "authority": 2
         }
       ]
@@ -66,16 +66,16 @@
       "answers": [
         {
           "statement": "Да.",
-		  "workers": 2,
-		  "military": 1,
-		  "business": 3,
+          "workers": 2,
+          "military": 1,
+          "business": 3,
           "authority": 1
         },
         {
           "statement": "Нет.",
           "media": -1,
-		  "military": -1,
-		  "business": 1,
+          "military": -1,
+          "business": 1,
           "authority": -1
         }
       ]
@@ -86,19 +86,19 @@
         {
           "statement": "Да, безусловно.",
           "media": 1,
-		  "workers": 2,
-		  "military": 1
+          "workers": 2,
+          "military": 1
         },
         {
           "statement": "Возможно, но я бы не сказал, что эти знания первой важности.",
           "media": 2,
-		  "business": 2
+          "business": 2
         },
         {
           "statement": "Нет, они абсолютно бесполезны.",
           "media": 2,
-		  "workers": -2,
-		  "military": -1
+          "workers": -2,
+          "military": -1
         }
       ]
     },
@@ -108,32 +108,32 @@
         {
           "statement": "Монархия.",
           "media": 2,
-		  "workers": -5,
-		  "military": -1,
-		  "business": -1,
+          "workers": -5,
+          "military": -1,
+          "business": -1,
           "foreign": 2
         },
         {
           "statement": "Республика.",
           "media": 4,
-		  "workers": 4,
-		  "military": 1,
+          "workers": 4,
+          "military": 1,
           "foreign": 1
         },
         {
           "statement": "Консерватизм.",
-		  "media": -2,
-		  "workers": -4,
-		  "military": -2,
-		  "business": -3
+          "media": -2,
+          "workers": -4,
+          "military": -2,
+          "business": -3
         },
         {
           "statement": "Либерализм.",
           "media": 5,
-		  "workers": 5,
-		  "military": 5,
-		  "business": 7,
-		  "foreign": 3,
+          "workers": 5,
+          "military": 5,
+          "business": 7,
+          "foreign": 3,
           "authority": -1
         },
         {
@@ -149,15 +149,15 @@
         {
           "statement": "Активную.",
           "media": 1,
-		  "workers": 1,
-		  "military": -2,
+          "workers": 1,
+          "military": -2,
           "authority": 3
         },
         {
           "statement": "Пассивную.",
           "media": 3,
-		  "workers": -1,
-		  "military": -1,
+          "workers": -1,
+          "military": -1,
           "authority": -3
         }
       ]
@@ -168,17 +168,17 @@
         {
           "statement": "Да.",
           "media": -3,
-		  "workers": -6,
-		  "military": -4,
+          "workers": -6,
+          "military": -4,
           "authority": 1
         },
         {
           "statement": "Нет.",
           "media": 2,
-		  "workers": 2,
-		  "military": 1,
-		  "business": 3,
-		  "foreign": 2,
+          "workers": 2,
+          "military": 1,
+          "business": 3,
+          "foreign": 2,
           "authority": -3
         }
       ]
@@ -188,20 +188,20 @@
       "answers": [
         {
           "statement": "Материально-бытовые проблемы.",
-		  "workers": 2,
-		  "military": 3 
+          "workers": 2,
+          "military": 3
         },
         {
           "statement": "Психологические проблемы.",
           "media": 2,
-		  "workers": -2,
-		  "military": -1
+          "workers": -2,
+          "military": -1
         },
         {
           "statement": "Финансовые проблемы.",
           "media": -1,
-		  "workers": 2,
-		  "military": -1,
+          "workers": 2,
+          "military": -1,
           "authority": -2
         }
       ]
@@ -212,10 +212,10 @@
         {
           "statement": "Была социальная справедливость .",
           "media": -2,
-		  "workers": 4,
-		  "military": 1,
-		  "business": -3,
-		  "foreign": 2,
+          "workers": 4,
+          "military": 1,
+          "business": -3,
+          "foreign": 2,
           "authority": -1
         },
         {
@@ -225,9 +225,9 @@
         },
         {
           "statement": "Бесплатная медицина, образование, жилье .",
-            "media": 2,
-		  "workers": 5,
-		  "military": 3,
+          "media": 2,
+          "workers": 5,
+          "military": 3,
           "authority": -2
         }
       ]
@@ -253,19 +253,19 @@
         {
           "statement": "Никак.",
           "media": 5,
-		  "workers": 3,
-		  "military": 1,
-		  "business": -4,
-		  "foreign": 2,
+          "workers": 3,
+          "military": 1,
+          "business": -4,
+          "foreign": 2,
           "authority": -1
         },
         {
           "statement": "Государство должно держать религию под всеохватывающим контролем.",
           "media": 2,
-		  "workers": -2,
-		  "military": -1,
-		  "business": 5,
-		  "foreign": 2
+          "workers": -2,
+          "military": -1,
+          "business": 5,
+          "foreign": 2
         }
       ]
     },
@@ -301,17 +301,17 @@
         {
           "statement": "Согласен , что это необходимо.",
           "media": 2,
-		  "workers": 2,
-		  "military": 1,
-		  "business": 1,
-		  "foreign": 2
+          "workers": 2,
+          "military": 1,
+          "business": 1,
+          "foreign": 2
         },
         {
           "statement": "Это совершенно не нужно.",
           "media": 3,
-		  "workers": -2,
-		  "military": -1,
-		  "foreign": 2
+          "workers": -2,
+          "military": -1,
+          "foreign": 2
         }
       ]
     },
@@ -321,17 +321,17 @@
         {
           "statement": "Отрицательно. Я считаю,что это аморально.",
           "media": 2,
-		  "workers": 2,
-		  "military": -1,
-		  "foreign": 2
+          "workers": 2,
+          "military": -1,
+          "foreign": 2
         },
         {
           "statement": "Считаю,что это возможно, но при определённых условиях.",
           "media": -5,
-		  "workers": -2,
-		  "military": 1,
-		  "business": -1,
-		  "foreign": -2
+          "workers": -2,
+          "military": 1,
+          "business": -1,
+          "foreign": -2
         }
       ]
     },
@@ -362,19 +362,19 @@
         {
           "statement": "Положительно. Это двигатель демократии.",
           "media": 2,
-		  "workers": 2,
-		  "military": -1,
-		  "business": 3,
-		  "foreign": 7,
+          "workers": 2,
+          "military": -1,
+          "business": 3,
+          "foreign": 7,
           "authority": -2
         },
         {
           "statement": "Негативно. Все равно ничего не изменится. ",
           "media": -2,
-		  "workers": -6,
-		  "military": -4,
-		  "business": -3,
-		  "foreign": -2,
+          "workers": -6,
+          "military": -4,
+          "business": -3,
+          "foreign": -2,
           "authority": 1
         }
       ]
@@ -420,18 +420,18 @@
         {
           "statement": "Интернет.",
           "media": 2,
-		  "workers": -2,
-		  "military": 1,
-		  "business": 3,
-		  "foreign": 2
+          "workers": -2,
+          "military": 1,
+          "business": 3,
+          "foreign": 2
         },
         {
           "statement": "Телевидение.",
           "media": -2,
-		  "workers": 2,
-		  "military": -1,
-		  "business": -3,
-		  "foreign": -2,
+          "workers": 2,
+          "military": -1,
+          "business": -3,
+          "foreign": -2,
           "authority": 2
         }
       ]
@@ -442,19 +442,19 @@
         {
           "statement": "Мы - могучая держава.",
           "media": -2,
-		  "workers": 2,
-		  "military": 1,
-		  "business": -3,
-		  "foreign": 2,
+          "workers": 2,
+          "military": 1,
+          "business": -3,
+          "foreign": 2,
           "authority": 2
         },
         {
           "statement": "На данный момент мы не направляем свою силу в нужное русло.",
           "media": 2,
-		  "workers": 5,
-		  "military": 3,
-		  "business": 5,
-		  "foreign": -1
+          "workers": 5,
+          "military": 3,
+          "business": 5,
+          "foreign": -1
         }
       ]
     },
@@ -464,17 +464,17 @@
         {
           "statement": "Думаю, некоторым не хватает опыта и знаний, чтобы претендовать на пост президента.",
           "media": 2,
-		  "workers": 2,
-		  "military": 1,
+          "workers": 2,
+          "military": 1,
           "peaceful": -2
         },
         {
           "statement": "Большинство из них помешаны на власти и собственной выгоде.",
           "media": 2,
-		  "workers": 5,
-		  "military": 3,
-		  "business": 3,
-		  "foreign": 2,
+          "workers": 5,
+          "military": 3,
+          "business": 3,
+          "foreign": 2,
           "positive": -2,
           "peaceful": -1
         }
@@ -486,18 +486,18 @@
         {
           "statement": "Да,это потребует немалых вложений, но плачевное состояние экологии не позволяет экономить на этом.",
           "media": 2,
-		  "workers": 3,
-		  "military": 3,
-		  "business": 7,
-		  "foreign": 2
+          "workers": 3,
+          "military": 3,
+          "business": 7,
+          "foreign": 2
         },
         {
           "statement": "Нет, наиболее вредные для экологии предприятия уже находятся за пределами столицы, а нам следует рациональней использовать государственный бюджет.",
           "media": -1,
-		  "workers": -8,
-		  "military": -4,
-		  "business": -2,
-		  "foreign": 2
+          "workers": -8,
+          "military": -4,
+          "business": -2,
+          "foreign": 2
         }
       ]
     },
@@ -507,9 +507,9 @@
         {
           "statement": "В эпоху сети интернет , дистанционное обучение должно процветать. Дети должны проводить время в интернете с пользой. Я поддерживаю идею дистанционного обучения в школах. Также, я поддерживаю идею о внесении изменений в стандартное расписание уроков: три учебных дня и два дня вне школы, но с выполнением заданий в электронной среде.",
           "media": 2,
-		  "workers": 2,
-		  "military": 1,
-		  "business": 3,
+          "workers": 2,
+          "military": 1,
+          "business": 3,
           "authority": -1
         },
         {
@@ -525,19 +525,19 @@
         {
           "statement": "Да, потому что народ ограничивают в свободе выбора.",
           "media": 2,
-		  "workers": -2,
-		  "military": -1,
-		  "business": 1,
-		  "foreign": 2,
+          "workers": -2,
+          "military": -1,
+          "business": 1,
+          "foreign": 2,
           "liberal": 6
         },
         {
           "statement": "Нет, экстремисты - это неадекватные люди с пугающими ценностями, таких людей в нашей стране очень мало.",
           "media": -2,
-		  "workers": 2,
-		  "military": 1,
-		  "business": 3,
-		  "foreign": 2,
+          "workers": 2,
+          "military": 1,
+          "business": 3,
+          "foreign": 2,
           "liberal": -2
         }
       ]
@@ -553,15 +553,15 @@
         {
           "statement": "Ввести специальные наказания для несовершеннолетних.",
           "media": 2,
-		  "military": 5,
+          "military": 5,
           "authority": -2
         },
         {
           "statement": "Обеспечить полную занятость у школьников и взять её под чуткий контроль.",
           "media": 2,
-		  "workers": 2,
-		  "military": 1,
-		  "foreign": 2
+          "workers": 2,
+          "military": 1,
+          "foreign": 2
         }
       ]
     },
@@ -578,10 +578,10 @@
         {
           "statement": "Не стоит игнорировать митинги, так как митинги - это сигнал о том, что происходит что-то недопустимое. Нужно прислушиваться к мнению народа.",
           "media": 4,
-		  "workers": 1,
-		  "military": 1,
-		  "business": 3,
-		  "foreign": 7,
+          "workers": 1,
+          "military": 1,
+          "business": 3,
+          "foreign": 7,
           "liberal": 4
         },
         {
@@ -616,10 +616,10 @@
         {
           "statement": "С проверки эффективности работы всех структур.",
           "media": 4,
-		  "workers": 5,
-		  "military": 1,
-		  "business": 3,
-		  "foreign": 2,
+          "workers": 5,
+          "military": 1,
+          "business": 3,
+          "foreign": 2,
           "authority": -2
         },
         {
@@ -654,16 +654,16 @@
         {
           "statement": "Да.",
           "media": 2,
-		  "workers": 2,
-		  "military": 1,
-		  "business": 3,
-		  "foreign": 2
+          "workers": 2,
+          "military": 1,
+          "business": 3,
+          "foreign": 2
         },
         {
           "statement": "Нет.",
           "media": -5,
-		  "business": -4,
-		  "foreign": -2
+          "business": -4,
+          "foreign": -2
         }
       ]
     },
@@ -673,17 +673,17 @@
         {
           "statement": "Власть и значимость.",
           "media": -2,
-		  "workers": -2,
-		  "military": -1,
-		  "foreign": -2
+          "workers": -2,
+          "military": -1,
+          "foreign": -2
         },
         {
           "statement": "Возможность изменить государство в лучшую сторону.",
           "media": 2,
-		  "workers": 2,
-		  "military": 1,
-		  "business": 3,
-		  "foreign": 2,
+          "workers": 2,
+          "military": 1,
+          "business": 3,
+          "foreign": 2,
           "authority": -1
         }
       ]
@@ -694,19 +694,19 @@
         {
           "statement": "Мощнейшее государство.",
           "media": -1,
-		  "workers": 2,
-		  "military": 1,
-		  "business": -3,
-		  "foreign": -5,
+          "workers": 2,
+          "military": 1,
+          "business": -3,
+          "foreign": -5,
           "authority": 1
         },
         {
           "statement": "Государство с большим потенциалом. Все впереди.",
           "media": 2,
-		  "workers": 5,
-		  "military": -2,
-		  "business": 3,
-		  "foreign": 2
+          "workers": 5,
+          "military": -2,
+          "business": 3,
+          "foreign": 2
         }
       ]
     },
@@ -721,9 +721,9 @@
         {
           "statement": "Экономические разногласия.",
           "media": 5,
-		  "workers": 2,
-		  "military": 5,
-		  "business": 7,
+          "workers": 2,
+          "military": 5,
+          "business": 7,
           "foreign": 4
         }
       ]
@@ -734,17 +734,17 @@
         {
           "statement": "Этот вариант можно рассмотреть в связи с меняющимися тенденциями во всем мире.",
           "media": 2,
-		  "workers": -3,
-		  "military": -2,
-		  "business": 4,
-		  "foreign": 2
+          "workers": -3,
+          "military": -2,
+          "business": 4,
+          "foreign": 2
         },
         {
           "statement": "Нет, это негативно скажется на подрастающем поколении.",
           "media": -1,
-		  "workers": 2,
-		  "military": 1,
-		  "business": -3
+          "workers": 2,
+          "military": 1,
+          "business": -3
         }
       ]
     },
@@ -759,9 +759,9 @@
         {
           "statement": "Провести рекламную кампанию.",
           "media": 3,
-		  "workers": 2,
-		  "military": 1,
-		  "business": 7
+          "workers": 2,
+          "military": 1,
+          "business": 7
         }
       ]
     },
@@ -797,10 +797,10 @@
         {
           "statement": "Любовь и уважение к родине.",
           "media": 2,
-		  "workers": 5,
-		  "military": 3,
-		  "business": 3,
-		  "foreign": 2
+          "workers": 5,
+          "military": 3,
+          "business": 3,
+          "foreign": 2
         }
       ]
     },
@@ -856,16 +856,16 @@
         {
           "statement": "Люди уверены, что столица - город возможностей, но это заблуждение.",
           "media": 2,
-		  "workers": 4,
-		  "military": 2,
-		  "business": -5
+          "workers": 4,
+          "military": 2,
+          "business": -5
         },
         {
           "statement": "В столице есть множество ресурсов необходимых для комфортного бытия.",
           "media": 2,
-		  "workers": -2,
-		  "military": -1,
-		  "business": 6
+          "workers": -2,
+          "military": -1,
+          "business": 6
         }
       ]
     },
@@ -874,9 +874,9 @@
       "answers": [
         {
           "statement": "Суетливость, легкомыслие, мелочность.",
-		  "workers": 1,
-		  "military": 1,
-		  "business": 3,
+          "workers": 1,
+          "military": 1,
+          "business": 3,
           "authority": 2
         },
         {
@@ -1260,7 +1260,7 @@
         {
           "statement": "Я думаю,к этому всё и идёт",
           "media": 3,
-		  "workers": 4,
+          "workers": 4,
           "authority": 4
         }
       ]
@@ -1277,7 +1277,7 @@
         {
           "statement": "Да, их обильность стимулирует граждан тратить деньги не на полезную пищу, а на быстродоступную.",
           "media": 5,
-		  "foreign": 3,
+          "foreign": 3,
           "workers": 5
         }
       ]
@@ -1297,7 +1297,7 @@
         {
           "statement": "Думаю, его методы актуальны и по сей день: перенять у запада всё лучшее и ввести это в будни нашего народа.",
           "media": 5,
-		  "workers": 3,
+          "workers": 3,
           "authority": -3
         }
       ]
@@ -1313,7 +1313,7 @@
         {
           "statement": "Думаю,да. Некоторые районы уже давно стоит присоединить.",
           "media": 4,
-		  "foreign": 4,
+          "foreign": 4,
           "workers": 3
         }
       ]
@@ -1324,7 +1324,7 @@
         {
           "statement": "Безграничное счастье.",
           "media": 5,
-		  "business": 3
+          "business": 3
         },
         {
           "statement": "Огромную ответственность.",
@@ -1343,7 +1343,7 @@
         {
           "statement": "Признание народа.",
           "media": 4,
-		  "workers": 3
+          "workers": 3
         },
         {
           "statement": "Отсутствие серьёзных конфликтов во внутренней и внешней политике.",
@@ -1353,7 +1353,7 @@
         {
           "statement": "Стремительное развитие и процветание страны.",
           "media": 3,
-		  "workers": 4,
+          "workers": 4,
           "business": 3
         }
       ]
@@ -1487,7 +1487,7 @@
         {
           "statement": "Да, посещаю театры, концерты и выставки.",
           "media": 4,
-		  "foreign": 2
+          "foreign": 2
         },
         {
           "statement": "Предпочитаю отдыхать дома в кругу семьи, редко куда-либо выхожу.",
@@ -1507,7 +1507,7 @@
         {
           "statement": "Таких много.",
           "media": -5,
-		  "workers": -3,
+          "workers": -3,
           "authority": 2
         }
       ]
@@ -1579,7 +1579,7 @@
         {
           "statement": "Родина там, где хочется остепениться и прожить остаток дней.",
           "media": 4,
-		  "workers": 5,
+          "workers": 5,
           "authority": 2
         }
       ]
@@ -1592,7 +1592,7 @@
           "media": 5,
           "authority": -4,
           "foreign": 5,
-		  "workers": -4,
+          "workers": -4,
           "peaceful": 2
         },
         {
@@ -1628,6 +1628,367 @@
     }
   ],
   "business": [
+    {
+      "answers": [
+        {
+          "statement": "Да .",
+          "workers": "-2",
+          "media": "4",
+          "business": "-2"
+        }
+      ],
+      "statement": "Повышение цен на табачные изделие сподвигнуть людей бросить курить?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Да, бюджетные места сокращаются.",
+          "business": "-3",
+          "media": "3"
+        }
+      ],
+      "statement": "Бюджетное высшее образование в нашей стране на грани исчезновения?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Да.",
+          "media": "3",
+          "foreign": "2"
+        }
+      ],
+      "statement": "Должно ли государство спонсировать искусство?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "За. Помощь важна для каждой из стран.",
+          "foreign": "4",
+          "media": "3",
+          "business": "2"
+        }
+      ],
+      "statement": "Материальная поддержка нуждающихся стран. За или против?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Да.",
+          "media": "4",
+          "foreign": "3",
+          "workers": "6"
+        }
+      ],
+      "statement": "Помощь молодым семьям после рождения второго или третьего ребёнка необходима?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Кредит в банке.",
+          "media": "2",
+          "workers": "-3",
+          "business": "2"
+        },
+        {
+          "statement": "Найти инвестора.",
+          "business": "4",
+          "workers": "2"
+        }
+      ],
+      "statement": "Где, по вашему мнению, нужно брать деньги на создание собственного бизнеса?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Да, ранее.",
+          "media": "-6"
+        }
+      ],
+      "statement": "Давали ли вы взятки?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Да, на случай потери работы.",
+          "media": "2",
+          "workers": "4"
+        }
+      ],
+      "statement": "Считаете ли Вы целесообразным откладывать деньги?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Еда.",
+          "media": "-4"
+        },
+        {
+          "statement": "Одежда, техника.",
+          "media": "-2",
+          "workers": "-1"
+        },
+        {
+          "statement": "Здоровье.",
+          "media": "3"
+        }
+      ],
+      "statement": "На что вы тратите большую часть доходов?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Безразличие к борьбе с коррупцией.",
+          "media": "4",
+          "workers": "4"
+        },
+        {
+          "statement": "Жесткость борьбе с коррупцией.",
+          "media": "-4",
+          "workers": "-2",
+          "business": "-2"
+        }
+      ],
+      "statement": "Что является источником коррупции?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Да.",
+          "business": "5",
+          "media": "3"
+        },
+        {
+          "statement": "Нет.",
+          "media": "-3",
+          "business": "-3",
+          "workers": "3"
+        }
+      ],
+      "statement": "По вашему мнению, вы аккуратны в обращении с деньгами? Сможете ли вы вкладывать их в нужные ресурсы?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "От 10 тысяч.",
+          "media": "-6",
+          "workers": "-6"
+        },
+        {
+          "statement": "От 20 тысяч.",
+          "media": "3",
+          "workers": "6"
+        },
+        {
+          "statement": "От 30 тысяч.",
+          "workers": "4",
+          "media": "-4"
+        }
+      ],
+      "statement": "Какой должна быть средняя зарплата жителя нашей страны?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Повысить.",
+          "media": "8",
+          "business": "-7",
+          "workers": "-7"
+        },
+        {
+          "statement": "Понизить.",
+          "business": "5",
+          "workers": "5"
+        }
+      ],
+      "statement": "Повысить налоги или понизить?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Обязательно.",
+          "media": "3",
+          "business": "-5",
+          "workers": "1"
+        }
+      ],
+      "statement": "Нужно ли государству повышено контролировать действия предпринимателей?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Против, среднее образование должно быть бесплатным.",
+          "media": "4",
+          "workers": "6"
+        }
+      ],
+      "statement": "Платное обучение в школах ЗА или ПРОТИВ?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Повышение стоимости штрафов за административные правонарушения справедливо?"
+        },
+        {
+          "statement": "Да, это снизит количество нарушений.",
+          "media": "5",
+          "workers": "-3"
+        },
+        {
+          "statement": "Нет, это никак не влияет на количество нарушений.",
+          "media": "3",
+          "workers": "2"
+        }
+      ],
+      "statement": ""
+    },
+    {
+      "answers": [
+        {
+          "statement": "Определённо.",
+          "media": "2"
+        },
+        {
+          "statement": "Зависит от ситуации.",
+          "media": "3"
+        }
+      ],
+      "statement": "Вручение подарков, высшим должностным лицам - это взятка?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Да.",
+          "media": "4",
+          "workers": "5",
+          "business": "2"
+        },
+        {
+          "statement": "Нет.",
+          "media": "-4",
+          "workers": "-6"
+        }
+      ],
+      "statement": "Должно ли государство выделять деньги и предоставлять льготы многодетным и малоимущим?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "В нашем государстве нет проблем с этим.",
+          "media": "4",
+          "workers": "-2"
+        },
+        {
+          "statement": "Нужно повысить контроль над воровством и взятками.",
+          "media": "5",
+          "workers": "5"
+        }
+      ],
+      "statement": "Как сделать равными и справедливыми зарплаты горожан?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Против, некоторая агитация скрыта и больше похожа на пропаганду.",
+          "media": "3",
+          "foreign": "1"
+        }
+      ],
+      "statement": "Агитация в соц. сетях. За или против?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Да, нужно пользоваться только отечественными.",
+          "media": "4",
+          "workers": "-6"
+        }
+      ],
+      "statement": "Стоит ли запретить иностранные социальные сети?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Против, так как коллекторы порой перегибают палку и выполняют действия, которые противоречат закону.",
+          "media": "5",
+          "workers": "4"
+        }
+      ],
+      "statement": "Коллекторы. За или против?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Да, однозначно.",
+          "business": "4",
+          "workers": "4",
+          "media": "4"
+        },
+        {
+          "statement": "Нет, ведь доходы у всех разные.",
+          "media": "2",
+          "workers": "4",
+          "business": "-2"
+        }
+      ],
+      "statement": "Налоги должны быть равными для всех?"
+    },
+    {
+      "answers": [
+      ],
+      "statement": "Стоит ли сделать всё спектры необходимых медицинских услуг бесплатными?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Бытовые услуги.",
+          "workers": "-1"
+        },
+        {
+          "statement": "Медицинские услуги.",
+          "business": "+2",
+          "workers": "+3"
+        },
+        {
+          "statement": "Транспортные услуги.",
+          "business": "+2",
+          "workers": "-2"
+        }
+      ],
+      "statement": "Какой спектр услуг Вы считаете самым дорогим в нашей стране?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Да, в платных школах дают больше знаний.",
+          "media": "4",
+          "business": "2",
+          "workers": "-2"
+        },
+        {
+          "statement": "Нет, знания у учеников платных и бесплатных учреждений одинаковы.",
+          "media": "-4",
+          "business": "-2",
+          "workers": "-5"
+        }
+      ],
+      "statement": "Отличается ли платное среднее образование от бесплатного?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Да, в соответствии с повышением качества транспортных услуг.",
+          "media": "4",
+          "business": "2",
+          "workers": "-1"
+        },
+        {
+          "statement": "Нет.",
+          "media": "2",
+          "workers": "2"
+        }
+      ],
+      "statement": "Стоит ли повышать цены на транспорт?"
+    },
     {
       "statement": "Существует ли в гражданском браке материальная ответственность?",
       "answers": [
@@ -1668,13 +2029,13 @@
           "statement": "К сожалению, коррупции стало намного больше.",
           "media": 6,
           "foreign": -2,
-		  "workers": -4,
+          "workers": -4,
           "authority": -5
         },
         {
           "statement": "Нет, все осталось на том же уровне.",
           "media": -4,
-		  "workers": -4,
+          "workers": -4,
           "authority": -1
         }
       ]
@@ -1685,13 +2046,13 @@
         {
           "statement": "Зарплаты депутатов слишком высокие, их необходимо снизить.",
           "media": 6,
-		  "workers": 5,
+          "workers": 5,
           "authority": -3
         },
         {
           "statement": "Зарплаты депутатов вполне соответствуют их обязанностям.",
           "media": 2,
-		  "workers": -4,
+          "workers": -4,
           "authority": 3
         }
       ]
@@ -1702,12 +2063,12 @@
         {
           "statement": "Да.",
           "media": 4,
-		  "workers": 4
+          "workers": 4
         },
         {
           "statement": "Нет.",
           "media": -2,
-		  "workers": -6,
+          "workers": -6,
           "authority": -1
         }
       ]
@@ -1725,7 +2086,7 @@
           "statement": "Нет, на мой взгляд, в сфере бизнеса уже достаточно санкций против нарушителей.",
           "media": 4,
           "workers": -1,
-		  "business": 5
+          "business": 5
         }
       ]
     },
@@ -1783,18 +2144,216 @@
   ],
   "military": [
     {
+      "answers": [
+        {
+          "statement": "Запрошу поддержку содружественных стран и все же постараюсь сгладить конфликт.",
+          "media": "2",
+          "military": "3",
+          "workers": "5"
+        }
+      ],
+      "statement": "Если война с враждующей страной неизбежна, что вы предпримите?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Конечно! Это не лишний повод показать мощь нашего государства и поднять патриотизм!",
+          "military": "5",
+          "workers": "1",
+          "foreign": "-5"
+        },
+        {
+          "statement": "Это совершенно ни к чему. Те, кому это нужно и так всё знают.",
+          "military": "-2"
+        }
+      ],
+      "statement": "Как вы считаете, нужно ли проводить парады военной техники?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Нет, эта профессия не должна быть мотивированна финансово.",
+          "military": "-4",
+          "workers": "3"
+        }
+      ],
+      "statement": "Зарплаты военным должны превышать среднюю оплату труда по стране?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Да.",
+          "media": "6",
+          "military": "6",
+          "workers": "3",
+          "foreign": "1"
+        }
+      ],
+      "statement": "Силовые структуры находятся под тотальным контролем. Планируете дать им свободы?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Ни в коем случае. Эти люди заслуживают праздника каждый день!",
+          "media": "-4",
+          "military": "7",
+          "workers": "-1",
+          "foreign": "-5"
+        },
+        {
+          "statement": "Так исторически сложилось.",
+          "military": "1",
+          "workers": "1"
+        }
+      ],
+      "statement": "В стране много праздников, посвященных военной тематике. Возможно, стоит их сократить?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Нет, это не так.",
+          "media": "2",
+          "military": "-1"
+        }
+      ],
+      "statement": "Действительно хотите потратить огромные средства на перевооружение армии?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Да",
+          "media": "-10",
+          "military": "4",
+          "workers": "-8",
+          "foreign": "-7"
+        }
+      ],
+      "statement": "Разрешить военным по необходимости применять физическую силу относительно граждан?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Поддержать союзника и вместе выступить против",
+          "media": "-10",
+          "military": "3",
+          "workers": "-10",
+          "foreign": "-7",
+          "business": "-5"
+        },
+        {
+          "statement": "Вмешаться и урегулировать конфликт",
+          "media": "2",
+          "military": "4",
+          "workers": "2",
+          "foreign": "6"
+        }
+      ],
+      "statement": "Одна из содружественных вам стран развязала нешуточный конфликт на западе"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Да, конечно. Наши территории в опасности!",
+          "military": "3",
+          "foreign": "-1"
+        }
+      ],
+      "statement": "Нужно ли создавать военно-патриотические организации для молодежи?"
+    },
+    {
+      "answers": [
+      ],
+      "statement": "Вы проходили службу в армии?"
+    },
+    {
+      "answers": [
+      ],
+      "statement": "Нет, работал над собой, что бы стать кандидатом в президентыJ"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Да",
+          "workers": "2",
+          "foreign": "1",
+          "military": "-2",
+          "business": "1",
+          "media": "1"
+        },
+        {
+          "statement": "Нет"
+        }
+      ],
+      "statement": "Вы сократите бюджет на вооружение нашей страны?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Да, хватит. Нужно развивать работать над внутренней политикой.",
+          "workers": "2",
+          "media": "2",
+          "military": "-1",
+          "business": "1"
+        }
+      ],
+      "statement": "Может, пора нашей стране перестать лезть в любой мировой конфликт?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Да, до 40 лет.",
+          "workers": "-3",
+          "media": "-3"
+        }
+      ],
+      "statement": "Поднимите ли вы призывной возраст?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Безусловно. Это залог успеха прогрессивного государства.",
+          "workers": "3",
+          "media": "2",
+          "business": "1",
+          "military": "-4",
+          "foreign": "1"
+        }
+      ],
+      "statement": "Надо ли создавать контрактную армию?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Да",
+          "military": "1"
+        }
+      ],
+      "statement": "Будете ли вы привлекать наемников?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Да. Иначе, если не мы, то нас!",
+          "military": "2",
+          "media": "-2",
+          "foreign": "-2"
+        }
+      ],
+      "statement": "Продолжите ли вы гонку вооружений?"
+    },
+    {
       "statement": "Согласны ли Вы с утверждением «Сильная армия - сильная страна»?",
       "answers": [
         {
           "statement": "Да.",
           "media": -2,
-		  "military": 5,
+          "military": 5,
           "authority": 3
         },
         {
           "statement": "Нет.",
           "media": 4,
-		  "military": -2,
+          "military": -2,
           "authority": -1
         },
         {
@@ -1809,19 +2368,19 @@
         {
           "statement": "Да.",
           "media": 2,
-		  "military": 4,
+          "military": 4,
           "authority": 4
         },
         {
           "statement": "Скорее да, чем нет.",
           "media": 1,
-		  "military": 1,
+          "military": 1,
           "authority": 1
         },
         {
           "statement": "Нет.",
           "media": 7,
-		  "military": -4,
+          "military": -4,
           "authority": -1
         }
       ]
@@ -1854,22 +2413,22 @@
           "statement": "Нет.",
           "media": -7,
           "foreign": -2,
-		  "workers": -6,
-		  "military": -5,
+          "workers": -6,
+          "military": -5,
           "authority": -5
         },
         {
           "statement": "Да, но только от относительно слабого агрессора.",
           "media": 2,
-		  "foreign": 2,
-		  "military": -2,
+          "foreign": 2,
+          "military": -2,
           "authority": -2
         },
         {
           "statement": "Да, легко разгромит любого противника.",
           "media": 6,
-		  "workers": 4,
-		  "military": 5,
+          "workers": 4,
+          "military": 5,
           "authority": 3
         }
       ]
@@ -1913,6 +2472,182 @@
           "authority": -1
         }
       ]
+    }
+  ],
+  "workers": [
+    {
+      "answers": [
+        {
+          "statement": "Да",
+          "media": "5",
+          "military": "-2",
+          "workers": "-6",
+          "business": "4"
+        }
+      ],
+      "statement": "Планируемое увеличение выработки часов в неделю – 50 часов. Поддержать?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Поддержать",
+          "media": "3",
+          "workers": "4",
+          "foreign": "3",
+          "business": "1"
+        }
+      ],
+      "statement": "Снятие порога для устройства на работу недееспособного населения:"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Я считаю, для начала нужно озаботиться повышением качеством жизни",
+          "media": "7",
+          "military": "2",
+          "workers": "7",
+          "foreign": "1"
+        },
+        {
+          "statement": "Он находится на нужном уровне",
+          "media": "1",
+          "workers": "1"
+        }
+      ],
+      "statement": "Нужно ли повышение пенсионного возраста?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Да",
+          "media": "6",
+          "military": "2",
+          "workers": "8",
+          "business": "2"
+        }
+      ],
+      "statement": "Планируется понижение подоходного налога. Поддержать?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "За этот срок люди сами могут накопить себе на три квартиры!",
+          "media": "-5",
+          "military": "-2",
+          "workers": "-6"
+        },
+        {
+          "statement": "Мы пока не можем себе этого позволить",
+          "media": "1",
+          "workers": "1"
+        }
+      ],
+      "statement": "Нужно ли обеспечивать людей квартирами от государства при стаже работы в 30 лет?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Да",
+          "media": "3",
+          "military": "2",
+          "workers": "4"
+        }
+      ],
+      "statement": "Требуется ли введение социальных льгот для трудящихся?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Нет, на данном уровне сумма приемлема для всех регионов страны",
+          "media": "2",
+          "workers": "-2",
+          "business": "3"
+        }
+      ],
+      "statement": "Планируете ли вы повысить минимальный уровень оплаты труда?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Да. Без высшего образования сейчас никуда!",
+          "workers": "-1",
+          "media": "-2",
+          "business": "2"
+        }
+      ],
+      "statement": "Рассматриваете ли вы вопрос об увеличении количества бюджетных мест в ВУЗах?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Да, я за свободу человека!",
+          "workers": "3",
+          "business": "-5",
+          "foreign": "2",
+          "media": "2"
+        },
+        {
+          "statement": "Нет, это невозможно в нынешней обстановке.",
+          "business": "2"
+        }
+      ],
+      "statement": "В некоторых странах, если человек устал, то может уйти домой с работы. Внедрите ли вы такую систему?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Да, люди должны работать не больше 6 часов в день.",
+          "workers": "2",
+          "business": "-2",
+          "military": "1",
+          "media": "-1"
+        }
+      ],
+      "statement": "Сократите ли вы рабочий день?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Да. В моей программе прописано его снижение на 5 лет.",
+          "workers": "2",
+          "military": "2",
+          "media": "1",
+          "business": "-1"
+        }
+      ],
+      "statement": "Уменьшите ли вы пенсионный возраст?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Да. Мы можем получать больше.",
+          "workers": "1",
+          "business": "1",
+          "media": "1"
+        }
+      ],
+      "statement": "Планируете ли вы увеличить минимальную оплату труда?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Переквалифицируем их в схожую профессию.",
+          "workers": "2",
+          "media": "-1"
+        }
+      ],
+      "statement": "Через несколько лет, некоторые профессии будут не актуальны. Как вы поступите с этими людьми?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Возможно",
+          "workers": "-1",
+          "foreign": "1",
+          "media": "1"
+        }
+      ],
+      "statement": "Увеличите ли вы премии работникам государственных учреждений?"
     },
     {
       "statement": "Считаете ли вы, что служба в армии воспитывает в мужчине такие качества, как ответственность, пунктуальность, решимость, смелость, выдержка?",
@@ -1937,13 +2672,13 @@
           "statement": "Да,я считаю,нашей стране необходимо поддерживать тех,кто не в силах самостоятельно защитить свои интересы.",
           "media": 6,
           "foreign": 4,
-		  "military": 4,
+          "military": 4,
           "authority": -2
         },
         {
           "statement": "Нет, я считаю, нашей стране не стоит учавствовать в подобных конфликтах, потому как последствия могут быть непредсказуемы.",
           "media": 5,
-		  "military": -2
+          "military": -2
         }
       ]
     },
@@ -1953,17 +2688,17 @@
         {
           "statement": "Очень большая вероятность.",
           "media": 4,
-		  "workers": 4
+          "workers": 4
         },
         {
           "statement": "Не большая вероятность.",
           "media": 1,
-		  "workers": -2
+          "workers": -2
         },
         {
           "statement": "Никакой.",
           "media": 2,
-		  "workers": -5,
+          "workers": -5,
           "authority": -1
         }
       ]
@@ -1974,12 +2709,12 @@
         {
           "statement": "Да.",
           "media": 3,
-		  "workers": -3
+          "workers": -3
         },
         {
           "statement": "Нет.",
           "media": 5,
-	"workers": 3
+          "workers": 3
         }
       ]
     },
@@ -1994,7 +2729,7 @@
         {
           "statement": "Нет,некомпетентность этих врачей можно объяснить лишь низким качеством обучения в этих учреждениях.",
           "media": 4,
-		  "foreign": -3,
+          "foreign": -3,
           "authority": 1
         }
       ]
@@ -2010,7 +2745,7 @@
         {
           "statement": "Жителям нашей страны всегда мало денег.",
           "media": -6,
-		  "workers": -6,
+          "workers": -6,
           "military": 2
         }
       ]
@@ -2032,7 +2767,7 @@
         {
           "statement": "Наши государственные праздники идеально отображают дух нашего народа,поэтому не вижу смысла что-то менять.",
           "media": 6,
-		  "workers": 3,
+          "workers": 3,
           "authority": 4
         }
       ]
@@ -2063,7 +2798,7 @@
           "statement": "Ввести штраф за тунеядство.",
           "media": 7,
           "authority": 3,
-		  "foreign": -4,
+          "foreign": -4,
           "workers": -5
         },
         {
@@ -2074,11 +2809,128 @@
         {
           "statement": "Ввести государственную поддержку работникам низшего звена.",
           "media": 6,
-		  "foreign": 3,
-		  "workers": 3,
+          "foreign": 3,
+          "workers": 3,
           "authority": 3
         }
       ]
+    }
+  ],
+  "foreign": [
+    {
+      "answers": [
+        {
+          "statement": "Да, это то, чего стоит опасаться.",
+          "foreign": "2",
+          "media": "5"
+        }
+      ],
+      "statement": "Считаете ли вы глобальное потепление реальностью?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Негативное.",
+          "foreign": "-4",
+          "media": "-6"
+        },
+        {
+          "statement": "Положительное.",
+          "foreign": "4",
+          "media": "2"
+        }
+      ],
+      "statement": "Каково Ваше отношение к иммигрантам?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Нет, в политике каждый сам за себя.",
+          "foreign": "-4",
+          "media": "-2"
+        }
+      ],
+      "statement": "Стоит ли поддерживать хорошие отношения с соседними странами?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Сейчас нет необходимости.",
+          "foreign": "-2",
+          "media": "3"
+        }
+      ],
+      "statement": "Стоит ли плотно следить за демографической ситуацией в мире?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Всегда искать компромисс.",
+          "foreign": "5",
+          "media": "4"
+        },
+        {
+          "statement": "Не могу ответить на этот вопрос.",
+          "foreign": "-1",
+          "media": "-1"
+        }
+      ],
+      "statement": "Что нужно делать, чтобы избегать конфликтов с другими странами?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Нет, предпочитаю отдых на Родине.",
+          "foreign": "1",
+          "media": "5"
+        }
+      ],
+      "statement": "Любите ли вы путешествовать заграницей?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Крайне отрицательно.",
+          "foreign": "-4",
+          "media": "3"
+        },
+        {
+          "statement": "Нейтрально.",
+          "media": "1",
+          "foreign": "1"
+        }
+      ],
+      "statement": "Как вы относитесь к гражданам, которые меняют гражданство?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Однозначно, да. foreign прогрессирует.",
+          "foreign": "4",
+          "media": "2"
+        }
+      ],
+      "statement": "Вас устраивает как живут и развиваются люди на сегодняшний день?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Да, это необходимо.",
+          "media": "3",
+          "foreign": "2"
+        }
+      ],
+      "statement": "Стоит ли активно изучать космос?"
+    },
+    {
+      "answers": [
+        {
+          "statement": "Развитым, здоровым, технологичным.",
+          "foreign": "4",
+          "media": "4"
+        }
+      ],
+      "statement": "Каким вы видите человечество через пятьдесят лет?"
     },
     {
       "statement": "По вашему мнению, что помогло бы улучшить демографическую ситуацию в стране?",
@@ -2086,13 +2938,13 @@
         {
           "statement": "Повышение заработной платы для достойного обеспечения ребёнка.",
           "media": 5,
-		  "workers": 5,
+          "workers": 5,
           "authority": -2
         },
         {
           "statement": "Улучшение жилья .",
           "media": 3,
-		  "workers": 3,
+          "workers": 3,
           "authority": -3
         },
         {
@@ -2107,20 +2959,20 @@
         {
           "statement": "Да, тяжёлая.",
           "media": 5,
-		  "workers": -4,
+          "workers": -4,
           "foreign": -3,
           "authority": -5
         },
         {
           "statement": "Нет, не тяжёлая.",
           "media": 2,
-		  "workers": 2,
+          "workers": 2,
           "authority": 1
         },
         {
           "statement": "Стабильная .",
           "media": 4,
-		  "workers": 2
+          "workers": 2
         }
       ]
     },
@@ -2172,8 +3024,8 @@
         },
         {
           "statement": "Национальность.",
-		  "foreign": -2,
-		  "media": 6
+          "foreign": -2,
+          "media": 6
         },
         {
           "statement": "Социальные роли (отец, врач, политический деятель)",
@@ -2188,7 +3040,7 @@
         {
           "statement": "Политику улучшения социальных условий жизни мигрантов и их полную легализацию.",
           "media": 6,
-		  "foreign": 5,
+          "foreign": 5,
           "authority": 2
         },
         {
@@ -2199,7 +3051,7 @@
         {
           "statement": "Политику ужесточения контроля миграционных потоков (введение визового контроля, квот при приеме на работу и т.п.)",
           "media": 7,
-		  "foreign": -4,
+          "foreign": -4,
           "authority": 1
         }
       ]
@@ -2210,7 +3062,7 @@
         {
           "statement": "Да, обязательно.",
           "media": 2,
-		  "foreign": 2,
+          "foreign": 2,
           "authority": 2
         },
         {
@@ -2237,7 +3089,7 @@
           "statement": "На мой взгляд, некоторую продукцию всё же никак не получится заменить на российский аналог,а их исчезновение с прилавков повлечёт за собой лишь волну недовольства.",
           "media": 3,
           "foreign": 2,
-		  "business": -4
+          "business": -4
         }
       ]
     },
@@ -2369,7 +3221,7 @@
         {
           "statement": "Если это не превращается в массовое стечение людей в одну точку страны ради выгоды,то нейтрально.",
           "media": 5,
-		  "foreign": 3,
+          "foreign": 3,
           "workers": 3
         },
         {
