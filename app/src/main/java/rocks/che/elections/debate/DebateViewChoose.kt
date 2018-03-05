@@ -10,8 +10,8 @@ import org.jetbrains.anko.sdk25.listeners.onTouch
 import rocks.che.elections.R
 import rocks.che.elections.helpers.DebateTimeDistributionUpdate
 import rocks.che.elections.helpers.DefaultView
+import rocks.che.elections.helpers.NextDebateStage
 import rocks.che.elections.helpers.gameTextView
-import rocks.che.elections.helpers.nextDebateStage
 
 enum class SourceSlider { OPPONENTS, GROUPS}
 
@@ -80,7 +80,7 @@ class DebateViewChoose(val bus: Bus = Bus()) : DefaultView<DebateActivity> {
                 textResource = R.string.next
                 onClick {
                     bus.post(DebateTimeDistributionUpdate(groupsBar.progress, opponentsBar.progress))
-                    bus.post(nextDebateStage)
+                    bus.post(NextDebateStage())
                 }
             }.lparams(weight = 0.07f, height = 0, width = dip(180))
         }

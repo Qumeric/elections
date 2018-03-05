@@ -1,19 +1,25 @@
 package rocks.che.elections
 
-import android.support.v7.app.AlertDialog
+import android.support.v7.widget.AppCompatTextView
 import android.view.Gravity
+import android.widget.ImageView
 import com.pixplicity.easyprefs.library.Prefs
+import com.squareup.otto.Bus
 import org.jetbrains.anko.*
+import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.sdk25.listeners.onClick
+import rocks.che.elections.helpers.BuyGroupPointsEvent
 import rocks.che.elections.helpers.DefaultView
 import rocks.che.elections.helpers.cardView
 import rocks.che.elections.helpers.gameTextView
-import rocks.che.elections.logic.QuestionGroup
-import rocks.che.elections.logic.fakeQuestions
-import rocks.che.elections.logic.getGroupResource
+import rocks.che.elections.logic.*
 
-class GameView(val step: Int = 0, val questions: Map<String, QuestionGroup> = fakeQuestions) : DefaultView<GameActivity> {
+class GameView(val step: Int = 0, val questions: Map<String, QuestionGroup> = fakeQuestions,
+               val opinions: Opinions = fakeOpinions, var money: Int = 0,
+               val bus: Bus = Bus()) : DefaultView<GameActivity> {
     private lateinit var ankoContext: AnkoContext<GameActivity>
+    private lateinit var moneyTextView: AppCompatTextView
+    private val moneyToUp = 5
 
     override fun createView(ui: AnkoContext<GameActivity>) = with(ui) {
         ankoContext = ui
@@ -22,96 +28,110 @@ class GameView(val step: Int = 0, val questions: Map<String, QuestionGroup> = fa
             gravity = Gravity.CENTER
             verticalLayout {
                 gravity = Gravity.CENTER
-                gameTextView(20) {
+                val tv = gameTextView {
                     textResource = R.string.choose_category
-                }
+                }.lparams (height = dip(50), width = matchParent)
             }.lparams {
-                height = 0
-                weight = 0.2f
-            }
-
-            gameTextView {
-                text = String.format("Day: %d", step)
-            } // FIXME lparams
-
-            val row1 = linearLayout {
-                space().lparams(width = dip(20), height = matchParent)
-            }.lparams {
-                height = 0
-                weight = 0.3f
-            }
-
-            val row2 = linearLayout {
-                space().lparams(width = dip(20), height = matchParent)
-            }.lparams {
-                height = 0
-                weight = 0.3f
-            }
-
-            var leftInRow = 3
-
-            for ((group, qGroup) in questions) {
-                val v = cardView {
-                    onClick {
-                        val q = qGroup.getQuestion()
-                        ctx.startActivity<QuestionActivity>("question" to q, "group" to group)
-                    }
-                    verticalLayout {
-                        imageView {
-                            imageResource = getGroupResource(group)
-                        }.lparams {
-                            height = dip(70)
-                            width = dip(70)
-                        }
-                        gameTextView(color = R.color.white) {
-                            backgroundResource = R.color.navy
-                            text = group
-                        }
-                    }
-                }
-                removeView(v)
-                if (leftInRow > 0) {
-                    row1.addView(v)
-                    val s = space().lparams(width = dip(20), height = matchParent)
-                    removeView(s)
-                    row1.addView(s)
-                } else {
-                    row2.addView(v)
-                    val s = space().lparams(width = dip(20), height = matchParent)
-                    removeView(s)
-                    row2.addView(s)
-                }
-                leftInRow--
+                height = dip(50)
+                width = matchParent
             }
 
             linearLayout {
                 gravity = Gravity.CENTER
-                themedButton(theme = R.style.button) {
-                    textResource = R.string.exit_game
-                    onClick {
-                        val simpleAlert = AlertDialog.Builder(ctx as GameActivity).create()
-                        simpleAlert.setTitle(ctx.getString(R.string.end_game_dialog_title))
-                        simpleAlert.setMessage(ctx.getString(R.string.end_game_dialog_message))
-
-                        simpleAlert.setButton(AlertDialog.BUTTON_POSITIVE, ctx.getString(R.string.yes_button), { _, _ ->
-                            Prefs.remove("gamestate")
-                            ctx.startActivity<NewGameActivity>()
-                        })
-                        simpleAlert.setButton(AlertDialog.BUTTON_NEGATIVE, ctx.getString(R.string.no_button), { _, _ ->
-                            // do Nothing
-                        })
-
-                        simpleAlert.show()
-                    }
+                gameTextView(14) {
+                    text = String.format("Day: %d", step)
                 }
-
-                themedButton(theme = R.style.button) {
-                    text = "spend money"
-                    onClick {
-                        ctx.startActivity<SpendMoneyActivity>()
-                    }
+                space().lparams{width = dip(20)}
+                moneyTextView = gameTextView(14, R.color.green) {
+                    text = money.toString()
                 }
-            }.lparams(weight = 0.2f, height = 0)
+                imageView {
+
+                }
+            }
+
+            for ((group, qGroup) in questions) {
+                cardView {
+                    gravity = Gravity.START
+                    linearLayout {
+                        imageView {
+                            imageResource = getGroupResource(group)
+                        }.lparams {
+                            width = 0
+                            height = matchParent
+                            weight = 0.4f
+                        }
+
+                        linearLayout {
+                            weightSum = 1f
+                            backgroundResource = R.color.teal
+                            gravity = Gravity.CENTER
+                            themedButton(theme = R.style.button) {
+                                text = group
+
+                                onClick {
+                                    val q = qGroup.getQuestion()
+                                    ctx.startActivity<QuestionActivity>("question" to q, "group" to group)
+
+                                }
+                            }
+                            gameTextView {
+                                text = opinions[group]!!.value.toString()
+                            }.lparams {
+                                height = matchParent
+                                weight = 0.5f
+                            }
+                            imageView {
+                                imageResource = R.drawable.ic_coins
+                                onClick {
+                                    if (money >= moneyToUp) {
+                                        bus.post(BuyGroupPointsEvent(group, 1, moneyToUp))
+                                        money -= moneyToUp
+                                        moneyTextView.text = money.toString()
+                                    } else {
+                                        snackbar(ankoContext.view, R.string.not_enough_money)
+                                    }
+                                }
+                            }.lparams {
+                                height = matchParent
+                                weight = 0.5f
+                            }
+                        }.lparams {
+                            height = matchParent
+                            weight = 0.6f
+                            width = 0
+                        }
+                    }
+                }.lparams {
+                    height = 0
+                    weight = 1f/5
+                    width = matchParent
+                    margin = dip(5)
+                }
+            }
+
+            linearLayout {
+                imageView {
+                    imageResource = R.drawable.ic_logout
+                    scaleType = ImageView.ScaleType.FIT_CENTER
+                    onClick {
+                        alert(R.string.end_game_dialog_title, R.string.end_game_dialog_message) {
+                            yesButton {
+                                Prefs.remove("gamestate")
+                                ctx.startActivity<NewGameActivity>()
+                            }
+                            noButton {
+                                // Do nothing
+                            }
+                        }.show()
+                    }
+                }.lparams(height= matchParent, width = 0, weight = 0.5f)
+
+                /*imageView {
+                    imageResource = if (isSpending) R.drawable.ic_close else R.drawable.ic_coins
+                    scaleType = ImageView.ScaleType.FIT_CENTER
+                }.lparams(height= matchParent, width = 0, weight = 0.5f)*/
+            }.lparams(weight = 0.2f, height = 0, width = matchParent)
         }
     }
 }

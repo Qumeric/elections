@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.pixplicity.easyprefs.library.Prefs
 import com.squareup.otto.Bus
+import im.delight.android.audio.MusicManager
 import im.delight.android.audio.SoundManager
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.AnkoLogger
@@ -18,6 +19,7 @@ abstract class DefaultActivity: AppCompatActivity(), AnkoLogger {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bus.register(this)
+        MusicManager.getInstance().play(this, R.raw.main_music)
     }
 
 	override fun onResume() {

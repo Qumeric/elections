@@ -4,10 +4,11 @@ import android.content.Context
 import android.graphics.RectF
 import android.graphics.Typeface
 import android.support.v4.content.ContextCompat
+import android.support.v4.widget.TextViewCompat
+import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.CardView
 import android.view.View
 import android.view.ViewManager
-import android.widget.TextView
 import com.robinhood.spark.SparkAdapter
 import com.robinhood.spark.SparkView
 import nl.dionsegijn.konfetti.KonfettiView
@@ -19,7 +20,7 @@ import org.jetbrains.anko.textColor
 import pl.droidsonroids.gif.GifImageView
 import rocks.che.elections.R
 
-class SquareGridLayout(ctx: Context): _GridLayout(ctx) {
+class SquareGridLayout(ctx: Context) : _GridLayout(ctx) {
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         var width = MeasureSpec.getSize(widthMeasureSpec)
         var height = MeasureSpec.getSize(heightMeasureSpec)
@@ -54,15 +55,20 @@ inline fun ViewManager.gifImageView(init: GifImageView.() -> Unit): GifImageView
 }
 
 inline fun ViewManager.konfettiView(init: KonfettiView.() -> Unit): KonfettiView {
-    return ankoView({ KonfettiView(it)}, theme = 0, init = init)
+    return ankoView({ KonfettiView(it) }, theme = 0, init = init)
 }
 
-inline fun ViewManager.gameTextView(size: Int = 0, color: Int = 0, text: String?=null, init: TextView.() -> Unit) : TextView {
+inline fun ViewManager.gameTextView(size: Int = 0, color: Int = 0, text: String? = null,
+                                    init: AppCompatTextView.() -> Unit): AppCompatTextView {
     return ankoView({
-        val tv = TextView(it)
+        val tv = AppCompatTextView(it)
         tv.typeface = Typeface.createFromAsset(it.assets, "mfred.ttf")
         tv.textAlignment = View.TEXT_ALIGNMENT_CENTER
-        if (size > 0)   tv.textSize = size.toFloat()*2.5f // FIXME shouldn't have a constant
+        if (size > 0) {
+            tv.textSize = size.toFloat() * 2.5f // FIXME shouldn't have a constant
+        } else {
+            TextViewCompat.setAutoSizeTextTypeWithDefaults(tv, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM)
+        }
         if (color != 0) tv.textColor = ContextCompat.getColor(it, color)
         if (text != null) tv.text = text
         tv.elevation = 100f
@@ -91,4 +97,4 @@ class MyAdapter(private val yData: FloatArray) : SparkAdapter() {
     }
 }
 
-interface DefaultView<T>: AnkoComponent<T>, AnkoLogger
+interface DefaultView<T> : AnkoComponent<T>, AnkoLogger

@@ -2,7 +2,6 @@ package rocks.che.elections.logic
 
 import android.util.Log
 import com.pixplicity.easyprefs.library.Prefs
-import com.thedeanda.lorem.LoremIpsum
 import org.json.JSONArray
 import org.json.JSONObject
 import rocks.che.elections.R
@@ -83,7 +82,7 @@ class Candidate(val name: String, private val description: String, val perks: Li
 }
 
 val fakeCandidate = Candidate("Fake", "Something went wrong",
-        (0..2).map { LoremIpsum.getInstance().getWords(5, 7)},
+        (1..3).map { "blah ".repeat(it) },
         "navalny", mapOf(), mapOf())
 val fakeQuestions = mapOf<String, QuestionGroup>(
         "military" to QuestionGroup(),
@@ -184,6 +183,7 @@ class Gamestate(val candidate: Candidate, val questions: Map<String, QuestionGro
 
     init {
         candidates.removeAll { it.name == candidate.name }
+        if (candidate.name == "Клубникин") money = 50
     }
 
     fun toJSON(): JSONObject {

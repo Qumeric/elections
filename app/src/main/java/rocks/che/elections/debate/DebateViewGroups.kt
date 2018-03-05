@@ -10,13 +10,13 @@ import org.jetbrains.anko.sdk25.listeners.onClick
 import org.jetbrains.anko.sdk25.listeners.onSeekBarChangeListener
 import rocks.che.elections.R
 import rocks.che.elections.helpers.DefaultView
+import rocks.che.elections.helpers.NextDebateStage
 import rocks.che.elections.helpers.SetGroupDistribution
 import rocks.che.elections.helpers.gameTextView
-import rocks.che.elections.helpers.nextDebateStage
-import rocks.che.elections.logic.gamestate
+import rocks.che.elections.logic.QuestionGroup
 import rocks.che.elections.logic.getGroupResource
 
-class DebateViewGroups(val minutes: Int = 60, val bus: Bus = Bus()) : DefaultView<DebateActivity> {
+class DebateViewGroups(val minutes: Int = 60, val questions: Map<String, QuestionGroup> = mapOf(), val bus: Bus = Bus()) : DefaultView<DebateActivity> {
     private lateinit var ankoContext: AnkoContext<DebateActivity>
     private lateinit var nextButton: Button
     private val amounts = mutableListOf<TextView>()
@@ -46,7 +46,7 @@ class DebateViewGroups(val minutes: Int = 60, val bus: Bus = Bus()) : DefaultVie
 
             var isGray = true
             var pos = 0
-            for ((group, _) in gamestate.questions) {
+            for (group in questions.keys) {
                 linearLayout {
                     gravity = Gravity.CENTER
                     backgroundResource = if (isGray) {
@@ -98,7 +98,7 @@ class DebateViewGroups(val minutes: Int = 60, val bus: Bus = Bus()) : DefaultVie
                 onClick {
                     if (amountVals.sum() == minutes) {
                         bus.post(SetGroupDistribution(amountVals))
-                        bus.post(nextDebateStage)
+                        bus.post(NextDebateStage())
                     } else {
                         snackbar(this, R.string.debate_spend_minutes_first)
                     }

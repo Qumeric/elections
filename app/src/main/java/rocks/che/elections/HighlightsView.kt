@@ -43,18 +43,22 @@ class HighlightsView(val candidate: Candidate = fakeCandidate) : DefaultView<Hig
 
             space { }.lparams(weight = 0.05f, height = 0)
 
-            for (perk in candidate.perks) {
-                linearLayout {
-                    gravity = Gravity.CENTER
-                    imageView {
-                        imageResource = R.drawable.red_star
+            verticalLayout {
+                gravity = Gravity.CENTER
+                for (perk in candidate.perks) {
+                    linearLayout {
+                        imageView {
+                            imageResource = R.drawable.red_star
+                        }
+                        gameTextView(12) {
+                            text = perk
+                        }
+                    }.lparams(weight = 0.07f, height = 0) {
+                        gravity = Gravity.START
                     }
-                    gameTextView(12) {
-                        text = perk
-                    }
-                }.lparams(weight = 0.07f, height = 0)
-            }
-            space { }.lparams(weight = 0.2f, height = 0)
+                }
+            }.lparams(weight = 0.21f, height = 0)
+            space { }.lparams(weight = 0.1f, height = 0)
         }
     }
 }

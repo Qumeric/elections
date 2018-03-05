@@ -1,16 +1,20 @@
 package rocks.che.elections
 
-import android.util.Log
 import android.view.Gravity
 import android.widget.GridLayout
+import com.squareup.otto.Bus
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
 import rocks.che.elections.helpers.DefaultView
+import rocks.che.elections.helpers.GamestateUpdate
 import rocks.che.elections.helpers.cardView
 import rocks.che.elections.helpers.gameTextView
-import rocks.che.elections.logic.*
+import rocks.che.elections.logic.Candidate
+import rocks.che.elections.logic.Gamestate
+import rocks.che.elections.logic.loadCandidates
+import rocks.che.elections.logic.loadQuestions
 
-class ChooseCandidateView(val secretUnlocked: Boolean = false) : DefaultView<ChooseCandidateActivity> {
+class ChooseCandidateView(val secretUnlocked: Boolean = false, val bus: Bus = Bus()) : DefaultView<ChooseCandidateActivity> {
     private lateinit var ankoContext: AnkoContext<ChooseCandidateActivity>
 
     override fun createView(ui: AnkoContext<ChooseCandidateActivity>) = with(ui) {
@@ -36,54 +40,61 @@ class ChooseCandidateView(val secretUnlocked: Boolean = false) : DefaultView<Cho
                 rowCount = 3
                 columnCount = 2
                 alignmentMode = GridLayout.ALIGN_MARGINS
-                padding = dip(14)
+                padding = dip(12)
 
                 for (candidate in loadCandidates(resources)) {
                     cardView {
-                        cardElevation = dip(8).toFloat()
-                        radius = 0f
-
-                        verticalLayout {
-                            gravity = Gravity.CENTER_HORIZONTAL or Gravity.CENTER_VERTICAL
-
-                            linearLayout {
+                        frameLayout {
+                            verticalLayout {
                                 gravity = Gravity.CENTER
 
-                                imageView {
-                                    imageResource = candidate.resource
-                                }.lparams {
-                                    width = dip(80)
-                                }
+                                linearLayout {
+                                    gravity = Gravity.CENTER
 
-                                verticalLayout {
-                                    for ((group, value) in candidate.opinions) {
-                                        gameTextView(8) {
-                                            text = "%s: %d".format(group, value.value)
+                                    imageView {
+                                        imageResource = candidate.resource
+                                    }.lparams {
+                                        width = dip(80)
+                                    }
+
+                                    verticalLayout {
+                                        gravity = Gravity.END
+                                        for ((group, value) in candidate.opinions) {
+                                            gameTextView {
+                                                text = "%s: %d".format(group, value.value)
+                                            }
                                         }
                                     }
+                                }.lparams {
+                                    weight = 0.8f
+                                    height = 0
+                                    width = matchParent
                                 }
-                            }.lparams {
-                                height = 0
-                                weight = 0.8f
-                            }
 
-                            themedButton(theme = R.style.button) {
-                                text = candidate.name
-                                if (candidate.name != ctx.getString(R.string.secret_candidate_name) || secretUnlocked) {
+                                button(candidate.name) {
                                     backgroundResource = R.color.blue
-                                } else {
-                                    Log.d("ChooseCandidateView", "there is a secret candidate and he's blocked")
-                                    backgroundResource = R.color.silver
+                                    onClick {
+                                        bus.post(GamestateUpdate(Gamestate(candidate, loadQuestions(resources),
+                                                loadCandidates(resources) as MutableList<Candidate>)))
+                                    }
+                                }.lparams {
+                                    width = matchParent
+                                    height = 0
+                                    weight = 0.2f
                                 }
-                                onClick {
-                                    gamestate = Gamestate(candidate, loadQuestions(resources),
-                                            loadCandidates(resources) as MutableList<Candidate>)
-                                    ctx.startActivity<HighlightsActivity>()
+                            }.lparams(width = matchParent, height = matchParent)
+                            if (candidate.name == ctx.getString(R.string.secret_candidate_name) && !secretUnlocked) {
+                                view {
+                                    backgroundResource = R.color.black
+                                    alpha = 0.5f
+                                }.lparams(width = matchParent, height = matchParent)
+                                imageView {
+                                    imageResource = R.drawable.ic_locked
+                                }.lparams {
+                                    width = dip(50)
+                                    height = dip(50)
+                                    gravity = Gravity.CENTER
                                 }
-                            }.lparams {
-                                width = matchParent
-                                height = 0
-                                weight = 0.2f
                             }
                         }
                     }.lparams {

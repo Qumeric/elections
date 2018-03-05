@@ -1,13 +1,13 @@
 [
   {
-    "name": "Нэвэльный",
-    "description": "Make Russia blet again",
+    "name": "Овальный",
+    "description": "",
     "basicStats": {
-      "military": 50,
-      "workers": 50,
-      "foreign": 50,
-      "media": 50,
-      "business": 50
+      "military": 0,
+      "workers": 10,
+      "foreign": 10,
+      "media": 10,
+      "business": 15
     },
     "basicLevels": {
       "liberal": 50,
@@ -23,14 +23,14 @@
     "imgResource": "navalny"
   },
   {
-    "name": "Ксюшечка",
-    "description": "Против всех лол)))",
+    "name": "Путчак",
+    "description": "",
     "basicStats": {
-      "military": 50,
-      "workers": 0,
-      "foreign": 50,
-      "media": 50,
-      "business": 50
+      "military": 0,
+      "workers": 5,
+      "foreign": 5,
+      "media": 20,
+      "business": 5
     },
     "basicLevels": {
       "liberal": 50,
@@ -47,13 +47,13 @@
   },
   {
     "name": "Жирный",
-    "description": "Буш, ты ковбой!",
+    "description": "",
     "basicStats": {
-      "military": 50,
-      "workers": 0,
-      "foreign": 50,
-      "media": 50,
-      "business": 50
+      "military": 5,
+      "workers": 10,
+      "foreign": 0,
+      "media": 10,
+      "business": 5
     },
     "basicLevels": {
       "liberal": 50,
@@ -72,11 +72,11 @@
     "name": "Мутин",
     "description": "",
     "basicStats": {
-      "military": 50,
-      "workers": 0,
-      "foreign": 50,
-      "media": 50,
-      "business": 50
+      "military": 10,
+      "workers": 15,
+      "foreign": 5,
+      "media": 20,
+      "business": 5
     },
     "basicLevels": {
       "liberal": 50,
@@ -95,11 +95,11 @@
     "name": "Клубникин",
     "description": "Совок",
     "basicStats": {
-      "military": 50,
-      "workers": 0,
-      "foreign": 50,
-      "media": 50,
-      "business": 50
+      "military": 5,
+      "workers": 15,
+      "foreign": 5,
+      "media": 5,
+      "business": 5
     },
     "basicLevels": {
       "liberal": 50,
@@ -116,13 +116,13 @@
   },
   {
     "name": "Жулинский",
-    "description": "...",
+    "description": "",
     "basicStats": {
-      "military": 50,
-      "workers": 0,
-      "foreign": 50,
-      "media": 50,
-      "business": 50
+      "military": 5,
+      "workers": 10,
+      "foreign": 5,
+      "media": 0,
+      "business": 5
     },
     "basicLevels": {
       "liberal": 50,
@@ -138,3 +138,4 @@
     "imgResource": "yavlinsky"
   }
 ]
+

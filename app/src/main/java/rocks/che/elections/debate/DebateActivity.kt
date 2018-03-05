@@ -27,8 +27,8 @@ class DebateActivity : DefaultActivity() {
         when(++stage) {
             1 -> DebateViewStart(bus).setContentView(this)
             2 -> DebateViewChoose(bus).setContentView(this)
-            3 -> DebateViewGroups(groupMinutes, bus).setContentView(this)
-            4 -> DebateViewOpponents(opponentMinutes, bus).setContentView(this)
+            3 -> DebateViewGroups(groupMinutes, gamestate.questions, bus).setContentView(this)
+            4 -> DebateViewOpponents(opponentMinutes, gamestate.candidates, bus).setContentView(this)
             5 -> DebateViewEnd(gamestate.candidate, winGroup(), loseGroup(), attackResult(), bus).setContentView(this)
             else -> startActivity<PollActivity>()
         }
@@ -74,6 +74,6 @@ class DebateActivity : DefaultActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        nextStage(nextDebateStage)
+        nextStage(NextDebateStage())
     }
 }

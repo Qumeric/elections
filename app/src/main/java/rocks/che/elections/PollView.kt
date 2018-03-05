@@ -10,7 +10,6 @@ import rocks.che.elections.helpers.gameTextView
 import rocks.che.elections.helpers.sparkView
 import rocks.che.elections.logic.gamestate
 
-
 class PollView(private val h: Map<String, List<Double>>) : DefaultView<PollActivity> {
     private lateinit var ankoContext: AnkoContext<PollActivity>
     private val colors = listOf(R.color.red, R.color.green, R.color.blue, R.color.yellow, R.color.teal, R.color.orange)
@@ -49,7 +48,7 @@ class PollView(private val h: Map<String, List<Double>>) : DefaultView<PollActiv
                     }.lparams(weight = 1f)
                 }
             }
-            if (gamestate.isWon() || gamestate.isLost()) {
+            if (gamestate.isPollTime() && (gamestate.isWon() || gamestate.isLost())) {
                 gameTextView(12) {
                     textResource = if (gamestate.isWon()) {
                         R.string.win_message

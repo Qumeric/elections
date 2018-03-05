@@ -21,6 +21,7 @@
     <string name="need_unblock">You have to unblock this candidate first</string>
     <string name="secret_candidate_name">Нэвэльный</string>
     <string name="your_candidate">Your candidate</string>
+    <string name="endgame_text">Поздравляем! Вы неплохо провели президентскую компанию, но победил сами знаете кто!</string>
 
     <!-- Debate description -->
     <string name="debate">Debate</string>
