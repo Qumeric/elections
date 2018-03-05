@@ -38,13 +38,13 @@ class HammerGameView : AnkoComponent<HammerGameActivity> {
 
             relativeLayout {
                 backgroundResource = R.color.white
-                scoreText = gameTextView(dip(18), color = R.color.black) {
+                scoreText = gameTextView(18, color = R.color.black) {
                     text = "0"
                 }.lparams {
                     alignParentLeft()
                     centerVertically()
                 }
-                missedText = gameTextView(dip(18), color = R.color.maroon) {
+                missedText = gameTextView(18, color = R.color.maroon) {
                     text = "0"
                 }.lparams {
                     alignParentRight()

@@ -5,11 +5,12 @@ import android.view.Gravity
 import android.widget.GridLayout
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
+import rocks.che.elections.helpers.DefaultView
 import rocks.che.elections.helpers.cardView
 import rocks.che.elections.helpers.gameTextView
 import rocks.che.elections.logic.*
 
-class ChooseCandidateView : AnkoComponent<ChooseCandidateActivity> {
+class ChooseCandidateView(val secretUnlocked: Boolean = false) : DefaultView<ChooseCandidateActivity> {
     private lateinit var ankoContext: AnkoContext<ChooseCandidateActivity>
 
     override fun createView(ui: AnkoContext<ChooseCandidateActivity>) = with(ui) {
@@ -23,7 +24,7 @@ class ChooseCandidateView : AnkoComponent<ChooseCandidateActivity> {
             gravity = Gravity.CENTER
             verticalLayout {
                 gravity = Gravity.CENTER
-                gameTextView(dip(20)) {
+                gameTextView(20) {
                     textResource = R.string.choose_candidate
                 }
             }.lparams {
@@ -56,7 +57,7 @@ class ChooseCandidateView : AnkoComponent<ChooseCandidateActivity> {
 
                                 verticalLayout {
                                     for ((group, value) in candidate.opinions) {
-                                        gameTextView(dip(8)) {
+                                        gameTextView(8) {
                                             text = "%s: %d".format(group, value.value)
                                         }
                                     }
@@ -66,24 +67,23 @@ class ChooseCandidateView : AnkoComponent<ChooseCandidateActivity> {
                                 weight = 0.8f
                             }
 
-                            button {
+                            themedButton(theme = R.style.button) {
                                 text = candidate.name
-                                if (candidate.name != ctx.getString(R.string.secret_candidate_name) ||
-                                checkExistence(ctx, secretFilename)) {
-                                    Log.d("ChooseCandidateView",
-                                            "there is a secret candidate and he's blocked because " + checkExistence(ctx, secretFilename))
+                                if (candidate.name != ctx.getString(R.string.secret_candidate_name) || secretUnlocked) {
                                     backgroundResource = R.color.blue
+                                } else {
+                                    Log.d("ChooseCandidateView", "there is a secret candidate and he's blocked")
+                                    backgroundResource = R.color.silver
                                 }
                                 onClick {
                                     gamestate = Gamestate(candidate, loadQuestions(resources),
                                             loadCandidates(resources) as MutableList<Candidate>)
-                                    ctx.startActivity(ctx.intentFor<HighlightsActivity>())
+                                    ctx.startActivity<HighlightsActivity>()
                                 }
                             }.lparams {
                                 width = matchParent
                                 height = 0
                                 weight = 0.2f
-                                margin = 0
                             }
                         }
                     }.lparams {

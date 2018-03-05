@@ -2,8 +2,8 @@ package rocks.che.elections.helpers
 
 import android.content.Context
 import android.graphics.RectF
+import android.graphics.Typeface
 import android.support.v4.content.ContextCompat
-import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.CardView
 import android.view.View
 import android.view.ViewManager
@@ -11,6 +11,8 @@ import android.widget.TextView
 import com.robinhood.spark.SparkAdapter
 import com.robinhood.spark.SparkView
 import nl.dionsegijn.konfetti.KonfettiView
+import org.jetbrains.anko.AnkoComponent
+import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko._GridLayout
 import org.jetbrains.anko.custom.ankoView
 import org.jetbrains.anko.textColor
@@ -44,7 +46,7 @@ inline fun ViewManager.sparkView(init: SparkView.() -> Unit): SparkView {
 }
 
 inline fun ViewManager.cardView(init: CardView.() -> Unit): CardView {
-    return ankoView({ CardView(it) }, theme = 0, init = init)
+    return ankoView({ CardView(it) }, theme = R.style.CardView, init = init)
 }
 
 inline fun ViewManager.gifImageView(init: GifImageView.() -> Unit): GifImageView {
@@ -58,9 +60,9 @@ inline fun ViewManager.konfettiView(init: KonfettiView.() -> Unit): KonfettiView
 inline fun ViewManager.gameTextView(size: Int = 0, color: Int = 0, text: String?=null, init: TextView.() -> Unit) : TextView {
     return ankoView({
         val tv = TextView(it)
-        tv.typeface = ResourcesCompat.getFont(it, R.font.mfred)
+        tv.typeface = Typeface.createFromAsset(it.assets, "mfred.ttf")
         tv.textAlignment = View.TEXT_ALIGNMENT_CENTER
-        if (size > 0)   tv.textSize = size.toFloat()
+        if (size > 0)   tv.textSize = size.toFloat()*2.5f // FIXME shouldn't have a constant
         if (color != 0) tv.textColor = ContextCompat.getColor(it, color)
         if (text != null) tv.text = text
         tv.elevation = 100f
@@ -88,3 +90,5 @@ class MyAdapter(private val yData: FloatArray) : SparkAdapter() {
         return bounds
     }
 }
+
+interface DefaultView<T>: AnkoComponent<T>, AnkoLogger

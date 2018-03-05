@@ -4,11 +4,12 @@ import android.view.Gravity
 import android.widget.LinearLayout
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
+import rocks.che.elections.helpers.DefaultView
 import rocks.che.elections.helpers.gameTextView
 import rocks.che.elections.logic.Question
 import rocks.che.elections.logic.getGroupResource
 
-class QuestionView(private val question: Question, val group: String) : AnkoComponent<QuestionActivity> {
+class QuestionView(private val question: Question, val group: String) : DefaultView<QuestionActivity> {
     private lateinit var ankoContext: AnkoContext<QuestionActivity>
 
     override fun createView(ui: AnkoContext<QuestionActivity>) = with(ui) {
@@ -24,7 +25,7 @@ class QuestionView(private val question: Question, val group: String) : AnkoComp
                 height = dip(70)
             }
 
-            gameTextView(dip(15)) {
+            gameTextView(15) {
                 text = question.statement
             }
 
@@ -38,7 +39,7 @@ class QuestionView(private val question: Question, val group: String) : AnkoComp
                         text = answer.statement
                         backgroundResource = R.color.blue
                         onClick {
-                            ctx.startActivity(ctx.intentFor<ChangeActivity>("answer" to answer))
+                            ctx.startActivity<ChangeActivity>("answer" to answer)
                         }
                     }.lparams(width = matchParent, height = wrapContent)
                     space().lparams(width = matchParent, height = dip(30))

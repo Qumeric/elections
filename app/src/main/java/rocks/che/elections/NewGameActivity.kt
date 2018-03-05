@@ -1,10 +1,12 @@
 package rocks.che.elections
 
 import android.os.Bundle
-import android.util.Log
-import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.setContentView
-import rocks.che.elections.logic.*
+import org.jetbrains.anko.startActivity
+import rocks.che.elections.helpers.DefaultActivity
+import rocks.che.elections.logic.fakeCandidate
+import rocks.che.elections.logic.gamestate
+import rocks.che.elections.logic.loadGame
 
 class NewGameActivity: DefaultActivity() {
     private lateinit var view: NewGameView
@@ -12,16 +14,10 @@ class NewGameActivity: DefaultActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (BuildConfig.DEBUG) {
-            delete(this, secretFilename)
-        }
-
-        try {
-            gamestate = loadGame(this)
-            // FIXME saveGame last activity
-            startActivity(intentFor<GameActivity>())
-        } catch (e: Exception) {
-            Log.d("NewGameActivity", "unable to loadGame candidate")
+        // FIXME saveGame last activity and bad code overall
+        gamestate = loadGame()
+        if (gamestate.candidate.name != fakeCandidate.name) {
+            startActivity<GameActivity>()
         }
 
         view = NewGameView()

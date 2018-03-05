@@ -2,15 +2,19 @@ package rocks.che.elections.debate
 
 import android.view.Gravity
 import android.widget.TextView
-import android.widget.Toast
+import com.squareup.otto.Bus
 import org.jetbrains.anko.*
+import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.sdk25.listeners.onClick
 import org.jetbrains.anko.sdk25.listeners.onSeekBarChangeListener
 import rocks.che.elections.R
+import rocks.che.elections.helpers.DefaultView
+import rocks.che.elections.helpers.SetOpponentDistribution
 import rocks.che.elections.helpers.gameTextView
+import rocks.che.elections.helpers.nextDebateStage
 import rocks.che.elections.logic.gamestate
 
-class DebateViewOpponents : AnkoComponent<DebateActivity> {
+class DebateViewOpponents(val minutes: Int = 40, val bus: Bus = Bus()) : DefaultView<DebateActivity> {
     private lateinit var ankoContext: AnkoContext<DebateActivity>
     private val amounts = mutableListOf<TextView>()
     private val amountVals = mutableListOf<Int>()
@@ -21,7 +25,7 @@ class DebateViewOpponents : AnkoComponent<DebateActivity> {
         verticalLayout {
             gravity = Gravity.CENTER
 
-            gameTextView(dip(20)) {
+            gameTextView(20) {
                 textResource = R.string.debate
             }.lparams(weight = 0.09f, height = 0)
 
@@ -29,12 +33,12 @@ class DebateViewOpponents : AnkoComponent<DebateActivity> {
                 backgroundResource = R.color.blue
             }.lparams(weight = 0.012f, height = 0, width = dip(120))
 
-            gameTextView(dip(12)) {
+            gameTextView(12) {
                 textResource = R.string.debate_opponents
             }.lparams(weight = 0.15f, height = 0)
 
-            val minutesTextView = gameTextView(dip(18)) {
-                text = ctx.getString(R.string.debate_minutes_left_template).format((ctx as DebateActivity).opponentMinutes)
+            val minutesTextView = gameTextView(18) {
+                text = ctx.getString(R.string.debate_minutes_left_template).format(minutes)
             }.lparams(weight = 0.1f, height = 0)
 
             var isGray = true
@@ -51,7 +55,7 @@ class DebateViewOpponents : AnkoComponent<DebateActivity> {
                     }
 
                     seekBar {
-                        max = (ctx as DebateActivity).opponentMinutes
+                        max = minutes
                         onSeekBarChangeListener {
                             onProgressChanged({ sb, progress, _ ->
                                 var spendMinutes = (0 until amountVals.size)
@@ -78,12 +82,11 @@ class DebateViewOpponents : AnkoComponent<DebateActivity> {
             themedButton(theme = R.style.button) {
                 textResource = R.string.next
                 onClick {
-                    val activity = ctx as DebateActivity
-                    if (amountVals.sum() == activity.opponentMinutes) {
-                        activity.setOpponentDistribution(amountVals)
-                        activity.nextStage()
+                    if (amountVals.sum() == minutes) {
+                        bus.post(SetOpponentDistribution(amountVals))
+                        bus.post(nextDebateStage)
                     } else {
-                        Toast.makeText(ctx, ctx.getString(R.string.debate_spend_minutes_first), Toast.LENGTH_SHORT).show()
+                        snackbar(this, R.string.debate_spend_minutes_first)
                     }
                 }
             }.lparams(weight = 0.08f, height = 0, width = dip(180))

@@ -4,23 +4,25 @@ import android.view.Gravity
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
 import rocks.che.elections.debate.DebateActivity
+import rocks.che.elections.helpers.DefaultView
 import rocks.che.elections.helpers.gameTextView
 import rocks.che.elections.logic.gamestate
 import rocks.che.elections.logic.getGroupResource
 import java.util.*
 
-class ChangeView(private val oldOpinions: Map<String, Int>) : AnkoComponent<ChangeActivity> {
+class ChangeView(private val oldOpinions: Map<String, Int>) : DefaultView<ChangeActivity> {
     private lateinit var ankoContext: AnkoContext<ChangeActivity>
 
     override fun createView(ui: AnkoContext<ChangeActivity>) = with(ui) {
         ankoContext = ui
+
 
         var pos = 0
 
         verticalLayout {
             gravity = Gravity.CENTER
 
-            gameTextView(dip(15)) {
+            gameTextView(15) {
                 textResource = R.string.support
             }
 
@@ -41,7 +43,7 @@ class ChangeView(private val oldOpinions: Map<String, Int>) : AnkoComponent<Chan
 
                     space().lparams(width = dip(15), height = matchParent)
 
-                    gameTextView(dip(10)) {
+                    gameTextView(10) {
                         text = String.format("%s  %d(%s)", group, opinion.value,
                                 Formatter().format(Locale.US, "%+d", opinion.value - oldOpinions[group]!!))
                     }
@@ -54,9 +56,9 @@ class ChangeView(private val oldOpinions: Map<String, Int>) : AnkoComponent<Chan
                 backgroundResource = R.color.blue
                 onClick {
                     if (gamestate.isPollTime()) {
-                        ctx.startActivity(ctx.intentFor<DebateActivity>())
+                        ctx.startActivity<DebateActivity>()
                     } else {
-                        ctx.startActivity(ctx.intentFor<PollActivity>())
+                        ctx.startActivity<PollActivity>()
                     }
                 }
             }.lparams(width = dip(150), height = dip(60))

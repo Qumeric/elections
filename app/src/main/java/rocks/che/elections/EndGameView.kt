@@ -5,9 +5,10 @@ import android.view.Gravity
 import nl.dionsegijn.konfetti.models.Shape
 import nl.dionsegijn.konfetti.models.Size
 import org.jetbrains.anko.*
+import rocks.che.elections.helpers.DefaultView
 import rocks.che.elections.helpers.konfettiView
 
-class EndGameView : AnkoComponent<EndGameActivity> {
+class EndGameView : DefaultView<EndGameActivity> {
     private lateinit var ankoContext: AnkoContext<EndGameActivity>
 
     override fun createView(ui: AnkoContext<EndGameActivity>) = with(ui) {

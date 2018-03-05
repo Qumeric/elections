@@ -2,6 +2,7 @@ package rocks.che.elections
 
 import android.os.Bundle
 import org.jetbrains.anko.setContentView
+import rocks.che.elections.helpers.DefaultActivity
 import rocks.che.elections.logic.Answer
 import rocks.che.elections.logic.gamestate
 

@@ -30,6 +30,12 @@
     <string name="debate_choose_description">
         Распределите время между разговорами про группы населения и атакоЙ на оппонентов
     </string>
+    <string name="group_slider_annotation">
+        Время на обращения к группам
+    </string>
+    <string name="opponent_slider_annotation">
+        Время на дебаты с оппонентом
+    </string>
     <string name="debate_groups">
         Распределите время, рассказывая о группах населения
     </string>

@@ -2,10 +2,12 @@ package rocks.che.elections
 
 import android.view.Gravity
 import org.jetbrains.anko.*
+import rocks.che.elections.helpers.DefaultView
 import rocks.che.elections.helpers.gameTextView
-import rocks.che.elections.logic.gamestate
+import rocks.che.elections.logic.Candidate
+import rocks.che.elections.logic.fakeCandidate
 
-class HighlightsView : AnkoComponent<HighlightsActivity> {
+class HighlightsView(val candidate: Candidate = fakeCandidate) : DefaultView<HighlightsActivity> {
     private lateinit var ankoContext: AnkoContext<HighlightsActivity>
 
     override fun createView(ui: AnkoContext<HighlightsActivity>) = with(ui) {
@@ -16,7 +18,7 @@ class HighlightsView : AnkoComponent<HighlightsActivity> {
 
             space { }.lparams(weight = 0.1f, height = 0)
 
-            gameTextView(dip(20)) {
+            gameTextView(20) {
                 textResource = R.string.your_candidate
             }.lparams(weight = 0.1f, height = 0)
 
@@ -24,14 +26,14 @@ class HighlightsView : AnkoComponent<HighlightsActivity> {
                 backgroundResource = R.color.blue
             }.lparams(weight = 0.01f, height = 0, width = dip(120))
 
-            gameTextView(dip(16)) {
-                text = gamestate.candidate.name
+            gameTextView(16) {
+                text = candidate.name
             }.lparams(weight = 0.09f, height = 0)
 
             relativeLayout {
                 backgroundResource = R.color.white
                 imageView {
-                    imageResource = gamestate.candidate.resource
+                    imageResource = candidate.resource
                 }.lparams {
                     centerInParent()
                     width = matchParent
@@ -41,13 +43,13 @@ class HighlightsView : AnkoComponent<HighlightsActivity> {
 
             space { }.lparams(weight = 0.05f, height = 0)
 
-            for (perk in gamestate.candidate.perks) {
+            for (perk in candidate.perks) {
                 linearLayout {
                     gravity = Gravity.CENTER
                     imageView {
                         imageResource = R.drawable.red_star
                     }
-                    gameTextView(dip(12)) {
+                    gameTextView(12) {
                         text = perk
                     }
                 }.lparams(weight = 0.07f, height = 0)

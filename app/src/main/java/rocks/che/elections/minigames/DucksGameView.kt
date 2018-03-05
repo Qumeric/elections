@@ -31,17 +31,17 @@ class DucksGameView : AnkoComponent<DucksGameActivity> {
             relativeLayout {
                 backgroundResource = R.color.ducksBackground
                 gravity = Gravity.CENTER
-                missedDucksText = gameTextView(dip(18), color = R.color.red) {
+                missedDucksText = gameTextView(18, color = R.color.red) {
                 }.lparams {
                     alignParentLeft()
                     centerVertically()
                 }
-                scoreText = gameTextView(dip(18), color = R.color.white) {
+                scoreText = gameTextView(18, color = R.color.white) {
                     textResource = R.string.ducks_welcome
                 }.lparams {
                     centerInParent()
                 }
-                missedShotsText = gameTextView(dip(18), color = R.color.red) {
+                missedShotsText = gameTextView(18, color = R.color.red) {
                 }.lparams {
                     alignParentRight()
                     centerVertically()

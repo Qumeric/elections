@@ -1,16 +1,15 @@
 package rocks.che.elections.debate
 
 import android.os.Bundle
-import org.jetbrains.anko.AnkoComponent
-import org.jetbrains.anko.intentFor
+import com.squareup.otto.Subscribe
 import org.jetbrains.anko.setContentView
-import rocks.che.elections.DefaultActivity
+import org.jetbrains.anko.startActivity
 import rocks.che.elections.PollActivity
+import rocks.che.elections.helpers.*
 import rocks.che.elections.logic.gamestate
 import java.util.*
 
 class DebateActivity : DefaultActivity() {
-    private val views = mutableListOf<AnkoComponent<DebateActivity>>()
     private var stage = 0
     private val groupDistribution = mutableMapOf<String, Int>()
     private val opponentDistribution = mutableMapOf<String, Int>()
@@ -18,27 +17,26 @@ class DebateActivity : DefaultActivity() {
     var groupMinutes = maxMinutes/2
     var opponentMinutes = maxMinutes-groupMinutes
 
-    fun setGroupDistribution(vals: List<Int>) {
-        var cVal = 0
-        for ((group, _) in gamestate.questions) {
-            groupDistribution[group] = vals[cVal++]
+    @Subscribe fun setGroupDistribution(e: SetGroupDistribution) =
+        gamestate.questions.keys.withIndex().forEach {(i, k) -> groupDistribution[k] = e.vals[i]}
+
+    @Subscribe fun setOpponentDistribution(e: SetOpponentDistribution) =
+        gamestate.questions.keys.withIndex().forEach {(i, k) -> opponentDistribution[k] = e.vals[i]}
+
+    @Subscribe fun nextStage(e: NextDebateStage) {
+        when(++stage) {
+            1 -> DebateViewStart(bus).setContentView(this)
+            2 -> DebateViewChoose(bus).setContentView(this)
+            3 -> DebateViewGroups(groupMinutes, bus).setContentView(this)
+            4 -> DebateViewOpponents(opponentMinutes, bus).setContentView(this)
+            5 -> DebateViewEnd(gamestate.candidate, winGroup(), loseGroup(), attackResult(), bus).setContentView(this)
+            else -> startActivity<PollActivity>()
         }
     }
 
-    fun setOpponentDistribution(vals: List<Int>) {
-        var cVal = 0
-        for (candidate in gamestate.candidates) {
-            opponentDistribution[candidate.name] = vals[cVal++]
-        }
-    }
-
-    fun nextStage() {
-        if (stage+1 == views.size) {
-            startActivity(intentFor<PollActivity>())
-            // FIXME assign scores
-            return
-        }
-        views[++stage].setContentView(this)
+    @Subscribe fun timeDistributionUpdate(e: DebateTimeDistributionUpdate) {
+        groupMinutes = e.groupMinutes
+        opponentMinutes = e.opponentMinutes
     }
 
     private val winPoints = 5 // FIXME do something smarter
@@ -60,7 +58,7 @@ class DebateActivity : DefaultActivity() {
         val r = Random().nextDouble()
         var sum = 0f
         for ((group, time) in groupDistribution) {
-            sum += 1/time
+            sum += 1/time // FIXME possible divide by zero
             if (sum > r) {
                 gamestate.candidate.opinions[group]!! += losePoints
                 return group
@@ -76,11 +74,6 @@ class DebateActivity : DefaultActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        views.add(DebateViewStart())
-        views.add(DebateViewChoose())
-        views.add(DebateViewGroups())
-        views.add(DebateViewOpponents())
-        views.add(DebateViewEnd())
-        views[stage].setContentView(this)
+        nextStage(nextDebateStage)
     }
 }

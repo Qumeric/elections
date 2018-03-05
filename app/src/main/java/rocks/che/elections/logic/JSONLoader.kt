@@ -4,6 +4,7 @@ import android.content.res.Resources
 import org.json.JSONArray
 import org.json.JSONObject
 import rocks.che.elections.R
+import java.util.*
 
 fun loadCandidate(json: JSONObject): Candidate {
     val basicStats = json.getJSONObject("basicStats")
@@ -101,7 +102,7 @@ fun loadQuotes(resources: Resources): List<Quote> {
     return quotes
 }
 
-fun loadGameState(json: JSONObject): Gamestate {
+fun loadGamestate(json: JSONObject): Gamestate {
     val candidate = loadCandidate(json.getJSONObject("candidate"))
 
     val jsonQuestions = json.getJSONObject("questions")
@@ -118,4 +119,11 @@ fun loadGameState(json: JSONObject): Gamestate {
     gs.step = json.getInt("step")
 
     return gs
+}
+
+fun loadFakeGamestate(resources: Resources): Gamestate {
+    val candidates = loadCandidates(resources) as MutableList
+    val candidate = candidates[Random().nextInt(candidates.size)]
+    val questions = loadQuestions(resources)
+    return Gamestate(candidate, questions, candidates)
 }

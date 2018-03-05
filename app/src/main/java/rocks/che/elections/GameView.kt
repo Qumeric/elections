@@ -2,14 +2,17 @@ package rocks.che.elections
 
 import android.support.v7.app.AlertDialog
 import android.view.Gravity
+import com.pixplicity.easyprefs.library.Prefs
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
+import rocks.che.elections.helpers.DefaultView
 import rocks.che.elections.helpers.cardView
 import rocks.che.elections.helpers.gameTextView
-import rocks.che.elections.logic.gamestate
+import rocks.che.elections.logic.QuestionGroup
+import rocks.che.elections.logic.fakeQuestions
 import rocks.che.elections.logic.getGroupResource
 
-class GameView : AnkoComponent<GameActivity> {
+class GameView(val step: Int = 0, val questions: Map<String, QuestionGroup> = fakeQuestions) : DefaultView<GameActivity> {
     private lateinit var ankoContext: AnkoContext<GameActivity>
 
     override fun createView(ui: AnkoContext<GameActivity>) = with(ui) {
@@ -19,7 +22,7 @@ class GameView : AnkoComponent<GameActivity> {
             gravity = Gravity.CENTER
             verticalLayout {
                 gravity = Gravity.CENTER
-                gameTextView(dip(20)) {
+                gameTextView(20) {
                     textResource = R.string.choose_category
                 }
             }.lparams {
@@ -28,7 +31,7 @@ class GameView : AnkoComponent<GameActivity> {
             }
 
             gameTextView {
-                text = String.format("Day: %d", gamestate.step)
+                text = String.format("Day: %d", step)
             } // FIXME lparams
 
             val row1 = linearLayout {
@@ -47,12 +50,11 @@ class GameView : AnkoComponent<GameActivity> {
 
             var leftInRow = 3
 
-            for ((group, qGroup) in gamestate.questions) {
+            for ((group, qGroup) in questions) {
                 val v = cardView {
                     onClick {
                         val q = qGroup.getQuestion()
-                        val ctx = ankoContext.ctx
-                        ctx.startActivity(ctx.intentFor<QuestionActivity>("question" to q, "group" to group))
+                        ctx.startActivity<QuestionActivity>("question" to q, "group" to group)
                     }
                     verticalLayout {
                         imageView {
@@ -92,8 +94,8 @@ class GameView : AnkoComponent<GameActivity> {
                         simpleAlert.setMessage(ctx.getString(R.string.end_game_dialog_message))
 
                         simpleAlert.setButton(AlertDialog.BUTTON_POSITIVE, ctx.getString(R.string.yes_button), { _, _ ->
-
-                            ctx.startActivity(ctx.intentFor<NewGameActivity>())
+                            Prefs.remove("gamestate")
+                            ctx.startActivity<NewGameActivity>()
                         })
                         simpleAlert.setButton(AlertDialog.BUTTON_NEGATIVE, ctx.getString(R.string.no_button), { _, _ ->
                             // do Nothing
@@ -106,7 +108,7 @@ class GameView : AnkoComponent<GameActivity> {
                 themedButton(theme = R.style.button) {
                     text = "spend money"
                     onClick {
-                        ctx.startActivity(ctx.intentFor<SpendMoneyActivity>())
+                        ctx.startActivity<SpendMoneyActivity>()
                     }
                 }
             }.lparams(weight = 0.2f, height = 0)

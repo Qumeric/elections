@@ -20,6 +20,3 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
-# AndroidPlot required (?)
--keep class com.androidplot.** { *; }
-

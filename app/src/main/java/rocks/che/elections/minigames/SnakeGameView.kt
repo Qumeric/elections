@@ -26,7 +26,7 @@ class SnakeGameView(private val onTouchListener: View.OnTouchListener) : AnkoCom
             setOnTouchListener(onTouchListener)
 
             relativeLayout {
-                scoreText = gameTextView(dip(18)) { }
+                scoreText = gameTextView(18) { }
                 //?lengthText = gameTextView {}
             }.lparams(weight = 7/32f, width = matchParent, height = 0)
 

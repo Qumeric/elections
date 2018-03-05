@@ -23,10 +23,12 @@ class LadderGameView : AnkoComponent<LadderGameActivity> {
     @SuppressLint("RtlHardcoded")
     override fun createView(ui: AnkoContext<LadderGameActivity>) = with(ui) {
         ankoContext = ui
-        stickmanDrawable = GifDrawable(resources, R.drawable.ladder_anim)
-        stickmanDrawable.stop()
 
         frameLayout {
+            if (!isInEditMode()) { // FIXME
+                stickmanDrawable = GifDrawable(resources, R.drawable.ladder_anim)
+                stickmanDrawable.stop()
+            }
             relativeLayout {
                 gravity = Gravity.CENTER
                 onClick {
@@ -35,7 +37,7 @@ class LadderGameView : AnkoComponent<LadderGameActivity> {
                     (ctx as LadderGameActivity).tap()
                 }
 
-                scoreText = gameTextView(dip(18)) {
+                scoreText = gameTextView(18) {
                     text = "0"
                 }.lparams {
                     alignParentTop()
@@ -50,12 +52,18 @@ class LadderGameView : AnkoComponent<LadderGameActivity> {
                     width = dip(100)
                 }
 
-                stickmanView = gifImageView {
-                    isClickable = false
-                    setImageDrawable(stickmanDrawable)
-                }.lparams {
-                    centerInParent()
-                    width = dip(80)
+                if (!isInEditMode) { // FIXME Anko preview does not support gifImageView
+                    stickmanView = gifImageView {
+                        isClickable = false
+                        setImageDrawable(stickmanDrawable)
+                    }.lparams {
+                        centerInParent()
+                        width = dip(80)
+                    }
+                } else {
+                    imageView {
+                        backgroundResource = R.color.fuchsia
+                    }
                 }
             }
             relativeLayout {

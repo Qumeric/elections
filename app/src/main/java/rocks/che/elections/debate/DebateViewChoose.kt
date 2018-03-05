@@ -1,16 +1,21 @@
 package rocks.che.elections.debate
 
+import android.support.v4.content.ContextCompat
 import android.view.Gravity
 import android.widget.SeekBar
+import com.squareup.otto.Bus
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
 import org.jetbrains.anko.sdk25.listeners.onTouch
 import rocks.che.elections.R
+import rocks.che.elections.helpers.DebateTimeDistributionUpdate
+import rocks.che.elections.helpers.DefaultView
 import rocks.che.elections.helpers.gameTextView
+import rocks.che.elections.helpers.nextDebateStage
 
 enum class SourceSlider { OPPONENTS, GROUPS}
 
-class DebateViewChoose : AnkoComponent<DebateActivity> {
+class DebateViewChoose(val bus: Bus = Bus()) : DefaultView<DebateActivity> {
     private lateinit var ankoContext: AnkoContext<DebateActivity>
     private lateinit var groupsBar: SeekBar
     private lateinit var opponentsBar: SeekBar
@@ -21,44 +26,63 @@ class DebateViewChoose : AnkoComponent<DebateActivity> {
         verticalLayout {
             gravity = Gravity.CENTER
 
-            gameTextView(dip(20)) {
+            gameTextView(20) {
                 textResource = R.string.debate
-            }.lparams(weight = 0.06f, height = 0)
+            }.lparams(weight = 0.05f, height = 0)
 
             imageView {
                 backgroundResource = R.color.blue
-            }.lparams(weight = 0.012f, height = 0, width = dip(120))
+            }.lparams(weight = 0.005f, height = 0, width = dip(120))
 
-            gameTextView(dip(12)) {
+            space().lparams(weight = 0.03f, height = 0)
+
+            gameTextView(12) {
                 textResource = R.string.debate_choose_description
             }.lparams(weight = 0.1f, height = 0)
 
+            space().lparams(weight = 0.03f, height = 0)
+
+            gameTextView(10) {
+                textResource = R.string.group_slider_annotation
+            }.lparams(weight = 0.05f, height = 0)
             groupsBar = seekBar {
+                splitTrack = false
+                thumb = ContextCompat.getDrawable(ctx, R.drawable.seek)
+                progressDrawable = ContextCompat.getDrawable(ctx, R.drawable.seek_style)
+
                 progress = max/2
                 onTouch { _, _ ->
                     handleSliders(SourceSlider.GROUPS, ctx as DebateActivity)
                     false
                 }
-            }.lparams(weight = 0.1f, height = 0, width = matchParent)
+            }.lparams(weight = 0.04f, height = 0, width = matchParent)
 
+            space().lparams(weight = 0.03f, height = 0)
+
+            gameTextView(10) {
+                textResource = R.string.opponent_slider_annotation
+            }.lparams(weight = 0.05f, height = 0) { topMargin = dip(40)}
             opponentsBar = seekBar {
+                splitTrack = false
+                thumb = ContextCompat.getDrawable(ctx, R.drawable.seek)
+                progressDrawable = ContextCompat.getDrawable(ctx, R.drawable.seek_style)
+
                 progress = max/2
                 onTouch { _, _ ->
                     handleSliders(SourceSlider.OPPONENTS, ctx as DebateActivity)
                     false
                 }
-            }.lparams(weight = 0.1f, height = 0, width = matchParent)
+            }.lparams(weight = 0.04f, height = 0, width = matchParent)
 
+            space().lparams(weight = 0.07f, height = 0)
 
             themedButton(theme = R.style.button) {
                 textResource = R.string.next
                 onClick {
-                    val activity = ctx as DebateActivity
-                    activity.groupMinutes = groupsBar.progress
-                    activity.opponentMinutes = opponentsBar.progress
-                    activity.nextStage()
+                    bus.post(DebateTimeDistributionUpdate(groupsBar.progress, opponentsBar.progress))
+                    bus.post(nextDebateStage)
                 }
-            }.lparams(weight = 0.14f, height = 0, width = dip(180))
+            }.lparams(weight = 0.07f, height = 0, width = dip(180))
         }
     }
 

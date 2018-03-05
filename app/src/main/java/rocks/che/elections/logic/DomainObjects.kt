@@ -1,23 +1,27 @@
 package rocks.che.elections.logic
 
+import android.util.Log
+import com.pixplicity.easyprefs.library.Prefs
+import com.thedeanda.lorem.LoremIpsum
 import org.json.JSONArray
 import org.json.JSONObject
 import rocks.che.elections.R
 import java.io.Serializable
 import java.util.*
-import kotlin.collections.HashMap
 import kotlin.math.roundToInt
 
 typealias Opinions = HashMap<String, Opinion>
 
+const val secretFilename = "che.rocks.secret"
+
 // Candidates is a candidate which player can/does play.
 class Candidate(val name: String, private val description: String, val perks: List<String>,
                 private val imgResource: String, _opinions: Map<String, Int>,
-                private val levels: Map<String, Int>, val history: MutableList<Double> = mutableListOf()): Comparable<Candidate> {
+                private val levels: Map<String, Int>, val history: MutableList<Double> = mutableListOf()) : Comparable<Candidate> {
     val opinions: Opinions = hashMapOf()
     private var boost = 0 // used only for opponents
     var resource: Int = 0
-        get () = when(imgResource) {
+        get () = when (imgResource) {
             "navalny" -> R.drawable.navalny
             "sobchak" -> R.drawable.sobchak
             "zhirinovsky" -> R.drawable.zhirinovsky
@@ -75,11 +79,26 @@ class Candidate(val name: String, private val description: String, val perks: Li
         return json
     }
 
-    override fun compareTo(other: Candidate): Int = (generalOpinion()-other.generalOpinion()).roundToInt()
+    override fun compareTo(other: Candidate): Int = (generalOpinion() - other.generalOpinion()).roundToInt()
 }
 
-// default value (while candidate is unset)
-val fakeCandidate = Candidate("Fake", "Something went wrong", listOf(),"navalny", mapOf(), mapOf())
+val fakeCandidate = Candidate("Fake", "Something went wrong",
+        (0..2).map { LoremIpsum.getInstance().getWords(5, 7)},
+        "navalny", mapOf(), mapOf())
+val fakeQuestions = mapOf<String, QuestionGroup>(
+        "military" to QuestionGroup(),
+        "workers" to QuestionGroup(),
+        "foreign" to QuestionGroup(),
+        "media" to QuestionGroup(),
+        "business" to QuestionGroup()
+)
+val fakeOpinions = hashMapOf<String, Opinion>(
+        "military" to Opinion(),
+        "workers" to Opinion(),
+        "foreign" to Opinion(),
+        "media" to Opinion(),
+        "business" to Opinion()
+)
 
 data class Quote(val text: String, val author: String) : Serializable
 
@@ -119,14 +138,14 @@ class Answer(val statement: String, private val impact: Map<String, Int>) : Seri
 // Opinion is a wrapper around integer.
 // It represents level of support from the specific group.
 class Opinion(var value: Int = 0, private val limit: Int = 100) : Serializable {
-    operator fun plusAssign(x: Int){
-        value = maxOf(minOf(value+x, limit), 0)
+    operator fun plusAssign(x: Int) {
+        value = maxOf(minOf(value + x, limit), 0)
     }
 }
 
 // QuestionGroup is a wrapper around list of questions.
 // It shuffles data and provides getter to get random unused answer from the list.
-class QuestionGroup(private val questions: MutableList<Question>, shuffle:Boolean = true) {
+class QuestionGroup(private val questions: MutableList<Question>, shuffle: Boolean = true) {
     var nextQuestionIndex = 0
 
     init {
@@ -139,6 +158,8 @@ class QuestionGroup(private val questions: MutableList<Question>, shuffle:Boolea
         }
     }
 
+    constructor() : this(mutableListOf())
+
     fun getQuestion(): Question {
         nextQuestionIndex %= questions.size
         return questions[nextQuestionIndex++]
@@ -147,7 +168,7 @@ class QuestionGroup(private val questions: MutableList<Question>, shuffle:Boolea
     fun toJSON(): JSONObject {
         val json = JSONObject()
         json.put("nextQuestionIndex", nextQuestionIndex)
-        json.put("questions", JSONArray(questions))
+        json.put("questions", JSONArray(questions.map { it.toJSON() }))
         return json
     }
 }
@@ -183,7 +204,7 @@ class Gamestate(val candidate: Candidate, val questions: Map<String, QuestionGro
 
     fun isPollTime() = step != 0 && step % pollFrequency == 0
 
-    fun isLost() = candidates.all {it.generalOpinion() > candidate.generalOpinion()}
+    fun isLost() = candidates.all { it.generalOpinion() > candidate.generalOpinion() }
 
     fun isWon() = candidates.size == 1 && candidate.generalOpinion() > candidates[0].generalOpinion()
 
@@ -198,14 +219,30 @@ class Gamestate(val candidate: Candidate, val questions: Map<String, QuestionGro
     fun update() {
         step++
         candidate.update()
-        candidates.forEach { it.update()}
+        candidates.forEach { it.update() }
     }
 }
 
-var gamestate: Gamestate = Gamestate(fakeCandidate, HashMap(), mutableListOf()) // FIXME
+fun loadGame(): Gamestate {
+    val savedState = Prefs.getString("gamestate", "")
+    if (savedState == "") {
+        Log.d("loadGame", "saved state is empty or there is no saved state")
+        return Gamestate(fakeCandidate, fakeQuestions, mutableListOf())
+    }
+    Log.d("loadGame", "trying to read JSON: $savedState")
+    try {
+        return loadGamestate(JSONObject(savedState))
+    } catch (e: Exception) {
+        Log.e("loadGame", "Unable to load existing save. Probably file corruption")
+        Prefs.remove("gamestate")
+        return Gamestate(fakeCandidate, fakeQuestions, mutableListOf())
+    }
+}
+
+lateinit var gamestate: Gamestate
 
 fun getGroupResource(group: String): Int {
-    return when(group) {
+    return when (group) {
         "media" -> R.drawable.media
         "business" -> R.drawable.business
         "foreign" -> R.drawable.foreign

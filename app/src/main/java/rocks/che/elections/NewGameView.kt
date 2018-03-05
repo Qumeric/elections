@@ -1,13 +1,13 @@
 package rocks.che.elections
 
 import android.view.Gravity
-import android.widget.LinearLayout
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
 import rocks.che.elections.debate.DebateActivity
+import rocks.che.elections.helpers.DefaultView
 import rocks.che.elections.minigames.*
 
-class NewGameView : AnkoComponent<NewGameActivity> {
+class NewGameView : DefaultView<NewGameActivity> {
     private lateinit var ankoContext: AnkoContext<NewGameActivity>
 
     override fun createView(ui: AnkoContext<NewGameActivity>) = with(ui) {
@@ -19,55 +19,55 @@ class NewGameView : AnkoComponent<NewGameActivity> {
             imageButton {
                 imageResource = R.drawable.play
                 onClick {
-                    ctx.startActivity(ctx.intentFor<ChooseCandidateActivity>())
+                    ctx.startActivity<ChooseCandidateActivity>()
                 }
             }
-            themedButton(theme = R.style.button) {
+            button {
                 text = "c"
                 onClick {
-                    ctx.startActivity(ctx.intentFor<CatcherGameActivity>())
+                    ctx.startActivity<CatcherGameActivity>()
                 }
             }
             themedButton(theme = R.style.button) {
                 text = "ducks"
                 onClick {
-                    ctx.startActivity(ctx.intentFor<DucksGameActivity>())
+                    ctx.startActivity<DucksGameActivity>()
                 }
             }
             themedButton(theme = R.style.button) {
                 text = "hammer"
                 onClick {
-                    ctx.startActivity(ctx.intentFor<HammerGameActivity>())
+                    ctx.startActivity<HammerGameActivity>()
                 }
             }
             themedButton(theme = R.style.button) {
                 text = "ladder"
                 onClick {
-                    ctx.startActivity(ctx.intentFor<LadderGameActivity>())
+                    ctx.startActivity<LadderGameActivity>()
                 }
             }
             themedButton(theme = R.style.button) {
                 text = "snake"
                 onClick {
-                    ctx.startActivity(ctx.intentFor<SnakeGameActivity>())
+                    ctx.startActivity<SnakeGameActivity>()
                 }
             }
             themedButton(theme = R.style.button) {
                 text = "runner"
                 onClick {
-                    ctx.startActivity(ctx.intentFor<RunnerGameActivity>())
+                    ctx.startActivity<RunnerGameActivity>()
                 }
             }
             themedButton(theme = R.style.button) {
                 text = "debate"
                 onClick {
-                    ctx.startActivity(ctx.intentFor<DebateActivity>())
+                    ctx.startActivity<DebateActivity>()
                 }
             }
             themedButton(theme = R.style.button) {
                 text = "endGameView"
                 onClick {
-                    ctx.startActivity(ctx.intentFor<EndGameActivity>())
+                    ctx.startActivity<EndGameActivity>()
                 }
             }
         }

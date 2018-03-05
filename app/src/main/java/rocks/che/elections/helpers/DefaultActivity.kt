@@ -1,15 +1,24 @@
-package rocks.che.elections
+package rocks.che.elections.helpers
 
+import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
+import com.pixplicity.easyprefs.library.Prefs
+import com.squareup.otto.Bus
 import im.delight.android.audio.SoundManager
 import org.jetbrains.anko.AnkoContext
+import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.alert
+import rocks.che.elections.R
 import rocks.che.elections.logic.gamestate
-import rocks.che.elections.logic.save
 
-abstract class DefaultActivity: AppCompatActivity() {
+abstract class DefaultActivity: AppCompatActivity(), AnkoLogger {
     private var soundManager: SoundManager? = null
+    protected val bus = Bus()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        bus.register(this)
+    }
 
 	override fun onResume() {
 		super.onResume()
@@ -19,9 +28,8 @@ abstract class DefaultActivity: AppCompatActivity() {
 
 		soundManager!!.start()
         listOf(R.raw.ah_sound, R.raw.button_sound, R.raw.catch_miss_sound, R.raw.catch_strawberry_sound,
-                R.raw.catcher_music, R.raw.choose_sound, R.raw.ducks_music, R.raw.eat_apple_sound,
-                R.raw.hammer_miss_sound, R.raw.hammer_music, R.raw.hammer_sound, R.raw.main_music,
-                R.raw.mutin_sound, R.raw.runner_music, R.raw.shot_sound, R.raw.siren_sound, R.raw.snake_music)
+                R.raw.choose_sound, R.raw.eat_apple_sound, R.raw.hammer_sound, R.raw.hammer_miss_sound,
+                R.raw.mutin_sound, R.raw.shot_sound, R.raw.siren_sound)
                 .forEach {soundManager!!.load(it)}
 	}
 
@@ -60,12 +68,8 @@ abstract class DefaultActivity: AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        try {
-            if (gamestate.candidate.name != "Fake") {
-                save(this, gamestate.toJSON().toString())
-            }
-        } catch (e: Exception) {
-            Log.e("DefaultActivity", "Unable to saveGame")
+        if (gamestate.candidate.name != "Fake") {
+            Prefs.putString("gamestate", gamestate.toJSON().toString())
         }
     }
 }

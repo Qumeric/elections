@@ -31,11 +31,11 @@ class CatcherGameView : AnkoComponent<CatcherGameActivity> {
                 backgroundResource = R.color.black
                 background.alpha = 33
                 gravity = Gravity.CENTER
-                scoreText = gameTextView(dip(18)) {
+                scoreText = gameTextView(18) {
                 }.lparams {
                     alignParentLeft()
                 }
-                missedText = gameTextView(dip(18), R.color.maroon) {
+                missedText = gameTextView(18, R.color.maroon) {
                 }.lparams {
                     alignParentRight()
                 }

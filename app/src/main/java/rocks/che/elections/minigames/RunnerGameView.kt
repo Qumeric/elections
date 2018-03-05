@@ -21,17 +21,20 @@ class RunnerGameView : AnkoComponent<RunnerGameActivity> {
 
     @SuppressLint("RtlHardcoded")
     override fun createView(ui: AnkoContext<RunnerGameActivity>) = with(ui) {
-        stickmanDrawable = GifDrawable(resources, R.drawable.runner_anim)
         ankoContext = ui
 
         verticalLayout {
+            if (!isInEditMode()) { // FIXME
+                stickmanDrawable = GifDrawable(resources, R.drawable.runner_anim)
+            }
+
             gravity = Gravity.CENTER
 
             relativeLayout {
                 backgroundResource = R.color.black
                 background.alpha = 33
                 gravity = Gravity.CENTER
-                scoreText = gameTextView(dip(18)) {
+                scoreText = gameTextView(18) {
                     text = "0"
                 }
             }.lparams(weight = 0.15f, height = 0, width = matchParent)
@@ -42,9 +45,15 @@ class RunnerGameView : AnkoComponent<RunnerGameActivity> {
                     stickmanDrawable.seekToFrame((stickmanDrawable.currentFrameIndex + 1) % stickmanDrawable.numberOfFrames)
                     (ctx as RunnerGameActivity).startFlight()
                 }
-                stickmanView = gifImageView {
-                    isClickable = false
-                    setImageDrawable(stickmanDrawable)
+                if (!isInEditMode) { // FIXME
+                    stickmanView = gifImageView {
+                        isClickable = false
+                        setImageDrawable(stickmanDrawable)
+                    }
+                } else {
+                    imageView {
+                        backgroundResource=R.color.fuchsia
+                    }
                 }
             }.lparams(weight = 0.85f, height = 0, width = matchParent)
         }
