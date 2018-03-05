@@ -77,7 +77,7 @@ class ChooseCandidateView : AnkoComponent<ChooseCandidateActivity> {
                                 onClick {
                                     gamestate = Gamestate(candidate, loadQuestions(resources),
                                             loadCandidates(resources) as MutableList<Candidate>)
-                                    ctx.startActivity(ctx.intentFor<GameActivity>())
+                                    ctx.startActivity(ctx.intentFor<HighlightsActivity>())
                                 }
                             }.lparams {
                                 width = matchParent

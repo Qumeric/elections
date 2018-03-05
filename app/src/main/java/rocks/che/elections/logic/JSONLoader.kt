@@ -8,35 +8,26 @@ import rocks.che.elections.R
 fun loadCandidate(json: JSONObject): Candidate {
     val basicStats = json.getJSONObject("basicStats")
     val basicLevels = json.getJSONObject("basicLevels")
+    val jsonPerks = json.getJSONArray("perks")
+    val jsonHistory = json.getJSONArray("history")
 
     val opinions = mutableMapOf<String, Int>()
     val levels = mutableMapOf<String, Int>()
+    val perks = (0 until jsonPerks.length()).map { jsonPerks.getString(it) }
+    val history = ((0 until jsonHistory.length()).map{ jsonHistory.getDouble(it) }).toMutableList()
 
-    for (stat in basicStats.keys()) {
-        opinions[stat] = basicStats.getInt(stat)
-    }
+    basicStats.keys().forEach { opinions[it] = basicStats.getInt(it) }
 
-    for (level in basicLevels.keys()) {
-        levels[level] = basicLevels.getInt(level)
-    }
-
-    val candidate = Candidate(
+    basicLevels.keys().forEach { levels[it] = basicLevels.getInt(it) }
+    return Candidate(
             json.getString("name"),
             json.getString("description"),
+            perks,
             json.getString("imgResource"),
-            opinions, levels)
-
-    val jsonHistory = json.getJSONArray("history")
-    for (i in 0 until jsonHistory.length()) {
-        candidate.history.add(jsonHistory.getDouble(i))
-    }
-
-    return candidate
+            opinions, levels, history)
 }
 
-fun loadCandidates(json: JSONArray): List<Candidate> {
-    return (0 until json.length()).map { loadCandidate(json.getJSONObject(it)) }
-}
+fun loadCandidates(json: JSONArray) = (0 until json.length()).map { loadCandidate(json.getJSONObject(it)) }
 
 fun loadCandidates(resources: Resources): List<Candidate> {
     val jsonString = resources.openRawResource(R.raw.candidates)

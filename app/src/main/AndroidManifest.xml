@@ -66,6 +66,9 @@
         <activity
             android:name=".EndGameActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".HighlightsActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

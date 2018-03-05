@@ -1,6 +1,5 @@
 package rocks.che.elections.logic
 
-import android.util.Log
 import org.json.JSONArray
 import org.json.JSONObject
 import rocks.che.elections.R
@@ -12,10 +11,10 @@ import kotlin.math.roundToInt
 typealias Opinions = HashMap<String, Opinion>
 
 // Candidates is a candidate which player can/does play.
-class Candidate(val name: String, private val description: String, private val imgResource: String,
-                _opinions: Map<String, Int>, private val levels: Map<String, Int>): Comparable<Candidate> {
+class Candidate(val name: String, private val description: String, val perks: List<String>,
+                private val imgResource: String, _opinions: Map<String, Int>,
+                private val levels: Map<String, Int>, val history: MutableList<Double> = mutableListOf()): Comparable<Candidate> {
     val opinions: Opinions = hashMapOf()
-    val history = mutableListOf<Double>()
     private var boost = 0 // used only for opponents
     var resource: Int = 0
         get () = when(imgResource) {
@@ -65,17 +64,13 @@ class Candidate(val name: String, private val description: String, private val i
             basicLevels.put(name, lvl)
         }
 
-        val jsonHistory = JSONArray()
-        for (h in history) {
-            jsonHistory.put(h)
-        }
-
         json.put("imgResource", imgResource)
         json.put("name", name)
         json.put("description", description)
         json.put("basicStats", basicStats)
         json.put("basicLevels", basicLevels)
-        json.put("history", jsonHistory)
+        json.put("history", JSONArray(history))
+        json.put("perks", JSONArray(perks))
 
         return json
     }
@@ -84,21 +79,16 @@ class Candidate(val name: String, private val description: String, private val i
 }
 
 // default value (while candidate is unset)
-val fakeCandidate = Candidate("Fake", "Something went wrong", "navalny", mapOf(), mapOf())
+val fakeCandidate = Candidate("Fake", "Something went wrong", listOf(),"navalny", mapOf(), mapOf())
 
 data class Quote(val text: String, val author: String) : Serializable
 
 class Question(val statement: String, val answers: List<Answer>) : Serializable {
     fun toJSON(): JSONObject {
         val json = JSONObject()
-        val jsonAnswers = JSONArray()
-
-        for (anw in answers) {
-            jsonAnswers.put(anw.toJSON())
-        }
 
         json.put("statement", statement)
-        json.put("answers", jsonAnswers)
+        json.put("answers", JSONArray(answers.map { it.toJSON() }))
 
         return json
     }
@@ -110,7 +100,6 @@ class Answer(val statement: String, private val impact: Map<String, Int>) : Seri
     fun select() {
         gamestate.update()
         for ((groupName, delta) in impact) {
-            Log.d("Answer", groupName)
             if (groupName in gamestate.opinions.keys) {
                 gamestate.opinions[groupName]!! += delta
             }
@@ -145,9 +134,7 @@ class QuestionGroup(private val questions: MutableList<Question>, shuffle:Boolea
             val rg = Random()
             for (i in 0 until questions.size) {
                 val randomPosition = rg.nextInt(questions.size)
-                val tmp = questions[i]
-                questions[i] = questions[randomPosition]
-                questions[randomPosition] = tmp
+                questions[i] = questions[randomPosition].also { questions[randomPosition] = questions[i] }
             }
         }
     }
@@ -159,12 +146,8 @@ class QuestionGroup(private val questions: MutableList<Question>, shuffle:Boolea
 
     fun toJSON(): JSONObject {
         val json = JSONObject()
-        val jsonQuestions = JSONArray()
-        for (q in questions) {
-            jsonQuestions.put(q.toJSON())
-        }
         json.put("nextQuestionIndex", nextQuestionIndex)
-        json.put("questions", jsonQuestions)
+        json.put("questions", JSONArray(questions))
         return json
     }
 }
@@ -184,38 +167,23 @@ class Gamestate(val candidate: Candidate, val questions: Map<String, QuestionGro
 
     fun toJSON(): JSONObject {
         val json = JSONObject()
-        json.put("candidate", candidate.toJSON())
 
         val jsonQuestions = JSONObject()
         for ((group, qGroup) in questions) {
             jsonQuestions.put(group, qGroup.toJSON())
         }
+
+        json.put("candidate", candidate.toJSON())
         json.put("questions", jsonQuestions)
-
-        val jsonCandidates = JSONArray()
-        for (fc in candidates) {
-            jsonCandidates.put(fc.toJSON())
-        }
-        json.put("candidates", jsonCandidates)
-
+        json.put("candidates", JSONArray(candidates.map { it.toJSON() }))
         json.put("money", money)
         json.put("step", step)
         return json
     }
 
-    fun isPollTime(): Boolean {
-        return step != 0 && step % pollFrequency == 0
-    }
+    fun isPollTime() = step != 0 && step % pollFrequency == 0
 
-    fun isLost(): Boolean {
-        val opinionOnPlayer = candidate.generalOpinion()
-        for (c in candidates) {
-            if (c.generalOpinion() < opinionOnPlayer) {
-                return false
-            }
-        }
-        return true
-    }
+    fun isLost() = candidates.all {it.generalOpinion() > candidate.generalOpinion()}
 
     fun isWon() = candidates.size == 1 && candidate.generalOpinion() > candidates[0].generalOpinion()
 
@@ -234,7 +202,7 @@ class Gamestate(val candidate: Candidate, val questions: Map<String, QuestionGro
     }
 }
 
-var gamestate: Gamestate = Gamestate(fakeCandidate, HashMap(), mutableListOf())
+var gamestate: Gamestate = Gamestate(fakeCandidate, HashMap(), mutableListOf()) // FIXME
 
 fun getGroupResource(group: String): Int {
     return when(group) {

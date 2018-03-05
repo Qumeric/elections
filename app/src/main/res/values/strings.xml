@@ -20,6 +20,7 @@
     <string name="congratulations">Congratulations!</string>
     <string name="need_unblock">You have to unblock this candidate first</string>
     <string name="secret_candidate_name">Нэвэльный</string>
+    <string name="your_candidate">Your candidate</string>
 
     <!-- Debate description -->
     <string name="debate">Debate</string>
