@@ -56,7 +56,6 @@ class ChooseCandidateView(val secretUnlocked: Boolean = false, val bus: Bus = Bu
                                     }.lparams {
                                         width = dip(80)
                                     }
-
                                     verticalLayout {
                                         gravity = Gravity.END
                                         for ((group, value) in candidate.opinions) {

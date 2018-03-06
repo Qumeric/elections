@@ -2,6 +2,7 @@ package rocks.che.elections.minigames
 
 import android.os.Bundle
 import android.view.View
+import im.delight.android.audio.MusicManager
 import org.jetbrains.anko.sdk25.listeners.onClick
 import org.jetbrains.anko.setContentView
 import rocks.che.elections.R
@@ -51,6 +52,7 @@ class HammerGameActivity : MiniGameActivity() {
 
         view = HammerGameView()
         view.setContentView(this)
+        MusicManager.instance.play(this, R.raw.hammer_music)
 
         drawInformationDialog(
                 getString(R.string.hammer_info_title),

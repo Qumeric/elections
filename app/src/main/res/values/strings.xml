@@ -21,7 +21,10 @@
     <string name="need_unblock">You have to unblock this candidate first</string>
     <string name="secret_candidate_name">Нэвэльный</string>
     <string name="your_candidate">Your candidate</string>
-    <string name="endgame_text">Поздравляем! Вы неплохо провели президентскую компанию, но победил сами знаете кто!</string>
+    <string name="endgame_text">Вы неплохо провели президентскую компанию, но победил сами знаете кто!</string>
+    <string name="logo">
+        <font color='#EE0000'>В</font>ремя\n<font color='#EE0000'>В</font>ыбриать\n<font color='#EE0000'>П</font>резидента
+    </string>
 
     <!-- Debate description -->
     <string name="debate">Debate</string>
@@ -69,37 +72,49 @@
     <string name="score_template">Score: %d</string>
 
     <string name="ducks_info_title">A</string>
-    <string name="ducks_info_message">A</string>
+    <string name="ducks_info_message">
+        Стреляйте как можно точнее! Ваша задача: попасть в максимальное количество уток.
+    </string>
     <string name="ducks_end_title">Minigame is finished</string>
     <string name="ducks_end_message_template">
         You have scored %d points
     </string>
     <string name="runner_info_title">A</string>
-    <string name="runner_info_message">A</string>
+    <string name="runner_info_message">
+        Не споткнитесь! Ваша задача: перепрыгнуть все полицейские машины.
+    </string>
     <string name="runner_end_title">Minigame is finished</string>
     <string name="runner_end_message_template">
         You have scored %d points
     </string>
     <string name="catcher_info_title">A</string>
-    <string name="catcher_info_message">A</string>
+    <string name="catcher_info_message">
+        Передвигая тележку, соберите как можно больше ягод.
+    </string>
     <string name="catcher_end_title">Minigame is finished</string>
     <string name="catcher_end_message_template">
         You have scored %d points
     </string>
     <string name="hammer_info_title">A</string>
-    <string name="hammer_info_message">A</string>
+    <string name="hammer_info_message">
+        Не позволяйте им всплыть! Нажимайте на персонажей, как только они появляются.
+    </string>
     <string name="hammer_end_title">Minigame is finished</string>
     <string name="hammer_end_message_template">
         You have scored %d points
     </string>
     <string name="snake_info_title">A</string>
-    <string name="snake_info_message">A</string>
+    <string name="snake_info_message">
+        Змейка кушает яблоки. Ничего необычного.
+    </string>
     <string name="snake_end_title">Minigame is finished</string>
     <string name="snake_end_message_template">
         You have scored %d points
     </string>
     <string name="ladder_info_title">A</string>
-    <string name="ladder_info_message">A</string>
+    <string name="ladder_info_message">
+        Поднимаясь по лестнице, жмите на экран как можно быстрее.
+    </string>
     <string name="ladder_end_title">Minigame is finished</string>
     <string name="ladder_end_message_template">
         You have scored %d points

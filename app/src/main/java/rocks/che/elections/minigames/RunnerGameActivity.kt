@@ -43,7 +43,7 @@ class RunnerGameActivity : MiniGameActivity() {
             car.getHitRect(carRC)
 
             if (smRC.intersect(carRC)) {
-                MusicManager.getInstance().play(ctx, R.raw.siren_sound)
+                MusicManager.instance.play(ctx, R.raw.siren_sound)
                 lose()
                 return true
             }
@@ -99,6 +99,7 @@ class RunnerGameActivity : MiniGameActivity() {
         view = RunnerGameView()
         view.setContentView(this)
 
+        MusicManager.instance.play(this, R.raw.runner_music)
 
         drawInformationDialog(getString(R.string.runner_info_title), getString(R.string.runner_info_message),
                 {

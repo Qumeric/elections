@@ -12,42 +12,45 @@ import org.jetbrains.anko.alert
 import rocks.che.elections.R
 import rocks.che.elections.logic.gamestate
 
-abstract class DefaultActivity: AppCompatActivity(), AnkoLogger {
+abstract class DefaultActivity : AppCompatActivity(), AnkoLogger {
     private var soundManager: SoundManager? = null
     protected val bus = Bus()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bus.register(this)
-        MusicManager.getInstance().play(this, R.raw.main_music)
     }
 
-	override fun onResume() {
-		super.onResume()
+    override fun onResume() {
+        super.onResume()
+
+        MusicManager.volume = 0.5f
 
         val maxSimultaneousStreams = 5
         soundManager = SoundManager(this, maxSimultaneousStreams)
 
-		soundManager!!.start()
+        soundManager!!.start()
         listOf(R.raw.ah_sound, R.raw.button_sound, R.raw.catch_miss_sound, R.raw.catch_strawberry_sound,
                 R.raw.choose_sound, R.raw.eat_apple_sound, R.raw.hammer_sound, R.raw.hammer_miss_sound,
-                R.raw.mutin_sound, R.raw.shot_sound, R.raw.siren_sound)
-                .forEach {soundManager!!.load(it)}
-	}
+                R.raw.mutin_sound, R.raw.shot_sound, R.raw.siren_sound,
+                R.raw.main_music, R.raw.ducks_music, R.raw.catcher_music,
+                R.raw.runner_music, R.raw.snake_music)
+                .forEach { soundManager!!.load(it) }
+    }
 
-	protected fun playSound(res: Int) {
+    protected fun playSound(res: Int) {
         if (soundManager != null)
             soundManager!!.play(res)
     }
 
-	override fun onPause() {
-		super.onPause()
+    override fun onPause() {
+        super.onPause()
 
         if (soundManager != null) {
-			soundManager!!.cancel()
-			soundManager = null
-		}
-	}
+            soundManager!!.cancel()
+            soundManager = null
+        }
+    }
 
     override fun onBackPressed() {
         // Do nothing

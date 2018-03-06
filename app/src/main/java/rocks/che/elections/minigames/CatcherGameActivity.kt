@@ -47,13 +47,13 @@ class CatcherGameActivity : MiniGameActivity() {
             s.getHitRect(sRC)
 
             if (cartRC.intersect(sRC)) {
-                MusicManager.getInstance().play(ctx, R.raw.catch_strawberry_sound)
+                MusicManager.instance.play(ctx, R.raw.catch_strawberry_sound)
                 score++
                 toRemove.add(s)
             }
 
             if (s.y + s.height >= view.layout.height) {
-                MusicManager.getInstance().play(ctx, R.raw.catch_miss_sound)
+                MusicManager.instance.play(ctx, R.raw.catch_miss_sound)
                 missedStrawberries++
                 toRemove.add(s)
             }
@@ -80,6 +80,8 @@ class CatcherGameActivity : MiniGameActivity() {
 
         view = CatcherGameView()
         view.setContentView(this)
+
+        MusicManager.instance.play(this, R.raw.catcher_music)
 
         drawInformationDialog(getString(R.string.ducks_info_title), getString(R.string.ducks_info_message),
                 {

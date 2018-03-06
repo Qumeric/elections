@@ -1,6 +1,7 @@
 package rocks.che.elections
 
 import android.os.Bundle
+import im.delight.android.audio.MusicManager
 import org.jetbrains.anko.setContentView
 import org.jetbrains.anko.startActivity
 import rocks.che.elections.helpers.DefaultActivity
@@ -22,5 +23,6 @@ class NewGameActivity: DefaultActivity() {
 
         view = NewGameView()
         view.setContentView(this)
+        MusicManager.instance.play(this, R.raw.main_music)
     }
 }

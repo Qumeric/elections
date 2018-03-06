@@ -6,10 +6,17 @@ import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
 import rocks.che.elections.helpers.DefaultView
 import rocks.che.elections.helpers.gameTextView
+import rocks.che.elections.logic.Answer
 import rocks.che.elections.logic.Question
 import rocks.che.elections.logic.getGroupResource
 
-class QuestionView(private val question: Question, val group: String) : DefaultView<QuestionActivity> {
+val fakeQuestion = Question("statement", listOf(
+        Answer("answer 1", mapOf()),
+        Answer("answer 2", mapOf()),
+        Answer("answer 3", mapOf())
+))
+class QuestionView(private val question: Question = fakeQuestion,
+                   val group: String = "group") : DefaultView<QuestionActivity> {
     private lateinit var ankoContext: AnkoContext<QuestionActivity>
 
     override fun createView(ui: AnkoContext<QuestionActivity>) = with(ui) {
@@ -23,6 +30,7 @@ class QuestionView(private val question: Question, val group: String) : DefaultV
             }.lparams {
                 width = dip(70)
                 height = dip(70)
+                bottomMargin = dip(10)
             }
 
             gameTextView(15) {

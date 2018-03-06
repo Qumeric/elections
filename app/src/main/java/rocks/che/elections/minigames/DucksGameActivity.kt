@@ -66,6 +66,8 @@ class DucksGameActivity : MiniGameActivity() {
         view = DucksGameView()
         view.setContentView(this)
 
+        MusicManager.instance.play(this, R.raw.ducks_music)
+
         drawInformationDialog(getString(R.string.ducks_info_title), getString(R.string.ducks_info_message),
                 {
                     handler.postDelayed({createDuck()}, 1)
@@ -74,7 +76,7 @@ class DucksGameActivity : MiniGameActivity() {
     }
 
     fun shoot() {
-        MusicManager.getInstance().play(this, R.raw.shot_sound)
+        playSound(R.raw.shot_sound)
 
         val chRC = Rect()
         view.crosshair.getHitRect(chRC)

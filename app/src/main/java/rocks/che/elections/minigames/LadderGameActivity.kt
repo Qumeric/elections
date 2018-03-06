@@ -7,16 +7,11 @@ import rocks.che.elections.R
 class LadderGameActivity : MiniGameActivity() {
     private lateinit var view: LadderGameView
 
-    private val length = 30 // in seconds
+    private val length = 20L // in seconds
 
     fun tap() {
         score++
         view.scoreText.text = score.toString()
-    }
-
-    private fun danger() {
-        view.enemyView.x += 10
-        handler.postDelayed({danger()}, 2000)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,12 +19,12 @@ class LadderGameActivity : MiniGameActivity() {
 
         view = LadderGameView()
         view.setContentView(this)
+        //MusicManager.getInstance().play(this, R.raw.) FIXME
 
 
         drawInformationDialog(getString(R.string.ladder_info_title), getString(R.string.ladder_info_message),
                 {
-                    handler.postDelayed({danger()}, 2000)
-                    handler.postDelayed({lose()}, 1000 * length.toLong())
+                    handler.postDelayed({lose()}, 1000 * length)
                 }, view.ankoContext)
 
     }

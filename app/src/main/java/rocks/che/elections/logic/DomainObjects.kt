@@ -92,11 +92,11 @@ val fakeQuestions = mapOf<String, QuestionGroup>(
         "business" to QuestionGroup()
 )
 val fakeOpinions = hashMapOf<String, Opinion>(
-        "military" to Opinion(),
-        "workers" to Opinion(),
-        "foreign" to Opinion(),
-        "media" to Opinion(),
-        "business" to Opinion()
+        "military" to Opinion(8),
+        "workers" to Opinion(16),
+        "foreign" to Opinion(32),
+        "media" to Opinion(64),
+        "business" to Opinion(100)
 )
 
 data class Quote(val text: String, val author: String) : Serializable

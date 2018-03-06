@@ -17,7 +17,7 @@ class ChangeActivity : DefaultActivity() {
         val oldValues = gamestate.opinions.mapValues { it.value.value }
         answer.select()
 
-        view = ChangeView(oldValues)
+        view = ChangeView(oldValues, gamestate.opinions, gamestate.isPollTime())
         view.setContentView(this)
     }
 }

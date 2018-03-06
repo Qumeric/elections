@@ -1,6 +1,5 @@
 package rocks.che.elections.minigames
 
-import android.annotation.SuppressLint
 import android.view.Gravity
 import android.widget.ImageView
 import android.widget.TextView
@@ -18,30 +17,29 @@ class LadderGameView : AnkoComponent<LadderGameActivity> {
     lateinit var stickmanView: GifImageView
     lateinit var ladderView: ImageView
     lateinit var scoreText: TextView
-    lateinit var enemyView: ImageView
 
-    @SuppressLint("RtlHardcoded")
     override fun createView(ui: AnkoContext<LadderGameActivity>) = with(ui) {
         ankoContext = ui
 
         frameLayout {
-            if (!isInEditMode()) { // FIXME
+            // Anko preview does not support gif-drawable assets
+            if (!isInEditMode) {
                 stickmanDrawable = GifDrawable(resources, R.drawable.ladder_anim)
                 stickmanDrawable.stop()
             }
+
+            scoreText = gameTextView(18) {
+                text = "0"
+            }.lparams {
+                gravity = Gravity.TOP or Gravity.END
+            }
+
             relativeLayout {
                 gravity = Gravity.CENTER
                 onClick {
                     stickmanDrawable.seekToFrame((stickmanDrawable.currentFrameIndex + 1) % stickmanDrawable.numberOfFrames)
                     ladderView.y += 5
                     (ctx as LadderGameActivity).tap()
-                }
-
-                scoreText = gameTextView(18) {
-                    text = "0"
-                }.lparams {
-                    alignParentTop()
-                    centerHorizontally()
                 }
 
                 ladderView = imageView {
@@ -52,7 +50,7 @@ class LadderGameView : AnkoComponent<LadderGameActivity> {
                     width = dip(100)
                 }
 
-                if (!isInEditMode) { // FIXME Anko preview does not support gifImageView
+                if (!isInEditMode) {
                     stickmanView = gifImageView {
                         isClickable = false
                         setImageDrawable(stickmanDrawable)
@@ -63,20 +61,12 @@ class LadderGameView : AnkoComponent<LadderGameActivity> {
                 } else {
                     imageView {
                         backgroundResource = R.color.fuchsia
+                    }.lparams {
+                        centerInParent()
+                        width = dip(80)
                     }
                 }
-            }
-            relativeLayout {
-                gravity = Gravity.LEFT
-                enemyView = imageView {
-                    isClickable = false
-                    imageResource = R.drawable.putin
-                    rotation = 90f
-                }.lparams {
-                    width = dip(100)
-                    x = -width.toFloat()
-                }
-            }
+            }.lparams(height= matchParent, width = matchParent)
         }
     }
 }

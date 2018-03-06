@@ -45,7 +45,7 @@ class SnakeGameActivity : MiniGameActivity() {
 
     fun eat() {
         score++
-        MusicManager.getInstance().play(this, R.raw.eat_apple_sound)
+        MusicManager.instance.play(this, R.raw.eat_apple_sound)
         apple = genApple()
     }
 
@@ -55,33 +55,31 @@ class SnakeGameActivity : MiniGameActivity() {
                 R.drawable.ic_apple_3)[Random().nextInt(3)]
     }
 
-    private val update = object : Runnable {
-        override fun run() {
-            view.scoreText.text = score.toString()
+    private fun update() {
+        view.scoreText.text = score.toString()
 
-            val nextHeadPos = snake.first.plus(d)
-            if (!nextHeadPos.isValid(view.rowCnt, view.colCnt) || inSnake(nextHeadPos)) {
-                lose()
-                return
-            }
-            snake.addFirst(nextHeadPos)
-
-            if (snake.first != apple) {
-                view.field[snake.last.y][snake.last.x].backgroundResource = R.color.green
-                snake.removeLast()
-            } else {
-                eat()
-            }
-
-            for (pos in snake) {
-                val elem = view.field[pos.y][pos.x]
-                elem.backgroundResource = R.color.navy
-            }
-
-            view.field[apple!!.y][apple!!.x].imageResource = appleResource
-
-            handler.postDelayed(this, 300L)
+        val nextHeadPos = snake.first.plus(d)
+        if (!nextHeadPos.isValid(view.rowCnt, view.colCnt) || inSnake(nextHeadPos)) {
+            lose()
+            return
         }
+        snake.addFirst(nextHeadPos)
+
+        if (snake.first != apple) {
+            view.field[snake.last.y][snake.last.x].backgroundResource = R.color.green
+            snake.removeLast()
+        } else {
+            eat()
+        }
+
+        for (pos in snake) {
+            val elem = view.field[pos.y][pos.x]
+            elem.backgroundResource = R.color.navy
+        }
+
+        view.field[apple!!.y][apple!!.x].imageResource = appleResource
+
+        handler.postDelayed({update()}, 300L)
     }
 
     private fun inSnake(obj: Position): Boolean {
@@ -105,30 +103,34 @@ class SnakeGameActivity : MiniGameActivity() {
         super.onCreate(savedInstanceState)
 
         view = SnakeGameView(object : OnSwipeTouchListener(this) {
-                override fun onSwipeTop() {
-                    if (d != Direction.SOUTH) {
-                        d = Direction.NORTH
-                    }
-                }
-                override fun onSwipeRight() {
-                    if (d != Direction.WEST) {
-                        d = Direction.EAST
-                    }
-                }
-                override fun onSwipeLeft() {
-                    if (d != Direction.EAST) {
-                        d = Direction.WEST
-                    }
-                }
-                override fun onSwipeBottom() {
-                    if (d != Direction.NORTH) {
-                        d = Direction.SOUTH
-                    }
+            override fun onSwipeTop() {
+                if (d != Direction.SOUTH) {
+                    d = Direction.NORTH
                 }
             }
+
+            override fun onSwipeRight() {
+                if (d != Direction.WEST) {
+                    d = Direction.EAST
+                }
+            }
+
+            override fun onSwipeLeft() {
+                if (d != Direction.EAST) {
+                    d = Direction.WEST
+                }
+            }
+
+            override fun onSwipeBottom() {
+                if (d != Direction.NORTH) {
+                    d = Direction.SOUTH
+                }
+            }
+        }
         )
         view.setContentView(this)
 
+        MusicManager.instance.play(this, R.raw.snake_music)
 
         for (i in 1..startLength) {
             snake.addLast(Position(0, startLength - i))
@@ -136,8 +138,9 @@ class SnakeGameActivity : MiniGameActivity() {
         apple = genApple()
 
         drawInformationDialog(getString(R.string.snake_info_title), getString(R.string.snake_info_message),
-                {handler.postDelayed(update, 1)}, view.ankoContext)
+                { handler.postDelayed({update()}, 1) }, view.ankoContext)
     }
+
     override fun lose() {
         handler.removeCallbacksAndMessages(null)
         drawInformationDialog(

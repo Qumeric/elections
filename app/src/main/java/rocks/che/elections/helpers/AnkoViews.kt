@@ -19,62 +19,49 @@ import org.jetbrains.anko.custom.ankoView
 import org.jetbrains.anko.textColor
 import pl.droidsonroids.gif.GifImageView
 import rocks.che.elections.R
+import kotlin.math.min
 
 class SquareGridLayout(ctx: Context) : _GridLayout(ctx) {
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        var width = MeasureSpec.getSize(widthMeasureSpec)
-        var height = MeasureSpec.getSize(heightMeasureSpec)
-
-        if (width > height) {
-            width = height
-        } else {
-            height = width
-        }
+        val size = min(MeasureSpec.getSize(widthMeasureSpec), MeasureSpec.getSize(heightMeasureSpec))
 
         super.onMeasure(
-                MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY),
-                MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY)
+                MeasureSpec.makeMeasureSpec(size, MeasureSpec.EXACTLY),
+                MeasureSpec.makeMeasureSpec(size, MeasureSpec.EXACTLY)
         )
     }
 }
 
-inline fun ViewManager.squareGridLayout(init: SquareGridLayout.() -> Unit): SquareGridLayout {
-    return ankoView({ SquareGridLayout(it) }, theme = 0, init = init)
-}
+inline fun ViewManager.squareGridLayout(init: SquareGridLayout.() -> Unit): SquareGridLayout =
+        ankoView({ SquareGridLayout(it) }, theme = 0, init = init)
 
-inline fun ViewManager.sparkView(init: SparkView.() -> Unit): SparkView {
-    return ankoView({ SparkView(it) }, theme = 0, init = init)
-}
+inline fun ViewManager.sparkView(init: SparkView.() -> Unit): SparkView =
+        ankoView({ SparkView(it) }, theme = 0, init = init)
 
-inline fun ViewManager.cardView(init: CardView.() -> Unit): CardView {
-    return ankoView({ CardView(it) }, theme = R.style.CardView, init = init)
-}
+inline fun ViewManager.cardView(init: CardView.() -> Unit): CardView =
+        ankoView({ CardView(it) }, theme = R.style.CardView, init = init)
 
-inline fun ViewManager.gifImageView(init: GifImageView.() -> Unit): GifImageView {
-    return ankoView({ GifImageView(it) }, theme = 0, init = init)
-}
+inline fun ViewManager.gifImageView(init: GifImageView.() -> Unit): GifImageView =
+        ankoView({ GifImageView(it) }, theme = 0, init = init)
 
-inline fun ViewManager.konfettiView(init: KonfettiView.() -> Unit): KonfettiView {
-    return ankoView({ KonfettiView(it) }, theme = 0, init = init)
-}
+inline fun ViewManager.konfettiView(init: KonfettiView.() -> Unit): KonfettiView =
+        ankoView({ KonfettiView(it) }, theme = 0, init = init)
 
-inline fun ViewManager.gameTextView(size: Int = 0, color: Int = 0, text: String? = null,
-                                    init: AppCompatTextView.() -> Unit): AppCompatTextView {
-    return ankoView({
-        val tv = AppCompatTextView(it)
-        tv.typeface = Typeface.createFromAsset(it.assets, "mfred.ttf")
-        tv.textAlignment = View.TEXT_ALIGNMENT_CENTER
-        if (size > 0) {
-            tv.textSize = size.toFloat() * 2.5f // FIXME shouldn't have a constant
-        } else {
-            TextViewCompat.setAutoSizeTextTypeWithDefaults(tv, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM)
-        }
-        if (color != 0) tv.textColor = ContextCompat.getColor(it, color)
-        if (text != null) tv.text = text
-        tv.elevation = 100f
-        tv
-    }, theme = 0, init = init)
-}
+inline fun ViewManager.gameTextView(size: Int? = null, color: Int? = null, text: String? = null, autoResize: Boolean = true,
+                                    init: AppCompatTextView.() -> Unit): AppCompatTextView = ankoView(
+        {
+            val tv = AppCompatTextView(it)
+            tv.typeface = Typeface.createFromAsset(it.assets, "mfred.ttf")
+            tv.textAlignment = View.TEXT_ALIGNMENT_CENTER
+            if (color != null) tv.textColor = ContextCompat.getColor(it, color)
+            if (text != null) tv.text = text
+            if (size != null) tv.textSize = size * 2.5f // FIXME shouldn't have a constant
+            else if (autoResize) TextViewCompat.setAutoSizeTextTypeWithDefaults(tv, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM)
+            tv.elevation = 100f
+            tv
+        }, theme = 0, init = init)
+
+
 
 class MyAdapter(private val yData: FloatArray) : SparkAdapter() {
     override fun getCount(): Int {
