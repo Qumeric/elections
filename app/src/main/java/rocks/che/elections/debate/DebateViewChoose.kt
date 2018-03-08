@@ -8,9 +8,7 @@ import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
 import org.jetbrains.anko.sdk25.listeners.onTouch
 import rocks.che.elections.R
-import rocks.che.elections.helpers.DebateTimeDistributionUpdate
 import rocks.che.elections.helpers.DefaultView
-import rocks.che.elections.helpers.NextDebateStage
 import rocks.che.elections.helpers.gameTextView
 
 enum class SourceSlider { OPPONENTS, GROUPS}
@@ -52,7 +50,7 @@ class DebateViewChoose(val bus: Bus = Bus()) : DefaultView<DebateActivity> {
 
                 progress = max/2
                 onTouch { _, _ ->
-                    handleSliders(SourceSlider.GROUPS, ctx as DebateActivity)
+                    handleSliders(SourceSlider.GROUPS, ui.owner)
                     false
                 }
             }.lparams(weight = 0.04f, height = 0, width = matchParent)
@@ -69,7 +67,7 @@ class DebateViewChoose(val bus: Bus = Bus()) : DefaultView<DebateActivity> {
 
                 progress = max/2
                 onTouch { _, _ ->
-                    handleSliders(SourceSlider.OPPONENTS, ctx as DebateActivity)
+                    handleSliders(SourceSlider.OPPONENTS, ui.owner)
                     false
                 }
             }.lparams(weight = 0.04f, height = 0, width = matchParent)

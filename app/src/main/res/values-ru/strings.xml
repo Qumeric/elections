@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Время Выбирать Президента</string>
+    <string name="dialog_button_close">Закрыть</string>
+    <string name="no_button">Нет</string>
+    <string name="yes_button">Да</string>
+    <string name="lost_message">Вы проиграли. Удачи в следующий раз!</string>
+    <string name="win_message">Поздравляем! Вы выиграли!</string>
+    <string name="try_again">Сыграть еще раз</string>
+    <string name="next">Далее</string>
+    <string name="choose_candidate">Выберите кандидата</string>
+    <string name="choose_category">Выберите категорию</string>
+    <string name="support">Поддержка</string>
+    <string name="results">Результаты</string>
+    <string name="exit_game">Выйти из игры</string>
+    <string name="end_game_dialog_title">Выйти из игры?</string>
+    <string name="end_game_dialog_message">Вы уверены что хотите закончить эту игру и начать новую?</string>
+    <string name="not_enough_money">Недостаточно денег!</string>
+    <string name="finish">Завершить</string>
+    <string name="congratulations">Поздравляем!</string>
+    <string name="need_unblock">Сначала вы должны разблокировать этого кандидата</string>
+    <string name="your_candidate">Ваш кандидат</string>
+    <string name="endgame_text">Вы неплохо провели президентскую компанию, но победил сами знаете кто!</string>
+    <string name="endgame_text_mutin">Вы победили в президентской компании с уверенным отрывом в 146% голосов!</string>
+    <string name="debate_description">"Вы можете потратить время, чтобы улучшить свое положение в разных группах населения или атаковать своих оппонентов     "</string>
+    <string name="ducks_welcome">Уничтожьте всех уток!</string>
+    <string name="debate">Дебаты</string>
+    <string name="debate_choose_description">"Распределите время между разговорами про группы населения и атакоЙ на оппонентов     "</string>
+    <string name="group_slider_annotation">"Время на обращения к группам  "</string>
+    <string name="score_template" translatable="false">Баллы: %d</string>
+</resources>

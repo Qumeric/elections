@@ -51,13 +51,13 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".minigames.LadderGameActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="landscape" />
         <activity
             android:name=".minigames.SnakeGameActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".minigames.RunnerGameActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="landscape" />
         <activity
             android:name=".debate.DebateActivity"
             android:screenOrientation="portrait" />

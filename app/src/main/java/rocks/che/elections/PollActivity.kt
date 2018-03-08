@@ -3,20 +3,21 @@ package rocks.che.elections
 import android.os.Bundle
 import org.jetbrains.anko.setContentView
 import rocks.che.elections.helpers.DefaultActivity
-import rocks.che.elections.logic.gamestate
+import rocks.che.elections.logic.Gamestate
 
 class PollActivity : DefaultActivity() {
     private lateinit var view: PollView
+    private lateinit var gs: Gamestate
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val h = mutableMapOf<String, List<Double>>(gamestate.candidate.name to gamestate.candidate.history)
-        for (c in gamestate.candidates) {
-            h[c.name] = c.history
-        }
+        gs = intent.getParcelableExtra("gamestate")
 
-        view = PollView(h)
+        val h = gs.candidates.map { it.name to it.history}.toMap()
+
+        view = PollView(h, gs)
+
         view.setContentView(this)
     }
 }

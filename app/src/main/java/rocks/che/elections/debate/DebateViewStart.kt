@@ -1,26 +1,20 @@
 package rocks.che.elections.debate
 
 import android.view.Gravity
-import com.squareup.otto.Bus
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
 import rocks.che.elections.R
 import rocks.che.elections.helpers.DefaultView
-import rocks.che.elections.helpers.NextDebateStage
 import rocks.che.elections.helpers.gameTextView
-import rocks.che.elections.logic.gamestate
-import rocks.che.elections.logic.loadFakeGamestate
+import rocks.che.elections.logic.bus
 
-class DebateViewStart(val bus: Bus = Bus()) : DefaultView<DebateActivity> {
+class DebateViewStart(val candidateResource: Int = 0) : DefaultView<DebateActivity> {
     private lateinit var ankoContext: AnkoContext<DebateActivity>
 
     override fun createView(ui: AnkoContext<DebateActivity>) = with(ui) {
         ankoContext = ui
 
         verticalLayout {
-            if (isInEditMode()) {
-                gamestate = loadFakeGamestate(resources)
-            } // FIXME
             space {
             }.lparams(weight = 0.125f, height = 0)
 
@@ -29,7 +23,7 @@ class DebateViewStart(val bus: Bus = Bus()) : DefaultView<DebateActivity> {
                 backgroundResource = R.color.white
 
                 imageView {
-                    imageResource = gamestate.candidate.resource
+                    imageResource = candidateResource
                 }.lparams(weight = 0.35f, height = 0)
 
                 gameTextView(20) {

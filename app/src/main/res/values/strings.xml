@@ -1,14 +1,7 @@
 <resources>
-    <string name="app_name">Elections</string>
-    <string name="dialog_button_close">Close</string>
-    <string name="no_button">No</string>
-    <string name="yes_button">Yes</string>
+    <string name="app_name">Время Выбирать Президента</string>
     <string name="lost_message">You lose. Better luck next time!</string>
     <string name="win_message">Congratulations! You won!</string>
-    <string name="try_again">Try again!</string>
-    <string name="next">Next</string>
-    <string name="choose_candidate">Choose candidate</string>
-    <string name="choose_category">Choose category</string>
     <string name="support">Support</string>
     <string name="results">Results</string>
     <string name="ducks_welcome">Shoot all the ducks!</string>
@@ -19,104 +12,106 @@
     <string name="finish">Finish</string>
     <string name="congratulations">Congratulations!</string>
     <string name="need_unblock">You have to unblock this candidate first</string>
-    <string name="secret_candidate_name">Нэвэльный</string>
+    <string name="secret_candidate_name" translatable="false">Овальный</string>
     <string name="your_candidate">Your candidate</string>
-    <string name="endgame_text">Вы неплохо провели президентскую компанию, но победил сами знаете кто!</string>
-    <string name="logo">
-        <font color='#EE0000'>В</font>ремя\n<font color='#EE0000'>В</font>ыбриать\n<font color='#EE0000'>П</font>резидента
+    <string name="logo" translatable="false">
+        <font color='#EE0000'>В</font>ремя\n<font color='#EE0000'>В</font>ыбирать\n<font color='#EE0000'>П</font>резидента
     </string>
 
     <!-- Debate description -->
     <string name="debate">Debate</string>
-    <string name="debate_description">
-        Вы можете потратить время, чтобы улучшить свое положение в разных группах населения или атаковать своих оппонентов
-    </string>
-    <string name="debate_choose_description">
-        Распределите время между разговорами про группы населения и атакоЙ на оппонентов
-    </string>
-    <string name="group_slider_annotation">
-        Время на обращения к группам
-    </string>
-    <string name="opponent_slider_annotation">
+    <string name="group_slider_annotation">Time allocated to groups</string>
+    <string name="opponent_slider_annotation" translatable="false">
         Время на дебаты с оппонентом
     </string>
-    <string name="debate_groups">
+    <string name="debate_groups" translatable="false">
         Распределите время, рассказывая о группах населения
     </string>
-    <string name="debate_opponents">
+    <string name="debate_opponents" translatable="false">
         Распределите время атаки на следующих оппонентов
     </string>
-    <string name="debate_spend_minutes_first">
+    <string name="debate_spend_minutes_first" translatable="false">
         You have to spend all available minutes!
     </string>
-    <string name="debate_minutes_left_template">
+    <string name="debate_minutes_left_template" translatable="false">
         Minutes left %d
     </string>
-    <string name="debate_finish">
+    <string name="debate_finish" translatable="false">
         Debate is finished
     </string>
-    <string name="debate_good_group_template">
+    <string name="debate_good_group_template" translatable="false">
         Ypu speech was praised by %s
     </string>
-    <string name="debate_bad_group_template">
+    <string name="debate_bad_group_template" translatable="false">
         Ypu speech was disliked by %s
     </string>
-    <string name="debate_opponent_attack_success">
+    <string name="debate_opponent_attack_success" translatable="false">
         Attack on the opponent was successful
     </string>
-    <string name="debate_opponent_attack_fail">
+    <string name="debate_opponent_attack_fail" translatable="false">
         Attack on the opponent was unsuccessful
     </string>
 
     <!-- Minigames -->
     <string name="score_template">Score: %d</string>
 
-    <string name="ducks_info_title">A</string>
-    <string name="ducks_info_message">
+    <string name="ducks_info_title" translatable="false">A</string>
+    <string name="ducks_info_message" translatable="false">
         Стреляйте как можно точнее! Ваша задача: попасть в максимальное количество уток.
     </string>
-    <string name="ducks_end_title">Minigame is finished</string>
-    <string name="ducks_end_message_template">
+    <string name="ducks_end_title" translatable="false">Minigame is finished</string>
+    <string name="ducks_end_message_template" translatable="false">
         You have scored %d points
     </string>
-    <string name="runner_info_title">A</string>
-    <string name="runner_info_message">
+    <string name="runner_info_title" translatable="false">A</string>
+    <string name="runner_info_message" translatable="false">
         Не споткнитесь! Ваша задача: перепрыгнуть все полицейские машины.
     </string>
-    <string name="runner_end_title">Minigame is finished</string>
-    <string name="runner_end_message_template">
+    <string name="runner_end_title" translatable="false">Minigame is finished</string>
+    <string name="runner_end_message_template" translatable="false">
         You have scored %d points
     </string>
-    <string name="catcher_info_title">A</string>
-    <string name="catcher_info_message">
+    <string name="catcher_info_title" translatable="false">A</string>
+    <string name="catcher_info_message" translatable="false">
         Передвигая тележку, соберите как можно больше ягод.
     </string>
-    <string name="catcher_end_title">Minigame is finished</string>
-    <string name="catcher_end_message_template">
+    <string name="catcher_end_title" translatable="false">Minigame is finished</string>
+    <string name="catcher_end_message_template" translatable="false">
         You have scored %d points
     </string>
-    <string name="hammer_info_title">A</string>
-    <string name="hammer_info_message">
+    <string name="hammer_info_title" translatable="false">A</string>
+    <string name="hammer_info_message" translatable="false">
         Не позволяйте им всплыть! Нажимайте на персонажей, как только они появляются.
     </string>
-    <string name="hammer_end_title">Minigame is finished</string>
-    <string name="hammer_end_message_template">
+    <string name="hammer_end_title" translatable="false">Minigame is finished</string>
+    <string name="hammer_end_message_template" translatable="false">
         You have scored %d points
     </string>
-    <string name="snake_info_title">A</string>
-    <string name="snake_info_message">
+    <string name="snake_info_title" translatable="false">A</string>
+    <string name="snake_info_message" translatable="false">
         Змейка кушает яблоки. Ничего необычного.
     </string>
-    <string name="snake_end_title">Minigame is finished</string>
-    <string name="snake_end_message_template">
+    <string name="snake_end_title" translatable="false">Minigame is finished</string>
+    <string name="snake_end_message_template" translatable="false">
         You have scored %d points
     </string>
-    <string name="ladder_info_title">A</string>
-    <string name="ladder_info_message">
+    <string name="ladder_info_title" translatable="false">A</string>
+    <string name="ladder_info_message" translatable="false">
         Поднимаясь по лестнице, жмите на экран как можно быстрее.
     </string>
-    <string name="ladder_end_title">Minigame is finished</string>
-    <string name="ladder_end_message_template">
+    <string name="ladder_end_title" translatable="false">Minigame is finished</string>
+    <string name="ladder_end_message_template" translatable="false">
         You have scored %d points
     </string>
+    <string name="dialog_button_close">Close</string>
+    <string name="no_button">No</string>
+    <string name="yes_button">Yes</string>
+    <string name="try_again">Play again</string>
+    <string name="next">Next</string>
+    <string name="choose_candidate">Choose candidate</string>
+    <string name="choose_category">Select category</string>
+    <string name="endgame_text">MISSING</string>
+    <string name="endgame_text_mutin">MISSING</string>
+    <string name="debate_description">MISSING</string>
+    <string name="debate_choose_description">MISSING</string>
 </resources>

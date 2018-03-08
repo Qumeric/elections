@@ -9,6 +9,7 @@ import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.CardView
 import android.view.View
 import android.view.ViewManager
+import android.widget.TextView
 import com.robinhood.spark.SparkAdapter
 import com.robinhood.spark.SparkView
 import nl.dionsegijn.konfetti.KonfettiView
@@ -56,11 +57,10 @@ inline fun ViewManager.gameTextView(size: Int? = null, color: Int? = null, text:
             if (color != null) tv.textColor = ContextCompat.getColor(it, color)
             if (text != null) tv.text = text
             if (size != null) tv.textSize = size * 2.5f // FIXME shouldn't have a constant
-            else if (autoResize) TextViewCompat.setAutoSizeTextTypeWithDefaults(tv, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM)
+            /* else */if (autoResize) TextViewCompat.setAutoSizeTextTypeWithDefaults(tv, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM)
             tv.elevation = 100f
             tv
         }, theme = 0, init = init)
-
 
 
 class MyAdapter(private val yData: FloatArray) : SparkAdapter() {
@@ -85,3 +85,25 @@ class MyAdapter(private val yData: FloatArray) : SparkAdapter() {
 }
 
 interface DefaultView<T> : AnkoComponent<T>, AnkoLogger
+
+val groupToResource = mapOf(
+        "media" to R.drawable.ic_media,
+        "business" to R.drawable.ic_business,
+        "foreign" to R.drawable.ic_foreign,
+        "workers" to R.drawable.ic_workers,
+        "military" to R.drawable.ic_military
+)
+
+val candidateResourceNameToResource = mapOf(
+        "candidate_navalny" to R.drawable.candidate_navalny,
+        "candidate_sobchak" to R.drawable.candidate_sobchak,
+        "candidate_zhirinovsky" to R.drawable.candidate_zhirinovsky,
+        "candidate_putin" to R.drawable.candidate_putin,
+        "candidate_grudinin" to R.drawable.candidate_grudinin,
+        "candidate_yavlinsky" to R.drawable.candidate_yavlinsky
+)
+
+const val h1TextSize = 20
+const val h2TextSize = 16
+const val ordinaryTextSize = 10
+

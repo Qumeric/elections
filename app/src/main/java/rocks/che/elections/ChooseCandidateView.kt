@@ -2,11 +2,9 @@ package rocks.che.elections
 
 import android.view.Gravity
 import android.widget.GridLayout
-import com.squareup.otto.Bus
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
 import rocks.che.elections.helpers.DefaultView
-import rocks.che.elections.helpers.GamestateUpdate
 import rocks.che.elections.helpers.cardView
 import rocks.che.elections.helpers.gameTextView
 import rocks.che.elections.logic.Candidate
@@ -14,7 +12,7 @@ import rocks.che.elections.logic.Gamestate
 import rocks.che.elections.logic.loadCandidates
 import rocks.che.elections.logic.loadQuestions
 
-class ChooseCandidateView(val secretUnlocked: Boolean = false, val bus: Bus = Bus()) : DefaultView<ChooseCandidateActivity> {
+class ChooseCandidateView(val secretUnlocked: Boolean = false) : DefaultView<ChooseCandidateActivity> {
     private lateinit var ankoContext: AnkoContext<ChooseCandidateActivity>
 
     override fun createView(ui: AnkoContext<ChooseCandidateActivity>) = with(ui) {
@@ -42,7 +40,8 @@ class ChooseCandidateView(val secretUnlocked: Boolean = false, val bus: Bus = Bu
                 alignmentMode = GridLayout.ALIGN_MARGINS
                 padding = dip(12)
 
-                for (candidate in loadCandidates(resources)) {
+                val candidates = loadCandidates(resources)
+                for (candidate in candidates) {
                     cardView {
                         frameLayout {
                             verticalLayout {
@@ -60,7 +59,7 @@ class ChooseCandidateView(val secretUnlocked: Boolean = false, val bus: Bus = Bu
                                         gravity = Gravity.END
                                         for ((group, value) in candidate.opinions) {
                                             gameTextView {
-                                                text = "%s: %d".format(group, value.value)
+                                                text = "%s: %d".format(group, value)
                                             }
                                         }
                                     }
@@ -73,8 +72,8 @@ class ChooseCandidateView(val secretUnlocked: Boolean = false, val bus: Bus = Bu
                                 button(candidate.name) {
                                     backgroundResource = R.color.blue
                                     onClick {
-                                        bus.post(GamestateUpdate(Gamestate(candidate, loadQuestions(resources),
-                                                loadCandidates(resources) as MutableList<Candidate>)))
+                                        ctx.startActivity<GameActivity>("gamestate" to Gamestate(candidate,
+                                                candidates as MutableList<Candidate>, loadQuestions(resources)))
                                     }
                                 }.lparams {
                                     width = matchParent

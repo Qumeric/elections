@@ -1,89 +1,44 @@
 package rocks.che.elections.logic
 
+import android.os.Parcelable
 import android.util.Log
+import com.google.gson.Gson
 import com.pixplicity.easyprefs.library.Prefs
-import org.json.JSONArray
-import org.json.JSONObject
-import rocks.che.elections.R
-import java.io.Serializable
-import java.util.*
+import com.squareup.otto.Bus
+import kotlinx.android.parcel.Parcelize
+import rocks.che.elections.helpers.groupToResource
 import kotlin.math.roundToInt
-
-typealias Opinions = HashMap<String, Opinion>
 
 const val secretFilename = "che.rocks.secret"
 
-// Candidates is a candidate which player can/does play.
-class Candidate(val name: String, private val description: String, val perks: List<String>,
-                private val imgResource: String, _opinions: Map<String, Int>,
-                private val levels: Map<String, Int>, val history: MutableList<Double> = mutableListOf()) : Comparable<Candidate> {
-    val opinions: Opinions = hashMapOf()
-    private var boost = 0 // used only for opponents
-    var resource: Int = 0
-        get () = when (imgResource) {
-            "navalny" -> R.drawable.navalny
-            "sobchak" -> R.drawable.sobchak
-            "zhirinovsky" -> R.drawable.zhirinovsky
-            "putin" -> R.drawable.putin
-            "grudinin" -> R.drawable.grudinin
-            "yavlinsky" -> R.drawable.yavlinsky
-            else -> 0 // should never be reached
-        }
+class Opinions : HashMap<String, Int>() {
+    override fun get(key: String): Int? {
+        val value = super.get(key) ?: return null
+        return maxOf(0, minOf(value, 100))
+    }
+}
+
+@Parcelize
+class Candidate(val name: String, val perks: List<String>,
+                val resource: Int, val opinions: Opinions,
+                val history: MutableList<Double>) : Comparable<Candidate>, Parcelable {
+    val generalOpinion get() = opinions.values.sum().toDouble() / opinions.size
 
     init {
-        for ((group, value) in _opinions) {
-            opinions[group] = Opinion()
-            opinions[group]!! += value
-        }
-        history.add(generalOpinion())
-    }
-
-    fun generalOpinion(): Double {
-        var total: Double = 0.toDouble()
-        for ((_, value) in opinions) {
-            total += value.value
-        }
-        return (total / opinions.size) + boost
+        history.add(generalOpinion)
     }
 
     fun update() {
-        if (name != gamestate.candidate.name) {
-            boost += Random().nextInt(6)
-        }
-        history.add(generalOpinion())
+        // TODO add rating if not player candidate
+        history.add(generalOpinion)
     }
 
-
-    fun toJSON(): JSONObject {
-        val json = JSONObject()
-
-        val basicStats = JSONObject()
-        for ((group, op) in opinions) {
-            basicStats.put(group, op.value)
-        }
-
-        val basicLevels = JSONObject()
-        for ((name, lvl) in levels) {
-            basicLevels.put(name, lvl)
-        }
-
-        json.put("imgResource", imgResource)
-        json.put("name", name)
-        json.put("description", description)
-        json.put("basicStats", basicStats)
-        json.put("basicLevels", basicLevels)
-        json.put("history", JSONArray(history))
-        json.put("perks", JSONArray(perks))
-
-        return json
-    }
-
-    override fun compareTo(other: Candidate): Int = (generalOpinion() - other.generalOpinion()).roundToInt()
+    override fun compareTo(other: Candidate) = (generalOpinion - other.generalOpinion).roundToInt()
 }
 
-val fakeCandidate = Candidate("Fake", "Something went wrong",
+/*val fakeCandidate = Candidate("Fake", "Something went wrong",
         (1..3).map { "blah ".repeat(it) },
-        "navalny", mapOf(), mapOf())
+        "candidate_navalny", mapOf(), mapOf())
 val fakeQuestions = mapOf<String, QuestionGroup>(
         "military" to QuestionGroup(),
         "workers" to QuestionGroup(),
@@ -97,158 +52,76 @@ val fakeOpinions = hashMapOf<String, Opinion>(
         "foreign" to Opinion(32),
         "media" to Opinion(64),
         "business" to Opinion(100)
-)
+)*/
 
-data class Quote(val text: String, val author: String) : Serializable
+@Parcelize
+data class Quote(val text: String, val author: String) : Parcelable
 
-class Question(val statement: String, val answers: List<Answer>) : Serializable {
-    fun toJSON(): JSONObject {
-        val json = JSONObject()
+@Parcelize
+data class Question(val statement: String, val answers: List<Answer>) : Parcelable
 
-        json.put("statement", statement)
-        json.put("answers", JSONArray(answers.map { it.toJSON() }))
+@Parcelize
+data class Answer(val statement: String, val impact: Opinions) : Parcelable
 
-        return json
-    }
-}
-
-class Answer(val statement: String, private val impact: Map<String, Int>) : Serializable {
-    // This function updates global gamestate.
-    // An example of bad design...
-    fun select() {
-        gamestate.update()
-        for ((groupName, delta) in impact) {
-            if (groupName in gamestate.opinions.keys) {
-                gamestate.opinions[groupName]!! += delta
-            }
-        }
-    }
-
-    fun toJSON(): JSONObject {
-        val json = JSONObject()
-        json.put("statement", statement)
-        for ((group, v) in impact) {
-            json.put(group, v)
-        }
-        return json
-    }
-}
-
-// Opinion is a wrapper around integer.
-// It represents level of support from the specific group.
-class Opinion(var value: Int = 0, private val limit: Int = 100) : Serializable {
-    operator fun plusAssign(x: Int) {
-        value = maxOf(minOf(value + x, limit), 0)
-    }
-}
-
-// QuestionGroup is a wrapper around list of questions.
-// It shuffles data and provides getter to get random unused answer from the list.
-class QuestionGroup(private val questions: MutableList<Question>, shuffle: Boolean = true) {
-    var nextQuestionIndex = 0
-
+@Parcelize
+class Questions(val all: HashMap<String, MutableList<Question>>,
+                val answered: HashMap<String, Int> = groupToResource.keys.associateBy({ it }, { 0 }) as HashMap) : Parcelable {
     init {
-        if (shuffle) {
-            val rg = Random()
-            for (i in 0 until questions.size) {
-                val randomPosition = rg.nextInt(questions.size)
-                questions[i] = questions[randomPosition].also { questions[randomPosition] = questions[i] }
-            }
-        }
+        all.values.forEach { it.shuffle() }
     }
 
-    constructor() : this(mutableListOf())
-
-    fun getQuestion(): Question {
-        nextQuestionIndex %= questions.size
-        return questions[nextQuestionIndex++]
-    }
-
-    fun toJSON(): JSONObject {
-        val json = JSONObject()
-        json.put("nextQuestionIndex", nextQuestionIndex)
-        json.put("questions", JSONArray(questions.map { it.toJSON() }))
-        return json
+    fun get(group: String): Question {
+        val ptr = answered[group]!!
+        answered[group] = (ptr + 1) % all[group]!!.size
+        return all[group]!![ptr]
     }
 }
 
-// Gamestate is a class which stores global game state.
-// It should be loaded/created once and used as a singleton.
-class Gamestate(val candidate: Candidate, val questions: Map<String, QuestionGroup>,
-                val candidates: MutableList<Candidate>) {
-    private val pollFrequency = 5
-    var step = 0
-    val opinions: Opinions = candidate.opinions
-    var money = 0
+const val pollFrequency = 5
 
-    init {
-        candidates.removeAll { it.name == candidate.name }
-        if (candidate.name == "Клубникин") money = 50
-    }
+// FIXME grudinin money bonus
+@Parcelize
+class Gamestate(val candidate: Candidate, val candidates: MutableList<Candidate>, val questions: Questions,
+                var step: Int = 0, var money: Int = 0, var nextDebates: Boolean = true,
+                var lastGroup: String? = null) : Parcelable {
+    val isPollTime get() = step != 0 && step % pollFrequency == 0
+    val worst get() = candidates.min()
+    val isWorst get() = worst == candidate
+    val isBest get() = candidates.max() == candidate
+    val isWon get() = candidates.size == 2 && isBest
 
-    fun toJSON(): JSONObject {
-        val json = JSONObject()
-
-        val jsonQuestions = JSONObject()
-        for ((group, qGroup) in questions) {
-            jsonQuestions.put(group, qGroup.toJSON())
+    fun update(impact: Opinions) {
+        candidate.opinions.forEach { (k, v) ->
+            candidate.opinions[k] = impact[k] ?: 0 + v
         }
-
-        json.put("candidate", candidate.toJSON())
-        json.put("questions", jsonQuestions)
-        json.put("candidates", JSONArray(candidates.map { it.toJSON() }))
-        json.put("money", money)
-        json.put("step", step)
-        return json
-    }
-
-    fun isPollTime() = step != 0 && step % pollFrequency == 0
-
-    fun isLost() = candidates.all { it.generalOpinion() > candidate.generalOpinion() }
-
-    fun isWon() = candidates.size == 1 && candidate.generalOpinion() > candidates[0].generalOpinion()
-
-    // Removes the weakest candidate.
-    // Returns its name.
-    fun expel(): String {
-        val weakest = candidates.min()
-        candidates.remove(weakest)
-        return weakest!!.name
-    }
-
-    fun update() {
-        step++
-        candidate.update()
         candidates.forEach { it.update() }
     }
-}
 
-fun loadGame(): Gamestate {
-    val savedState = Prefs.getString("gamestate", "")
-    if (savedState == "") {
-        Log.d("loadGame", "saved state is empty or there is no saved state")
-        return Gamestate(fakeCandidate, fakeQuestions, mutableListOf())
+    fun save() {
+        val json = Gson().toJson(this);
+        Prefs.putString("gamestate", json)
     }
-    Log.d("loadGame", "trying to read JSON: $savedState")
-    try {
-        return loadGamestate(JSONObject(savedState))
-    } catch (e: Exception) {
-        Log.e("loadGame", "Unable to load existing save. Probably file corruption")
-        Prefs.remove("gamestate")
-        return Gamestate(fakeCandidate, fakeQuestions, mutableListOf())
-    }
-}
 
-lateinit var gamestate: Gamestate
-
-fun getGroupResource(group: String): Int {
-    return when (group) {
-        "media" -> R.drawable.media
-        "business" -> R.drawable.business
-        "foreign" -> R.drawable.foreign
-        "workers" -> R.drawable.workers
-        "military" -> R.drawable.military
-        else -> 0 // should never be reached
+    companion object {
+        fun loadGame(): Gamestate? {
+            if (!Prefs.contains("gamestate")) {
+                return null
+            }
+            return try {
+                val json = Prefs.getString("location", null) ?: return null
+                return Gson().fromJson(json, Gamestate::class.java);
+            } catch (e: Exception) {
+                Log.e("loadGame", "Unable to load existing save")
+                Prefs.remove("gamestate")
+                null
+            }
+        }
     }
 }
 
+val bus = Bus()
+
+data class ChangeStepEvent(val step: Int)
+data class ChangeMoneyEvent(val money: Int)
+data class ChangeScoreEvent(val score: Int)
+data class ChangeOpinionEvent(val group: String, val value: Int)

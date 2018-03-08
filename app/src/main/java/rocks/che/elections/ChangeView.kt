@@ -1,18 +1,19 @@
 package rocks.che.elections
 
+import android.content.Intent
 import android.view.Gravity
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
 import rocks.che.elections.debate.DebateActivity
 import rocks.che.elections.helpers.DefaultView
 import rocks.che.elections.helpers.gameTextView
-import rocks.che.elections.logic.Opinion
-import rocks.che.elections.logic.fakeOpinions
-import rocks.che.elections.logic.getGroupResource
+import rocks.che.elections.helpers.groupToResource
+import rocks.che.elections.logic.Gamestate
+import rocks.che.elections.minigames.*
 import java.util.*
 
-class ChangeView(private val oldOpinions: Map<String, Int> = mapOf(),
-                 val opinions: Map<String, Opinion> = fakeOpinions, val isPollTime: Boolean = false) : DefaultView<ChangeActivity> {
+
+class ChangeView(private val oldOpinions: Map<String, Int> = mapOf(), val gs: Gamestate) : DefaultView<ChangeActivity> {
     private lateinit var ankoContext: AnkoContext<ChangeActivity>
 
     override fun createView(ui: AnkoContext<ChangeActivity>) = with(ui) {
@@ -29,7 +30,7 @@ class ChangeView(private val oldOpinions: Map<String, Int> = mapOf(),
 
             space().lparams(height = dip(30), width = matchParent)
 
-            for ((group, opinion) in opinions) {
+            for ((group, opinion) in gs.candidate.opinions) {
                 linearLayout {
                     leftPadding = dip(25)
                     gravity = Gravity.CENTER_VERTICAL
@@ -37,7 +38,7 @@ class ChangeView(private val oldOpinions: Map<String, Int> = mapOf(),
                         backgroundResource = R.color.silver
                     }
                     imageView {
-                        imageResource = getGroupResource(group)
+                        imageResource = groupToResource[group]!!
                     }.lparams {
                         width = dip(50)
                         height = dip(50)
@@ -48,15 +49,15 @@ class ChangeView(private val oldOpinions: Map<String, Int> = mapOf(),
                     // FIXME strings of different length?
                     gameTextView(10) {
                         text = if (!isInEditMode) {
-                            "%s: %d(%s)".format(group, opinion.value,
-                                    Formatter().format(Locale.US, "%+d", opinion.value - oldOpinions[group]!!))
+                            "%s: %d(%s)".format(group, opinion,
+                                    Formatter().format(Locale.US, "%+d", opinion- oldOpinions[group]!!))
                         } else {
                             "Group: val(+c)"
                         }
                     }.lparams {
                         horizontalMargin = dip(15)
                     }
-                    var currentValue = opinion.value
+                    var currentValue = opinion
                     linearLayout {
                         while (currentValue >= 10) {
                             imageView {
@@ -77,10 +78,25 @@ class ChangeView(private val oldOpinions: Map<String, Int> = mapOf(),
                 textResource = R.string.next
                 backgroundResource = R.color.blue
                 onClick {
-                    if (isPollTime) {
-                        ctx.startActivity<DebateActivity>()
+                    if (gs.isPollTime) {
+                        gs.nextDebates = !gs.nextDebates
+                        debug("it is poll time and nextdebates is %b".format(gs.nextDebates))
+                        if (gs.nextDebates) {
+                            val intent = Intent(ui.owner, RunnerGameActivity::class.java)
+                            when (gs.candidate.resource) {
+                                R.drawable.candidate_navalny -> Intent(ui.owner, RunnerGameActivity::class.java)
+                                R.drawable.candidate_sobchak -> Intent(ui.owner, LadderGameActivity::class.java)
+                                R.drawable.candidate_zhirinovsky -> Intent(ui.owner, DucksGameActivity::class.java)
+                                R.drawable.candidate_putin -> Intent(ui.owner, HammerGameActivity::class.java)
+                                R.drawable.candidate_grudinin -> Intent(ui.owner, CatcherGameActivity::class.java)
+                                R.drawable.candidate_yavlinsky -> Intent(ui.owner, SnakeGameActivity::class.java)
+                            }
+                            ui.owner.startActivityForResult(intent, gameRequestCode)
+                        } else {
+                            ctx.startActivity<DebateActivity>("gamestate" to gs)
+                        }
                     } else {
-                        ctx.startActivity<PollActivity>()
+                        ctx.startActivity<PollActivity>("gamestate" to gs)
                     }
                 }
             }.lparams(width = dip(150), height = dip(60))

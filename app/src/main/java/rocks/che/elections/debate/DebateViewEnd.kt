@@ -1,19 +1,16 @@
 package rocks.che.elections.debate
 
 import android.view.Gravity
-import com.squareup.otto.Bus
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
 import rocks.che.elections.R
 import rocks.che.elections.helpers.DefaultView
-import rocks.che.elections.helpers.NextDebateStage
 import rocks.che.elections.helpers.gameTextView
 import rocks.che.elections.logic.Candidate
-import rocks.che.elections.logic.fakeCandidate
+import rocks.che.elections.logic.bus
 
-class DebateViewEnd(val candidate: Candidate = fakeCandidate, val winGroup: String = "Winner",
-                    val loseGroup: String = "Loser", val attackResult: Boolean = true,
-                    val bus: Bus = Bus()): DefaultView<DebateActivity> {
+class DebateViewEnd(val candidate: Candidate, val winGroup: String = "Winner",
+                    val loseGroup: String = "Loser", val attackResult: Boolean = true): DefaultView<DebateActivity> {
     private lateinit var ankoContext: AnkoContext<DebateActivity>
 
     override fun createView(ui: AnkoContext<DebateActivity>) = with(ui) {

@@ -5,7 +5,7 @@ import android.os.Handler
 import org.jetbrains.anko.setContentView
 import org.jetbrains.anko.startActivity
 import rocks.che.elections.helpers.DefaultActivity
-import rocks.che.elections.logic.gamestate
+import rocks.che.elections.logic.Gamestate
 
 class HighlightsActivity : DefaultActivity() {
     private lateinit var view: HighlightsView
@@ -13,7 +13,9 @@ class HighlightsActivity : DefaultActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        view = HighlightsView(gamestate.candidate)
+        val gs: Gamestate = intent.getParcelableExtra("gamestate")
+
+        view = HighlightsView(gs.candidate)
         view.setContentView(this)
 
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)

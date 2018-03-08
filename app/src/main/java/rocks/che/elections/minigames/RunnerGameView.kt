@@ -2,6 +2,7 @@ package rocks.che.elections.minigames
 
 import android.annotation.SuppressLint
 import android.view.Gravity
+import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import org.jetbrains.anko.*
@@ -23,12 +24,10 @@ class RunnerGameView : AnkoComponent<RunnerGameActivity> {
     override fun createView(ui: AnkoContext<RunnerGameActivity>) = with(ui) {
         ankoContext = ui
 
-        verticalLayout {
+        frameLayout {
             if (!isInEditMode()) { // FIXME
                 stickmanDrawable = GifDrawable(resources, R.drawable.runner_anim)
             }
-
-            gravity = Gravity.CENTER
 
             relativeLayout {
                 backgroundResource = R.color.black
@@ -37,25 +36,43 @@ class RunnerGameView : AnkoComponent<RunnerGameActivity> {
                 scoreText = gameTextView(18) {
                     text = "0"
                 }
-            }.lparams(weight = 0.15f, height = 0, width = matchParent)
+            }.lparams {
+                width = matchParent
+            }
 
-            layout = relativeLayout {
-                gravity = Gravity.BOTTOM or Gravity.LEFT
-                onClick {
-                    stickmanDrawable.seekToFrame((stickmanDrawable.currentFrameIndex + 1) % stickmanDrawable.numberOfFrames)
-                    (ctx as RunnerGameActivity).startFlight()
-                }
-                if (!isInEditMode) { // FIXME
-                    stickmanView = gifImageView {
-                        isClickable = false
-                        setImageDrawable(stickmanDrawable)
+            frameLayout {
+                id = R.id.moving_image_layout
+                layout = relativeLayout {
+                    gravity = Gravity.BOTTOM
+                }.lparams(height= matchParent, width = matchParent)
+                relativeLayout {
+                    gravity = Gravity.BOTTOM
+                    onClick {
+                        if (ui.owner.jumps < 2) {
+                            stickmanDrawable.seekToFrame((stickmanDrawable.currentFrameIndex + 1) % stickmanDrawable.numberOfFrames)
+                            ui.owner.startFlight()
+                        }
                     }
-                } else {
-                    imageView {
-                        backgroundResource=R.color.fuchsia
+                    if (!isInEditMode) { // FIXME
+                        stickmanView = gifImageView {
+                            translationZ = 0f
+                            isClickable = false
+                            setImageDrawable(stickmanDrawable)
+                            scaleType = ImageView.ScaleType.FIT_XY
+                        }.lparams {
+                            height = dip(70)
+                            width = dip(30)
+                        }
+                    } else {
+                        imageView {
+                            backgroundResource = R.color.fuchsia
+                        }
                     }
-                }
-            }.lparams(weight = 0.85f, height = 0, width = matchParent)
+                }.lparams(height = matchParent, width = matchParent)
+            }.lparams {
+                height = matchParent
+                width = matchParent
+            }
         }
     }
 }

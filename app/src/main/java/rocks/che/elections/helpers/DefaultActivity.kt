@@ -2,29 +2,27 @@ package rocks.che.elections.helpers
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import com.pixplicity.easyprefs.library.Prefs
-import com.squareup.otto.Bus
+import android.view.WindowManager
 import im.delight.android.audio.MusicManager
 import im.delight.android.audio.SoundManager
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.alert
 import rocks.che.elections.R
-import rocks.che.elections.logic.gamestate
 
 abstract class DefaultActivity : AppCompatActivity(), AnkoLogger {
     private var soundManager: SoundManager? = null
-    protected val bus = Bus()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        bus.register(this)
+
+        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
     }
 
     override fun onResume() {
         super.onResume()
 
-        MusicManager.volume = 0.5f
+        MusicManager.volume = 0.1f
 
         val maxSimultaneousStreams = 5
         soundManager = SoundManager(this, maxSimultaneousStreams)
@@ -73,8 +71,6 @@ abstract class DefaultActivity : AppCompatActivity(), AnkoLogger {
 
     override fun onDestroy() {
         super.onDestroy()
-        if (gamestate.candidate.name != "Fake") {
-            Prefs.putString("gamestate", gamestate.toJSON().toString())
-        }
+        //Prefs.putString("gamestate", gamestate.())
     }
 }

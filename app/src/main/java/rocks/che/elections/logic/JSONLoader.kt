@@ -4,7 +4,7 @@ import android.content.res.Resources
 import org.json.JSONArray
 import org.json.JSONObject
 import rocks.che.elections.R
-import java.util.*
+import rocks.che.elections.helpers.candidateResourceNameToResource
 
 fun loadCandidate(json: JSONObject): Candidate {
     val basicStats = json.getJSONObject("basicStats")
@@ -12,7 +12,7 @@ fun loadCandidate(json: JSONObject): Candidate {
     val jsonPerks = json.getJSONArray("perks")
     val jsonHistory = json.getJSONArray("history")
 
-    val opinions = mutableMapOf<String, Int>()
+    val opinions = Opinions()
     val levels = mutableMapOf<String, Int>()
     val perks = (0 until jsonPerks.length()).map { jsonPerks.getString(it) }
     val history = ((0 until jsonHistory.length()).map{ jsonHistory.getDouble(it) }).toMutableList()
@@ -22,10 +22,9 @@ fun loadCandidate(json: JSONObject): Candidate {
     basicLevels.keys().forEach { levels[it] = basicLevels.getInt(it) }
     return Candidate(
             json.getString("name"),
-            json.getString("description"),
             perks,
-            json.getString("imgResource"),
-            opinions, levels, history)
+            candidateResourceNameToResource[json.getString("imgResource")]!!,
+            opinions, history)
 }
 
 fun loadCandidates(json: JSONArray) = (0 until json.length()).map { loadCandidate(json.getJSONObject(it)) }
@@ -42,7 +41,7 @@ fun loadQuestion(json: JSONObject): Question {
 
     for (a in 0 until jsonAnswers.length()) {
         val jsonAnswer = jsonAnswers.getJSONObject(a)
-        val impact = mutableMapOf<String, Int>()
+        val impact = Opinions()
         var statement = "EMPTY_STATEMENT"
         for (part in jsonAnswer.keys()) {
             if (part == "statement") {
@@ -57,34 +56,19 @@ fun loadQuestion(json: JSONObject): Question {
     return Question(json.getString("statement"), answers)
 }
 
-fun loadQuestions(json: JSONObject, shuffle: Boolean = false): HashMap<String, QuestionGroup> {
-    val questions = HashMap<String, QuestionGroup>()
-
+fun loadQuestions(json: JSONObject): Questions {
+    val all = hashMapOf<String, MutableList<Question>>()
     for (categoryName in json.keys()) {
-        val jsonQG = json.get(categoryName)
-        var nextQuestionIndex = 0
-        val questionList = when(jsonQG) {
-            is JSONArray -> {
-                (0 until jsonQG.length()).map { loadQuestion(jsonQG.getJSONObject(it)) }
-            }
-            is JSONObject -> {
-                val qs = jsonQG.getJSONArray("questions")
-                nextQuestionIndex = jsonQG.getInt("nextQuestionIndex")
-                (0 until qs.length()).map { loadQuestion(qs.getJSONObject(it)) }
-            }
-            else -> listOf() // should never be reached
-        }
-
-        questions[categoryName] = QuestionGroup(questionList as MutableList<Question>, shuffle)
-        questions[categoryName]!!.nextQuestionIndex = nextQuestionIndex
+        val jsonQG = json.getJSONArray(categoryName)
+        all[categoryName] = (0 until jsonQG.length()).map { loadQuestion(jsonQG.getJSONObject(it)) }.toMutableList()
     }
-    return questions
+    return Questions(all)
 }
 
-fun loadQuestions(resources: Resources): HashMap<String, QuestionGroup> {
+fun loadQuestions(resources: Resources): Questions {
     val jsonString = resources.openRawResource(R.raw.questions)
             .bufferedReader().use { it.readText() }
-    return loadQuestions(JSONObject(jsonString), true)
+    return loadQuestions(JSONObject(jsonString))
 }
 
 fun loadQuotes(resources: Resources): List<Quote> {
@@ -100,30 +84,4 @@ fun loadQuotes(resources: Resources): List<Quote> {
     }
 
     return quotes
-}
-
-fun loadGamestate(json: JSONObject): Gamestate {
-    val candidate = loadCandidate(json.getJSONObject("candidate"))
-
-    val jsonQuestions = json.getJSONObject("questions")
-    val questions = loadQuestions(jsonQuestions)
-
-    val jsonCandidates = json.getJSONArray("candidates")
-    val candidates = mutableListOf<Candidate>()
-    for (i in 0 until jsonCandidates.length()) {
-        candidates.add(loadCandidate(jsonCandidates.getJSONObject(i)))
-    }
-
-    val gs = Gamestate(candidate, questions, candidates)
-    gs.money = json.getInt("money")
-    gs.step = json.getInt("step")
-
-    return gs
-}
-
-fun loadFakeGamestate(resources: Resources): Gamestate {
-    val candidates = loadCandidates(resources) as MutableList
-    val candidate = candidates[Random().nextInt(candidates.size)]
-    val questions = loadQuestions(resources)
-    return Gamestate(candidate, questions, candidates)
 }

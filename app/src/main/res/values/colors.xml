@@ -26,4 +26,5 @@
 
     <!-- additional -->
     <color name="ducksBackground">@color/aqua</color>
+    <color name="pink">#FFC0CB</color>
 </resources>

@@ -1,72 +1,68 @@
 package rocks.che.elections.minigames
 
+import android.graphics.drawable.AnimationDrawable
 import android.view.Gravity
 import android.widget.ImageView
 import android.widget.TextView
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
-import pl.droidsonroids.gif.GifDrawable
-import pl.droidsonroids.gif.GifImageView
 import rocks.che.elections.R
 import rocks.che.elections.helpers.gameTextView
-import rocks.che.elections.helpers.gifImageView
+import java.util.*
 
 class LadderGameView : AnkoComponent<LadderGameActivity> {
     lateinit var ankoContext: AnkoContext<LadderGameActivity>
-    private lateinit var stickmanDrawable: GifDrawable
-    lateinit var stickmanView: GifImageView
-    lateinit var ladderView: ImageView
     lateinit var scoreText: TextView
+    lateinit var horse: ImageView
+    val horseResource = listOf(R.drawable.races_trojan_1, R.drawable.races_trojan_2, R.drawable.races_trojan_3,
+            R.drawable.races_trojan_4, R.drawable.races_trojan_5, R.drawable.races_trojan_6)[Random().nextInt(6)]
 
     override fun createView(ui: AnkoContext<LadderGameActivity>) = with(ui) {
         ankoContext = ui
 
-        frameLayout {
-            // Anko preview does not support gif-drawable assets
-            if (!isInEditMode) {
-                stickmanDrawable = GifDrawable(resources, R.drawable.ladder_anim)
-                stickmanDrawable.stop()
-            }
-
-            scoreText = gameTextView(18) {
-                text = "0"
-            }.lparams {
-                gravity = Gravity.TOP or Gravity.END
-            }
-
+        relativeLayout {
+            //id = "@+id/linear_layout"
+            backgroundResource = R.drawable.bg_animlist
             relativeLayout {
+                backgroundResource = R.color.black
+                background.alpha = 33
                 gravity = Gravity.CENTER
-                onClick {
-                    stickmanDrawable.seekToFrame((stickmanDrawable.currentFrameIndex + 1) % stickmanDrawable.numberOfFrames)
-                    ladderView.y += 5
-                    (ctx as LadderGameActivity).tap()
+                scoreText = gameTextView(18) {
+                    text = "0"
                 }
+            }.lparams(width = matchParent, height = dip(60)) {
+                alignParentTop()
+                centerHorizontally()
+            }
 
-                ladderView = imageView {
-                    isClickable = false
-                    imageResource = R.drawable.ladder
-                }.lparams {
-                    centerInParent()
-                    width = dip(100)
-                }
+            val animatedBackground = background as AnimationDrawable
+            animatedBackground.setEnterFadeDuration(2500);
+            animatedBackground.setExitFadeDuration(5000);
+            animatedBackground.start();
 
-                if (!isInEditMode) {
-                    stickmanView = gifImageView {
+            frameLayout {
+                relativeLayout {
+                    id = R.id.moving_image_layout
+                    gravity = Gravity.BOTTOM
+                    onClick {
+                        ui.owner.tap()
+                    }
+                }.lparams(height= matchParent, width = matchParent)
+                relativeLayout {
+                    gravity = Gravity.BOTTOM
+                    horse = imageView {
+                        translationZ = 0f
                         isClickable = false
-                        setImageDrawable(stickmanDrawable)
+                        imageResource = horseResource
+                        scaleType = ImageView.ScaleType.FIT_END
                     }.lparams {
-                        centerInParent()
-                        width = dip(80)
+                        height = dip(70)
+                        width = dip(70)
                     }
-                } else {
-                    imageView {
-                        backgroundResource = R.color.fuchsia
-                    }.lparams {
-                        centerInParent()
-                        width = dip(80)
-                    }
-                }
-            }.lparams(height= matchParent, width = matchParent)
+                }.lparams(height= matchParent, width = matchParent)
+            }.lparams(width = matchParent, height = matchParent) {
+                alignParentBottom()
+            }
         }
     }
 }

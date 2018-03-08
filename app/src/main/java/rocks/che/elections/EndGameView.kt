@@ -12,7 +12,7 @@ import rocks.che.elections.helpers.DefaultView
 import rocks.che.elections.helpers.gameTextView
 import rocks.che.elections.helpers.konfettiView
 
-class EndGameView : DefaultView<EndGameActivity> {
+class EndGameView(val isMutin: Boolean = false) : DefaultView<EndGameActivity> {
     private lateinit var ankoContext: AnkoContext<EndGameActivity>
 
     @SuppressLint("RtlHardcoded")
@@ -44,7 +44,11 @@ class EndGameView : DefaultView<EndGameActivity> {
                         width = matchParent
                     }
                     gameTextView(12) {
-                        textResource = R.string.endgame_text
+                        textResource = if (isMutin) {
+                            R.string.endgame_text
+                        } else {
+                            R.string.endgame_text_mutin
+                        }
                     }.lparams {
                         width = matchParent
                     }
@@ -67,7 +71,7 @@ class EndGameView : DefaultView<EndGameActivity> {
             val imgSize = dip(150)
             imageView {
                 rotation = -30f
-                imageResource = R.drawable.putin
+                imageResource = R.drawable.candidate_putin
                 x = displayMetrics.widthPixels/2.toFloat()
                 y = imgSize/2.toFloat()
             }.lparams(height = imgSize) {

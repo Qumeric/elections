@@ -9,8 +9,6 @@ import org.jetbrains.anko.sdk25.listeners.onClick
 import org.jetbrains.anko.sdk25.listeners.onSeekBarChangeListener
 import rocks.che.elections.R
 import rocks.che.elections.helpers.DefaultView
-import rocks.che.elections.helpers.NextDebateStage
-import rocks.che.elections.helpers.SetOpponentDistribution
 import rocks.che.elections.helpers.gameTextView
 import rocks.che.elections.logic.Candidate
 

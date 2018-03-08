@@ -2,7 +2,10 @@ package rocks.che.elections.minigames
 
 import android.support.v4.content.ContextCompat
 import android.view.Gravity
-import android.widget.*
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
+import android.widget.TextView
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
 import rocks.che.elections.R
@@ -70,7 +73,7 @@ class DucksGameView : AnkoComponent<DucksGameActivity> {
                     backgroundDrawable = bulletDrawable
 
                     onClick {
-                        (ctx as DucksGameActivity).shoot()
+                        ui.owner.shoot()
                     }
                 }
             }.lparams(weight = 0.50f, width = matchParent, height = 0)

@@ -7,11 +7,11 @@ import org.jetbrains.anko.sdk25.listeners.onClick
 import rocks.che.elections.debate.DebateActivity
 import rocks.che.elections.helpers.DefaultView
 import rocks.che.elections.helpers.gameTextView
+import rocks.che.elections.logic.loadCandidates
 import rocks.che.elections.minigames.*
 
 class NewGameView : DefaultView<NewGameActivity> {
     private lateinit var ankoContext: AnkoContext<NewGameActivity>
-
 
     override fun createView(ui: AnkoContext<NewGameActivity>) = with(ui) {
         ankoContext = ui
@@ -115,6 +115,7 @@ class NewGameView : DefaultView<NewGameActivity> {
             }
             themedButton(theme = R.style.button) {
                 text = "debate"
+                val cs = loadCandidates(resources)
                 onClick {
                     ctx.startActivity<DebateActivity>()
                 }

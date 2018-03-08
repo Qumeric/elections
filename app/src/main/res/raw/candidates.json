@@ -1,7 +1,6 @@
 [
   {
     "name": "Овальный",
-    "description": "",
     "basicStats": {
       "military": 0,
       "workers": 10,
@@ -20,11 +19,10 @@
       "Черный список прессы"
     ],
     "history": [],
-    "imgResource": "navalny"
+    "imgResource": "candidate_navalny"
   },
   {
     "name": "Путчак",
-    "description": "",
     "basicStats": {
       "military": 0,
       "workers": 5,
@@ -43,11 +41,10 @@
       "Либерализм"
     ],
     "history": [],
-    "imgResource": "sobchak"
+    "imgResource": "candidate_sobchak"
   },
   {
-    "name": "Жирный",
-    "description": "",
+    "name": "Маржиновский",
     "basicStats": {
       "military": 5,
       "workers": 10,
@@ -66,11 +63,10 @@
       "Экспрессивность"
     ],
     "history": [],
-    "imgResource": "zhirinovsky"
+    "imgResource": "candidate_zhirinovsky"
   },
   {
     "name": "Мутин",
-    "description": "",
     "basicStats": {
       "military": 10,
       "workers": 15,
@@ -89,11 +85,10 @@
       "Поддержка трудящихся"
     ],
     "history": [],
-    "imgResource": "putin"
+    "imgResource": "candidate_putin"
   },
   {
     "name": "Клубникин",
-    "description": "Совок",
     "basicStats": {
       "military": 5,
       "workers": 15,
@@ -112,7 +107,7 @@
       "Хайпоголик"
     ],
     "history": [],
-    "imgResource": "grudinin"
+    "imgResource": "candidate_grudinin"
   },
   {
     "name": "Жулинский",
@@ -135,7 +130,7 @@
       "Завсегдатай выборов"
     ],
     "history": [],
-    "imgResource": "yavlinsky"
+    "imgResource": "candidate_yavlinsky"
   }
 ]
 

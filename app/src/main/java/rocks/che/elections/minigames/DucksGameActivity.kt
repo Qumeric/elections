@@ -98,6 +98,7 @@ class DucksGameActivity : MiniGameActivity() {
             val realDuckCenterY = duckRC.top + (duckRC.bottom - duckRC.top) * 287 / 512
 
             if (chRC.contains(realDuckCenterX, realDuckCenterY)) {
+                playSound(R.raw.duck_hit_sound)
                 ducks.remove(duck)
                 view.layout.removeView(duck)
                 score++
