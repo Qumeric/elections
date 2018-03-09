@@ -2,7 +2,6 @@ package rocks.che.elections.debate
 
 import android.view.Gravity
 import android.widget.TextView
-import com.squareup.otto.Bus
 import org.jetbrains.anko.*
 import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.sdk25.listeners.onClick
@@ -11,8 +10,9 @@ import rocks.che.elections.R
 import rocks.che.elections.helpers.DefaultView
 import rocks.che.elections.helpers.gameTextView
 import rocks.che.elections.logic.Candidate
+import rocks.che.elections.logic.bus
 
-class DebateViewOpponents(val minutes: Int = 40, val candidates: List<Candidate> = listOf(), val bus: Bus = Bus()) : DefaultView<DebateActivity> {
+class DebateViewOpponents(val minutes: Int = 40, val candidates: List<Candidate> = listOf()) : DefaultView<DebateActivity> {
     private lateinit var ankoContext: AnkoContext<DebateActivity>
     private val amounts = mutableListOf<TextView>()
     private val amountVals = mutableListOf<Int>()
@@ -31,9 +31,11 @@ class DebateViewOpponents(val minutes: Int = 40, val candidates: List<Candidate>
                 backgroundResource = R.color.blue
             }.lparams(weight = 0.012f, height = 0, width = dip(120))
 
+            space {}.lparams(weight = 0.005f, height=0)
+
             gameTextView(12) {
                 textResource = R.string.debate_opponents
-            }.lparams(weight = 0.15f, height = 0)
+            }.lparams(weight = 0.1f, height = 0)
 
             val minutesTextView = gameTextView(18) {
                 text = ctx.getString(R.string.debate_minutes_left_template).format(minutes)
@@ -44,9 +46,9 @@ class DebateViewOpponents(val minutes: Int = 40, val candidates: List<Candidate>
                 linearLayout {
                     gravity = Gravity.CENTER
                     backgroundResource = if (isGray) {
-                        R.color.gray
-                    } else {
                         R.color.silver
+                    } else {
+                        R.color.white
                     }
 
                     gameTextView(text=candidate.name) {
@@ -82,7 +84,7 @@ class DebateViewOpponents(val minutes: Int = 40, val candidates: List<Candidate>
                 onClick {
                     if (amountVals.sum() == minutes) {
                         bus.post(SetOpponentDistribution(amountVals))
-                        bus.post(NextDebateStage())
+                        ui.owner.nextStage()
                     } else {
                         snackbar(this, R.string.debate_spend_minutes_first)
                     }

@@ -6,10 +6,7 @@ import org.jetbrains.anko.sdk25.listeners.onClick
 import rocks.che.elections.helpers.DefaultView
 import rocks.che.elections.helpers.gameTextView
 import rocks.che.elections.helpers.groupToResource
-import rocks.che.elections.logic.Answer
-import rocks.che.elections.logic.Gamestate
-import rocks.che.elections.logic.Opinions
-import rocks.che.elections.logic.Question
+import rocks.che.elections.logic.*
 
 val fakeQuestion = Question("statement", listOf(
         Answer("answer 1", Opinions()),
@@ -48,6 +45,8 @@ class QuestionView(private val question: Question = fakeQuestion,
                         themedButton(theme = R.style.button) {
                             text = answer.statement
                             onClick {
+                                gs.step++
+                                bus.post(ChangeStepEvent(gs.step))
                                 ctx.startActivity<ChangeActivity>("answer" to answer, "gamestate" to gs)
                             }
                         }

@@ -45,11 +45,8 @@
     <string name="debate_bad_group_template" translatable="false">
         Ypu speech was disliked by %s
     </string>
-    <string name="debate_opponent_attack_success" translatable="false">
-        Attack on the opponent was successful
-    </string>
-    <string name="debate_opponent_attack_fail" translatable="false">
-        Attack on the opponent was unsuccessful
+    <string name="debate_opponent_attack_template" translatable="false">
+        Attack on the opponent %s has been successful
     </string>
 
     <!-- Minigames -->

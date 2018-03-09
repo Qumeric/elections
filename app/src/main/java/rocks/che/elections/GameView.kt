@@ -3,24 +3,22 @@ package rocks.che.elections
 import android.support.v7.widget.AppCompatTextView
 import android.view.Gravity
 import android.widget.ImageView
+import android.widget.TextView
 import com.pixplicity.easyprefs.library.Prefs
-import com.squareup.otto.Subscribe
 import org.jetbrains.anko.*
 import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.sdk25.listeners.onClick
 import rocks.che.elections.helpers.DefaultView
 import rocks.che.elections.helpers.gameTextView
 import rocks.che.elections.helpers.groupToResource
-import rocks.che.elections.logic.ChangeMoneyEvent
 import rocks.che.elections.logic.Gamestate
-import rocks.che.elections.logic.bus
 
 class GameView(val gs: Gamestate) : DefaultView<GameActivity> {
     private lateinit var ankoContext: AnkoContext<GameActivity>
     private lateinit var moneyTextView: AppCompatTextView
+    private var groupViews = hashMapOf<String, TextView>()
 
     override fun createView(ui: AnkoContext<GameActivity>) = with(ui) {
-        bus.register(this@GameView)
         ankoContext = ui
 
         verticalLayout {
@@ -45,7 +43,8 @@ class GameView(val gs: Gamestate) : DefaultView<GameActivity> {
                         imageResource = groupToResource[group]!!
                         onClick {
                             gs.lastGroup = group
-                            ctx.startActivity<QuestionActivity>("question" to gs.questions.get(group), "group" to group)
+                            ctx.startActivity<QuestionActivity>("question" to gs.questions.get(group),
+                                    "group" to group, "gamestate" to gs)
                         }
                     }.lparams {
                         width = 0
@@ -55,7 +54,7 @@ class GameView(val gs: Gamestate) : DefaultView<GameActivity> {
 
                     linearLayout {
                         gravity = Gravity.CENTER
-                        gameTextView(12) {
+                        val tv = gameTextView(12) {
                             text = "%s: %d".format(group, gs.candidate.opinions[group]!!)
                             onClick {
                                 gs.lastGroup = group
@@ -63,6 +62,7 @@ class GameView(val gs: Gamestate) : DefaultView<GameActivity> {
                                         "group" to group, "gamestate" to gs)
                             }
                         }
+                        groupViews[group] = tv
                     }.lparams {
                         width = 0
                         height = matchParent
@@ -80,6 +80,8 @@ class GameView(val gs: Gamestate) : DefaultView<GameActivity> {
                                     if (!ui.owner.buyGroupPoints(group)) {
                                         snackbar(ankoContext.view, R.string.not_enough_money)
                                     }
+                                    moneyTextView.text = gs.money.toString() + "$"
+                                    groupViews[group]!!.text = "%s: %d".format(group, gs.candidate.opinions[group]!!)
                                 }
                             }
                         }.lparams(width = matchParent, height = matchParent)
@@ -131,9 +133,5 @@ class GameView(val gs: Gamestate) : DefaultView<GameActivity> {
                 }.lparams(height = matchParent, width = 0, weight = 0.5f)
             }.lparams(weight = 0.2f, height = 0, width = matchParent)
         }
-    }
-
-    @Subscribe fun updateMoney(e: ChangeMoneyEvent) {
-        moneyTextView.text = e.money.toString()
     }
 }

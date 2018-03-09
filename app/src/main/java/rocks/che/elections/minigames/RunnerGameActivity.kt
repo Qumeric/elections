@@ -14,7 +14,7 @@ import java.lang.Math.random
 
 class RunnerGameActivity : MiniGameActivity() {
     private lateinit var view: RunnerGameView
-    private val jumpVelocity = 30
+    private val jumpVelocity = 20
     private val gravity = 4
     private var currentVelocity = 0
     var jumps: Int = 0
@@ -77,8 +77,11 @@ class RunnerGameActivity : MiniGameActivity() {
 
     fun startFlight() {
         view.stickmanDrawable.stop()
-        currentVelocity += jumpVelocity
-        if (jumps==0) {
+        if (currentVelocity < 0) {
+            currentVelocity /= 2
+        }
+        currentVelocity += (jumpVelocity * 1.5).toInt()
+        if (jumps == 0) {
             currentVelocity += jumpVelocity
             flightUpdate(view.stickmanView.y)
         }
@@ -99,8 +102,8 @@ class RunnerGameActivity : MiniGameActivity() {
     }
 
     private fun buildKremlinWall(x: Float = displayMetrics.widthPixels.toFloat()) {
-        val drawable = if (random()<0.1f) R.drawable.runner_kremlin_tower else R.drawable.runner_kremlin_wall
-        createMovingImage(drawable, 10f, x=x, onAppear = {buildKremlinWall(it)})
+        val drawable = if (random() < 0.1f) R.drawable.runner_kremlin_tower else R.drawable.runner_kremlin_wall
+        createMovingImage(drawable, 10f, x = x, onAppear = { buildKremlinWall(it) })
     }
 
     private fun buildInitialWall(x: Float = 0f) {
@@ -108,7 +111,7 @@ class RunnerGameActivity : MiniGameActivity() {
             createMovingImage(R.drawable.runner_kremlin_wall, 10f, x = x, onAppear = { buildKremlinWall(it) })
             return
         }
-        createMovingImage(R.drawable.runner_kremlin_wall, 10f, x=x, onAppear = {buildInitialWall(it)})
+        createMovingImage(R.drawable.runner_kremlin_wall, 10f, x = x, onAppear = { buildInitialWall(it) })
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

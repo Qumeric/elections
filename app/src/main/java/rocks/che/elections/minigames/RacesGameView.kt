@@ -8,16 +8,17 @@ import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
 import rocks.che.elections.R
 import rocks.che.elections.helpers.gameTextView
+import rocks.che.elections.logic.Candidate
 import java.util.*
 
-class LadderGameView : AnkoComponent<LadderGameActivity> {
-    lateinit var ankoContext: AnkoContext<LadderGameActivity>
+class RacesGameView(val candidates: ArrayList<Candidate>) : AnkoComponent<RacesGameActivity> {
+    lateinit var ankoContext: AnkoContext<RacesGameActivity>
     lateinit var scoreText: TextView
     lateinit var horse: ImageView
-    val horseResource = listOf(R.drawable.races_trojan_1, R.drawable.races_trojan_2, R.drawable.races_trojan_3,
-            R.drawable.races_trojan_4, R.drawable.races_trojan_5, R.drawable.races_trojan_6)[Random().nextInt(6)]
 
-    override fun createView(ui: AnkoContext<LadderGameActivity>) = with(ui) {
+    val opponentHorses = mutableListOf<ImageView>()
+
+    override fun createView(ui: AnkoContext<RacesGameActivity>) = with(ui) {
         ankoContext = ui
 
         relativeLayout {
@@ -48,18 +49,35 @@ class LadderGameView : AnkoComponent<LadderGameActivity> {
                         ui.owner.tap()
                     }
                 }.lparams(height= matchParent, width = matchParent)
+                var i = Random().nextInt(6)
                 relativeLayout {
                     gravity = Gravity.BOTTOM
                     horse = imageView {
                         translationZ = 0f
                         isClickable = false
-                        imageResource = horseResource
+                        imageResource = R.drawable.races_horse
                         scaleType = ImageView.ScaleType.FIT_END
                     }.lparams {
                         height = dip(70)
                         width = dip(70)
                     }
                 }.lparams(height= matchParent, width = matchParent)
+                for (c in candidates.filter { it.resource != R.drawable.candidate_sobchak }) {
+                    i = (i+1)%6
+                    relativeLayout {
+                        gravity = Gravity.BOTTOM
+                        val h = imageView {
+                            translationZ = 0f
+                            isClickable = false
+                            imageResource = R.drawable.races_horse
+                            scaleType = ImageView.ScaleType.FIT_END
+                        }.lparams {
+                            height = dip(70)
+                            width = dip(70)
+                        }
+                        opponentHorses.add(h)
+                    }.lparams(height= matchParent, width = matchParent)
+                }
             }.lparams(width = matchParent, height = matchParent) {
                 alignParentBottom()
             }

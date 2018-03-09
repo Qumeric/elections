@@ -15,14 +15,14 @@ import rocks.che.elections.logic.Candidate
 class HighlightsView(val candidate: Candidate) : DefaultView<HighlightsActivity> {
     private lateinit var ankoContext: AnkoContext<HighlightsActivity>
 
-    private fun scaleView(v: View, startScale:Float = 0f, endScale: Float = 1f) {
+    private fun scaleView(v: View, startScale: Float = 0f, endScale: Float = 1f) {
         val anim = ScaleAnimation(
                 startScale, endScale, // Start and end values for the X axis scaling
                 startScale, endScale, // Start and end values for the Y axis scaling
                 Animation.RELATIVE_TO_SELF, 0.5f, // Pivot point of X scaling
                 Animation.RELATIVE_TO_SELF, 0.5f); // Pivot point of Y scaling
         anim.fillAfter = true; // Needed to keep the result of the animation
-        anim.duration = 1000;
+        anim.duration = 2500;
         v.startAnimation(anim);
     }
 
@@ -81,11 +81,11 @@ class HighlightsView(val candidate: Candidate) : DefaultView<HighlightsActivity>
                     }
                 }.lparams(weight = 0.21f, height = 0)
                 space { }.lparams(weight = 0.1f, height = 0)
-            }.lparams(height= matchParent, width = matchParent)
+            }.lparams(height = matchParent, width = matchParent)
 
             konfettiView {
                 build().addColors(0xff0000.opaque, 0x00ff00.opaque, 0x0000ff.opaque,
-                        0xffff00.opaque,0x00ffff.opaque, 0xff00ff.opaque, 0x000000.opaque)
+                        0xffff00.opaque, 0x00ffff.opaque, 0xff00ff.opaque, 0x000000.opaque)
                         .setDirection(0.0, 359.0)
                         .setSpeed(1f, 5f)
                         .setFadeOutEnabled(true)
@@ -94,7 +94,7 @@ class HighlightsView(val candidate: Candidate) : DefaultView<HighlightsActivity>
                         .addSizes(Size(12))
                         .setPosition(0f, displayMetrics.widthPixels.toFloat(), 0f, 0f)
                         .streamFor(300, 3000L)
-            }.lparams(width= matchParent, height = matchParent)
+            }.lparams(width = matchParent, height = matchParent)
         }
     }
 }

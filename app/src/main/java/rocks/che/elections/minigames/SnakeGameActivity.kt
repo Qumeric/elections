@@ -1,9 +1,10 @@
 package rocks.che.elections.minigames
 
 import android.os.Bundle
+import android.util.Log
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import im.delight.android.audio.MusicManager
-import org.jetbrains.anko.backgroundResource
-import org.jetbrains.anko.imageResource
 import org.jetbrains.anko.setContentView
 import rocks.che.elections.R
 import rocks.che.elections.helpers.OnSwipeTouchListener
@@ -38,7 +39,7 @@ class SnakeGameActivity : MiniGameActivity() {
 
     fun eat() {
         score++
-        MusicManager.instance.play(this, R.raw.eat_apple_sound)
+        playSound(R.raw.eat_apple_sound)
         apple = genApple()
     }
 
@@ -48,45 +49,55 @@ class SnakeGameActivity : MiniGameActivity() {
                 R.drawable.ic_apple_3)[Random().nextInt(3)]
     }
 
+    private fun snakeGrow(p: Position) {
+        view.field[p.y][p.x].setImageResource(R.color.black)
+        view.field[p.y][p.x].visibility = VISIBLE
+        snake.addFirst(p)
+    }
+
+    private fun snakeShrink() {
+        view.field[snake.last.y][snake.last.x].setImageResource(0)
+        view.field[snake.last.y][snake.last.x].visibility = INVISIBLE
+        snake.removeLast()
+    }
+
     private fun update() {
         view.scoreText.text = score.toString()
 
         val nextHeadPos = snake.first + d
+        Log.d("Snake", "nextHeadPos: " + nextHeadPos)
         if (!nextHeadPos.isValid(view.rowCnt, view.colCnt) || inSnake(nextHeadPos)) {
             lose()
             return
         }
-        snake.addFirst(nextHeadPos)
+        snakeGrow(nextHeadPos)
 
         if (snake.first != apple) {
-            view.field[snake.last.y][snake.last.x].backgroundResource = R.color.green
-            snake.removeLast()
+            snakeShrink()
         } else {
             eat()
         }
 
-        for ((y, x) in snake) {
-            val elem = view.field[y][x]
-            elem.backgroundResource = R.color.black
-        }
-
-        view.field[apple!!.y][apple!!.x].imageResource = appleResource
-
-        handler.postDelayed({ update() }, 300L)
+        handler.postDelayed({ update() }, 150L-score)
     }
 
     private fun inSnake(obj: Position): Boolean = snake.any { it == obj }
 
     private fun genApple(): Position {
         if (apple != null) {
-            view.field[apple!!.y][apple!!.x].imageResource = 0
+            view.field[apple!!.y][apple!!.x].setBackgroundResource(R.color.black)
+            view.field[apple!!.y][apple!!.x].setImageResource(0)
+            view.field[apple!!.y][apple!!.x].invalidate()
         }
         var apple: Position
         do {
             apple = Position(Random().nextInt(view.rowCnt), Random().nextInt(view.colCnt))
         } while (inSnake(apple))
         randomAppleResource()
-        view.field[apple.y][apple.x].imageResource = appleResource
+        view.field[apple.y][apple.x].setBackgroundResource(R.color.green)
+        view.field[apple.y][apple.x].setImageResource(appleResource)
+        view.field[apple.y][apple.x].visibility = VISIBLE
+        view.field[apple.y][apple.x].invalidate()
         return apple
     }
 
@@ -115,7 +126,7 @@ class SnakeGameActivity : MiniGameActivity() {
         MusicManager.instance.play(this, R.raw.snake_music)
 
         for (i in 1..startLength) {
-            snake.addLast(Position(2, startLength - i))
+            snakeGrow(Position(2, i))
         }
         apple = genApple()
 

@@ -6,7 +6,6 @@ import org.jetbrains.anko.sdk25.listeners.onClick
 import rocks.che.elections.R
 import rocks.che.elections.helpers.DefaultView
 import rocks.che.elections.helpers.gameTextView
-import rocks.che.elections.logic.bus
 
 class DebateViewStart(val candidateResource: Int = 0) : DefaultView<DebateActivity> {
     private lateinit var ankoContext: AnkoContext<DebateActivity>
@@ -41,7 +40,7 @@ class DebateViewStart(val candidateResource: Int = 0) : DefaultView<DebateActivi
 
                 themedButton(theme = R.style.button) {
                     textResource = R.string.next
-                    onClick { bus.post(NextDebateStage()) }
+                    onClick { ui.owner.nextStage()}
                 }.lparams(weight = 0.14f, height = 0, width = dip(180))
             }.lparams(weight = 0.75f, height = 0)
 

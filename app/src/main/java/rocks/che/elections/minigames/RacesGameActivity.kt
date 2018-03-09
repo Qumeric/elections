@@ -6,15 +6,18 @@ import org.jetbrains.anko.displayMetrics
 import org.jetbrains.anko.find
 import org.jetbrains.anko.setContentView
 import rocks.che.elections.R
+import rocks.che.elections.logic.Candidate
 import java.lang.Math.random
+import kotlin.math.sqrt
 
-class LadderGameActivity : MiniGameActivity() {
-    private lateinit var view: LadderGameView
+class RacesGameActivity : MiniGameActivity() {
+    private lateinit var view: RacesGameView
 
     private val length = 20L // in seconds
     private var speed = 0f
     private var acceleration = 5f
-    private var deceleration = 5f
+    private var deceleration = 1f
+    private val speeds = mutableListOf<Float>(0f, 0f, 0f, 0f, 0f, 0f)
 
     fun tap() {
         speed += acceleration
@@ -23,9 +26,21 @@ class LadderGameActivity : MiniGameActivity() {
     }
 
     private fun update() {
-        speed -= deceleration * (view.horse.x / displayMetrics.widthPixels)
-        speed = maxOf(speed, -view.horse.x / 5)
+        speed = maxOf(0f, speed-deceleration)
         view.horse.x += speed
+
+        if (view.horse.x >= displayMetrics.widthPixels-view.horse.width) {
+            win()
+        }
+
+        for ((index, h) in view.opponentHorses.withIndex()) {
+            speeds[index] += sqrt(0.2/random()).toFloat()
+            speeds[index] = maxOf(0f, speeds[index]-deceleration)
+            h.x += speeds[index]
+            if (h.x >= displayMetrics.widthPixels-h.width) {
+                lose()
+            }
+        }
 
         handler.postDelayed({ update() }, 1000 / 50)
     }
@@ -33,7 +48,8 @@ class LadderGameActivity : MiniGameActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        view = LadderGameView()
+        val candidates: ArrayList<Candidate> = intent.getParcelableArrayListExtra("candidates")
+        view = RacesGameView(candidates)
         view.setContentView(this)
 
         useMovingImages(find<ViewGroup>(R.id.moving_image_layout))
@@ -50,6 +66,8 @@ class LadderGameActivity : MiniGameActivity() {
                 }, view.ankoContext)
 
     }
+
+    fun win() = lose()
 
     override fun lose() {
         handler.removeCallbacksAndMessages(null)

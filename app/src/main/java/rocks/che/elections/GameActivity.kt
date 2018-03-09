@@ -10,26 +10,31 @@ import rocks.che.elections.logic.bus
 
 class GameActivity : DefaultActivity() {
     private lateinit var view: GameView
-    private lateinit var gamestate: Gamestate
+    private lateinit var gs: Gamestate
     private val moneyToUp = 5
 
     fun buyGroupPoints(group: String): Boolean {
-        if (gamestate.money < moneyToUp) {
+        if (gs.money < moneyToUp) {
             return false
         }
-        gamestate.money -= moneyToUp
-        bus.post(ChangeMoneyEvent(gamestate.money))
-        gamestate.candidate.opinions[group]!!.inc() // FIXME check
-        bus.post(ChangeOpinionEvent(group, gamestate.candidate.opinions[group]!!))
+        gs.money -= moneyToUp
+        bus.post(ChangeMoneyEvent(gs.money))
+        gs.candidate.opinions[group] = gs.candidate.opinions[group]!!+1
+        bus.post(ChangeOpinionEvent(group, gs.candidate.opinions[group]!!))
         return true
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        gamestate = intent.extras.getParcelable("gamestate")
+        try {
+            gs = intent.extras.getParcelable("gamestate")
+        } catch (e: Exception) {
+            gs = Gamestate.loadGame()!!
+        }
+        gs.save()
 
-        view = GameView(gamestate)
+        view = GameView(gs)
         view.setContentView(this)
     }
 }

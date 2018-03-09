@@ -77,7 +77,6 @@ class DucksGameActivity : MiniGameActivity() {
 
     fun shoot() {
         playSound(R.raw.shot_sound)
-
         val chRC = Rect()
         view.crosshair.getHitRect(chRC)
 

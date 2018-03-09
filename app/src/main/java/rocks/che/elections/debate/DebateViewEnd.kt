@@ -7,10 +7,9 @@ import rocks.che.elections.R
 import rocks.che.elections.helpers.DefaultView
 import rocks.che.elections.helpers.gameTextView
 import rocks.che.elections.logic.Candidate
-import rocks.che.elections.logic.bus
 
 class DebateViewEnd(val candidate: Candidate, val winGroup: String = "Winner",
-                    val loseGroup: String = "Loser", val attackResult: Boolean = true): DefaultView<DebateActivity> {
+                    val loseGroup: String = "Loser", val attackResult: String = "Opponent"): DefaultView<DebateActivity> {
     private lateinit var ankoContext: AnkoContext<DebateActivity>
 
     override fun createView(ui: AnkoContext<DebateActivity>) = with(ui) {
@@ -60,17 +59,13 @@ class DebateViewEnd(val candidate: Candidate, val winGroup: String = "Winner",
                         imageResource = R.drawable.ic_flash
                     }
                     gameTextView(10) {
-                        textResource = if (attackResult) {
-                            R.string.debate_opponent_attack_success
-                        } else {
-                            R.string.debate_opponent_attack_fail
-                        }
+                        text = ctx.getString(R.string.debate_opponent_attack_template).format(attackResult)
                     }
                 }.lparams(weight = 0.1f, height = 0, width = matchParent)
 
                 themedButton(theme = R.style.button) {
                     textResource = R.string.next
-                    onClick { bus.post(NextDebateStage()) }
+                    onClick { ui.owner.nextStage() }
                 }.lparams(weight = 0.14f, height = 0, width = dip(180))
             }.lparams(weight = 0.75f, height = 0)
 

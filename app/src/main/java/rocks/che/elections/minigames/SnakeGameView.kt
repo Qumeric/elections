@@ -1,7 +1,10 @@
 package rocks.che.elections.minigames
 
 import android.view.View
-import android.widget.*
+import android.view.View.INVISIBLE
+import android.widget.GridLayout
+import android.widget.ImageView
+import android.widget.TextView
 import org.jetbrains.anko.*
 import rocks.che.elections.R
 import rocks.che.elections.helpers.gameTextView
@@ -35,12 +38,13 @@ class SnakeGameView(private val onTouchListener: View.OnTouchListener) : AnkoCom
                 columnCount = colCnt
                 rowCount = rowCnt
 
+                backgroundResource = R.color.green
                 for (row in 0 until rowCount) {
-                    val rowElems: ArrayList<ImageView> = arrayListOf()
-                    (0 until columnCount).mapTo(rowElems) {
+                    val rowElems: List<ImageView> = (0 until columnCount).map {
                         imageView {
                             isClickable = false
-                            backgroundResource = R.color.green
+                            background = null
+                            visibility = INVISIBLE
                             scaleType = ImageView.ScaleType.FIT_CENTER
                         }.lparams {
                             rowSpec = GridLayout.spec(row, 1f)
@@ -49,7 +53,7 @@ class SnakeGameView(private val onTouchListener: View.OnTouchListener) : AnkoCom
                             width = 40
                         }
                     }
-                    field.add(rowElems)
+                    field.add(rowElems as ArrayList<ImageView>)
                 }
             }.lparams(weight = 9/16f, width = matchParent, height = 0)
         }

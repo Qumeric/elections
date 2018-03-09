@@ -25,8 +25,9 @@ class RunnerGameView : AnkoComponent<RunnerGameActivity> {
         ankoContext = ui
 
         frameLayout {
-            if (!isInEditMode()) { // FIXME
+            if (!isInEditMode) { // FIXME
                 stickmanDrawable = GifDrawable(resources, R.drawable.runner_anim)
+                stickmanDrawable.setSpeed(2.5f)
             }
 
             relativeLayout {
@@ -60,8 +61,8 @@ class RunnerGameView : AnkoComponent<RunnerGameActivity> {
                             setImageDrawable(stickmanDrawable)
                             scaleType = ImageView.ScaleType.FIT_XY
                         }.lparams {
-                            height = dip(70)
-                            width = dip(30)
+                            height = dip(75)
+                            width = dip(50)
                         }
                     } else {
                         imageView {

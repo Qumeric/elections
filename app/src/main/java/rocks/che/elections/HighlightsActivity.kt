@@ -19,6 +19,6 @@ class HighlightsActivity : DefaultActivity() {
         view.setContentView(this)
 
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
-        Handler().postDelayed({startActivity<GameActivity>()}, 5000)
+        Handler().postDelayed({ startActivity<GameActivity>("gamestate" to gs) }, 5000)
     }
 }

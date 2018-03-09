@@ -13,6 +13,7 @@ class PollActivity : DefaultActivity() {
         super.onCreate(savedInstanceState)
 
         gs = intent.getParcelableExtra("gamestate")
+        gs.updateCandidate()
 
         val h = gs.candidates.map { it.name to it.history}.toMap()
 

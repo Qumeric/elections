@@ -3,6 +3,7 @@ package rocks.che.elections
 import android.view.Gravity
 import android.widget.GridLayout
 import org.jetbrains.anko.*
+import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.sdk25.listeners.onClick
 import rocks.che.elections.helpers.DefaultView
 import rocks.che.elections.helpers.cardView
@@ -70,10 +71,17 @@ class ChooseCandidateView(val secretUnlocked: Boolean = false) : DefaultView<Cho
                                 }
 
                                 button(candidate.name) {
-                                    backgroundResource = R.color.blue
-                                    onClick {
-                                        ctx.startActivity<GameActivity>("gamestate" to Gamestate(candidate,
-                                                candidates as MutableList<Candidate>, loadQuestions(resources)))
+                                    if (candidate.resource != R.drawable.candidate_navalny || secretUnlocked) {
+                                        backgroundResource = R.color.blue
+                                        onClick {
+                                            ctx.startActivity<HighlightsActivity>("gamestate" to Gamestate(candidate,
+                                                    candidates as MutableList<Candidate>, loadQuestions(resources)))
+                                        }
+                                    } else {
+                                        backgroundResource = R.color.gray
+                                        onClick {
+                                            snackbar(this@verticalLayout, R.string.need_unblock)
+                                        }
                                     }
                                 }.lparams {
                                     width = matchParent
@@ -81,7 +89,7 @@ class ChooseCandidateView(val secretUnlocked: Boolean = false) : DefaultView<Cho
                                     weight = 0.2f
                                 }
                             }.lparams(width = matchParent, height = matchParent)
-                            if (candidate.name == ctx.getString(R.string.secret_candidate_name) && !secretUnlocked) {
+                            if (candidate.resource == R.drawable.candidate_navalny && !secretUnlocked) {
                                 view {
                                     backgroundResource = R.color.black
                                     alpha = 0.5f

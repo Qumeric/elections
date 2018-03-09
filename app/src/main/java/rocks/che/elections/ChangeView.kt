@@ -1,6 +1,7 @@
 package rocks.che.elections
 
 import android.content.Intent
+import android.os.Parcelable
 import android.view.Gravity
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
@@ -83,9 +84,12 @@ class ChangeView(private val oldOpinions: Map<String, Int> = mapOf(), val gs: Ga
                         debug("it is poll time and nextdebates is %b".format(gs.nextDebates))
                         if (gs.nextDebates) {
                             val intent = Intent(ui.owner, RunnerGameActivity::class.java)
+                            if (gs.candidate.resource == R.drawable.candidate_sobchak) {
+                                intent.putParcelableArrayListExtra("candidates", gs.candidates as ArrayList<out Parcelable>)
+                            }
                             when (gs.candidate.resource) {
                                 R.drawable.candidate_navalny -> Intent(ui.owner, RunnerGameActivity::class.java)
-                                R.drawable.candidate_sobchak -> Intent(ui.owner, LadderGameActivity::class.java)
+                                R.drawable.candidate_sobchak -> Intent(ui.owner, RacesGameActivity::class.java)
                                 R.drawable.candidate_zhirinovsky -> Intent(ui.owner, DucksGameActivity::class.java)
                                 R.drawable.candidate_putin -> Intent(ui.owner, HammerGameActivity::class.java)
                                 R.drawable.candidate_grudinin -> Intent(ui.owner, CatcherGameActivity::class.java)

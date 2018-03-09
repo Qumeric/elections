@@ -1,5 +1,6 @@
 package rocks.che.elections
 
+import android.os.Parcelable
 import android.view.Gravity
 import android.view.View
 import org.jetbrains.anko.*
@@ -96,9 +97,11 @@ class NewGameView : DefaultView<NewGameActivity> {
                 }
             }
             themedButton(theme = R.style.button) {
-                text = "ladder"
+                text = "races"
+
                 onClick {
-                    ctx.startActivity<LadderGameActivity>()
+                    //intent.putParcelableArrayListExtra("candidates", gs.candidates as ArrayList<out Parcelable>)
+                    ctx.startActivity<RacesGameActivity>("candidates" to loadCandidates(resources) as ArrayList<out Parcelable>)
                 }
             }
             themedButton(theme = R.style.button) {

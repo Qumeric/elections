@@ -35,23 +35,15 @@ class MusicManager private constructor() {
     fun play(context: Context, soundResourceId: Int) {
         // if there's an existing stream playing already
         if (mMediaPlayer != null) {
-            // stop the stream in case it's still playing
-            try {
-                mMediaPlayer!!.stop()
-            } catch (e: Exception) {
-            }
-
-            // release the resources
-            mMediaPlayer!!.release()
-
-            // unset the reference
-            mMediaPlayer = null
+            stop()
         }
 
         // create a new stream for the sound to play
         mMediaPlayer = MediaPlayer.create(context.applicationContext, soundResourceId)
         // set volume (same for both channels)
         mMediaPlayer!!.setVolume(volume, volume)
+        // make it loop
+        mMediaPlayer!!.isLooping = true
 
         // if the instance could be created
         if (mMediaPlayer != null) {
@@ -72,9 +64,38 @@ class MusicManager private constructor() {
         }
     }
 
+    fun stop() {
+        try {
+            mMediaPlayer?.stop()
+        } catch (e: Exception) {
+        }
+
+        // release the resources
+        mMediaPlayer?.release()
+
+        // unset the reference
+        mMediaPlayer = null
+    }
+
+    fun pause() {
+        try {
+            mMediaPlayer?.pause()
+        } catch (e: Exception) {
+
+        }
+    }
+
+    fun play() {
+        try {
+            mMediaPlayer?.start()
+        } catch (e: Exception) {
+
+        }
+    }
+
     companion object {
         private var mInstance: MusicManager? = null
-        var volume: Float = 1f
+        var volume: Float = 0.1f
             set(v: Float) {
                 field = maxOf(0f, minOf(v, 1f))
             }

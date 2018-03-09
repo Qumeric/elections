@@ -96,7 +96,7 @@ class DebateViewGroups(val minutes: Int = 60, val questions: Questions = Questio
                 onClick {
                     if (amountVals.sum() == minutes) {
                         bus.post(SetGroupDistribution(amountVals))
-                        bus.post(NextDebateStage())
+                        ui.owner.nextStage()
                     } else {
                         snackbar(this, R.string.debate_spend_minutes_first)
                     }

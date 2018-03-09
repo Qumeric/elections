@@ -3,17 +3,17 @@ package rocks.che.elections.debate
 import android.support.v4.content.ContextCompat
 import android.view.Gravity
 import android.widget.SeekBar
-import com.squareup.otto.Bus
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
 import org.jetbrains.anko.sdk25.listeners.onTouch
 import rocks.che.elections.R
 import rocks.che.elections.helpers.DefaultView
 import rocks.che.elections.helpers.gameTextView
+import rocks.che.elections.logic.bus
 
 enum class SourceSlider { OPPONENTS, GROUPS}
 
-class DebateViewChoose(val bus: Bus = Bus()) : DefaultView<DebateActivity> {
+class DebateViewChoose: DefaultView<DebateActivity> {
     private lateinit var ankoContext: AnkoContext<DebateActivity>
     private lateinit var groupsBar: SeekBar
     private lateinit var opponentsBar: SeekBar
@@ -78,7 +78,7 @@ class DebateViewChoose(val bus: Bus = Bus()) : DefaultView<DebateActivity> {
                 textResource = R.string.next
                 onClick {
                     bus.post(DebateTimeDistributionUpdate(groupsBar.progress, opponentsBar.progress))
-                    bus.post(NextDebateStage())
+                    ui.owner.nextStage()
                 }
             }.lparams(weight = 0.07f, height = 0, width = dip(180))
         }

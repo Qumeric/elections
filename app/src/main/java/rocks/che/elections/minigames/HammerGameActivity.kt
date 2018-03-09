@@ -7,6 +7,7 @@ import org.jetbrains.anko.sdk25.listeners.onClick
 import org.jetbrains.anko.setContentView
 import rocks.che.elections.R
 import java.util.*
+import kotlin.math.sqrt
 
 class HammerGameActivity : MiniGameActivity() {
     private lateinit var view: HammerGameView
@@ -18,7 +19,7 @@ class HammerGameActivity : MiniGameActivity() {
         view.scoreText.text = score.toString()
     }
 
-    private fun removeEnemy(row: Int, col: Int){
+    private fun removeEnemy(row: Int, col: Int) {
         val elem = view.field[row][col]
         if (elem.visibility != View.INVISIBLE) {
             playSound(R.raw.hammer_miss_sound)
@@ -31,20 +32,24 @@ class HammerGameActivity : MiniGameActivity() {
                 return
             }
         }
-        handler.postDelayed({createEnemy(row, col)}, 3000*(1+Random().nextDouble()).toLong())
+        val timeToHide = (5000 * (1 + Random().nextDouble()) /sqrt(5+score.toDouble())).toLong()
+        handler.postDelayed({ createEnemy(row, col) }, timeToHide)
     }
 
-    private fun createEnemy(row: Int, col: Int){
+    private fun createEnemy(row: Int, col: Int) {
         val elem = view.field[row][col]
         val r = view.pickRandomEnemyResource()
         elem.setImageResource(r)
         elem.visibility = View.VISIBLE
         elem.onClick {
+            elem.clearAnimation()
             elem.visibility = View.INVISIBLE
             kill()
         }
 
-        handler.postDelayed({removeEnemy(row, col)}, 3000*(1+Random().nextDouble()).toLong())
+        val timeToStay = (7000 * (1 + Random().nextDouble()) /sqrt(5+score.toDouble())).toLong()
+        view.scaleView(elem, 1f, 0f, timeToStay)
+        handler.postDelayed({ removeEnemy(row, col) }, timeToStay)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,7 +65,7 @@ class HammerGameActivity : MiniGameActivity() {
                 {
                     for (row in 0 until view.rowCnt) {
                         (0 until view.colCnt).forEach {
-                            handler.postDelayed({createEnemy(row, it)}, (5000*Random().nextDouble()).toLong())
+                            handler.postDelayed({ createEnemy(row, it) }, (5000 * Random().nextDouble()).toLong())
                         }
                     }
                 },

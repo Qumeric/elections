@@ -25,7 +25,6 @@ class ChangeActivity : DefaultActivity() {
         val oldValues = gs.candidate.opinions.mapValues { it.value }
         gs.update(answer.impact)
 
-
         view = ChangeView(oldValues, gs)
         view.setContentView(this)
     }

@@ -9,7 +9,6 @@ import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.CardView
 import android.view.View
 import android.view.ViewManager
-import android.widget.TextView
 import com.robinhood.spark.SparkAdapter
 import com.robinhood.spark.SparkView
 import nl.dionsegijn.konfetti.KonfettiView
@@ -57,7 +56,7 @@ inline fun ViewManager.gameTextView(size: Int? = null, color: Int? = null, text:
             if (color != null) tv.textColor = ContextCompat.getColor(it, color)
             if (text != null) tv.text = text
             if (size != null) tv.textSize = size * 2.5f // FIXME shouldn't have a constant
-            /* else */if (autoResize) TextViewCompat.setAutoSizeTextTypeWithDefaults(tv, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM)
+            else if (autoResize) TextViewCompat.setAutoSizeTextTypeWithDefaults(tv, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM)
             tv.elevation = 100f
             tv
         }, theme = 0, init = init)

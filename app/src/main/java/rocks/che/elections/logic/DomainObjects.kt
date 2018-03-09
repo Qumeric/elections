@@ -6,7 +6,9 @@ import com.google.gson.Gson
 import com.pixplicity.easyprefs.library.Prefs
 import com.squareup.otto.Bus
 import kotlinx.android.parcel.Parcelize
+import rocks.che.elections.R
 import rocks.che.elections.helpers.groupToResource
+import java.util.*
 import kotlin.math.roundToInt
 
 const val secretFilename = "che.rocks.secret"
@@ -18,18 +20,21 @@ class Opinions : HashMap<String, Int>() {
     }
 }
 
+
 @Parcelize
 class Candidate(val name: String, val perks: List<String>,
                 val resource: Int, val opinions: Opinions,
-                val history: MutableList<Double>) : Comparable<Candidate>, Parcelable {
-    val generalOpinion get() = opinions.values.sum().toDouble() / opinions.size
+                val history: MutableList<Double>, var boost: Float=0f) : Comparable<Candidate>, Parcelable {
+    val generalOpinion get() = opinions.values.sum().toDouble() / opinions.size + boost
 
     init {
         history.add(generalOpinion)
     }
 
-    fun update() {
-        // TODO add rating if not player candidate
+    fun update(isOpponent: Boolean = false) {
+        if (isOpponent) {
+            boost += Random().nextInt(5 + if (resource == R.drawable.candidate_putin) 1 else 0)
+        }
         history.add(generalOpinion)
     }
 
@@ -86,15 +91,37 @@ class Gamestate(val candidate: Candidate, val candidates: MutableList<Candidate>
                 var lastGroup: String? = null) : Parcelable {
     val isPollTime get() = step != 0 && step % pollFrequency == 0
     val worst get() = candidates.min()
-    val isWorst get() = worst == candidate
-    val isBest get() = candidates.max() == candidate
+    val isWorst get() = worst!!.resource == candidate.resource
+    val isBest get() = candidates.max()!!.resource == candidate.resource
     val isWon get() = candidates.size == 2 && isBest
 
-    fun update(impact: Opinions) {
-        candidate.opinions.forEach { (k, v) ->
-            candidate.opinions[k] = impact[k] ?: 0 + v
+    init {
+        if (step == 0 && candidate.resource == R.drawable.candidate_grudinin) { // FIXME possible to cheat
+            money = 50
         }
-        candidates.forEach { it.update() }
+    }
+
+    fun getCandidate(name: String): Candidate {
+        return candidates.find{it.name == name}!!
+    }
+
+    // FIXME bad style...
+    fun updateCandidate() {
+        val candidateInList = (candidates.filter { it.resource == candidate.resource })[0]
+        candidate.opinions.forEach { (k, v) ->
+            candidateInList.opinions[k] = v
+        }
+    }
+
+    fun update(impact: Opinions) {
+        val candidateInList = (candidates.filter { it.resource == candidate.resource })[0]
+        candidate.opinions.forEach { (k, v) ->
+            candidate.opinions[k] = (impact[k] ?: 0) + v
+            candidateInList.opinions[k] = v
+        }
+        candidate.update()
+        candidateInList.update()
+        candidates.filter{it.resource != candidate.resource}.forEach { it.update(true) }
     }
 
     fun save() {
@@ -104,11 +131,8 @@ class Gamestate(val candidate: Candidate, val candidates: MutableList<Candidate>
 
     companion object {
         fun loadGame(): Gamestate? {
-            if (!Prefs.contains("gamestate")) {
-                return null
-            }
             return try {
-                val json = Prefs.getString("location", null) ?: return null
+                val json = Prefs.getString("gamestate", null) ?: return null
                 return Gson().fromJson(json, Gamestate::class.java);
             } catch (e: Exception) {
                 Log.e("loadGame", "Unable to load existing save")

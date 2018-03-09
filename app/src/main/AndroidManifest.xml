@@ -50,7 +50,7 @@
             android:name=".minigames.HammerGameActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".minigames.LadderGameActivity"
+            android:name=".minigames.RacesGameActivity"
             android:screenOrientation="landscape" />
         <activity
             android:name=".minigames.SnakeGameActivity"
