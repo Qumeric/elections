@@ -28,4 +28,30 @@
     <string name="debate_choose_description">"Распределите время между разговорами про группы населения и атакоЙ на оппонентов     "</string>
     <string name="group_slider_annotation">"Время на обращения к группам  "</string>
     <string name="score_template" translatable="false">Баллы: %d</string>
+    <string name="debate_finish" translatable="false">Дебаты завершены</string>
+    <string name="debate_good_group_template">Ваша речь понравилась группе %s</string>
+    <string name="debate_bad_group_template" translatable="false">Группа %s не оценила вашу речь</string>
+    <string name="debate_minutes_left_template" translatable="false">Осталось %d минут</string>
+    <string name="debate_spend_minutes_first" translatable="false">Вам необходимо распределить все минуты!</string>
+    <string name="opponent_slider_annotation" translatable="false">Время на дебаты с оппонентом</string>
+    <string name="debate_groups" translatable="false">Распределите время, рассказывая о группах населения</string>
+    <string name="debate_opponents" translatable="false">Распределите время атаки на следующих оппонентов</string>
+    <string name="debate_opponent_attack_template" translatable="false">Атака на оппонента %s была успешна</string>
+    <string name="ducks_info_title" translatable="false">Уткострел</string>
+    <string name="ducks_info_message" translatable="false">Стреляйте как можно точнее и старайтесь не промахиваться! Пропустив 5 уточек игра закончится.</string>
+    <string name="snake_info_title" translatable="false">Любитель яблок</string>
+    <string name="snake_info_message" translatable="false">
+        Змейка кушает яблочки. Классика. Двигая пальцами по экрану задавайте направление змейки. Не касайтесь бортов!
+    </string>
+    <string name="snake_end_message_template">Вы набрали %d очков</string>
+    <string name="ladder_info_message" translatable="false">Нажимайте как можно быстрее, чтобы быть первым!</string>
+    <string name="ladder_info_title" translatable="false">Лошадиные скачки</string>
+    <string name="hammer_info_message" translatable="false">Не позволяйте им всплыть. Нажимайте на персонажей, как только они всплывут. Максимум 5 пропусков.</string>
+    <string name="you">вы</string>
+    <string name="pick_twice">Нельзя отвечать на вопрос одной и той же группы два раза подряд</string>
+    <string name="runner_info_message" translatable="false">Не споткнитесь! Ваша задача: перепрыгнуть все полицейские машины.</string>
+    <string name="catcher_info_title" translatable="false">Совхоз имени Клубникина</string>
+    <string name="catcher_info_message" translatable="false">Передвигая тележку, соберите как можно больше ягод! 5 пропусков - конец игры.</string>
+    <string name="hammer_info_title" translatable="false">Вне конкуренции</string>
+    <string name="poll_results_template" translatable="false">Результаты недели\\u00A0%d</string>
 </resources>

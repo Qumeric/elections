@@ -1,4 +1,4 @@
-package rocks.che.elections.helpers
+package rocks.che.elections
 
 import android.app.Application
 import android.content.ContextWrapper

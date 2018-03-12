@@ -8,10 +8,12 @@ import org.jetbrains.anko.sdk25.listeners.onClick
 import rocks.che.elections.debate.DebateActivity
 import rocks.che.elections.helpers.DefaultView
 import rocks.che.elections.helpers.gameTextView
+import rocks.che.elections.logic.Quote
+import rocks.che.elections.logic.inActivityChange
 import rocks.che.elections.logic.loadCandidates
 import rocks.che.elections.minigames.*
 
-class NewGameView : DefaultView<NewGameActivity> {
+class NewGameView(val quote: Quote) : DefaultView<NewGameActivity> {
     private lateinit var ankoContext: AnkoContext<NewGameActivity>
 
     override fun createView(ui: AnkoContext<NewGameActivity>) = with(ui) {
@@ -39,12 +41,12 @@ class NewGameView : DefaultView<NewGameActivity> {
                     }
 
                     frameLayout {
-                        gameTextView(20, R.color.aqua) {
+                        gameTextView(20, R.color.blue) {
                             text = ctx.getText(R.string.logo)
                             textAlignment = View.TEXT_ALIGNMENT_TEXT_START
                         }
                         imageView {
-                            imageResource = R.drawable.checkmark
+                            imageResource = R.drawable.ic_checkmark
                         }.lparams {
                             gravity = Gravity.END
                             width = dip(25)
@@ -75,8 +77,12 @@ class NewGameView : DefaultView<NewGameActivity> {
             imageView {
                 imageResource = R.drawable.play
                 onClick {
+                    inActivityChange = true
                     ctx.startActivity<ChooseCandidateActivity>()
                 }
+            }
+            gameTextView(10) {
+                text = "%s: %s".format(quote.author, quote.text)
             }
             themedButton(theme = R.style.button) {
                 text = "catcher"

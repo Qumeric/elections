@@ -15,7 +15,7 @@ class PollActivity : DefaultActivity() {
         gs = intent.getParcelableExtra("gamestate")
         gs.updateCandidate()
 
-        val h = gs.candidates.map { it.name to it.history}.toMap()
+        val h = gs.candidates.map { it.resource to it.history}.toMap()
 
         view = PollView(h, gs)
 

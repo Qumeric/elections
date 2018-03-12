@@ -14,87 +14,67 @@
     <string name="need_unblock">You have to unblock this candidate first</string>
     <string name="secret_candidate_name" translatable="false">Овальный</string>
     <string name="your_candidate">Your candidate</string>
+    <string name="poll_results_template">Poll results on week\\u00A0%d</string>
     <string name="logo" translatable="false">
         <font color='#EE0000'>В</font>ремя\n<font color='#EE0000'>В</font>ыбирать\n<font color='#EE0000'>П</font>резидента
     </string>
+    <string name="you">you</string>
+    <string name="pick_twice">You cannot pick the same category twice in a row</string>
 
     <!-- Debate description -->
     <string name="debate">Debate</string>
     <string name="group_slider_annotation">Time allocated to groups</string>
-    <string name="opponent_slider_annotation" translatable="false">
-        Время на дебаты с оппонентом
-    </string>
-    <string name="debate_groups" translatable="false">
-        Распределите время, рассказывая о группах населения
-    </string>
-    <string name="debate_opponents" translatable="false">
-        Распределите время атаки на следующих оппонентов
-    </string>
-    <string name="debate_spend_minutes_first" translatable="false">
+    <string name="opponent_slider_annotation">MISSING</string>
+    <string name="debate_spend_minutes_first">
         You have to spend all available minutes!
     </string>
-    <string name="debate_minutes_left_template" translatable="false">
+    <string name="debate_minutes_left_template">
         Minutes left %d
     </string>
-    <string name="debate_finish" translatable="false">
+    <string name="debate_finish">
         Debate is finished
     </string>
-    <string name="debate_good_group_template" translatable="false">
-        Ypu speech was praised by %s
-    </string>
-    <string name="debate_bad_group_template" translatable="false">
-        Ypu speech was disliked by %s
-    </string>
-    <string name="debate_opponent_attack_template" translatable="false">
+    <string name="debate_good_group_template">Your speech was praised by %s</string>
+    <string name="debate_bad_group_template">Your speech was disliked by %s</string>
+    <string name="debate_opponent_attack_template">
         Attack on the opponent %s has been successful
     </string>
 
     <!-- Minigames -->
     <string name="score_template">Score: %d</string>
 
-    <string name="ducks_info_title" translatable="false">A</string>
-    <string name="ducks_info_message" translatable="false">
-        Стреляйте как можно точнее! Ваша задача: попасть в максимальное количество уток.
-    </string>
     <string name="ducks_end_title" translatable="false">Minigame is finished</string>
     <string name="ducks_end_message_template" translatable="false">
         You have scored %d points
     </string>
-    <string name="runner_info_title" translatable="false">A</string>
-    <string name="runner_info_message" translatable="false">
+    <string name="runner_info_title" translatable="false">
+        Побег из СИЗО
+    </string>
+    <string name="runner_info_message">
         Не споткнитесь! Ваша задача: перепрыгнуть все полицейские машины.
     </string>
     <string name="runner_end_title" translatable="false">Minigame is finished</string>
     <string name="runner_end_message_template" translatable="false">
         You have scored %d points
     </string>
-    <string name="catcher_info_title" translatable="false">A</string>
-    <string name="catcher_info_message" translatable="false">
-        Передвигая тележку, соберите как можно больше ягод.
+    <string name="catcher_info_title">
+        Совхоз имени Клубникина
+    </string>
+    <string name="catcher_info_message">
+        Передвигая тележку, соберите как можно больше ягод! 5 пропусков - конец игры.
     </string>
     <string name="catcher_end_title" translatable="false">Minigame is finished</string>
     <string name="catcher_end_message_template" translatable="false">
         You have scored %d points
     </string>
-    <string name="hammer_info_title" translatable="false">A</string>
-    <string name="hammer_info_message" translatable="false">
-        Не позволяйте им всплыть! Нажимайте на персонажей, как только они появляются.
-    </string>
+    <string name="hammer_info_title">Beyond competition</string>
     <string name="hammer_end_title" translatable="false">Minigame is finished</string>
     <string name="hammer_end_message_template" translatable="false">
         You have scored %d points
     </string>
-    <string name="snake_info_title" translatable="false">A</string>
-    <string name="snake_info_message" translatable="false">
-        Змейка кушает яблоки. Ничего необычного.
-    </string>
     <string name="snake_end_title" translatable="false">Minigame is finished</string>
-    <string name="snake_end_message_template" translatable="false">
+    <string name="snake_end_message_template">
         You have scored %d points
-    </string>
-    <string name="ladder_info_title" translatable="false">A</string>
-    <string name="ladder_info_message" translatable="false">
-        Поднимаясь по лестнице, жмите на экран как можно быстрее.
     </string>
     <string name="ladder_end_title" translatable="false">Minigame is finished</string>
     <string name="ladder_end_message_template" translatable="false">
@@ -111,4 +91,13 @@
     <string name="endgame_text_mutin">MISSING</string>
     <string name="debate_description">MISSING</string>
     <string name="debate_choose_description">MISSING</string>
+    <string name="debate_groups">MISSING</string>
+    <string name="debate_opponents">MISSING</string>
+    <string name="ducks_info_title">Duck Hunter</string>
+    <string name="ducks_info_message">MISSING</string>
+    <string name="snake_info_title">Apple lover</string>
+    <string name="snake_info_message">MISSING</string>
+    <string name="ladder_info_message">MISSING</string>
+    <string name="ladder_info_title">Horse racing</string>
+    <string name="hammer_info_message">MISSING</string>
 </resources>

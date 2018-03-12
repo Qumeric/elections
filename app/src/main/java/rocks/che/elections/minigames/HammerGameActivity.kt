@@ -6,6 +6,7 @@ import im.delight.android.audio.MusicManager
 import org.jetbrains.anko.sdk25.listeners.onClick
 import org.jetbrains.anko.setContentView
 import rocks.che.elections.R
+import rocks.che.elections.helpers.scaleView
 import java.util.*
 import kotlin.math.sqrt
 
@@ -48,7 +49,7 @@ class HammerGameActivity : MiniGameActivity() {
         }
 
         val timeToStay = (7000 * (1 + Random().nextDouble()) /sqrt(5+score.toDouble())).toLong()
-        view.scaleView(elem, 1f, 0f, timeToStay)
+        scaleView(elem, 1f, 0.2f, duration = timeToStay, pivotY = 1f)
         handler.postDelayed({ removeEnemy(row, col) }, timeToStay)
     }
 

@@ -5,7 +5,9 @@ import android.view.ViewGroup
 import org.jetbrains.anko.displayMetrics
 import org.jetbrains.anko.find
 import org.jetbrains.anko.setContentView
+import org.jetbrains.anko.textColor
 import rocks.che.elections.R
+import rocks.che.elections.helpers.scaleView
 import rocks.che.elections.logic.Candidate
 import java.lang.Math.random
 import kotlin.math.sqrt
@@ -13,7 +15,6 @@ import kotlin.math.sqrt
 class RacesGameActivity : MiniGameActivity() {
     private lateinit var view: RacesGameView
 
-    private val length = 20L // in seconds
     private var speed = 0f
     private var acceleration = 5f
     private var deceleration = 1f
@@ -26,23 +27,47 @@ class RacesGameActivity : MiniGameActivity() {
     }
 
     private fun update() {
-        speed = maxOf(0f, speed-deceleration)
+        speed = maxOf(0f, speed - deceleration)
         view.horse.x += speed
 
-        if (view.horse.x >= displayMetrics.widthPixels-view.horse.width) {
+        if (view.horse.x >= displayMetrics.widthPixels - view.horse.width) {
             win()
+            return
         }
 
         for ((index, h) in view.opponentHorses.withIndex()) {
-            speeds[index] += sqrt(0.2/random()).toFloat()
-            speeds[index] = maxOf(0f, speeds[index]-deceleration)
+            speeds[index] += sqrt(0.2 / random()).toFloat()
+            speeds[index] = maxOf(0f, speeds[index] - deceleration)
             h.x += speeds[index]
-            if (h.x >= displayMetrics.widthPixels-h.width) {
+            if (h.x >= displayMetrics.widthPixels - h.width) {
                 lose()
+                return
             }
         }
 
         handler.postDelayed({ update() }, 1000 / 50)
+    }
+
+    private fun onStartNumber(number: String) {
+        val tv = view.preText
+        tv.text = number
+        tv.textColor = R.color.red
+        scaleView(tv, 1f, 0f, duration = 1000)
+    }
+
+    private fun start() {
+        onStartNumber("3")
+        handler.postDelayed({onStartNumber("2")}, 1000)
+        handler.postDelayed({onStartNumber("1")}, 2000)
+
+        handler.postDelayed({
+            view.started = true
+            update()
+            doEach(
+                    { createMovingImage(R.drawable.races_clown, 10f, 10f) },
+                    { (1 + random()) * 3000 }
+            )
+        }, 3000)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,14 +81,7 @@ class RacesGameActivity : MiniGameActivity() {
         //MusicManager.getInstance().play(this, R.raw.) FIXME
 
         drawInformationDialog(getString(R.string.ladder_info_title), getString(R.string.ladder_info_message),
-                {
-                    handler.postDelayed({ lose() }, 1000 * length)
-                    update()
-                    doEach(
-                            { createMovingImage(R.drawable.races_clown, 10f, 10f) },
-                            { (1 + random()) * 1000 }
-                    )
-                }, view.ankoContext)
+                { start() }, view.ankoContext)
 
     }
 

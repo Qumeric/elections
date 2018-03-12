@@ -1,5 +1,7 @@
 package rocks.che.elections
 
+import android.graphics.Typeface
+import android.support.v4.widget.TextViewCompat
 import android.view.Gravity
 import android.widget.GridLayout
 import org.jetbrains.anko.*
@@ -8,10 +10,7 @@ import org.jetbrains.anko.sdk25.listeners.onClick
 import rocks.che.elections.helpers.DefaultView
 import rocks.che.elections.helpers.cardView
 import rocks.che.elections.helpers.gameTextView
-import rocks.che.elections.logic.Candidate
-import rocks.che.elections.logic.Gamestate
-import rocks.che.elections.logic.loadCandidates
-import rocks.che.elections.logic.loadQuestions
+import rocks.che.elections.logic.*
 
 class ChooseCandidateView(val secretUnlocked: Boolean = false) : DefaultView<ChooseCandidateActivity> {
     private lateinit var ankoContext: AnkoContext<ChooseCandidateActivity>
@@ -70,10 +69,14 @@ class ChooseCandidateView(val secretUnlocked: Boolean = false) : DefaultView<Cho
                                     width = matchParent
                                 }
 
-                                button(candidate.name) {
+                                val b = button {
+                                    text = candidate.name
+                                    typeface = Typeface.createFromAsset(ctx.assets, "mfred.ttf")
+                                    textSize = 20f
                                     if (candidate.resource != R.drawable.candidate_navalny || secretUnlocked) {
                                         backgroundResource = R.color.blue
                                         onClick {
+                                            inActivityChange = true
                                             ctx.startActivity<HighlightsActivity>("gamestate" to Gamestate(candidate,
                                                     candidates as MutableList<Candidate>, loadQuestions(resources)))
                                         }
@@ -88,6 +91,7 @@ class ChooseCandidateView(val secretUnlocked: Boolean = false) : DefaultView<Cho
                                     height = 0
                                     weight = 0.2f
                                 }
+                                TextViewCompat.setAutoSizeTextTypeWithDefaults(b, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM)
                             }.lparams(width = matchParent, height = matchParent)
                             if (candidate.resource == R.drawable.candidate_navalny && !secretUnlocked) {
                                 view {

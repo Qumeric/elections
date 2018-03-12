@@ -4,7 +4,6 @@ import android.os.Parcelable
 import android.util.Log
 import com.google.gson.Gson
 import com.pixplicity.easyprefs.library.Prefs
-import com.squareup.otto.Bus
 import kotlinx.android.parcel.Parcelize
 import rocks.che.elections.R
 import rocks.che.elections.helpers.groupToResource
@@ -20,20 +19,24 @@ class Opinions : HashMap<String, Int>() {
     }
 }
 
-
 @Parcelize
 class Candidate(val name: String, val perks: List<String>,
                 val resource: Int, val opinions: Opinions,
                 val history: MutableList<Double>, var boost: Float=0f) : Comparable<Candidate>, Parcelable {
-    val generalOpinion get() = opinions.values.sum().toDouble() / opinions.size + boost
+    val generalOpinion get() = maxOf(0.0, opinions.values.sum().toDouble() / opinions.size + boost)
 
     init {
-        history.add(generalOpinion)
+        if (history.size == 0)
+            history.add(generalOpinion)
     }
 
     fun update(isOpponent: Boolean = false) {
         if (isOpponent) {
-            boost += Random().nextInt(5 + if (resource == R.drawable.candidate_putin) 1 else 0)
+            boost += Random().nextInt(7)-2
+            when (resource) {
+                R.drawable.candidate_putin -> boost+=1
+                R.drawable.candidate_yavlinsky -> boost-=1
+            }
         }
         history.add(generalOpinion)
     }
@@ -66,7 +69,7 @@ data class Quote(val text: String, val author: String) : Parcelable
 data class Question(val statement: String, val answers: List<Answer>) : Parcelable
 
 @Parcelize
-data class Answer(val statement: String, val impact: Opinions) : Parcelable
+data class Answer(val statement: String, val impact: HashMap<String, Int>) : Parcelable
 
 @Parcelize
 class Questions(val all: HashMap<String, MutableList<Question>>,
@@ -78,7 +81,7 @@ class Questions(val all: HashMap<String, MutableList<Question>>,
     fun get(group: String): Question {
         val ptr = answered[group]!!
         answered[group] = (ptr + 1) % all[group]!!.size
-        return all[group]!![ptr]
+        return all[group]!![answered[group]!!]
     }
 }
 
@@ -113,10 +116,13 @@ class Gamestate(val candidate: Candidate, val candidates: MutableList<Candidate>
         }
     }
 
-    fun update(impact: Opinions) {
+    fun update(impact: HashMap<String, Int>) {
         val candidateInList = (candidates.filter { it.resource == candidate.resource })[0]
         candidate.opinions.forEach { (k, v) ->
-            candidate.opinions[k] = (impact[k] ?: 0) + v
+            if (impact[k] != null) {
+                candidate.opinions[k] = impact[k]!!*2 + v
+            }
+            candidate.opinions[k] = (impact[k] ?: 0) + candidate.opinions[k]!!
             candidateInList.opinions[k] = v
         }
         candidate.update()
@@ -143,9 +149,4 @@ class Gamestate(val candidate: Candidate, val candidates: MutableList<Candidate>
     }
 }
 
-val bus = Bus()
-
-data class ChangeStepEvent(val step: Int)
-data class ChangeMoneyEvent(val money: Int)
-data class ChangeScoreEvent(val score: Int)
-data class ChangeOpinionEvent(val group: String, val value: Int)
+var inActivityChange = false

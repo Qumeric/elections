@@ -1,30 +1,18 @@
 package rocks.che.elections
 
 import android.view.Gravity
-import android.view.View
-import android.view.animation.Animation
-import android.view.animation.ScaleAnimation
+import android.widget.ImageView
 import nl.dionsegijn.konfetti.models.Shape
 import nl.dionsegijn.konfetti.models.Size
 import org.jetbrains.anko.*
 import rocks.che.elections.helpers.DefaultView
 import rocks.che.elections.helpers.gameTextView
 import rocks.che.elections.helpers.konfettiView
+import rocks.che.elections.helpers.scaleView
 import rocks.che.elections.logic.Candidate
 
 class HighlightsView(val candidate: Candidate) : DefaultView<HighlightsActivity> {
     private lateinit var ankoContext: AnkoContext<HighlightsActivity>
-
-    private fun scaleView(v: View, startScale: Float = 0f, endScale: Float = 1f) {
-        val anim = ScaleAnimation(
-                startScale, endScale, // Start and end values for the X axis scaling
-                startScale, endScale, // Start and end values for the Y axis scaling
-                Animation.RELATIVE_TO_SELF, 0.5f, // Pivot point of X scaling
-                Animation.RELATIVE_TO_SELF, 0.5f); // Pivot point of Y scaling
-        anim.fillAfter = true; // Needed to keep the result of the animation
-        anim.duration = 2500;
-        v.startAnimation(anim);
-    }
 
     override fun createView(ui: AnkoContext<HighlightsActivity>) = with(ui) {
         ankoContext = ui
@@ -48,9 +36,10 @@ class HighlightsView(val candidate: Candidate) : DefaultView<HighlightsActivity>
                     text = candidate.name
                 }.lparams(weight = 0.09f, height = 0)
 
-                val cLayout = relativeLayout {
+                lateinit var cView: ImageView
+                relativeLayout {
                     backgroundResource = R.color.white
-                    imageView {
+                    cView = imageView {
                         imageResource = candidate.resource
                     }.lparams {
                         centerInParent()
@@ -59,7 +48,7 @@ class HighlightsView(val candidate: Candidate) : DefaultView<HighlightsActivity>
                     }
                 }.lparams(weight = 0.4f, height = 0)
 
-                scaleView(cLayout)
+                scaleView(cView)
 
                 space { }.lparams(weight = 0.05f, height = 0)
 
@@ -84,8 +73,8 @@ class HighlightsView(val candidate: Candidate) : DefaultView<HighlightsActivity>
             }.lparams(height = matchParent, width = matchParent)
 
             konfettiView {
-                build().addColors(0xff0000.opaque, 0x00ff00.opaque, 0x0000ff.opaque,
-                        0xffff00.opaque, 0x00ffff.opaque, 0xff00ff.opaque, 0x000000.opaque)
+                build().addColors(0xee0000.opaque, 0x00ee00.opaque, 0x0000ee.opaque,
+                        0xeeee00.opaque, 0x00eeee.opaque, 0xdd33dd.opaque, 0x000000.opaque)
                         .setDirection(0.0, 359.0)
                         .setSpeed(1f, 5f)
                         .setFadeOutEnabled(true)

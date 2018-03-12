@@ -1,6 +1,7 @@
 [
   {
-    "name": "Овальный",
+    "name": "ОвальныЙ",
+    "boost": 0,
     "basicStats": {
       "military": 0,
       "workers": 10,
@@ -16,13 +17,14 @@
     "perks": [
       "Любимчик народа",
       "Мировая поддержка",
-      "Черный список прессы"
+      "ЧерныЙ список прессы"
     ],
     "history": [],
     "imgResource": "candidate_navalny"
   },
   {
     "name": "Путчак",
+    "boost": 0,
     "basicStats": {
       "military": 0,
       "workers": 5,
@@ -44,7 +46,8 @@
     "imgResource": "candidate_sobchak"
   },
   {
-    "name": "Маржиновский",
+    "name": "МаржиновскиЙ",
+    "boost": 0,
     "basicStats": {
       "military": 5,
       "workers": 10,
@@ -59,7 +62,7 @@
     },
     "perks": [
       "Высокая узнаваемость",
-      "Завсегдатай СМИ",
+      "ЗавсегдатаЙ СМИ",
       "Экспрессивность"
     ],
     "history": [],
@@ -67,6 +70,7 @@
   },
   {
     "name": "Мутин",
+    "boost": 25,
     "basicStats": {
       "military": 10,
       "workers": 15,
@@ -89,6 +93,7 @@
   },
   {
     "name": "Клубникин",
+    "boost": 0,
     "basicStats": {
       "military": 5,
       "workers": 15,
@@ -104,13 +109,14 @@
     "perks": [
       "Есть бабки (да, именно так)",
       "Кандидат от народа!",
-      "Хайпоголик"
+      "ХаЙпоголик"
     ],
     "history": [],
     "imgResource": "candidate_grudinin"
   },
   {
-    "name": "Жулинский",
+    "name": "ЖулинскиЙ",
+    "boost": 0,
     "description": "",
     "basicStats": {
       "military": 5,
@@ -127,7 +133,7 @@
     "perks": [
       "Поддержка трудящихся",
       "Неконфликтность",
-      "Завсегдатай выборов"
+      "ЗавсегдатаЙ выборов"
     ],
     "history": [],
     "imgResource": "candidate_yavlinsky"

@@ -6,10 +6,12 @@
         <item name="android:textStyle">bold</item>
         <item name="android:colorButtonNormal">@color/blue</item>
     </style>
+
     <style name="cardViewStyle" parent="CardView">
         <item name="cardCornerRadius">4dp</item>
         <item name="cardElevation">4dp</item>
     </style>
+
     <style name="blue_space" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:background">@color/blue</item>
     </style>
@@ -20,4 +22,22 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="MySparkViewStyle" parent="@style/spark_SparkView">
+        <item name="spark_cornerRadius">10dp</item>
+        <item name="spark_fill">false</item>
+        <item name="spark_scrubEnabled">false</item>
+        <item name="spark_animateChanges">true</item>
+
+        <item name="spark_lineWidth">@dimen/spark_line_width</item>
+        <!--
+        <item name="spark_lineColor">@color/spark_line_color</item>
+        <item name="spark_fillColor">@color/spark_fill_color</item>
+
+        <item name="spark_baseLineColor">@color/spark_base_line_color</item>
+        <item name="spark_baseLineWidth">@dimen/spark_base_line_width</item>
+
+        <item name="spark_scrubLineColor">@color/spark_scrub_line_color</item>
+        <item name="spark_scrubLineWidth">@dimen/spark_scrub_line_width</item>
+        -->
+    </style>
 </resources>

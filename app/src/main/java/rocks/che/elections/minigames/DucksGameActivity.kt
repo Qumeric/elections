@@ -28,14 +28,14 @@ class DucksGameActivity : MiniGameActivity() {
         view.layout.addView(duckView)
         ducks.add(duckView)
 
-        handler.postDelayed({createDuck()}, ((5000 * (0.7 + random())) / Math.sqrt(10.0 + score)).toLong())
+        handler.postDelayed({createDuck()}, ((4000 * (0.7 + random())) / Math.sqrt(10.0 + score)).toLong())
     }
 
     private fun update() {
         val toRemove: MutableList<ImageView> = mutableListOf()
 
         for (s in ducks) {
-            s.x -= 3f + Math.sqrt(5f+score.toDouble()).toFloat()
+            s.x -= 8f + 2*Math.sqrt(10f+score.toDouble()).toFloat()
 
             if (s.x <= -s.drawable.intrinsicWidth) {
                 toRemove.add(s)
@@ -93,10 +93,10 @@ class DucksGameActivity : MiniGameActivity() {
             duck.getHitRect(duckRC)
 
             // Constants are hardcoded for the specific duck drawable
-            val realDuckCenterX = duckRC.left + (duckRC.right - duckRC.left) * 312 / 512
-            val realDuckCenterY = duckRC.top + (duckRC.bottom - duckRC.top) * 287 / 512
+            //val realDuckCenterX = duckRC.left + (duckRC.right - duckRC.left) * 288 / 512
+            //val realDuckCenterY = duckRC.top + (duckRC.bottom - duckRC.top) * 287 / 512
 
-            if (chRC.contains(realDuckCenterX, realDuckCenterY)) {
+            if (chRC.intersect(duckRC)) {
                 playSound(R.raw.duck_hit_sound)
                 ducks.remove(duck)
                 view.layout.removeView(duck)

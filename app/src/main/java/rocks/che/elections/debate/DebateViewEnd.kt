@@ -29,39 +29,39 @@ class DebateViewEnd(val candidate: Candidate, val winGroup: String = "Winner",
 
                 gameTextView(20) {
                     textResource = R.string.debate
-                }.lparams(weight = 0.15f, height = 0)
+                }.lparams(weight = 0.12f, height = 0)
 
                 imageView {
                     backgroundResource = R.color.blue
                 }.lparams(weight = 0.012f, height = 0, width = dip(120))
 
                 linearLayout {
-                    gravity = Gravity.CENTER
+                    gravity = Gravity.CENTER_VERTICAL
                     imageView {
                         imageResource = R.drawable.ic_add
-                    }
+                    }.lparams { rightPadding = dip(5)}
                     gameTextView(10) {
                         text= ctx.getString(R.string.debate_good_group_template).format(winGroup)
                     }
-                }
+                }.lparams {leftMargin = dip(20); topMargin = dip(10)}
                 linearLayout {
-                    gravity = Gravity.CENTER
+                    gravity = Gravity.CENTER_VERTICAL
                     imageView {
                         imageResource = R.drawable.ic_substract
-                    }
+                    }.lparams { rightPadding = dip(5)}
                     gameTextView(10) {
                         text= ctx.getString(R.string.debate_bad_group_template).format(loseGroup)
                     }
-                }.lparams(weight = 0.1f, height = 0, width = matchParent)
+                }.lparams {leftMargin = dip(20); topMargin = dip(5)}
                 linearLayout {
-                    gravity = Gravity.CENTER
+                    gravity = Gravity.CENTER_VERTICAL
                     imageView {
                         imageResource = R.drawable.ic_flash
-                    }
+                    }.lparams { rightPadding = dip(5)}
                     gameTextView(10) {
                         text = ctx.getString(R.string.debate_opponent_attack_template).format(attackResult)
                     }
-                }.lparams(weight = 0.1f, height = 0, width = matchParent)
+                }.lparams {leftMargin = dip(20); topMargin = dip(5)}
 
                 themedButton(theme = R.style.button) {
                     textResource = R.string.next

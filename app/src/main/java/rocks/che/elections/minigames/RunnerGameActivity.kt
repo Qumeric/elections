@@ -41,9 +41,17 @@ class RunnerGameActivity : MiniGameActivity() {
         for (car in cars) {
             val carRC = Rect()
             car.getHitRect(carRC)
+            val topCarRC = carRC
+            val botCarRC = carRC
 
-            if (smRC.intersect(carRC)) {
-                MusicManager.instance.play(ctx, R.raw.siren_sound)
+            topCarRC.bottom = (carRC.bottom + carRC.top) / 2
+            botCarRC.top    = (carRC.bottom + carRC.top) / 2
+
+            topCarRC.left += 20
+            topCarRC.right -= 20
+
+            if (smRC.intersect(topCarRC) || smRC.intersect(botCarRC)) {
+                playSound(R.raw.siren_sound)
                 lose()
                 return true
             }
@@ -80,9 +88,8 @@ class RunnerGameActivity : MiniGameActivity() {
         if (currentVelocity < 0) {
             currentVelocity /= 2
         }
-        currentVelocity += (jumpVelocity * 1.5).toInt()
+        currentVelocity = (jumpVelocity * 2.5).toInt()
         if (jumps == 0) {
-            currentVelocity += jumpVelocity
             flightUpdate(view.stickmanView.y)
         }
         jumps++
@@ -101,8 +108,20 @@ class RunnerGameActivity : MiniGameActivity() {
         handler.postDelayed({ flightUpdate(jumpedFrom) }, 20)
     }
 
+    var wallsInRow = 0
     private fun buildKremlinWall(x: Float = displayMetrics.widthPixels.toFloat()) {
-        val drawable = if (random() < 0.1f) R.drawable.runner_kremlin_tower else R.drawable.runner_kremlin_wall
+        var drawable = R.drawable.runner_kremlin_wall
+        if (wallsInRow < 5) {
+            wallsInRow++
+        } else if (wallsInRow > 20) {
+            drawable = R.drawable.runner_kremlin_tower
+            wallsInRow = 0
+        } else if (random() < 0.1f) {
+            drawable = R.drawable.runner_kremlin_tower
+            wallsInRow = 0
+        } else {
+            wallsInRow++
+        }
         createMovingImage(drawable, 10f, x = x, onAppear = { buildKremlinWall(it) })
     }
 

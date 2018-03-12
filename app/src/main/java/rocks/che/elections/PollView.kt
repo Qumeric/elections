@@ -13,47 +13,56 @@ import rocks.che.elections.helpers.gameTextView
 import rocks.che.elections.helpers.sparkView
 import rocks.che.elections.logic.Candidate
 import rocks.che.elections.logic.Gamestate
+import rocks.che.elections.logic.inActivityChange
 import kotlin.math.round
 
-class PollView(private val h: Map<String, List<Double>> = mapOf(), val gs: Gamestate) : DefaultView<PollActivity> {
+class PollView(private val h: Map<Int, List<Double>> = mapOf(), val gs: Gamestate) : DefaultView<PollActivity> {
     private lateinit var ankoContext: AnkoContext<PollActivity>
-    private val colors = listOf(R.color.red, R.color.green, R.color.aqua,
-            R.color.yellow, R.color.fuchsia, R.color.black)
-    private val candidateToColor = mutableMapOf<String, Int>()
+    private val candidateToColor = mutableMapOf(
+        R.drawable.candidate_putin to R.color.red,
+        R.drawable.candidate_sobchak to R.color.aqua,
+        R.drawable.candidate_zhirinovsky to R.color.yellow,
+        R.drawable.candidate_grudinin to R.color.fuchsia,
+        R.drawable.candidate_yavlinsky to R.color.green,
+        R.drawable.candidate_navalny to R.color.black
+    )
 
     override fun createView(ui: AnkoContext<PollActivity>) = with(ui) {
         ankoContext = ui
 
         verticalLayout {
             gravity = Gravity.CENTER
+            backgroundResource = R.color.white
 
             frameLayout {
-                gameTextView(20) {
-                    text = String.format("Poll results on day %d", gs.step)
+                gameTextView(20, autoResize = true) {
+                    text = resources.getString(R.string.poll_results_template).format(gs.step) // unbreakable space
                 }
-            }.lparams(height = 0, width = matchParent, weight = 0.15f)
+            }.lparams(height = 0, width = matchParent, weight = 0.09f)
 
             verticalLayout {
+                backgroundResource = R.color.blue
                 frameLayout {
                     backgroundResource = R.color.silver
                     var i = 0
                     for ((c, hd) in h) {
-                        candidateToColor[c] = colors[i]
                         val sv = sparkView {}
+                        //val paint = Paint()
+                        //paint.strokeJoin = Paint.Join.ROUND
+                        //sv.baseLinePaint = paint
                         sv.adapter = MyAdapter(FloatArray(hd.size, { j -> hd[j].toFloat() }))
-                        sv.lineColor = getColor(ctx, colors[i++])
+                        sv.lineColor = getColor(ctx, candidateToColor[c]!!)
                     }
                 }.lparams {
-                    padding=dip(10)
+                    padding=dip(3)
                 }
-            }.lparams(height = 0, width = matchParent, weight = 0.3f)
+            }.lparams(height = 0, width = matchParent, weight = 0.3f) { horizontalMargin = dip(5)}
 
             space {
 
             }.lparams(height = 0, width = matchParent, weight = 0.1f)
 
             var loser: Candidate? = gs.worst
-
             frameLayout {
                 gridLayout {
                     rowCount = 3
@@ -61,8 +70,7 @@ class PollView(private val h: Map<String, List<Double>> = mapOf(), val gs: Games
                     alignmentMode = GridLayout.ALIGN_MARGINS
 
                     val c = gs.candidate
-                    // FIXME
-                    val ssum = gs.candidates.sumBy<Candidate> { it.generalOpinion.toInt() } + c.generalOpinion.toInt()
+                    val ssum = gs.candidates.sumBy<Candidate> { it.generalOpinion.toInt() }
 
                     var col = 0
                     var row = 0
@@ -70,9 +78,6 @@ class PollView(private val h: Map<String, List<Double>> = mapOf(), val gs: Games
                         relativeLayout {
                             gravity = Gravity.CENTER
                             backgroundResource = if ((row + col) % 2 == 1) R.color.silver else R.color.white
-                            if (loser == oc) {
-                                backgroundResource = R.color.pink
-                            }
                             linearLayout {
                                 gravity = Gravity.CENTER_VERTICAL or Gravity.START
                                 view {
@@ -80,22 +85,29 @@ class PollView(private val h: Map<String, List<Double>> = mapOf(), val gs: Games
                                     val shape = GradientDrawable()
                                     shape.shape = GradientDrawable.OVAL
                                     shape.cornerRadii = floatArrayOf(8f, 8f, 8f, 8f, 0f, 0f, 0f, 0f)
-                                    shape.setColor(ContextCompat.getColor(ctx, candidateToColor[oc.name]!!))
+                                    shape.setColor(ContextCompat.getColor(ctx, candidateToColor[oc.resource]!!))
                                     background = shape
                                 }.lparams {
                                     width = dip(15)
                                     height = dip(15)
+                                    rightMargin = dip(10)
                                 }
-                                gameTextView(10) {
-                                    text = oc.name
+                                gameTextView(9) {
+                                    if (gs.candidate.resource == oc.resource) {
+                                        textResource = R.string.you
+                                    } else {
+                                        text = oc.name
+                                    }
                                 }.lparams {
                                     leftPadding = dip(3)
                                 }
                             }
-                            gameTextView(10) {
+                            gameTextView(9) {
                                 text = "%d%%".format(round(oc.generalOpinion/ssum*100).toInt())
                             }.lparams {
                                 alignParentRight()
+                                centerVertically()
+                                rightMargin = dip(4)
                             }
                         }.lparams {
                             width = 0
@@ -113,7 +125,7 @@ class PollView(private val h: Map<String, List<Double>> = mapOf(), val gs: Games
                     height = matchParent
                     width = matchParent
                 }
-            }.lparams(height = 0, width = matchParent, weight = 0.25f)
+            }.lparams(height = 0, width = matchParent, weight = 0.15f)
 
             verticalLayout {
                 gravity = Gravity.CENTER
@@ -123,6 +135,7 @@ class PollView(private val h: Map<String, List<Double>> = mapOf(), val gs: Games
                         if (gs.isWon) toast(R.string.win_message)
                         textResource = R.string.try_again
                         onClick {
+                            inActivityChange = true
                             ctx.startActivity<ChooseCandidateActivity>()
                         }
                     }
@@ -131,6 +144,7 @@ class PollView(private val h: Map<String, List<Double>> = mapOf(), val gs: Games
                         textResource = R.string.next
                         onClick {
                             if (gs.isPollTime) gs.candidates.remove(gs.worst)
+                            inActivityChange = true
                             ctx.startActivity<GameActivity>("gamestate" to gs)
                         }
                     }

@@ -6,9 +6,8 @@ import android.os.Bundle
 import org.jetbrains.anko.setContentView
 import rocks.che.elections.helpers.DefaultActivity
 import rocks.che.elections.logic.Answer
-import rocks.che.elections.logic.ChangeMoneyEvent
 import rocks.che.elections.logic.Gamestate
-import rocks.che.elections.logic.bus
+import rocks.che.elections.logic.inActivityChange
 
 const val gameRequestCode = 0
 
@@ -36,9 +35,9 @@ class ChangeActivity : DefaultActivity() {
             val prize = data.getIntExtra("money", 0)
             gs.money += prize
 
-            bus.post(ChangeMoneyEvent(gs.money))
             val intent = Intent(this, PollActivity::class.java)
             intent.putExtra("gamestate", gs);
+            inActivityChange = true
             startActivity(intent)
         }
     }

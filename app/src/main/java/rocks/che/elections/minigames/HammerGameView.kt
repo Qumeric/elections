@@ -2,8 +2,6 @@ package rocks.che.elections.minigames
 
 import android.view.Gravity
 import android.view.View
-import android.view.animation.Animation
-import android.view.animation.ScaleAnimation
 import android.widget.GridLayout
 import android.widget.ImageView
 import android.widget.TextView
@@ -24,17 +22,6 @@ class HammerGameView : AnkoComponent<HammerGameActivity> {
     val colCnt = 3
 
     var field: ArrayList<ArrayList<ImageView>> = arrayListOf()
-
-    fun scaleView(v: View, startScale: Float = 0f, endScale: Float = 1f, duration: Long = 2500) {
-        val anim = ScaleAnimation(
-                startScale, endScale,
-                startScale, endScale,
-                Animation.RELATIVE_TO_SELF, 0.5f,
-                Animation.RELATIVE_TO_SELF, 0f)
-        anim.fillAfter = true // Needed to keep the result of the animation
-        anim.duration = duration
-        v.startAnimation(anim)
-    }
 
     fun pickRandomEnemyResource(): Int {
         return listOf(R.drawable.candidate_grudinin, R.drawable.candidate_navalny, R.drawable.candidate_sobchak,

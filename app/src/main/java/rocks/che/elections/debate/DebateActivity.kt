@@ -2,12 +2,12 @@ package rocks.che.elections.debate
 
 import android.os.Bundle
 import android.util.Log
-import com.squareup.otto.Subscribe
 import org.jetbrains.anko.setContentView
 import org.jetbrains.anko.startActivity
 import rocks.che.elections.PollActivity
 import rocks.che.elections.helpers.DefaultActivity
 import rocks.che.elections.logic.Gamestate
+import rocks.che.elections.logic.inActivityChange
 import java.util.*
 
 
@@ -25,19 +25,17 @@ class DebateActivity : DefaultActivity() {
     var groupMinutes = maxMinutes / 2
     var opponentMinutes = maxMinutes - groupMinutes
 
-    @Subscribe
-    fun setGroupDistribution(e: SetGroupDistribution) =
-            gs.questions.all.keys.withIndex().forEach { (i, k) -> groupDistribution[k] = e.vals[i] }
+    fun setGroupDistribution(d: List<Int>) =
+            gs.questions.all.keys.withIndex().forEach { (i, k) -> groupDistribution[k] = d[i] }
 
-    @Subscribe
-    fun setOpponentDistribution(e: SetOpponentDistribution) =
+    fun setOpponentDistribution(d: List<Int>) =
             gs.candidates.filter { it.resource != gs.candidate.resource }.withIndex().forEach { (i, c) ->
-                opponentDistribution[c.name] = e.vals[i]
+                opponentDistribution[c.name] = d[i]
             }
 
-    @Subscribe
     fun nextStage(e: NextDebateStage = NextDebateStage()) {
         Log.d("DebateActivity", "nextStage event!")
+        inActivityChange = true
         when (++stage) {
             1 -> DebateViewStart(gs.candidate.resource).setContentView(this)
             2 -> DebateViewChoose().setContentView(this)
@@ -48,19 +46,18 @@ class DebateActivity : DefaultActivity() {
         }
     }
 
-    @Subscribe
-    fun timeDistributionUpdate(e: DebateTimeDistributionUpdate) {
-        groupMinutes = e.groupMinutes
-        opponentMinutes = e.opponentMinutes
+    fun timeDistributionUpdate(gm: Int, om: Int) {
+        groupMinutes = gm
+        opponentMinutes = om
     }
 
     private val winPoints = 5 // FIXME do something smarter
     private fun winGroup(): String {
-        val r = Random().nextInt(groupMinutes)
+        val r = Random().nextInt(groupMinutes+1)
         var sum = 0
         for ((group, time) in groupDistribution) {
             sum += time
-            if (sum > r) {
+            if (sum >= r) {
                 gs.candidate.opinions[group] = gs.candidate.opinions[group]!! + winPoints
                 return group
             }
@@ -83,7 +80,7 @@ class DebateActivity : DefaultActivity() {
     }
 
     private fun attackResult(): String {
-        val r = Random().nextInt(opponentMinutes)
+        val r = Random().nextInt(opponentMinutes+1)
         var sum = 0
         for ((opponent, time) in opponentDistribution) {
             gs.getCandidate(opponent).boost += winPoints.toFloat() * time / opponentMinutes

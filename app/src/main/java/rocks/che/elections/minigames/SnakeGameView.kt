@@ -1,15 +1,11 @@
 package rocks.che.elections.minigames
 
 import android.view.View
-import android.view.View.INVISIBLE
 import android.widget.GridLayout
-import android.widget.ImageView
 import android.widget.TextView
 import org.jetbrains.anko.*
 import rocks.che.elections.R
 import rocks.che.elections.helpers.gameTextView
-import rocks.che.elections.helpers.squareGridLayout
-import java.util.*
 
 class SnakeGameView(private val onTouchListener: View.OnTouchListener) : AnkoComponent<SnakeGameActivity> {
     lateinit var ankoContext: AnkoContext<SnakeGameActivity>
@@ -17,10 +13,8 @@ class SnakeGameView(private val onTouchListener: View.OnTouchListener) : AnkoCom
     lateinit var layout: GridLayout
     lateinit var scoreText: TextView
 
-    val rowCnt = 20
+    val rowCnt = 30
     val colCnt = 20
-
-    var field: ArrayList<ArrayList<ImageView>> = arrayListOf()
 
     override fun createView(ui: AnkoContext<SnakeGameActivity>) = with(ui) {
         ankoContext = ui
@@ -29,33 +23,39 @@ class SnakeGameView(private val onTouchListener: View.OnTouchListener) : AnkoCom
             setOnTouchListener(onTouchListener)
 
             relativeLayout {
-                scoreText = gameTextView(18) { }
-                //?lengthText = gameTextView {}
-            }.lparams(weight = 7/32f, width = matchParent, height = 0)
+                frameLayout {
+                    backgroundResource = R.color.black
+                    alpha = 0.33f
+                }.lparams {
+                    alignParentTop()
+                    centerHorizontally()
+                    width = matchParent
+                    height = matchParent
+                }
+                scoreText = gameTextView(18) { }.lparams {
+                    alignParentTop()
+                    centerHorizontally()
+                }
+            }.lparams(width = matchParent, height = dip(70))
 
-            layout = squareGridLayout {
+            layout = gridLayout {
                 isClickable = false
                 columnCount = colCnt
                 rowCount = rowCnt
-
                 backgroundResource = R.color.green
+
                 for (row in 0 until rowCount) {
-                    val rowElems: List<ImageView> = (0 until columnCount).map {
+                    for (col in 0 until columnCount) {
                         imageView {
-                            isClickable = false
-                            background = null
-                            visibility = INVISIBLE
-                            scaleType = ImageView.ScaleType.FIT_CENTER
                         }.lparams {
                             rowSpec = GridLayout.spec(row, 1f)
-                            columnSpec = GridLayout.spec(it, 1f)
-                            height = 40
-                            width = 40
+                            columnSpec = GridLayout.spec(col, 1f)
+                            height = dip(10)
+                            width = dip(10)
                         }
                     }
-                    field.add(rowElems as ArrayList<ImageView>)
                 }
-            }.lparams(weight = 9/16f, width = matchParent, height = 0)
+            }.lparams(width = matchParent, height = matchParent)
         }
     }
 }

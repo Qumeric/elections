@@ -29,7 +29,7 @@ class CatcherGameActivity : MiniGameActivity() {
             view.layout.addView(strawberryView)
             strawberries.add(strawberryView)
 
-            handler.postDelayed(this, (1000 / Math.sqrt(1.0 + score)).toLong())
+            handler.postDelayed(this, (1000 / Math.sqrt(1.0 + score * 0.8)).toLong())
         }
     }
 
@@ -72,7 +72,7 @@ class CatcherGameActivity : MiniGameActivity() {
             return
         }
 
-        handler.postDelayed({update()}, (1000 / 50).toLong())
+        handler.postDelayed({ update() }, (1000 / 50).toLong())
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,19 +84,19 @@ class CatcherGameActivity : MiniGameActivity() {
         MusicManager.instance.play(this, R.raw.catcher_music)
 
         drawInformationDialog(getString(R.string.catcher_info_title), getString(R.string.catcher_info_message),
-                {
-                    handler.postDelayed(createStrawberry, 1)
-                    handler.postDelayed({update()}, 1)
-                }, view.ankoContext)
+            {
+                handler.postDelayed(createStrawberry, 1)
+                handler.postDelayed({ update() }, 1)
+            }, view.ankoContext)
     }
 
     override fun lose() {
         handler.removeCallbacksAndMessages(null)
         drawInformationDialog(
-                getString(R.string.catcher_end_title),
-                getString(R.string.catcher_end_message_template).format(score),
-                { super.lose() },
-                view.ankoContext
+            getString(R.string.catcher_end_title),
+            getString(R.string.catcher_end_message_template).format(score),
+            { super.lose() },
+            view.ankoContext
         )
     }
 }

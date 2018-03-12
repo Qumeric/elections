@@ -2,7 +2,6 @@ package rocks.che.elections
 
 import android.support.v7.widget.AppCompatTextView
 import android.view.Gravity
-import android.widget.ImageView
 import android.widget.TextView
 import com.pixplicity.easyprefs.library.Prefs
 import org.jetbrains.anko.*
@@ -11,7 +10,9 @@ import org.jetbrains.anko.sdk25.listeners.onClick
 import rocks.che.elections.helpers.DefaultView
 import rocks.che.elections.helpers.gameTextView
 import rocks.che.elections.helpers.groupToResource
+import rocks.che.elections.helpers.toMaybeRussian
 import rocks.che.elections.logic.Gamestate
+import rocks.che.elections.logic.inActivityChange
 
 class GameView(val gs: Gamestate) : DefaultView<GameActivity> {
     private lateinit var ankoContext: AnkoContext<GameActivity>
@@ -38,13 +39,22 @@ class GameView(val gs: Gamestate) : DefaultView<GameActivity> {
             for (group in gs.questions.all.keys) {
                 linearLayout {
                     gravity = Gravity.START
-                    backgroundColorResource = R.color.white
+                    if (gs.lastGroup == group) {
+                        backgroundColorResource = R.color.silver
+                    } else {
+                        backgroundColorResource = R.color.white
+                    }
                     imageView {
                         imageResource = groupToResource[group]!!
                         onClick {
-                            gs.lastGroup = group
-                            ctx.startActivity<QuestionActivity>("question" to gs.questions.get(group),
+                            if (gs.lastGroup != group) {
+                                gs.lastGroup = group
+                                inActivityChange = true
+                                ctx.startActivity<QuestionActivity>("question" to gs.questions.get(group),
                                     "group" to group, "gamestate" to gs)
+                            } else {
+                                snackbar(this@linearLayout, R.string.pick_twice)
+                            }
                         }
                     }.lparams {
                         width = 0
@@ -54,13 +64,18 @@ class GameView(val gs: Gamestate) : DefaultView<GameActivity> {
 
                     linearLayout {
                         gravity = Gravity.CENTER
-                        val tv = gameTextView(12) {
-                            text = "%s: %d".format(group, gs.candidate.opinions[group]!!)
-                            onClick {
+                        onClick {
+                            if (gs.lastGroup != group) {
                                 gs.lastGroup = group
+                                inActivityChange = true
                                 ctx.startActivity<QuestionActivity>("question" to gs.questions.get(group),
-                                        "group" to group, "gamestate" to gs)
+                                    "group" to group, "gamestate" to gs)
+                            } else {
+                                snackbar(this@linearLayout, R.string.pick_twice)
                             }
+                        }
+                        val tv = gameTextView(12) {
+                            text = "%s: %d".format(group.toMaybeRussian(resources.configuration.locale.toString()), gs.candidate.opinions[group]!!)
                         }
                         groupViews[group] = tv
                     }.lparams {
@@ -72,7 +87,6 @@ class GameView(val gs: Gamestate) : DefaultView<GameActivity> {
                     linearLayout {
                         gravity = Gravity.CENTER
                         frameLayout {
-                            // TODO draw a circle or use round button theme
                             themedImageButton(theme = R.style.button) {
                                 backgroundResource = R.drawable.round_button
                                 imageResource = R.drawable.ic_coins
@@ -81,7 +95,7 @@ class GameView(val gs: Gamestate) : DefaultView<GameActivity> {
                                         snackbar(ankoContext.view, R.string.not_enough_money)
                                     }
                                     moneyTextView.text = gs.money.toString() + "$"
-                                    groupViews[group]!!.text = "%s: %d".format(group, gs.candidate.opinions[group]!!)
+                                    groupViews[group]!!.text = "%s: %d".format(group.toMaybeRussian(resources.configuration.locale.toString()), gs.candidate.opinions[group]!!)
                                 }
                             }
                         }.lparams(width = matchParent, height = matchParent)
@@ -115,13 +129,14 @@ class GameView(val gs: Gamestate) : DefaultView<GameActivity> {
                 }.lparams(height = matchParent, width = 0, weight = 0.5f)
                 linearLayout {
                     gravity = Gravity.CENTER
-                    imageView {
+                    themedImageButton(theme = R.style.button) {
+                        backgroundResource = R.drawable.round_button
                         imageResource = R.drawable.ic_logout
-                        scaleType = ImageView.ScaleType.FIT_CENTER
                         onClick {
-                            alert( R.string.end_game_dialog_message, R.string.end_game_dialog_title) {
+                            alert(R.string.end_game_dialog_message, R.string.end_game_dialog_title) {
                                 positiveButton(R.string.yes_button) {
                                     Prefs.remove("gamestate")
+                                    inActivityChange = true
                                     ctx.startActivity<NewGameActivity>()
                                 }
                                 negativeButton(R.string.no_button) {
@@ -129,7 +144,7 @@ class GameView(val gs: Gamestate) : DefaultView<GameActivity> {
                                 }
                             }.show()
                         }
-                    }.lparams(height = dip(20), width = dip(20))
+                    }.lparams(height = dip(50), width = dip(50))
                 }.lparams(height = matchParent, width = 0, weight = 0.5f)
             }.lparams(weight = 0.2f, height = 0, width = matchParent)
         }

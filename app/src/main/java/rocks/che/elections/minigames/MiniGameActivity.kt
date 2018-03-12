@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
+import im.delight.android.audio.MusicManager
 import org.jetbrains.anko.displayMetrics
 import org.jetbrains.anko.imageResource
 import rocks.che.elections.PollActivity
@@ -23,6 +24,12 @@ abstract class MiniGameActivity(private val nextActivity: Class<out DefaultActiv
 
     private val movingImages = mutableSetOf<MovingImage>()
     private lateinit var movingViewGroup: ViewGroup
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        MusicManager.instance.resume()
+    }
 
     open fun calculateMoney(): Int {
         return score

@@ -6,7 +6,7 @@ import org.json.JSONObject
 import rocks.che.elections.R
 import rocks.che.elections.helpers.candidateResourceNameToResource
 
-fun loadCandidate(json: JSONObject): Candidate {
+fun loadCandidate(json: JSONObject, isPlayer: Boolean = false): Candidate {
     val basicStats = json.getJSONObject("basicStats")
     val basicLevels = json.getJSONObject("basicLevels")
     val jsonPerks = json.getJSONArray("perks")
@@ -15,23 +15,25 @@ fun loadCandidate(json: JSONObject): Candidate {
     val opinions = Opinions()
     val levels = mutableMapOf<String, Int>()
     val perks = (0 until jsonPerks.length()).map { jsonPerks.getString(it) }
-    val history = ((0 until jsonHistory.length()).map{ jsonHistory.getDouble(it) }).toMutableList()
+    val history = ((0 until jsonHistory.length()).map { jsonHistory.getDouble(it) }).toMutableList()
 
     basicStats.keys().forEach { opinions[it] = basicStats.getInt(it) }
 
+    val boost = if (isPlayer) 0f else json.getDouble("boost").toFloat()
+
     basicLevels.keys().forEach { levels[it] = basicLevels.getInt(it) }
     return Candidate(
-            json.getString("name"),
-            perks,
-            candidateResourceNameToResource[json.getString("imgResource")]!!,
-            opinions, history)
+        json.getString("name"),
+        perks,
+        candidateResourceNameToResource[json.getString("imgResource")]!!,
+        opinions, history, boost)
 }
 
 fun loadCandidates(json: JSONArray) = (0 until json.length()).map { loadCandidate(json.getJSONObject(it)) }
 
 fun loadCandidates(resources: Resources): List<Candidate> {
     val jsonString = resources.openRawResource(R.raw.candidates)
-            .bufferedReader().use { it.readText() }
+        .bufferedReader().use { it.readText() }
     return loadCandidates(JSONArray(jsonString))
 }
 
@@ -67,21 +69,17 @@ fun loadQuestions(json: JSONObject): Questions {
 
 fun loadQuestions(resources: Resources): Questions {
     val jsonString = resources.openRawResource(R.raw.questions)
-            .bufferedReader().use { it.readText() }
+        .bufferedReader().use { it.readText() }
     return loadQuestions(JSONObject(jsonString))
 }
 
 fun loadQuotes(resources: Resources): List<Quote> {
     val jsonString = resources.openRawResource(R.raw.quotes)
-            .bufferedReader().use { it.readText() }
+        .bufferedReader().use { it.readText() }
     val jsonQuotes = JSONArray(jsonString)
 
-    val quotes = mutableListOf<Quote>()
-
-    for (q in 0 until jsonQuotes.length()) {
-        val jsonQuote = jsonQuotes.getJSONObject(q)
-        quotes.add(Quote(jsonQuote.getString("quote"), jsonQuote.getString("author")))
+    return (0 until jsonQuotes.length()).map {
+        val jsonQuote = jsonQuotes.getJSONObject(it)
+        Quote(jsonQuote.getString("quote"), jsonQuote.getString("author"))
     }
-
-    return quotes
 }

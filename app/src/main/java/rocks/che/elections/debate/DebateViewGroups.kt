@@ -1,5 +1,6 @@
 package rocks.che.elections.debate
 
+import android.support.v4.content.ContextCompat
 import android.view.Gravity
 import android.widget.Button
 import android.widget.TextView
@@ -12,7 +13,6 @@ import rocks.che.elections.helpers.DefaultView
 import rocks.che.elections.helpers.gameTextView
 import rocks.che.elections.helpers.groupToResource
 import rocks.che.elections.logic.Questions
-import rocks.che.elections.logic.bus
 
 class DebateViewGroups(val minutes: Int = 60, val questions: Questions = Questions(hashMapOf())) : DefaultView<DebateActivity> {
     private lateinit var ankoContext: AnkoContext<DebateActivity>
@@ -34,7 +34,7 @@ class DebateViewGroups(val minutes: Int = 60, val questions: Questions = Questio
                 backgroundResource = R.color.blue
             }.lparams(weight = 0.012f, height = 0, width = dip(120))
 
-            space{}.lparams(weight = 0.015f, height = 0)
+            space {}.lparams(weight = 0.015f, height = 0)
 
             gameTextView(12) {
                 textResource = R.string.debate_groups
@@ -47,44 +47,59 @@ class DebateViewGroups(val minutes: Int = 60, val questions: Questions = Questio
             var isGray = true
             var pos = 0
             for (group in questions.all.keys) {
-                linearLayout {
-                    gravity = Gravity.CENTER
+                relativeLayout {
                     backgroundResource = if (isGray) {
                         R.color.silver
                     } else {
                         R.color.white
                     }
+                    linearLayout {
+                        gravity = Gravity.CENTER_VERTICAL
+                        imageView {
+                            imageResource = groupToResource[group]!!
+                        }.lparams {
+                            width = 0
+                            height = matchParent
+                            weight = 0.2f
+                        }
 
-                    imageView {
-                        imageResource = groupToResource[group]!!
-                    }.lparams {
-                        height = dip(30)
-                        width = dip(30)
-                    }
+                        gameTextView(10, text = group) {}
 
-                    gameTextView(10, text = group) {}
-
-                    seekBar {
-                        max = minutes
-                        val p = pos // capture value
-                        onSeekBarChangeListener {
-                            onProgressChanged({ sb, progress, _ ->
-                                var spendMinutes = (0 until amountVals.size)
+                        seekBar {
+                            splitTrack = false
+                            thumb = ContextCompat.getDrawable(ctx, R.drawable.seek)
+                            progressDrawable = ContextCompat.getDrawable(ctx, R.drawable.seek_style)
+                            max = minutes
+                            val p = pos // capture value
+                            onSeekBarChangeListener {
+                                onProgressChanged({ sb, progress, _ ->
+                                    var spendMinutes = (0 until amountVals.size)
                                         .filter { it != p }
                                         .sumBy { amountVals[it] }
 
-                                sb!!.progress =  Math.min(max-spendMinutes, progress)
-                                amountVals[p] = sb.progress
+                                    sb!!.progress = Math.min(max - spendMinutes, progress)
+                                    amountVals[p] = sb.progress
 
-                                spendMinutes += sb.progress
+                                    spendMinutes += sb.progress
 
-                                minutesTextView.text = ctx.getString(R.string.debate_minutes_left_template).format(max-spendMinutes)
-                                amounts[p].text = sb.progress.toString()
-                            })
-                        }
-                    }.lparams(width=dip(200))
+                                    minutesTextView.text = ctx.getString(R.string.debate_minutes_left_template).format(max - spendMinutes)
+                                    amounts[p].text = sb.progress.toString()
+                                })
+                            }
+                        }.lparams(width = dip(200))
+                    }.lparams {
+                        width = matchParent
+                        height = matchParent
+                        rightMargin = dip(20)
+                        alignParentLeft()
+                        centerVertically()
+                    }
 
-                    amounts.add(gameTextView(10, text="0") {})
+                    amounts.add(gameTextView(10, text = "0") {
+                    }.lparams {
+                        alignParentRight()
+                        centerVertically()
+                    })
                     amountVals.add(0)
                 }.lparams(weight = 0.1f, height = 0, width = matchParent)
                 isGray = !isGray
@@ -95,7 +110,7 @@ class DebateViewGroups(val minutes: Int = 60, val questions: Questions = Questio
                 textResource = R.string.next
                 onClick {
                     if (amountVals.sum() == minutes) {
-                        bus.post(SetGroupDistribution(amountVals))
+                        ui.owner.setGroupDistribution(amountVals)
                         ui.owner.nextStage()
                     } else {
                         snackbar(this, R.string.debate_spend_minutes_first)

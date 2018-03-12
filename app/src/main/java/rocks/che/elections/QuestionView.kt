@@ -1,5 +1,6 @@
 package rocks.che.elections
 
+import android.graphics.Typeface
 import android.view.Gravity
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
@@ -44,15 +45,17 @@ class QuestionView(private val question: Question = fakeQuestion,
                     for (answer in question.answers) {
                         themedButton(theme = R.style.button) {
                             text = answer.statement
+                            textSize = 20f
+                            typeface = Typeface.createFromAsset(ctx.assets, "mfred.ttf")
                             onClick {
                                 gs.step++
-                                bus.post(ChangeStepEvent(gs.step))
+                                inActivityChange = true
                                 ctx.startActivity<ChangeActivity>("answer" to answer, "gamestate" to gs)
                             }
-                        }
+                        }.lparams(width = matchParent)
                         space().lparams(width = matchParent, height = dip(30))
                     }
-                }.lparams(width=0, weight = 0.75f)
+                }.lparams(width=0, weight = 1f)
             }
         }
     }

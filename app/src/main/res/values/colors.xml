@@ -7,7 +7,8 @@
     <!-- using clrs.cc -->
 
     <color name="navy">#001F3F</color>
-    <color name="blue">#0074D9</color>
+    <!--<color name="blue">#0074D9</color>-->
+    <color name="blue">#4C94E9</color>
     <color name="aqua">#7FDBFF</color>
     <color name="teal">#39CCCC</color>
     <color name="olive">#3D9970</color>
@@ -25,6 +26,7 @@
     <color name="white">#FFFFFF</color>
 
     <!-- additional -->
+    <color name="coinsBlue">#4C94E9</color>
     <color name="ducksBackground">@color/aqua</color>
     <color name="pink">#FFC0CB</color>
 </resources>

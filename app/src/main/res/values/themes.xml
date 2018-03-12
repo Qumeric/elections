@@ -7,11 +7,11 @@
         <item name="android:windowBackground">@drawable/bg</item>
         <item name="android:buttonStyle">@style/button</item>
         <item name="cardViewStyle">@style/cardViewStyle</item>
+        <item name="spark_SparkViewStyle">@style/MySparkViewStyle</item>
         <!-- FIXME wtf... -->
         <item name="android:alertDialogTheme">@style/AlertDialogTheme</item>
         <item name="alertDialogTheme">@style/AlertDialogTheme</item>
         <item name="alertDialogStyle">@style/AlertDialogTheme</item>
         <item name="android:alertDialogStyle">@style/AlertDialogTheme</item>
     </style>
-
 </resources>

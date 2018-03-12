@@ -24,6 +24,7 @@ import android.media.MediaPlayer
 /** Plays music and one-off sound files while managing the resources efficiently  */
 class MusicManager private constructor() {
     private var mMediaPlayer: MediaPlayer? = null
+    private val oldPlayers = mutableListOf<MediaPlayer>()
 
     /**
      * Plays the sound with the given resource ID
@@ -32,10 +33,17 @@ class MusicManager private constructor() {
      * @param soundResourceId the resource ID of the sound (e.g. `R.raw.my_sound`)
      */
     @Synchronized
-    fun play(context: Context, soundResourceId: Int) {
-        // if there's an existing stream playing already
-        if (mMediaPlayer != null) {
-            stop()
+    fun play(context: Context, soundResourceId: Int, stopLast: Boolean = false) {
+        if (stopLast) {
+            // if there's an existing stream playing already
+            if (mMediaPlayer != null) {
+                stop()
+            }
+        } else {
+            if (mMediaPlayer != null) {
+                pause()
+                oldPlayers.add(mMediaPlayer!!)
+            }
         }
 
         // create a new stream for the sound to play
@@ -93,9 +101,18 @@ class MusicManager private constructor() {
         }
     }
 
+    fun resume() {
+        if (oldPlayers.size > 0) {
+            stop()
+            mMediaPlayer = oldPlayers.last()
+            oldPlayers.removeAt(oldPlayers.size-1)
+            play()
+        }
+    }
+
     companion object {
         private var mInstance: MusicManager? = null
-        var volume: Float = 0.1f
+        var volume: Float = 0.2f
             set(v: Float) {
                 field = maxOf(0f, minOf(v, 1f))
             }

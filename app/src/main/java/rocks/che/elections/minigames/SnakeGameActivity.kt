@@ -2,9 +2,10 @@ package rocks.che.elections.minigames
 
 import android.os.Bundle
 import android.util.Log
-import android.view.View.INVISIBLE
-import android.view.View.VISIBLE
+import android.widget.ImageView
 import im.delight.android.audio.MusicManager
+import org.jetbrains.anko.backgroundResource
+import org.jetbrains.anko.imageResource
 import org.jetbrains.anko.setContentView
 import rocks.che.elections.R
 import rocks.che.elections.helpers.OnSwipeTouchListener
@@ -19,6 +20,13 @@ class SnakeGameActivity : MiniGameActivity() {
             Direction.EAST -> Position(y, x + 1)
         }
 
+        override operator fun equals(other: Any?): Boolean {
+            if (other == null || other !is Position) {
+                return false
+            }
+            return x == other.x && y == other.y
+        }
+
         fun isValid(yLimit: Int, xLimit: Int): Boolean {
             return x >= 0 && y >= 0 && x < xLimit && y < yLimit
         }
@@ -28,6 +36,8 @@ class SnakeGameActivity : MiniGameActivity() {
         NORTH, SOUTH, WEST, EAST
     }
 
+    val appleCount = 2
+
     private lateinit var view: SnakeGameView
 
     private val startLength = 5
@@ -35,29 +45,32 @@ class SnakeGameActivity : MiniGameActivity() {
     private val snake: Deque<Position> = LinkedList()
     var d = Direction.EAST
 
-    private var apple: Position? = null
+    private val apples = mutableListOf<Position>()
 
-    fun eat() {
+    private fun eat(apple: Position) {
+        Log.d("SnakeActivty", apples.size.toString())
         score++
         playSound(R.raw.eat_apple_sound)
-        apple = genApple()
+        (getElem(apple.y, apple.x) as ImageView).imageResource = 0
+        apples.remove(apple)
+        apples.add(genApple())
     }
+
+    private fun getElem(y: Int, x: Int) = view.layout.getChildAt(y*view.colCnt+x)
 
     private var appleResource = R.drawable.ic_apple_1
     private fun randomAppleResource() {
         appleResource = listOf(R.drawable.ic_apple_1, R.drawable.ic_apple_2,
-                R.drawable.ic_apple_3)[Random().nextInt(3)]
+            R.drawable.ic_apple_3)[Random().nextInt(3)]
     }
 
     private fun snakeGrow(p: Position) {
-        view.field[p.y][p.x].setImageResource(R.color.black)
-        view.field[p.y][p.x].visibility = VISIBLE
+        getElem(p.y, p.x).backgroundResource = R.color.black
         snake.addFirst(p)
     }
 
     private fun snakeShrink() {
-        view.field[snake.last.y][snake.last.x].setImageResource(0)
-        view.field[snake.last.y][snake.last.x].visibility = INVISIBLE
+        getElem(snake.last.y, snake.last.x).backgroundResource = 0
         snake.removeLast()
     }
 
@@ -65,39 +78,31 @@ class SnakeGameActivity : MiniGameActivity() {
         view.scoreText.text = score.toString()
 
         val nextHeadPos = snake.first + d
-        Log.d("Snake", "nextHeadPos: " + nextHeadPos)
         if (!nextHeadPos.isValid(view.rowCnt, view.colCnt) || inSnake(nextHeadPos)) {
             lose()
             return
         }
         snakeGrow(nextHeadPos)
 
-        if (snake.first != apple) {
+        val eatenApple = apples.find {snake.first == it}
+        if (eatenApple == null) {
             snakeShrink()
         } else {
-            eat()
+            eat(eatenApple)
         }
 
-        handler.postDelayed({ update() }, 150L-score)
+        handler.postDelayed({ update() }, 150L - score)
     }
 
     private fun inSnake(obj: Position): Boolean = snake.any { it == obj }
 
     private fun genApple(): Position {
-        if (apple != null) {
-            view.field[apple!!.y][apple!!.x].setBackgroundResource(R.color.black)
-            view.field[apple!!.y][apple!!.x].setImageResource(0)
-            view.field[apple!!.y][apple!!.x].invalidate()
-        }
         var apple: Position
         do {
             apple = Position(Random().nextInt(view.rowCnt), Random().nextInt(view.colCnt))
         } while (inSnake(apple))
         randomAppleResource()
-        view.field[apple.y][apple.x].setBackgroundResource(R.color.green)
-        view.field[apple.y][apple.x].setImageResource(appleResource)
-        view.field[apple.y][apple.x].visibility = VISIBLE
-        view.field[apple.y][apple.x].invalidate()
+        (getElem(apple.y, apple.x) as ImageView).imageResource = appleResource
         return apple
     }
 
@@ -128,19 +133,21 @@ class SnakeGameActivity : MiniGameActivity() {
         for (i in 1..startLength) {
             snakeGrow(Position(2, i))
         }
-        apple = genApple()
+        for (i in 1..appleCount) {
+            apples.add(genApple())
+        }
 
         drawInformationDialog(getString(R.string.snake_info_title), getString(R.string.snake_info_message),
-                { update() }, view.ankoContext)
+            { update() }, view.ankoContext)
     }
 
     override fun lose() {
         handler.removeCallbacksAndMessages(null)
         drawInformationDialog(
-                getString(R.string.snake_end_title),
-                getString(R.string.snake_end_message_template).format(score),
-                { super.lose() },
-                view.ankoContext
+            getString(R.string.snake_end_title),
+            getString(R.string.snake_end_message_template).format(score),
+            { super.lose() },
+            view.ankoContext
         )
     }
 }

@@ -9,7 +9,9 @@ import rocks.che.elections.debate.DebateActivity
 import rocks.che.elections.helpers.DefaultView
 import rocks.che.elections.helpers.gameTextView
 import rocks.che.elections.helpers.groupToResource
+import rocks.che.elections.helpers.toMaybeRussian
 import rocks.che.elections.logic.Gamestate
+import rocks.che.elections.logic.inActivityChange
 import rocks.che.elections.minigames.*
 import java.util.*
 
@@ -47,28 +49,23 @@ class ChangeView(private val oldOpinions: Map<String, Int> = mapOf(), val gs: Ga
 
                     space().lparams(width = dip(15), height = matchParent)
 
-                    // FIXME strings of different length?
+                    var delta = opinion - oldOpinions[group]!!
+
                     gameTextView(10) {
-                        text = if (!isInEditMode) {
-                            "%s: %d(%s)".format(group, opinion,
-                                    Formatter().format(Locale.US, "%+d", opinion- oldOpinions[group]!!))
-                        } else {
-                            "Group: val(+c)"
-                        }
+                        text = "%s: %d(%s)".format(group.toMaybeRussian(resources.configuration.locale.toString()), maxOf(0, opinion), Formatter().format(Locale.US, "%+d", delta))
                     }.lparams {
                         horizontalMargin = dip(15)
                     }
-                    var currentValue = opinion
                     linearLayout {
-                        while (currentValue >= 10) {
+                        while (delta >= 2) {
                             imageView {
-                                imageResource = if (currentValue >= 20) R.drawable.blue_star else R.drawable.blue_star_half
+                                imageResource = if (delta >= 4) R.drawable.blue_star else R.drawable.blue_star_half
                             }.lparams {
                                 height = dip(18)
                                 width = dip(18)
                                 marginEnd = dip(5)
                             }
-                            currentValue = (currentValue - 1) / 20 * 20 // largest divisor of 20 which is less than currentValue
+                            delta = (delta - 1) / 4 * 4 // largest divisor of 4 which is less than currentValue
                         }
                     }
                 }.lparams(height = dip(70), width = matchParent)
@@ -83,23 +80,25 @@ class ChangeView(private val oldOpinions: Map<String, Int> = mapOf(), val gs: Ga
                         gs.nextDebates = !gs.nextDebates
                         debug("it is poll time and nextdebates is %b".format(gs.nextDebates))
                         if (gs.nextDebates) {
-                            val intent = Intent(ui.owner, RunnerGameActivity::class.java)
-                            if (gs.candidate.resource == R.drawable.candidate_sobchak) {
-                                intent.putParcelableArrayListExtra("candidates", gs.candidates as ArrayList<out Parcelable>)
-                            }
-                            when (gs.candidate.resource) {
+                            val intent = when (gs.candidate.resource) {
                                 R.drawable.candidate_navalny -> Intent(ui.owner, RunnerGameActivity::class.java)
                                 R.drawable.candidate_sobchak -> Intent(ui.owner, RacesGameActivity::class.java)
                                 R.drawable.candidate_zhirinovsky -> Intent(ui.owner, DucksGameActivity::class.java)
                                 R.drawable.candidate_putin -> Intent(ui.owner, HammerGameActivity::class.java)
                                 R.drawable.candidate_grudinin -> Intent(ui.owner, CatcherGameActivity::class.java)
                                 R.drawable.candidate_yavlinsky -> Intent(ui.owner, SnakeGameActivity::class.java)
+                                else -> throw Exception("Cannot determine what game should be started")
+                            }
+                            if (gs.candidate.resource == R.drawable.candidate_sobchak) {
+                                intent.putParcelableArrayListExtra("candidates", gs.candidates as ArrayList<out Parcelable>)
                             }
                             ui.owner.startActivityForResult(intent, gameRequestCode)
                         } else {
+                            inActivityChange = true
                             ctx.startActivity<DebateActivity>("gamestate" to gs)
                         }
                     } else {
+                        inActivityChange = true
                         ctx.startActivity<PollActivity>("gamestate" to gs)
                     }
                 }
