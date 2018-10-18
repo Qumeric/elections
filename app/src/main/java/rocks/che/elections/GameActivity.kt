@@ -15,21 +15,23 @@ class GameActivity : DefaultActivity() {
             return false
         }
         gs.money -= moneyToUp
-        gs.candidate.opinions[group] = gs.candidate.opinions[group]!!+1
+        gs.candidate.opinions[group] = gs.candidate.opinions[group]!! + 1
         return true
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        try {
-            gs = intent.extras.getParcelable("gamestate")
+        gs = try {
+            intent.extras.getParcelable("gamestate")!!
         } catch (e: Exception) {
-            gs = Gamestate.loadGame()!!
+            Gamestate.loadGame()!!
         }
         gs.save()
 
         view = GameView(gs)
         view.setContentView(this)
+
+
     }
 }

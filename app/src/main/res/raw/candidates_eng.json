@@ -1,0 +1,141 @@
+[
+  {
+    "name": "Ovalny",
+    "boost": 0,
+    "basicStats": {
+      "military": 0,
+      "workers": 10,
+      "foreign": 10,
+      "media": 10,
+      "business": 15
+    },
+    "basicLevels": {
+      "liberal": 50,
+      "positive": 50,
+      "peaceful": 50
+    },
+    "perks": [
+      "Pet of the people",
+      "Foreign support",
+      "Media black list"
+    ],
+    "history": [],
+    "imgResource": "candidate_navalny"
+  },
+  {
+    "name": "Putchak",
+    "boost": 0,
+    "basicStats": {
+      "military": 0,
+      "workers": 5,
+      "foreign": 5,
+      "media": 20,
+      "business": 5
+    },
+    "basicLevels": {
+      "liberal": 50,
+      "positive": 50,
+      "peaceful": 50
+    },
+    "perks": [
+      "Eloquence",
+      "Press support",
+      "Liberalism"
+    ],
+    "history": [],
+    "imgResource": "candidate_sobchak"
+  },
+  {
+    "name": "Marzhinovsky",
+    "boost": 0,
+    "basicStats": {
+      "military": 5,
+      "workers": 10,
+      "foreign": 0,
+      "media": 10,
+      "business": 5
+    },
+    "basicLevels": {
+      "liberal": 50,
+      "positive": 50,
+      "peaceful": 50
+    },
+    "perks": [
+      "High recognition",
+      "Mass media frequenter",
+      "Expressiveness"
+    ],
+    "history": [],
+    "imgResource": "candidate_zhirinovsky"
+  },
+  {
+    "name": "Mutin",
+    "boost": 15,
+    "basicStats": {
+      "military": 10,
+      "workers": 15,
+      "foreign": 5,
+      "media": 20,
+      "business": 5
+    },
+    "basicLevels": {
+      "liberal": 50,
+      "positive": 50,
+      "peaceful": 50
+    },
+    "perks": [
+      "Mass media control",
+      "Military influence",
+      "Workers' support"
+    ],
+    "history": [],
+    "imgResource": "candidate_putin"
+  },
+  {
+    "name": "Klubnikin",
+    "boost": 0,
+    "basicStats": {
+      "military": 5,
+      "workers": 15,
+      "foreign": 5,
+      "media": 5,
+      "business": 5
+    },
+    "basicLevels": {
+      "liberal": 50,
+      "positive": 50,
+      "peaceful": 50
+    },
+    "perks": [
+      "Moneybag",
+      "People's candidate!",
+      "Hype machine"
+    ],
+    "history": [],
+    "imgResource": "candidate_grudinin"
+  },
+  {
+    "name": "Zhulinsky",
+    "boost": 0,
+    "description": "",
+    "basicStats": {
+      "military": 5,
+      "workers": 10,
+      "foreign": 5,
+      "media": 0,
+      "business": 5
+    },
+    "basicLevels": {
+      "liberal": 50,
+      "positive": 50,
+      "peaceful": 50
+    },
+    "perks": [
+      "Workers' support",
+      "Non-conflict",
+      "Old school"
+    ],
+    "history": [],
+    "imgResource": "candidate_yavlinsky"
+  }
+]

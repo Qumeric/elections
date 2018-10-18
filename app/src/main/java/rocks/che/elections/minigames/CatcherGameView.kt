@@ -17,13 +17,12 @@ class CatcherGameView : AnkoComponent<CatcherGameActivity> {
     lateinit var missedText: TextView
     lateinit var cart: ImageButton
 
-
     override fun createView(ui: AnkoContext<CatcherGameActivity>) = with(ui) {
         ankoContext = ui
 
         val cartDrawable = ui.ctx.resources.getDrawable(R.drawable.ic_cart, ctx.theme)
 
-        layout = relativeLayout  {
+        layout = relativeLayout {
             gravity = Gravity.NO_GRAVITY
             backgroundResource = R.color.aqua
 
@@ -41,9 +40,9 @@ class CatcherGameView : AnkoComponent<CatcherGameActivity> {
                 }
             }.lparams(height = dip(50), width = matchParent)
 
-            onTouch {_, e ->
+            onTouch { _, e ->
                 val cartWidth = cartDrawable.intrinsicWidth.toFloat()
-                cart.x = Math.max(0f, Math.min(e.x-cartWidth/2, displayMetrics.widthPixels-cartWidth))
+                cart.x = Math.max(0f, Math.min(e.x - cartWidth / 2, displayMetrics.widthPixels - cartWidth))
                 true
 
             }

@@ -22,12 +22,12 @@ class RacesGameView(val candidates: ArrayList<Candidate>) : AnkoComponent<RacesG
     val opponentHorses = mutableListOf<ImageView>()
 
     val candidateToHorse = mapOf(
-            R.drawable.candidate_putin to R.drawable.races_horse_putin,
-            R.drawable.candidate_navalny to R.drawable.races_horse_navalny,
-            R.drawable.candidate_grudinin to R.drawable.races_horse_grudinin,
-            R.drawable.candidate_yavlinsky to R.drawable.races_horse_yavlinksy,
-            R.drawable.candidate_zhirinovsky to R.drawable.races_horse_zhirinovsky,
-            R.drawable.candidate_sobchak to R.drawable.races_horse_sobchak)
+        R.drawable.candidate_putin to R.drawable.races_horse_putin,
+        R.drawable.candidate_navalny to R.drawable.races_horse_navalny,
+        R.drawable.candidate_grudinin to R.drawable.races_horse_grudinin,
+        R.drawable.candidate_yavlinsky to R.drawable.races_horse_yavlinksy,
+        R.drawable.candidate_zhirinovsky to R.drawable.races_horse_zhirinovsky,
+        R.drawable.candidate_sobchak to R.drawable.races_horse_sobchak)
 
     var started = false
 
@@ -54,9 +54,9 @@ class RacesGameView(val candidates: ArrayList<Candidate>) : AnkoComponent<RacesG
             }
 
             val animatedBackground = background as AnimationDrawable
-            animatedBackground.setEnterFadeDuration(2500);
-            animatedBackground.setExitFadeDuration(5000);
-            animatedBackground.start();
+            animatedBackground.setEnterFadeDuration(2500)
+            animatedBackground.setExitFadeDuration(5000)
+            animatedBackground.start()
 
             frameLayout {
                 relativeLayout {
@@ -65,7 +65,7 @@ class RacesGameView(val candidates: ArrayList<Candidate>) : AnkoComponent<RacesG
                     onClick {
                         if (started) ui.owner.tap()
                     }
-                }.lparams(height= matchParent, width = matchParent)
+                }.lparams(height = matchParent, width = matchParent)
                 relativeLayout {
                     gravity = Gravity.BOTTOM
                     horse = imageView {
@@ -77,7 +77,8 @@ class RacesGameView(val candidates: ArrayList<Candidate>) : AnkoComponent<RacesG
                         height = dip(70)
                         width = dip(70)
                     }
-                }.lparams(height= matchParent, width = matchParent)
+                }.lparams(height = matchParent, width = matchParent)
+                var ssum = 70
                 for ((i, c) in candidates.filter { it.resource != R.drawable.candidate_sobchak }.withIndex()) {
                     relativeLayout {
                         gravity = Gravity.BOTTOM
@@ -87,13 +88,14 @@ class RacesGameView(val candidates: ArrayList<Candidate>) : AnkoComponent<RacesG
                             imageResource = candidateToHorse[c.resource]!!
                             scaleType = ImageView.ScaleType.FIT_END
                         }.lparams {
-                            height = dip(70)
-                            width = dip(70)
+                            height = dip(60-i*5)
+                            width = dip(60-i*5)
                         }
                         opponentHorses.add(h)
-                    }.lparams(height= matchParent, width = matchParent) {
-                        bottomMargin = dip(70)*(i+1)
+                    }.lparams(height = matchParent, width = matchParent) {
+                        bottomMargin = dip(ssum)
                     }
+                    ssum += 60-i*5
                 }
             }.lparams(width = matchParent, height = matchParent) {
                 alignParentBottom()

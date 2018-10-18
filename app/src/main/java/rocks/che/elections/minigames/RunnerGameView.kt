@@ -26,10 +26,8 @@ class RunnerGameView : AnkoComponent<RunnerGameActivity> {
 
         frameLayout {
             backgroundResource = R.color.aqua
-            if (!isInEditMode) { // FIXME
-                stickmanDrawable = GifDrawable(resources, R.drawable.runner_anim)
-                stickmanDrawable.setSpeed(2.5f)
-            }
+            stickmanDrawable = GifDrawable(resources, R.drawable.runner_anim)
+            stickmanDrawable.setSpeed(2.5f)
 
             relativeLayout {
                 backgroundResource = R.color.black
@@ -46,7 +44,7 @@ class RunnerGameView : AnkoComponent<RunnerGameActivity> {
                 id = R.id.moving_image_layout
                 layout = relativeLayout {
                     gravity = Gravity.BOTTOM
-                }.lparams(height= matchParent, width = matchParent)
+                }.lparams(height = matchParent, width = matchParent)
                 relativeLayout {
                     gravity = Gravity.BOTTOM
                     onClick {
@@ -55,20 +53,14 @@ class RunnerGameView : AnkoComponent<RunnerGameActivity> {
                             ui.owner.startFlight()
                         }
                     }
-                    if (!isInEditMode) { // FIXME
-                        stickmanView = gifImageView {
-                            translationZ = 0f
-                            isClickable = false
-                            setImageDrawable(stickmanDrawable)
-                            scaleType = ImageView.ScaleType.FIT_XY
-                        }.lparams {
-                            height = dip(80)
-                            width = dip(66)
-                        }
-                    } else {
-                        imageView {
-                            backgroundResource = R.color.fuchsia
-                        }
+                    stickmanView = gifImageView {
+                        translationZ = 0f
+                        isClickable = false
+                        setImageDrawable(stickmanDrawable)
+                        scaleType = ImageView.ScaleType.FIT_XY
+                    }.lparams {
+                        height = dip(80)
+                        width = dip(66)
                     }
                 }.lparams(height = matchParent, width = matchParent)
             }.lparams {

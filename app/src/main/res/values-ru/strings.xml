@@ -6,7 +6,7 @@
     <string name="yes_button">Да</string>
     <string name="lost_message">Вы проиграли. Удачи в следующий раз!</string>
     <string name="win_message">Поздравляем! Вы выиграли!</string>
-    <string name="try_again">Сыграть еще раз</string>
+    <string name="try_again">Попробовать ещё раз</string>
     <string name="next">Далее</string>
     <string name="choose_candidate">Выберите кандидата</string>
     <string name="choose_category">Выберите категорию</string>
@@ -20,38 +20,66 @@
     <string name="congratulations">Поздравляем!</string>
     <string name="need_unblock">Сначала вы должны разблокировать этого кандидата</string>
     <string name="your_candidate">Ваш кандидат</string>
-    <string name="endgame_text">Вы неплохо провели президентскую компанию, но победил сами знаете кто!</string>
-    <string name="endgame_text_mutin">Вы победили в президентской компании с уверенным отрывом в 146% голосов!</string>
+    <string name="endgame_text">Поздравляем!Вы победили в честной борьбе! Попробуйте сыграть за других кандидатов. </string>
+    <string name="endgame_text_mutin">Вы победили! Это было несложно, правда? Сыграйте за других кандидатов.!</string>
     <string name="debate_description">"Вы можете потратить время, чтобы улучшить свое положение в разных группах населения или атаковать своих оппонентов     "</string>
     <string name="ducks_welcome">Уничтожьте всех уток!</string>
     <string name="debate">Дебаты</string>
     <string name="debate_choose_description">"Распределите время между разговорами про группы населения и атакоЙ на оппонентов     "</string>
     <string name="group_slider_annotation">"Время на обращения к группам  "</string>
-    <string name="score_template" translatable="false">Баллы: %d</string>
-    <string name="debate_finish" translatable="false">Дебаты завершены</string>
+    <string name="score_template">Баллы: %d</string>
+    <string name="debate_finish">Дебаты завершены</string>
     <string name="debate_good_group_template">Ваша речь понравилась группе %s</string>
-    <string name="debate_bad_group_template" translatable="false">Группа %s не оценила вашу речь</string>
-    <string name="debate_minutes_left_template" translatable="false">Осталось %d минут</string>
-    <string name="debate_spend_minutes_first" translatable="false">Вам необходимо распределить все минуты!</string>
-    <string name="opponent_slider_annotation" translatable="false">Время на дебаты с оппонентом</string>
-    <string name="debate_groups" translatable="false">Распределите время, рассказывая о группах населения</string>
-    <string name="debate_opponents" translatable="false">Распределите время атаки на следующих оппонентов</string>
-    <string name="debate_opponent_attack_template" translatable="false">Атака на оппонента %s была успешна</string>
-    <string name="ducks_info_title" translatable="false">Уткострел</string>
-    <string name="ducks_info_message" translatable="false">Стреляйте как можно точнее и старайтесь не промахиваться! Пропустив 5 уточек игра закончится.</string>
-    <string name="snake_info_title" translatable="false">Любитель яблок</string>
-    <string name="snake_info_message" translatable="false">
+    <string name="debate_bad_group_template">Группа %s не оценила вашу речь</string>
+    <string name="debate_minutes_left_template" >Осталось %d минут</string>
+    <string name="debate_spend_minutes_first">Вам необходимо распределить все минуты!</string>
+    <string name="opponent_slider_annotation">Время на дебаты с оппонентом</string>
+    <string name="debate_groups">Распределите время, рассказывая о группах населения</string>
+    <string name="debate_opponents" >Распределите время атаки на следующих оппонентов</string>
+    <string name="debate_opponent_attack_template" >Атака на оппонента %s была успешна</string>
+    <string name="debate_opponent_attack_fail">Атака на оппонента не была успешна</string>
+    <string name="ducks_info_title" >Уткострел</string>
+    <string name="ducks_info_message" >Стреляйте как можно точнее и старайтесь не промахиваться! Пропустив 5 уточек игра закончится.</string>
+    <string name="snake_info_title" >Любитель яблок</string>
+    <string name="snake_info_message" >
         Змейка кушает яблочки. Классика. Двигая пальцами по экрану задавайте направление змейки. Не касайтесь бортов!
     </string>
     <string name="snake_end_message_template">Вы набрали %d очков</string>
-    <string name="ladder_info_message" translatable="false">Нажимайте как можно быстрее, чтобы быть первым!</string>
-    <string name="ladder_info_title" translatable="false">Лошадиные скачки</string>
-    <string name="hammer_info_message" translatable="false">Не позволяйте им всплыть. Нажимайте на персонажей, как только они всплывут. Максимум 5 пропусков.</string>
+    <string name="ladder_info_message" >Нажимайте как можно быстрее, чтобы быть первым!</string>
+    <string name="ladder_info_title" >Лошадиные скачки</string>
+    <string name="hammer_info_message" >Не позволяйте им всплыть. Нажимайте на персонажей, как только они всплывут. Максимум 5 пропусков.</string>
     <string name="you">вы</string>
     <string name="pick_twice">Нельзя отвечать на вопрос одной и той же группы два раза подряд</string>
-    <string name="runner_info_message" translatable="false">Не споткнитесь! Ваша задача: перепрыгнуть все полицейские машины.</string>
-    <string name="catcher_info_title" translatable="false">Совхоз имени Клубникина</string>
-    <string name="catcher_info_message" translatable="false">Передвигая тележку, соберите как можно больше ягод! 5 пропусков - конец игры.</string>
-    <string name="hammer_info_title" translatable="false">Вне конкуренции</string>
-    <string name="poll_results_template" translatable="false">Результаты недели\\u00A0%d</string>
+    <string name="runner_info_message" >Не споткнитесь! Ваша задача: перепрыгнуть все полицейские машины.</string>
+    <string name="catcher_info_title" >Совхоз имени Клубникина</string>
+    <string name="catcher_info_message" >Передвигая тележку, соберите как можно больше ягод! 5 пропусков - конец игры.</string>
+    <string name="hammer_info_title" >Вне конкуренции</string>
+    <string name="poll_results_template" >Результаты недели %d</string>
+    <string name="end_game_lose_common">К сожалению, вы проиграли. Ваши оппоненты оказались сильнее.</string>
+    <string name="end_game_lose_mutin">К сожалению, вы проиграли. Пройдите предвыборную кампанию ещё раз.</string>
+    <string name="end_game_keep_winning">Продолжайте побеждать</string>
+    <string name="ducks_end_title" >Мини-игра завершена</string>
+    <string name="ducks_end_message_template" >Вы набрали %d баллов</string>
+    <string name="runner_info_title" >Побег из СИЗО</string>
+    <string name="catcher_end_message_template" >Вы набрали %d баллов</string>
+    <string name="hammer_end_message_template" >Вы набрали %d баллов</string>
+    <string name="ladder_end_message_template" >Вы набрали %d баллов</string>
+    <string name="runner_end_title" >Мини-игра завершена</string>
+    <string name="catcher_end_title" >Мини-игра завершена</string>
+    <string name="hammer_end_title" >Мини-игра завершена</string>
+    <string name="snake_end_title" >Мини-игра завершена</string>
+    <string name="runner_end_message_template">Вы набрали %d баллов</string>
+    <string name="ladder_end_title" >Мини-игра завершена</string>
+    <string name="day_template">Неделя: %d</string>
+    <string name="welcome">Добро пожаловать</string>
+    <string name="welcome_text">
+        Приветствуем вас в игре, где каждый может попробовать себя в роли кандидата в президенты!
+        Выбирайте любимого кандидата, отвечайте на вопросы разных групп населения и зарабатывайте их поддержку!
+        Участвуя в мини-играх вы сможете заработать деньги, которые можно потратить на увеличение очков выбранной группы населения. У каждого кандидата своя мини-игра, попробуйте пройти их все!
+        Желаем вам успехов!
+    </string>
+    <string name="info_title">Над игрой работали</string>
+    <string name="info_message">
+        Валерий Черепанов \@qumeric\nАлексеев Алексей \@chad_vicious\nБашкин Артём \@artiombash\nБоев Вячеслав \@slavaboev\nМанкевич Елизавета \@lizzzalee\nЖилина Анна \@_justwitch_\n\nРесурсы, которые были задействованы:\nwww.flaticon.com\nfreesound.org\nwav-library.net
+    </string>
 </resources>

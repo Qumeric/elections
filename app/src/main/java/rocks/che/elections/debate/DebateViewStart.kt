@@ -33,14 +33,14 @@ class DebateViewStart(val candidateResource: Int = 0) : DefaultView<DebateActivi
                     backgroundResource = R.color.blue
                 }.lparams(weight = 0.012f, height = 0, width = dip(120))
 
-                gameTextView (10) {
+                gameTextView(10) {
                     padding = dip(15)
                     textResource = R.string.debate_description
                 }.lparams(weight = 0.4f, height = 0)
 
                 themedButton(theme = R.style.button) {
                     textResource = R.string.next
-                    onClick { ui.owner.nextStage()}
+                    onClick { ui.owner.nextStage() }
                 }.lparams(weight = 0.14f, height = 0, width = dip(180))
             }.lparams(weight = 0.75f, height = 0)
 

@@ -1,10 +1,10 @@
 package rocks.che.elections.minigames
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageView
 import im.delight.android.audio.MusicManager
 import org.jetbrains.anko.backgroundResource
+import org.jetbrains.anko.debug
 import org.jetbrains.anko.imageResource
 import org.jetbrains.anko.setContentView
 import rocks.che.elections.R
@@ -27,6 +27,10 @@ class SnakeGameActivity : MiniGameActivity() {
             return x == other.x && y == other.y
         }
 
+        override fun hashCode(): Int {
+            return y * 1000 + x
+        }
+
         fun isValid(yLimit: Int, xLimit: Int): Boolean {
             return x >= 0 && y >= 0 && x < xLimit && y < yLimit
         }
@@ -36,7 +40,7 @@ class SnakeGameActivity : MiniGameActivity() {
         NORTH, SOUTH, WEST, EAST
     }
 
-    val appleCount = 2
+    val appleCount = 3
 
     private lateinit var view: SnakeGameView
 
@@ -48,7 +52,7 @@ class SnakeGameActivity : MiniGameActivity() {
     private val apples = mutableListOf<Position>()
 
     private fun eat(apple: Position) {
-        Log.d("SnakeActivty", apples.size.toString())
+        debug(apples.size.toString())
         score++
         playSound(R.raw.eat_apple_sound)
         (getElem(apple.y, apple.x) as ImageView).imageResource = 0
@@ -56,7 +60,7 @@ class SnakeGameActivity : MiniGameActivity() {
         apples.add(genApple())
     }
 
-    private fun getElem(y: Int, x: Int) = view.layout.getChildAt(y*view.colCnt+x)
+    private fun getElem(y: Int, x: Int) = view.layout.getChildAt(y * view.colCnt + x)
 
     private var appleResource = R.drawable.ic_apple_1
     private fun randomAppleResource() {
@@ -84,14 +88,14 @@ class SnakeGameActivity : MiniGameActivity() {
         }
         snakeGrow(nextHeadPos)
 
-        val eatenApple = apples.find {snake.first == it}
+        val eatenApple = apples.find { snake.first == it }
         if (eatenApple == null) {
             snakeShrink()
         } else {
             eat(eatenApple)
         }
 
-        handler.postDelayed({ update() }, 150L - score)
+        handler.postDelayed({ update() }, 120L - score)
     }
 
     private fun inSnake(obj: Position): Boolean = snake.any { it == obj }
@@ -142,6 +146,7 @@ class SnakeGameActivity : MiniGameActivity() {
     }
 
     override fun lose() {
+        score *= 2
         handler.removeCallbacksAndMessages(null)
         drawInformationDialog(
             getString(R.string.snake_end_title),

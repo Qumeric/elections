@@ -22,7 +22,7 @@ class Opinions : HashMap<String, Int>() {
 @Parcelize
 class Candidate(val name: String, val perks: List<String>,
                 val resource: Int, val opinions: Opinions,
-                val history: MutableList<Double>, var boost: Float=0f) : Comparable<Candidate>, Parcelable {
+                val history: MutableList<Double>, var boost: Float = 0f) : Comparable<Candidate>, Parcelable {
     val generalOpinion get() = maxOf(0.0, opinions.values.sum().toDouble() / opinions.size + boost)
 
     init {
@@ -32,16 +32,21 @@ class Candidate(val name: String, val perks: List<String>,
 
     fun update(isOpponent: Boolean = false) {
         if (isOpponent) {
-            boost += Random().nextInt(7)-2
+            boost += Random().nextInt(7) - 2
             when (resource) {
-                R.drawable.candidate_putin -> boost+=1
-                R.drawable.candidate_yavlinsky -> boost-=1
+                R.drawable.candidate_putin -> boost += 1
+                R.drawable.candidate_yavlinsky -> boost -= 1
             }
         }
         history.add(generalOpinion)
     }
 
-    override fun compareTo(other: Candidate) = (generalOpinion - other.generalOpinion).roundToInt()
+    override fun compareTo(other: Candidate): Int {
+        if (generalOpinion.isNaN()||other.generalOpinion.isNaN()) {
+            Log.e("Candidate", "Shitty value! $name ${other.name} $generalOpinion ${other.generalOpinion}")
+        }
+        return (generalOpinion - other.generalOpinion).roundToInt()
+    }
 }
 
 /*val fakeCandidate = Candidate("Fake", "Something went wrong",
@@ -87,7 +92,6 @@ class Questions(val all: HashMap<String, MutableList<Question>>,
 
 const val pollFrequency = 5
 
-// FIXME grudinin money bonus
 @Parcelize
 class Gamestate(val candidate: Candidate, val candidates: MutableList<Candidate>, val questions: Questions,
                 var step: Int = 0, var money: Int = 0, var nextDebates: Boolean = true,
@@ -105,10 +109,9 @@ class Gamestate(val candidate: Candidate, val candidates: MutableList<Candidate>
     }
 
     fun getCandidate(name: String): Candidate {
-        return candidates.find{it.name == name}!!
+        return candidates.find { it.name == name }!!
     }
 
-    // FIXME bad style...
     fun updateCandidate() {
         val candidateInList = (candidates.filter { it.resource == candidate.resource })[0]
         candidate.opinions.forEach { (k, v) ->
@@ -120,18 +123,18 @@ class Gamestate(val candidate: Candidate, val candidates: MutableList<Candidate>
         val candidateInList = (candidates.filter { it.resource == candidate.resource })[0]
         candidate.opinions.forEach { (k, v) ->
             if (impact[k] != null) {
-                candidate.opinions[k] = impact[k]!!*2 + v
+                candidate.opinions[k] = impact[k]!! * 2 + v
             }
             candidate.opinions[k] = (impact[k] ?: 0) + candidate.opinions[k]!!
             candidateInList.opinions[k] = v
         }
         candidate.update()
         candidateInList.update()
-        candidates.filter{it.resource != candidate.resource}.forEach { it.update(true) }
+        candidates.filter { it.resource != candidate.resource }.forEach { it.update(true) }
     }
 
     fun save() {
-        val json = Gson().toJson(this);
+        val json = Gson().toJson(this)
         Prefs.putString("gamestate", json)
     }
 
@@ -139,7 +142,7 @@ class Gamestate(val candidate: Candidate, val candidates: MutableList<Candidate>
         fun loadGame(): Gamestate? {
             return try {
                 val json = Prefs.getString("gamestate", null) ?: return null
-                return Gson().fromJson(json, Gamestate::class.java);
+                return Gson().fromJson(json, Gamestate::class.java)
             } catch (e: Exception) {
                 Log.e("loadGame", "Unable to load existing save")
                 Prefs.remove("gamestate")

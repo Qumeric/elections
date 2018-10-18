@@ -1,6 +1,7 @@
 package rocks.che.elections.helpers
 
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.RectF
 import android.graphics.Typeface
 import android.support.v4.content.ContextCompat
@@ -25,7 +26,7 @@ import kotlin.math.min
 
 class SquareGridLayout(ctx: Context) : _GridLayout(ctx) {
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        val size = min(MeasureSpec.getSize(widthMeasureSpec), MeasureSpec.getSize(heightMeasureSpec))
+        val size = min(MeasureSpec.getSize(widthMeasureSpec),  MeasureSpec.getSize(heightMeasureSpec))
 
         super.onMeasure(
             MeasureSpec.makeMeasureSpec(size, MeasureSpec.EXACTLY),
@@ -85,7 +86,7 @@ class MyAdapter(private val yData: FloatArray) : SparkAdapter() {
     }
 }
 
-interface DefaultView<T> : AnkoComponent<T>, AnkoLogger
+interface DefaultView<in T> : AnkoComponent<T>, AnkoLogger
 
 val groupToResource = mapOf(
     "media" to R.drawable.ic_media,
@@ -120,8 +121,16 @@ fun scaleView(v: View, startScale: Float = 0f, endScale: Float = 1f, duration: L
     v.startAnimation(anim)
 }
 
+fun isRussian(resources: Resources) = isRussian(resources.configuration.locale.toString())
+
+fun isRussian(locale: String): Boolean {
+    val part = locale.substring(0, 2)
+    // FIXME check collisions
+    return (part == "ru" || part == "uk" || part == "be")
+}
+
 fun String.toMaybeRussian(locale: String): String {
-    if (locale[0].toLowerCase() == 'r' && locale[1].toLowerCase() == 'u') {
+    if (isRussian(locale)) {
         return when (this.toLowerCase()) {
             "military" -> "военные"
             "foreign" -> "мир"

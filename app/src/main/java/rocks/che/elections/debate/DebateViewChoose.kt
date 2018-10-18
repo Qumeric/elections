@@ -10,9 +10,9 @@ import rocks.che.elections.R
 import rocks.che.elections.helpers.DefaultView
 import rocks.che.elections.helpers.gameTextView
 
-enum class SourceSlider { OPPONENTS, GROUPS}
+enum class SourceSlider { OPPONENTS, GROUPS }
 
-class DebateViewChoose: DefaultView<DebateActivity> {
+class DebateViewChoose : DefaultView<DebateActivity> {
     private lateinit var ankoContext: AnkoContext<DebateActivity>
     private lateinit var groupsBar: SeekBar
     private lateinit var opponentsBar: SeekBar
@@ -47,7 +47,7 @@ class DebateViewChoose: DefaultView<DebateActivity> {
                 thumb = ContextCompat.getDrawable(ctx, R.drawable.seek)
                 progressDrawable = ContextCompat.getDrawable(ctx, R.drawable.seek_style)
 
-                progress = max/2
+                progress = max / 2
                 onTouch { _, _ ->
                     handleSliders(SourceSlider.GROUPS, ui.owner)
                     false
@@ -58,13 +58,13 @@ class DebateViewChoose: DefaultView<DebateActivity> {
 
             gameTextView(10) {
                 textResource = R.string.opponent_slider_annotation
-            }.lparams(weight = 0.05f, height = 0) { topMargin = dip(40)}
+            }.lparams(weight = 0.05f, height = 0) { topMargin = dip(40) }
             opponentsBar = seekBar {
                 splitTrack = false
                 thumb = ContextCompat.getDrawable(ctx, R.drawable.seek)
                 progressDrawable = ContextCompat.getDrawable(ctx, R.drawable.seek_style)
 
-                progress = max/2
+                progress = max / 2
                 onTouch { _, _ ->
                     handleSliders(SourceSlider.OPPONENTS, ui.owner)
                     false
@@ -85,9 +85,9 @@ class DebateViewChoose: DefaultView<DebateActivity> {
 
     private fun handleSliders(slider: SourceSlider, ctx: DebateActivity) {
         if (slider == SourceSlider.GROUPS) {
-            opponentsBar.progress = ((ctx.maxMinutes-groupsBar.progress.toFloat()/groupsBar.max*ctx.maxMinutes)/ctx.maxMinutes*opponentsBar.max).toInt()
+            opponentsBar.progress = ((ctx.maxMinutes - groupsBar.progress.toFloat() / groupsBar.max * ctx.maxMinutes) / ctx.maxMinutes * opponentsBar.max).toInt()
         } else {
-            groupsBar.progress = ((ctx.maxMinutes-opponentsBar.progress.toFloat()/opponentsBar.max*ctx.maxMinutes)/ctx.maxMinutes*groupsBar.max).toInt()
+            groupsBar.progress = ((ctx.maxMinutes - opponentsBar.progress.toFloat() / opponentsBar.max * ctx.maxMinutes) / ctx.maxMinutes * groupsBar.max).toInt()
         }
     }
 }

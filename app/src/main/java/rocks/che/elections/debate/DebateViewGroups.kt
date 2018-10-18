@@ -12,6 +12,7 @@ import rocks.che.elections.R
 import rocks.che.elections.helpers.DefaultView
 import rocks.che.elections.helpers.gameTextView
 import rocks.che.elections.helpers.groupToResource
+import rocks.che.elections.helpers.toMaybeRussian
 import rocks.che.elections.logic.Questions
 
 class DebateViewGroups(val minutes: Int = 60, val questions: Questions = Questions(hashMapOf())) : DefaultView<DebateActivity> {
@@ -45,8 +46,7 @@ class DebateViewGroups(val minutes: Int = 60, val questions: Questions = Questio
             }.lparams(weight = 0.12f, height = 0)
 
             var isGray = true
-            var pos = 0
-            for (group in questions.all.keys) {
+            for ((pos, group) in questions.all.keys.withIndex()) {
                 relativeLayout {
                     backgroundResource = if (isGray) {
                         R.color.silver
@@ -63,7 +63,7 @@ class DebateViewGroups(val minutes: Int = 60, val questions: Questions = Questio
                             weight = 0.2f
                         }
 
-                        gameTextView(10, text = group) {}
+                        gameTextView(10, text = group.toMaybeRussian(resources.configuration.locale.toString())) {}
 
                         seekBar {
                             splitTrack = false
@@ -103,7 +103,6 @@ class DebateViewGroups(val minutes: Int = 60, val questions: Questions = Questio
                     amountVals.add(0)
                 }.lparams(weight = 0.1f, height = 0, width = matchParent)
                 isGray = !isGray
-                pos++
             }
 
             nextButton = themedButton(theme = R.style.button) {
@@ -113,7 +112,7 @@ class DebateViewGroups(val minutes: Int = 60, val questions: Questions = Questio
                         ui.owner.setGroupDistribution(amountVals)
                         ui.owner.nextStage()
                     } else {
-                        snackbar(this, R.string.debate_spend_minutes_first)
+                        this.snackbar(R.string.debate_spend_minutes_first)
                     }
                 }
             }.lparams(weight = 0.08f, height = 0, width = dip(180))

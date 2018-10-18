@@ -1,24 +1,22 @@
 package rocks.che.elections.minigames
 
 import android.os.Bundle
-import android.view.ViewGroup
-import org.jetbrains.anko.displayMetrics
-import org.jetbrains.anko.find
-import org.jetbrains.anko.setContentView
-import org.jetbrains.anko.textColor
+import im.delight.android.audio.MusicManager
+import org.jetbrains.anko.*
 import rocks.che.elections.R
 import rocks.che.elections.helpers.scaleView
 import rocks.che.elections.logic.Candidate
 import java.lang.Math.random
+import kotlin.math.min
 import kotlin.math.sqrt
 
 class RacesGameActivity : MiniGameActivity() {
     private lateinit var view: RacesGameView
 
     private var speed = 0f
-    private var acceleration = 5f
-    private var deceleration = 1f
-    private val speeds = mutableListOf<Float>(0f, 0f, 0f, 0f, 0f, 0f)
+    private var acceleration = 0f
+    private var deceleration = 0f
+    private val speeds = mutableListOf(0f, 0f, 0f, 0f, 0f, 0f)
 
     fun tap() {
         speed += acceleration
@@ -36,10 +34,11 @@ class RacesGameActivity : MiniGameActivity() {
         }
 
         for ((index, h) in view.opponentHorses.withIndex()) {
-            speeds[index] += sqrt(0.2 / random()).toFloat()
+            speeds[index] += dip(sqrt(min(sqrt(0.1 / random()).toFloat(), 20f))).toFloat() / 1.8f
             speeds[index] = maxOf(0f, speeds[index] - deceleration)
-            h.x += speeds[index]
+            h.x += dip(speeds[index])
             if (h.x >= displayMetrics.widthPixels - h.width) {
+                score = (score*0.75).toInt()
                 lose()
                 return
             }
@@ -57,16 +56,12 @@ class RacesGameActivity : MiniGameActivity() {
 
     private fun start() {
         onStartNumber("3")
-        handler.postDelayed({onStartNumber("2")}, 1000)
-        handler.postDelayed({onStartNumber("1")}, 2000)
+        handler.postDelayed({ onStartNumber("2") }, 1000)
+        handler.postDelayed({ onStartNumber("1") }, 2000)
 
         handler.postDelayed({
             view.started = true
             update()
-            doEach(
-                    { createMovingImage(R.drawable.races_clown, 10f, 10f) },
-                    { (1 + random()) * 3000 }
-            )
         }, 3000)
     }
 
@@ -77,23 +72,28 @@ class RacesGameActivity : MiniGameActivity() {
         view = RacesGameView(candidates)
         view.setContentView(this)
 
-        useMovingImages(find<ViewGroup>(R.id.moving_image_layout))
-        //MusicManager.getInstance().play(this, R.raw.) FIXME
+        acceleration = dip(45f) / 30f
+        deceleration = dip(10f) / 30f
+
+        useMovingImages(find(R.id.moving_image_layout))
+        MusicManager.instance.play(this, R.raw.races_music)
 
         drawInformationDialog(getString(R.string.ladder_info_title), getString(R.string.ladder_info_message),
-                { start() }, view.ankoContext)
-
+            { start() }, view.ankoContext)
     }
 
-    fun win() = lose()
+    fun win() {
+        score = (score * 1.25).toInt()
+        lose()
+    }
 
     override fun lose() {
         handler.removeCallbacksAndMessages(null)
         drawInformationDialog(
-                getString(R.string.ladder_end_title),
-                getString(R.string.ladder_end_message_template).format(score),
-                { super.lose() },
-                view.ankoContext
+            getString(R.string.ladder_end_title),
+            getString(R.string.ladder_end_message_template).format(score),
+            { super.lose() },
+            view.ankoContext
         )
     }
 }

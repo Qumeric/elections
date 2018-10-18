@@ -5,16 +5,14 @@
     <string name="support">Support</string>
     <string name="results">Results</string>
     <string name="ducks_welcome">Shoot all the ducks!</string>
-    <string name="exit_game">Exit game</string>
     <string name="end_game_dialog_title">Exit game?</string>
     <string name="end_game_dialog_message">Are you sure that you want to finish this game? All progress will be lost.</string>
+    <string name="end_game_keep_winning">Keep winning</string>
     <string name="not_enough_money">Not enough money!</string>
-    <string name="finish">Finish</string>
     <string name="congratulations">Congratulations!</string>
     <string name="need_unblock">You have to unblock this candidate first</string>
-    <string name="secret_candidate_name" translatable="false">Овальный</string>
     <string name="your_candidate">Your candidate</string>
-    <string name="poll_results_template">Poll results on week\\u00A0%d</string>
+    <string name="poll_results_template">Poll results on week %d</string>
     <string name="logo" translatable="false">
         <font color='#EE0000'>В</font>ремя\n<font color='#EE0000'>В</font>ыбирать\n<font color='#EE0000'>П</font>резидента
     </string>
@@ -24,13 +22,11 @@
     <!-- Debate description -->
     <string name="debate">Debate</string>
     <string name="group_slider_annotation">Time allocated to groups</string>
-    <string name="opponent_slider_annotation">MISSING</string>
+    <string name="opponent_slider_annotation">Allocate time to debate with opponents</string>
     <string name="debate_spend_minutes_first">
         You have to spend all available minutes!
     </string>
-    <string name="debate_minutes_left_template">
-        Minutes left %d
-    </string>
+    <string name="debate_minutes_left_template">%d minutes left</string>
     <string name="debate_finish">
         Debate is finished
     </string>
@@ -39,47 +35,44 @@
     <string name="debate_opponent_attack_template">
         Attack on the opponent %s has been successful
     </string>
-
+    <string name="debate_opponent_attack_fail">
+        Attack on the opponent has not been successful
+    </string>
     <!-- Minigames -->
     <string name="score_template">Score: %d</string>
 
-    <string name="ducks_end_title" translatable="false">Minigame is finished</string>
-    <string name="ducks_end_message_template" translatable="false">
+    <string name="ducks_end_title">Minigame is finished</string>
+    <string name="ducks_end_message_template">
         You have scored %d points
     </string>
-    <string name="runner_info_title" translatable="false">
-        Побег из СИЗО
+    <string name="runner_info_title">
+        The SIZO redemption
     </string>
-    <string name="runner_info_message">
-        Не споткнитесь! Ваша задача: перепрыгнуть все полицейские машины.
-    </string>
-    <string name="runner_end_title" translatable="false">Minigame is finished</string>
-    <string name="runner_end_message_template" translatable="false">
+    <string name="runner_info_message">Don\'t stumble! Your task is to jump over all police cars.</string>
+    <string name="runner_end_title">Minigame is finished</string>
+    <string name="runner_end_message_template">
         You have scored %d points
     </string>
-    <string name="catcher_info_title">
-        Совхоз имени Клубникина
-    </string>
-    <string name="catcher_info_message">
-        Передвигая тележку, соберите как можно больше ягод! 5 пропусков - конец игры.
-    </string>
-    <string name="catcher_end_title" translatable="false">Minigame is finished</string>
-    <string name="catcher_end_message_template" translatable="false">
+    <string name="catcher_info_title">Klubnikin\'s sovkhoz</string>
+    <string name="catcher_info_message">Move the cart and gather strawberries. Only 5 misses are allowed.</string>
+    <string name="catcher_end_title">Minigame is finished</string>
+    <string name="catcher_end_message_template">
         You have scored %d points
     </string>
     <string name="hammer_info_title">Beyond competition</string>
-    <string name="hammer_end_title" translatable="false">Minigame is finished</string>
-    <string name="hammer_end_message_template" translatable="false">
+    <string name="hammer_end_title">Minigame is finished</string>
+    <string name="hammer_end_message_template">
         You have scored %d points
     </string>
-    <string name="snake_end_title" translatable="false">Minigame is finished</string>
+    <string name="snake_end_title">Minigame is finished</string>
     <string name="snake_end_message_template">
         You have scored %d points
     </string>
-    <string name="ladder_end_title" translatable="false">Minigame is finished</string>
-    <string name="ladder_end_message_template" translatable="false">
+    <string name="ladder_end_title">Minigame is finished</string>
+    <string name="ladder_end_message_template">
         You have scored %d points
     </string>
+    <string name="day_template">Week: %d</string>
     <string name="dialog_button_close">Close</string>
     <string name="no_button">No</string>
     <string name="yes_button">Yes</string>
@@ -87,17 +80,31 @@
     <string name="next">Next</string>
     <string name="choose_candidate">Choose candidate</string>
     <string name="choose_category">Select category</string>
-    <string name="endgame_text">MISSING</string>
-    <string name="endgame_text_mutin">MISSING</string>
-    <string name="debate_description">MISSING</string>
-    <string name="debate_choose_description">MISSING</string>
-    <string name="debate_groups">MISSING</string>
-    <string name="debate_opponents">MISSING</string>
+    <string name="endgame_text">You had a decent campaign but you-know-who has won</string>
+    <string name="endgame_text_mutin">You have won the election with 146% advantage</string>
+    <string name="debate_description">You can spend time to improve your rating</string>
+    <string name="debate_choose_description">Allocate time between groups and opponents</string>
+    <string name="debate_groups">Allocate time to refer to groups</string>
+    <string name="debate_opponents">Allocate time to attack given opponents</string>
     <string name="ducks_info_title">Duck Hunter</string>
-    <string name="ducks_info_message">MISSING</string>
+    <string name="ducks_info_message">Shoot as accurate as possible and try not to miss. Only 5 misses are allowed.</string>
     <string name="snake_info_title">Apple lover</string>
-    <string name="snake_info_message">MISSING</string>
-    <string name="ladder_info_message">MISSING</string>
+    <string name="snake_info_message">Snake eats apple. The classics. Swipe to change direction. Don\'t touch borders!</string>
+    <string name="ladder_info_message">Tap as fast as possible to be the winner</string>
     <string name="ladder_info_title">Horse racing</string>
-    <string name="hammer_info_message">MISSING</string>
+    <string name="hammer_info_message">Don\'t let them float. Tap your opponents when they do. Only 5 misses are allowed</string>
+    <string name="end_game_lose_common">Unfortunately, you have lost. Your opponents have been stronger.</string>
+    <string name="end_game_lose_mutin">Unfortunately, you have lost. Try to go through the election campaign again.</string>
+    <string name="exit_game">Exit game</string>
+    <string name="finish">Finish</string>
+    <string name="welcome">Welcome</string>
+    <string name="welcome_text">
+        Welcome to the game, where everyone can try himself as a presidential candidate!
+        Choose your favorite candidate, answer the questions of different population groups and earn their support!
+        You can earn money in mini-games, and spend it on increasing your stats. Each candidate has his own mini-game, try to them all!
+        We wish you luck!
+    </string>
+    <string name="info_title">Developers</string>
+    <string name="info_message">\@qumeric\n\@chad_vicious\n\@artiombash\n\@slavaboev\n\@lizzzalee\n\@_justwitch_\n\nResources:\nwww.flaticon.com\nfreesound.org\nwav-library.net
+    </string>
 </resources>

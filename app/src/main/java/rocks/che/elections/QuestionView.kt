@@ -10,10 +10,11 @@ import rocks.che.elections.helpers.groupToResource
 import rocks.che.elections.logic.*
 
 val fakeQuestion = Question("statement", listOf(
-        Answer("answer 1", Opinions()),
-        Answer("answer 2", Opinions()),
-        Answer("answer 3", Opinions())
+    Answer("answer 1", Opinions()),
+    Answer("answer 2", Opinions()),
+    Answer("answer 3", Opinions())
 ))
+
 class QuestionView(private val question: Question = fakeQuestion,
                    val group: String = "group", val gs: Gamestate) : DefaultView<QuestionActivity> {
     private lateinit var ankoContext: AnkoContext<QuestionActivity>
@@ -55,7 +56,7 @@ class QuestionView(private val question: Question = fakeQuestion,
                         }.lparams(width = matchParent)
                         space().lparams(width = matchParent, height = dip(30))
                     }
-                }.lparams(width=0, weight = 1f)
+                }.lparams(width = 0, weight = 1f)
             }
         }
     }

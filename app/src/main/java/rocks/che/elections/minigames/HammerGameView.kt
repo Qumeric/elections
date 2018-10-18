@@ -25,7 +25,7 @@ class HammerGameView : AnkoComponent<HammerGameActivity> {
 
     fun pickRandomEnemyResource(): Int {
         return listOf(R.drawable.candidate_grudinin, R.drawable.candidate_navalny, R.drawable.candidate_sobchak,
-                R.drawable.candidate_yavlinsky, R.drawable.candidate_zhirinovsky)[Random().nextInt(5)]
+            R.drawable.candidate_yavlinsky, R.drawable.candidate_zhirinovsky)[Random().nextInt(5)]
     }
 
     override fun createView(ui: AnkoContext<HammerGameActivity>) = with(ui) {
@@ -72,7 +72,7 @@ class HammerGameView : AnkoComponent<HammerGameActivity> {
                     }
                     field.add(rowElems as ArrayList<ImageView>)
                 }
-            }.lparams(weight=9/16f, width= matchParent, height = 0)
+            }.lparams(weight = 9 / 16f, width = matchParent, height = 0)
 
             relativeLayout {
                 backgroundResource = R.color.yellow

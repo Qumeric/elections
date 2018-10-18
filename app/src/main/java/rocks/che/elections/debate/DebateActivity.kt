@@ -11,10 +11,7 @@ import rocks.che.elections.logic.inActivityChange
 import java.util.*
 
 
-data class SetGroupDistribution(val vals: List<Int>)
-data class SetOpponentDistribution(val vals: List<Int>)
-class NextDebateStage()
-class DebateTimeDistributionUpdate(val groupMinutes: Int, val opponentMinutes: Int)
+class NextDebateStage
 
 class DebateActivity : DefaultActivity() {
     private var stage = 0
@@ -26,12 +23,13 @@ class DebateActivity : DefaultActivity() {
     var opponentMinutes = maxMinutes - groupMinutes
 
     fun setGroupDistribution(d: List<Int>) =
-            gs.questions.all.keys.withIndex().forEach { (i, k) -> groupDistribution[k] = d[i] }
+        gs.questions.all.keys.withIndex().forEach { (i, k) -> groupDistribution[k] = d[i] }
 
+    //FIXME order dependent...
     fun setOpponentDistribution(d: List<Int>) =
-            gs.candidates.filter { it.resource != gs.candidate.resource }.withIndex().forEach { (i, c) ->
-                opponentDistribution[c.name] = d[i]
-            }
+        gs.candidates.filter { it.resource != gs.candidate.resource }.withIndex().forEach { (i, c) ->
+            opponentDistribution[c.name] = d[i]
+        }
 
     fun nextStage(e: NextDebateStage = NextDebateStage()) {
         Log.d("DebateActivity", "nextStage event!")
@@ -52,47 +50,50 @@ class DebateActivity : DefaultActivity() {
     }
 
     private val winPoints = 5 // FIXME do something smarter
-    private fun winGroup(): String {
-        val r = Random().nextInt(groupMinutes+1)
+    private fun winGroup(): String? {
+        val r = Random().nextInt(groupMinutes + 1)
         var sum = 0
         for ((group, time) in groupDistribution) {
             sum += time
             if (sum >= r) {
                 gs.candidate.opinions[group] = gs.candidate.opinions[group]!! + winPoints
+                gs.updateCandidate()
                 return group
             }
         }
-        throw Exception("winGroup returned nothing")
+        return null
     }
 
     private val losePoints = -5
-    private fun loseGroup(): String {
+    private fun loseGroup(): String? {
         val r = Random().nextDouble()
         var sum = 0f
         for ((group, time) in groupDistribution) {
             sum += 1 / (time + 1)
             if (sum > r) {
                 gs.candidate.opinions[group] = gs.candidate.opinions[group]!! + losePoints
+                gs.updateCandidate()
                 return group
             }
         }
-        throw Exception("loseGroup returned nothing")
+        return null
     }
 
-    private fun attackResult(): String {
-        val r = Random().nextInt(opponentMinutes+1)
+    private fun attackResult(): String? {
+        if (opponentMinutes == 0) return null
+        val r = Random().nextInt(opponentMinutes + 1)
         var sum = 0
         for ((opponent, time) in opponentDistribution) {
-            gs.getCandidate(opponent).boost += winPoints.toFloat() * time / opponentMinutes
+            gs.getCandidate(opponent).boost += losePoints.toFloat() * time / opponentMinutes
         }
         for ((opponent, time) in opponentDistribution) {
             sum += time
             if (sum > r) {
-                gs.getCandidate(opponent).boost += winPoints.toFloat()
+                gs.getCandidate(opponent).boost += losePoints.toFloat()
                 return opponent
             }
         }
-        throw Exception("winGroup returned nothing")
+        return null
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

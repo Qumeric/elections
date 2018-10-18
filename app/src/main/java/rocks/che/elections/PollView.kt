@@ -11,7 +11,6 @@ import rocks.che.elections.helpers.DefaultView
 import rocks.che.elections.helpers.MyAdapter
 import rocks.che.elections.helpers.gameTextView
 import rocks.che.elections.helpers.sparkView
-import rocks.che.elections.logic.Candidate
 import rocks.che.elections.logic.Gamestate
 import rocks.che.elections.logic.inActivityChange
 import kotlin.math.round
@@ -35,7 +34,7 @@ class PollView(private val h: Map<Int, List<Double>> = mapOf(), val gs: Gamestat
             backgroundResource = R.color.white
 
             frameLayout {
-                gameTextView(20, autoResize = true) {
+                gameTextView(16, autoResize = true) {
                     text = resources.getString(R.string.poll_results_template).format(gs.step) // unbreakable space
                 }
             }.lparams(height = 0, width = matchParent, weight = 0.09f)
@@ -44,33 +43,27 @@ class PollView(private val h: Map<Int, List<Double>> = mapOf(), val gs: Gamestat
                 backgroundResource = R.color.blue
                 frameLayout {
                     backgroundResource = R.color.silver
-                    var i = 0
                     for ((c, hd) in h) {
                         val sv = sparkView {}
-                        //val paint = Paint()
-                        //paint.strokeJoin = Paint.Join.ROUND
-                        //sv.baseLinePaint = paint
                         sv.adapter = MyAdapter(FloatArray(hd.size, { j -> hd[j].toFloat() }))
                         sv.lineColor = getColor(ctx, candidateToColor[c]!!)
                     }
                 }.lparams {
-                    padding=dip(3)
+                    padding = dip(3)
                 }
-            }.lparams(height = 0, width = matchParent, weight = 0.3f) { horizontalMargin = dip(5)}
+            }.lparams(height = 0, width = matchParent, weight = 0.3f) { horizontalMargin = dip(5) }
 
             space {
 
             }.lparams(height = 0, width = matchParent, weight = 0.1f)
 
-            var loser: Candidate? = gs.worst
             frameLayout {
                 gridLayout {
                     rowCount = 3
                     columnCount = 2
                     alignmentMode = GridLayout.ALIGN_MARGINS
 
-                    val c = gs.candidate
-                    val ssum = gs.candidates.sumBy<Candidate> { it.generalOpinion.toInt() }
+                    val ssum = gs.candidates.sumBy { it.generalOpinion.toInt() }
 
                     var col = 0
                     var row = 0
@@ -103,7 +96,7 @@ class PollView(private val h: Map<Int, List<Double>> = mapOf(), val gs: Gamestat
                                 }
                             }
                             gameTextView(9) {
-                                text = "%d%%".format(round(oc.generalOpinion/ssum*100).toInt())
+                                text = "%d%%".format(round(oc.generalOpinion / ssum * 100).toInt())
                             }.lparams {
                                 alignParentRight()
                                 centerVertically()
@@ -131,8 +124,14 @@ class PollView(private val h: Map<Int, List<Double>> = mapOf(), val gs: Gamestat
                 gravity = Gravity.CENTER
                 if (gs.isPollTime && (gs.isWon || gs.isWorst)) {
                     themedButton(theme = R.style.button) {
-                        if (gs.isWorst) toast(R.string.lost_message) // FIXME snackbar is better but crashes
-                        if (gs.isWon) toast(R.string.win_message)
+                        if (gs.isWorst) {
+                            toast(R.string.lost_message)
+                            startActivity<EndGameActivity>("isWon" to false, "gamestate" to gs)
+                        }
+                        if (gs.isWon) {
+                            toast(R.string.win_message)
+                            startActivity<EndGameActivity>("isWon" to true, "gamestate" to gs)
+                        }
                         textResource = R.string.try_again
                         onClick {
                             inActivityChange = true

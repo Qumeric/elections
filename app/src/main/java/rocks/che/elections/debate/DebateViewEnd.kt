@@ -1,17 +1,20 @@
 package rocks.che.elections.debate
 
+import android.annotation.SuppressLint
 import android.view.Gravity
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
 import rocks.che.elections.R
 import rocks.che.elections.helpers.DefaultView
 import rocks.che.elections.helpers.gameTextView
+import rocks.che.elections.helpers.toMaybeRussian
 import rocks.che.elections.logic.Candidate
 
-class DebateViewEnd(val candidate: Candidate, val winGroup: String = "Winner",
-                    val loseGroup: String = "Loser", val attackResult: String = "Opponent"): DefaultView<DebateActivity> {
+class DebateViewEnd(val candidate: Candidate, val winGroup: String? = "Winner",
+                    val loseGroup: String? = "Loser", val attackResult: String? = "Opponent") : DefaultView<DebateActivity> {
     private lateinit var ankoContext: AnkoContext<DebateActivity>
 
+    @SuppressLint("RtlHardcoded")
     override fun createView(ui: AnkoContext<DebateActivity>) = with(ui) {
         ankoContext = ui
 
@@ -35,33 +38,48 @@ class DebateViewEnd(val candidate: Candidate, val winGroup: String = "Winner",
                     backgroundResource = R.color.blue
                 }.lparams(weight = 0.012f, height = 0, width = dip(120))
 
-                linearLayout {
-                    gravity = Gravity.CENTER_VERTICAL
-                    imageView {
-                        imageResource = R.drawable.ic_add
-                    }.lparams { rightPadding = dip(5)}
-                    gameTextView(10) {
-                        text= ctx.getString(R.string.debate_good_group_template).format(winGroup)
-                    }
-                }.lparams {leftMargin = dip(20); topMargin = dip(10)}
-                linearLayout {
-                    gravity = Gravity.CENTER_VERTICAL
-                    imageView {
-                        imageResource = R.drawable.ic_substract
-                    }.lparams { rightPadding = dip(5)}
-                    gameTextView(10) {
-                        text= ctx.getString(R.string.debate_bad_group_template).format(loseGroup)
-                    }
-                }.lparams {leftMargin = dip(20); topMargin = dip(5)}
-                linearLayout {
-                    gravity = Gravity.CENTER_VERTICAL
-                    imageView {
-                        imageResource = R.drawable.ic_flash
-                    }.lparams { rightPadding = dip(5)}
-                    gameTextView(10) {
-                        text = ctx.getString(R.string.debate_opponent_attack_template).format(attackResult)
-                    }
-                }.lparams {leftMargin = dip(20); topMargin = dip(5)}
+                verticalLayout {
+                    gravity = Gravity.LEFT
+                    linearLayout {
+                        gravity = Gravity.CENTER_VERTICAL or Gravity.LEFT
+                        imageView {
+                            imageResource = R.drawable.ic_add
+                        }.lparams { rightPadding = dip(5) }
+                        gameTextView(10) {
+                            if (winGroup != null) {
+                                text = ctx.getString(R.string.debate_good_group_template).format(winGroup.toMaybeRussian(resources.configuration.locale.toString()))
+                            } else {
+                                text = ctx.getString(R.string.debate_good_group_template).format("-")
+                            }
+                        }
+                    }.lparams { leftMargin = dip(30); topMargin = dip(10) }
+                    linearLayout {
+                        gravity = Gravity.CENTER_VERTICAL or Gravity.LEFT
+                        imageView {
+                            imageResource = R.drawable.ic_substract
+                        }.lparams { rightPadding = dip(5) }
+                        gameTextView(10) {
+                            text = if (loseGroup != null) {
+                                ctx.getString(R.string.debate_bad_group_template).format(loseGroup.toMaybeRussian(resources.configuration.locale.toString()))
+                            } else {
+                                ctx.getString(R.string.debate_bad_group_template).format("-")
+                            }
+                        }
+                    }.lparams { leftMargin = dip(30); topMargin = dip(5) }
+                    linearLayout {
+                        gravity = Gravity.CENTER_VERTICAL or Gravity.LEFT
+                        imageView {
+                            imageResource = R.drawable.ic_flash
+                        }.lparams { rightPadding = dip(5) }
+                        gameTextView(10) {
+                            text = if (attackResult != null) {
+                                ctx.getString(R.string.debate_opponent_attack_template).format(attackResult.toMaybeRussian(resources.configuration.locale.toString()))
+                            } else {
+                                ctx.getString(R.string.debate_opponent_attack_fail)
+                            }
+                        }
+                    }.lparams { leftMargin = dip(30); topMargin = dip(5) }
+                }.lparams(width = matchParent)
 
                 themedButton(theme = R.style.button) {
                     textResource = R.string.next

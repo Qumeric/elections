@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.ImageView
 import im.delight.android.audio.MusicManager
 import org.jetbrains.anko.ctx
+import org.jetbrains.anko.dip
 import org.jetbrains.anko.displayMetrics
 import org.jetbrains.anko.setContentView
 import rocks.che.elections.R
@@ -19,7 +20,7 @@ class DucksGameActivity : MiniGameActivity() {
     private val ducks: MutableSet<ImageView> = mutableSetOf()
 
     private fun createDuck() {
-        val duckView = ImageView(ctx)
+        val duckView = ImageView(this)
 
         duckView.x = displayMetrics.widthPixels.toFloat()
 
@@ -28,14 +29,14 @@ class DucksGameActivity : MiniGameActivity() {
         view.layout.addView(duckView)
         ducks.add(duckView)
 
-        handler.postDelayed({createDuck()}, ((4000 * (0.7 + random())) / Math.sqrt(10.0 + score)).toLong())
+        handler.postDelayed({ createDuck() }, ((4000 * (0.7 + random())) / Math.sqrt(10.0 + score)).toLong())
     }
 
     private fun update() {
         val toRemove: MutableList<ImageView> = mutableListOf()
 
         for (s in ducks) {
-            s.x -= 8f + 2*Math.sqrt(10f+score.toDouble()).toFloat()
+            s.x -= dip(8f + 2 * Math.sqrt(10f + score.toDouble()).toFloat()) / 2.5f
 
             if (s.x <= -s.drawable.intrinsicWidth) {
                 toRemove.add(s)
@@ -57,7 +58,7 @@ class DucksGameActivity : MiniGameActivity() {
             return
         }
 
-        handler.postDelayed({update()}, (1000 / 50).toLong())
+        handler.postDelayed({ update() }, (1000 / 50).toLong())
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,10 +70,10 @@ class DucksGameActivity : MiniGameActivity() {
         MusicManager.instance.play(this, R.raw.ducks_music)
 
         drawInformationDialog(getString(R.string.ducks_info_title), getString(R.string.ducks_info_message),
-                {
-                    handler.postDelayed({createDuck()}, 1)
-                    handler.postDelayed({update()}, 1)
-                }, view.ankoContext)
+            {
+                handler.postDelayed({ createDuck() }, 1)
+                handler.postDelayed({ update() }, 1)
+            }, view.ankoContext)
     }
 
     fun shoot() {
@@ -113,10 +114,10 @@ class DucksGameActivity : MiniGameActivity() {
     override fun lose() {
         handler.removeCallbacksAndMessages(null)
         drawInformationDialog(
-                getString(R.string.ducks_end_title),
-                getString(R.string.ducks_end_message_template).format(score),
-                { super.lose() },
-                view.ankoContext
+            getString(R.string.ducks_end_title),
+            getString(R.string.ducks_end_message_template).format(score),
+            { super.lose() },
+            view.ankoContext
         )
     }
 }

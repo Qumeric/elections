@@ -15,7 +15,7 @@ import rocks.che.elections.logic.Gamestate
 import rocks.che.elections.logic.inActivityChange
 
 class GameView(val gs: Gamestate) : DefaultView<GameActivity> {
-    private lateinit var ankoContext: AnkoContext<GameActivity>
+    lateinit var ankoContext: AnkoContext<GameActivity>
     private lateinit var moneyTextView: AppCompatTextView
     private var groupViews = hashMapOf<String, TextView>()
 
@@ -39,10 +39,10 @@ class GameView(val gs: Gamestate) : DefaultView<GameActivity> {
             for (group in gs.questions.all.keys) {
                 linearLayout {
                     gravity = Gravity.START
-                    if (gs.lastGroup == group) {
-                        backgroundColorResource = R.color.silver
+                    backgroundColorResource = if (gs.lastGroup == group) {
+                        R.color.silver
                     } else {
-                        backgroundColorResource = R.color.white
+                        R.color.white
                     }
                     imageView {
                         imageResource = groupToResource[group]!!
@@ -53,7 +53,7 @@ class GameView(val gs: Gamestate) : DefaultView<GameActivity> {
                                 ctx.startActivity<QuestionActivity>("question" to gs.questions.get(group),
                                     "group" to group, "gamestate" to gs)
                             } else {
-                                snackbar(this@linearLayout, R.string.pick_twice)
+                                this@linearLayout.snackbar(R.string.pick_twice)
                             }
                         }
                     }.lparams {
@@ -71,7 +71,7 @@ class GameView(val gs: Gamestate) : DefaultView<GameActivity> {
                                 ctx.startActivity<QuestionActivity>("question" to gs.questions.get(group),
                                     "group" to group, "gamestate" to gs)
                             } else {
-                                snackbar(this@linearLayout, R.string.pick_twice)
+                                this@linearLayout.snackbar(R.string.pick_twice)
                             }
                         }
                         val tv = gameTextView(12) {
@@ -92,7 +92,7 @@ class GameView(val gs: Gamestate) : DefaultView<GameActivity> {
                                 imageResource = R.drawable.ic_coins
                                 onClick {
                                     if (!ui.owner.buyGroupPoints(group)) {
-                                        snackbar(ankoContext.view, R.string.not_enough_money)
+                                        ankoContext.view.snackbar(R.string.not_enough_money)
                                     }
                                     moneyTextView.text = gs.money.toString() + "$"
                                     groupViews[group]!!.text = "%s: %d".format(group.toMaybeRussian(resources.configuration.locale.toString()), gs.candidate.opinions[group]!!)
@@ -120,7 +120,7 @@ class GameView(val gs: Gamestate) : DefaultView<GameActivity> {
                 linearLayout {
                     gravity = Gravity.CENTER
                     gameTextView(14) {
-                        text = String.format("Day: %d", gs.step)
+                        text = String.format(ctx.getString(R.string.day_template), gs.step)
                     }
                     space().lparams { width = dip(30) }
                     moneyTextView = gameTextView(14, color = R.color.olive) {

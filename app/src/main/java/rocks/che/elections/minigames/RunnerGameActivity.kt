@@ -2,13 +2,9 @@ package rocks.che.elections.minigames
 
 import android.graphics.Rect
 import android.os.Bundle
-import android.view.ViewGroup
 import android.widget.ImageView
 import im.delight.android.audio.MusicManager
-import org.jetbrains.anko.ctx
-import org.jetbrains.anko.displayMetrics
-import org.jetbrains.anko.find
-import org.jetbrains.anko.setContentView
+import org.jetbrains.anko.*
 import rocks.che.elections.R
 import java.lang.Math.random
 
@@ -22,13 +18,12 @@ class RunnerGameActivity : MiniGameActivity() {
     private val cars: MutableSet<ImageView> = mutableSetOf()
 
     private fun createCar() {
-        //val carView = layoutInflater.inflate(R.drawable.ic_police_car, view.layout, false)
-        val carView = ImageView(ctx)
+        val carView = ImageView(this)
         carView.setImageResource(R.drawable.ic_police_car)
 
         carView.x = displayMetrics.widthPixels.toFloat()
-        //carView.y = displayMetrics.heightPixels.toFloat() - carView.drawable.intrinsicHeight
-        view.layout.addView(carView);
+        carView.y = dip(6).toFloat()
+        view.layout.addView(carView)
         cars.add(carView)
 
         handler.postDelayed({ createCar() }, ((5000 * (0.7 + random())) / Math.sqrt(10.0 + score)).toLong())
@@ -41,14 +36,14 @@ class RunnerGameActivity : MiniGameActivity() {
         for (car in cars) {
             val carRC = Rect()
             car.getHitRect(carRC)
-            val topCarRC = carRC
-            val botCarRC = carRC
-
-            topCarRC.bottom = (carRC.bottom + carRC.top) / 2
-            botCarRC.top    = (carRC.bottom + carRC.top) / 2
-
-            topCarRC.left += 20
-            topCarRC.right -= 20
+            val topCarRC = carRC.apply {
+                left += 20
+                right -= 20
+            }
+            val botCarRC = carRC.apply {
+                bottom = (carRC.bottom + carRC.top) / 2
+                top = (carRC.bottom + carRC.top) / 2
+            }
 
             if (smRC.intersect(topCarRC) || smRC.intersect(botCarRC)) {
                 playSound(R.raw.siren_sound)
@@ -63,7 +58,7 @@ class RunnerGameActivity : MiniGameActivity() {
         val toRemove: MutableList<ImageView> = mutableListOf()
 
         for (s in cars) {
-            s.x -= 25f + Math.sqrt(10f + score.toDouble()).toFloat()
+            s.x -= dip(250f + 10*Math.sqrt(10f + score.toDouble()).toFloat())/30
 
             if (s.x <= -s.drawable.intrinsicWidth) {
                 toRemove.add(s)
@@ -111,16 +106,17 @@ class RunnerGameActivity : MiniGameActivity() {
     var wallsInRow = 0
     private fun buildKremlinWall(x: Float = displayMetrics.widthPixels.toFloat()) {
         var drawable = R.drawable.runner_kremlin_wall
-        if (wallsInRow < 5) {
-            wallsInRow++
-        } else if (wallsInRow > 20) {
-            drawable = R.drawable.runner_kremlin_tower
-            wallsInRow = 0
-        } else if (random() < 0.1f) {
-            drawable = R.drawable.runner_kremlin_tower
-            wallsInRow = 0
-        } else {
-            wallsInRow++
+        when {
+            wallsInRow < 5 -> wallsInRow++
+            wallsInRow > 20 -> {
+                drawable = R.drawable.runner_kremlin_tower
+                wallsInRow = 0
+            }
+            random() < 0.1f -> {
+                drawable = R.drawable.runner_kremlin_tower
+                wallsInRow = 0
+            }
+            else -> wallsInRow++
         }
         createMovingImage(drawable, 10f, x = x, onAppear = { buildKremlinWall(it) })
     }
@@ -141,23 +137,24 @@ class RunnerGameActivity : MiniGameActivity() {
 
         MusicManager.instance.play(this, R.raw.runner_music)
 
-        useMovingImages(find<ViewGroup>(R.id.moving_image_layout))
+        useMovingImages(find(R.id.moving_image_layout))
 
         drawInformationDialog(getString(R.string.runner_info_title), getString(R.string.runner_info_message),
-                {
-                    createCar()
-                    update()
-                    buildInitialWall()
-                }, view.ankoContext)
+            {
+                createCar()
+                update()
+                buildInitialWall()
+            }, view.ankoContext)
     }
 
     override fun lose() {
+        score *= 2
         handler.removeCallbacksAndMessages(null)
         drawInformationDialog(
-                getString(R.string.runner_end_title),
-                getString(R.string.runner_end_message_template).format(score),
-                { super.lose() },
-                view.ankoContext
+            getString(R.string.runner_end_title),
+            getString(R.string.runner_end_message_template).format(score),
+            { super.lose() },
+            view.ankoContext
         )
     }
 }

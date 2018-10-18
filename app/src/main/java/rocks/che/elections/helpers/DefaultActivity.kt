@@ -36,7 +36,7 @@ abstract class DefaultActivity : AppCompatActivity(), AnkoLogger {
             R.raw.duck_hit_sound, R.raw.mutin_sound, R.raw.shot_sound, R.raw.siren_sound,
             R.raw.choose_sound,
             R.raw.main_music, R.raw.ducks_music, R.raw.catcher_music,
-            R.raw.runner_music, R.raw.snake_music)
+            R.raw.runner_music, R.raw.snake_music, R.raw.races_music) // FIXME is music even required?
             .forEach { soundManager!!.load(it) }
     }
 
@@ -66,6 +66,7 @@ abstract class DefaultActivity : AppCompatActivity(), AnkoLogger {
         alert {
             title = _title
             message = _message
+            isCancelable = false
             positiveButton(R.string.yes_button) {
                 run()
             }
@@ -78,7 +79,4 @@ abstract class DefaultActivity : AppCompatActivity(), AnkoLogger {
     }
 
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
 }

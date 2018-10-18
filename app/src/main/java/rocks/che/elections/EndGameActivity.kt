@@ -8,13 +8,14 @@ import rocks.che.elections.helpers.DefaultActivity
 import rocks.che.elections.logic.Gamestate
 import rocks.che.elections.logic.secretFilename
 
-class EndGameActivity: DefaultActivity() {
+class EndGameActivity() : DefaultActivity() {
     private lateinit var view: EndGameView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val gs: Gamestate = intent.getParcelableExtra("gamestate")
+        val isWon = intent.getBooleanExtra("isWon", false)
 
         try {
             Prefs.remove("gamestate")
@@ -22,9 +23,11 @@ class EndGameActivity: DefaultActivity() {
             Log.d("EndGameActivity", "unable to delete save after game completion")
         }
 
-        view = EndGameView(gs.candidate.resource == R.drawable.candidate_putin)
+        view = EndGameView(gs.candidate.resource == R.drawable.candidate_putin, isWon)
         view.setContentView(this)
 
-        Prefs.putBoolean(secretFilename, true)
+        if (isWon) {
+            Prefs.putBoolean(secretFilename, true)
+        }
     }
 }

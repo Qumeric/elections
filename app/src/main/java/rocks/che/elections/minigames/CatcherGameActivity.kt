@@ -4,10 +4,7 @@ import android.graphics.Rect
 import android.os.Bundle
 import android.widget.ImageView
 import im.delight.android.audio.MusicManager
-import org.jetbrains.anko.ctx
-import org.jetbrains.anko.displayMetrics
-import org.jetbrains.anko.image
-import org.jetbrains.anko.setContentView
+import org.jetbrains.anko.*
 import rocks.che.elections.R
 import java.lang.Math.random
 
@@ -20,7 +17,7 @@ class CatcherGameActivity : MiniGameActivity() {
 
     private val createStrawberry = object : Runnable {
         override fun run() {
-            val strawberryView = ImageView(ctx)
+            val strawberryView = ImageView(this@CatcherGameActivity)
 
             strawberryView.setImageResource(R.drawable.ic_strawberry)
             val sWidth = strawberryView.image!!.intrinsicWidth
@@ -40,7 +37,7 @@ class CatcherGameActivity : MiniGameActivity() {
         val toRemove: MutableList<ImageView> = mutableListOf()
 
         for (s in strawberries) {
-            s.y += 10f + score
+            s.y += dip(10f + score)/3
             s.invalidate()
 
             val sRC = Rect()

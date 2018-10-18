@@ -31,7 +31,7 @@ class DebateViewOpponents(val minutes: Int = 40, val candidates: List<Candidate>
                 backgroundResource = R.color.blue
             }.lparams(weight = 0.012f, height = 0, width = dip(120))
 
-            space {}.lparams(weight = 0.005f, height=0)
+            space {}.lparams(weight = 0.005f, height = 0)
 
             gameTextView(12) {
                 textResource = R.string.debate_opponents
@@ -52,7 +52,7 @@ class DebateViewOpponents(val minutes: Int = 40, val candidates: List<Candidate>
                     linearLayout {
                         gravity = Gravity.CENTER_VERTICAL
 
-                        gameTextView(10, text = candidate.name, autoResize = true) {
+                        gameTextView(8, text = candidate.name, autoResize = true) {
                         }.lparams {
                             width = dip(120)
                         }
@@ -77,7 +77,7 @@ class DebateViewOpponents(val minutes: Int = 40, val candidates: List<Candidate>
                                     amounts[pos].text = sb.progress.toString()
                                 })
                             }
-                        }.lparams(width = dip(250))
+                        }.lparams(width = dip(200))
                     }.lparams {
                         width = matchParent
                         height = matchParent
@@ -86,7 +86,7 @@ class DebateViewOpponents(val minutes: Int = 40, val candidates: List<Candidate>
                         centerVertically()
                     }
 
-                    amounts.add(gameTextView(10,text="0") {
+                    amounts.add(gameTextView(10, text = "0") {
                     }.lparams {
                         alignParentRight()
                         centerVertically()
@@ -103,7 +103,7 @@ class DebateViewOpponents(val minutes: Int = 40, val candidates: List<Candidate>
                         ui.owner.setOpponentDistribution(amountVals)
                         ui.owner.nextStage()
                     } else {
-                        snackbar(this, R.string.debate_spend_minutes_first)
+                        this.snackbar(R.string.debate_spend_minutes_first)
                     }
                 }
             }.lparams(weight = 0.08f, height = 0, width = dip(180))

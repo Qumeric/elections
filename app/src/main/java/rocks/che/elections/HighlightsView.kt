@@ -60,7 +60,7 @@ class HighlightsView(val candidate: Candidate) : DefaultView<HighlightsActivity>
                             imageView {
                                 imageResource = R.drawable.red_star
                             }
-                            gameTextView(12) {
+                            gameTextView(10) {
                                 text = perk
                             }
                         }.lparams(weight = 0.07f, height = 0) {
@@ -74,15 +74,15 @@ class HighlightsView(val candidate: Candidate) : DefaultView<HighlightsActivity>
 
             konfettiView {
                 build().addColors(0xee0000.opaque, 0x00ee00.opaque, 0x0000ee.opaque,
-                        0xeeee00.opaque, 0x00eeee.opaque, 0xdd33dd.opaque, 0x000000.opaque)
-                        .setDirection(0.0, 359.0)
-                        .setSpeed(1f, 5f)
-                        .setFadeOutEnabled(true)
-                        .setTimeToLive(2000L)
-                        .addShapes(Shape.RECT, Shape.CIRCLE)
-                        .addSizes(Size(12))
-                        .setPosition(0f, displayMetrics.widthPixels.toFloat(), 0f, 0f)
-                        .streamFor(300, 3000L)
+                    0xeeee00.opaque, 0x00eeee.opaque, 0xdd33dd.opaque, 0x000000.opaque)
+                    .setDirection(0.0, 359.0)
+                    .setSpeed(1f, 5f)
+                    .setFadeOutEnabled(true)
+                    .setTimeToLive(2000L)
+                    .addShapes(Shape.RECT, Shape.CIRCLE)
+                    .addSizes(Size(12))
+                    .setPosition(0f, displayMetrics.widthPixels.toFloat(), 0f, 0f)
+                    .streamFor(300, 3000L)
             }.lparams(width = matchParent, height = matchParent)
         }
     }

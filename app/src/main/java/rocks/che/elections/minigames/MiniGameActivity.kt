@@ -9,7 +9,6 @@ import android.widget.ImageView
 import im.delight.android.audio.MusicManager
 import org.jetbrains.anko.displayMetrics
 import org.jetbrains.anko.imageResource
-import rocks.che.elections.PollActivity
 import rocks.che.elections.helpers.DefaultActivity
 
 data class MovingImage(val imageFrame: FrameLayout, val imageView: ImageView, val speed: Float,
@@ -17,7 +16,7 @@ data class MovingImage(val imageFrame: FrameLayout, val imageView: ImageView, va
 
 const val frameRate = 60
 
-abstract class MiniGameActivity(private val nextActivity: Class<out DefaultActivity> = PollActivity::class.java) : DefaultActivity() {
+abstract class MiniGameActivity : DefaultActivity() {
     protected val handler = Handler()
     protected var score = 0
     protected val maxLose = 5
@@ -38,9 +37,9 @@ abstract class MiniGameActivity(private val nextActivity: Class<out DefaultActiv
     open fun lose() {
         handler.removeCallbacksAndMessages(null)
         val intent = Intent()
-        intent.putExtra("money", calculateMoney());
-        setResult(RESULT_OK, intent);
-        finish();
+        intent.putExtra("money", calculateMoney())
+        setResult(RESULT_OK, intent)
+        finish()
     }
 
     protected fun createMovingImage(imgResource: Int, speed: Float = 1f, depth: Float = 1f,
@@ -51,7 +50,7 @@ abstract class MiniGameActivity(private val nextActivity: Class<out DefaultActiv
         imageView.adjustViewBounds = true
 
         val params = FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT,
-                FrameLayout.LayoutParams.MATCH_PARENT);
+            FrameLayout.LayoutParams.MATCH_PARENT)
         //params.leftMargin = 50;
         //params.topMargin = 60;
 

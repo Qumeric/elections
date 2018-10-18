@@ -1,27 +1,22 @@
 package rocks.che.elections
 
-import android.os.Parcelable
 import android.view.Gravity
-import android.view.View
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
-import rocks.che.elections.debate.DebateActivity
 import rocks.che.elections.helpers.DefaultView
 import rocks.che.elections.helpers.gameTextView
 import rocks.che.elections.logic.Quote
 import rocks.che.elections.logic.inActivityChange
-import rocks.che.elections.logic.loadCandidates
-import rocks.che.elections.minigames.*
 
-class NewGameView(val quote: Quote) : DefaultView<NewGameActivity> {
+class NewGameView(val quote: Quote = Quote("quote text", "author")) : DefaultView<NewGameActivity> {
     private lateinit var ankoContext: AnkoContext<NewGameActivity>
 
     override fun createView(ui: AnkoContext<NewGameActivity>) = with(ui) {
         ankoContext = ui
 
         verticalLayout {
-            gravity = Gravity.CENTER
-            linearLayout {
+            gravity = Gravity.TOP or Gravity.CENTER_HORIZONTAL
+            /*linearLayout {
                 gravity = Gravity.CENTER
                 weightSum = 1f
                 verticalLayout {
@@ -72,69 +67,110 @@ class NewGameView(val quote: Quote) : DefaultView<NewGameActivity> {
                     width = 0
                     weight = 0.5f
                 }
+            }*/
+            weightSum = 1f
+            imageView {
+                imageResource = R.drawable.logo
+            }.lparams {
+                width = matchParent
+                margin = dip(30)
+                height = 0
+                weight = 0.7f
             }
 
             imageView {
-                imageResource = R.drawable.play
+                imageResource = R.drawable.ic_play
                 onClick {
                     inActivityChange = true
-                    ctx.startActivity<ChooseCandidateActivity>()
+                    ui.owner.drawInformationDialog(
+                        ctx.getString(R.string.welcome),
+                        ctx.getString(R.string.welcome_text),
+                        {
+
+                            ctx.startActivity<ChooseCandidateActivity>()
+                        },
+                        ankoContext
+                    )
                 }
+            }.lparams(width = dip(125), height = dip(125)) {
+                topMargin = dip(0)
+                bottomMargin = dip(12)
             }
             gameTextView(10) {
                 text = "%s: %s".format(quote.author, quote.text)
             }
-            themedButton(theme = R.style.button) {
-                text = "catcher"
-                onClick {
-                    ctx.startActivity<CatcherGameActivity>()
+            relativeLayout {
+                imageView {
+                    imageResource = R.drawable.ic_question
+                    onClick {
+                        ui.owner.drawInformationDialog(
+                            ctx.getString(R.string.info_title),
+                            ctx.getString(R.string.info_message),
+                            {},
+                            ankoContext
+                        )
+                    }
+                }.lparams(width = dip(50), height = dip(50)) {
+                    alignParentBottom()
+                    alignParentRight()
+                    rightMargin = dip(8)
+                    bottomMargin = dip(8)
                 }
+            }.lparams {
+                height = 0
+                weight = 0.3f
             }
-            themedButton(theme = R.style.button) {
-                text = "ducks"
-                onClick {
-                    ctx.startActivity<DucksGameActivity>()
+            /*themedButton(theme = R.style.button) {
+                    text = "catcher"
+                    onClick {
+                        ctx.startActivity<CatcherGameActivity>()
+                    }
                 }
-            }
-            themedButton(theme = R.style.button) {
-                text = "hammer"
-                onClick {
-                    ctx.startActivity<HammerGameActivity>()
+                themedButton(theme = R.style.button) {
+                    text = "ducks"
+                    onClick {
+                        ctx.startActivity<DucksGameActivity>()
+                    }
                 }
-            }
-            themedButton(theme = R.style.button) {
-                text = "races"
+                themedButton(theme = R.style.button) {
+                    text = "hammer"
+                    onClick {
+                        ctx.startActivity<HammerGameActivity>()
+                    }
+                }
+                themedButton(theme = R.style.button) {
+                    text = "races"
 
-                onClick {
-                    //intent.putParcelableArrayListExtra("candidates", gs.candidates as ArrayList<out Parcelable>)
-                    ctx.startActivity<RacesGameActivity>("candidates" to loadCandidates(resources) as ArrayList<out Parcelable>)
+                    onClick {
+                        //intent.putParcelableArrayListExtra("candidates", gs.candidates as ArrayList<out Parcelable>)
+                        ctx.startActivity<RacesGameActivity>("candidates" to loadCandidates(resources) as ArrayList<out Parcelable>)
+                    }
                 }
-            }
-            themedButton(theme = R.style.button) {
-                text = "snake"
-                onClick {
-                    ctx.startActivity<SnakeGameActivity>()
+                themedButton(theme = R.style.button) {
+                    text = "snake"
+                    onClick {
+                        ctx.startActivity<SnakeGameActivity>()
+                    }
                 }
-            }
-            themedButton(theme = R.style.button) {
-                text = "runner"
-                onClick {
-                    ctx.startActivity<RunnerGameActivity>()
+                themedButton(theme = R.style.button) {
+                    text = "runner"
+                    onClick {
+                        ctx.startActivity<RunnerGameActivity>()
+                    }
                 }
-            }
-            themedButton(theme = R.style.button) {
-                text = "debate"
-                val cs = loadCandidates(resources)
-                onClick {
-                    ctx.startActivity<DebateActivity>()
+                themedButton(theme = R.style.button) {
+                    text = "debate"
+                    val cs = loadCandidates(resources)
+                    onClick {
+                        ctx.startActivity<DebateActivity>()
+                    }
                 }
-            }
-            themedButton(theme = R.style.button) {
-                text = "endGameView"
-                onClick {
-                    ctx.startActivity<EndGameActivity>()
-                }
-            }
+                themedButton(theme = R.style.button) {
+                    text = "endGameView"
+                    onClick {
+                        ctx.startActivity<EndGameActivity>()
+                    }
+                }*/
         }
     }
 }

@@ -9,7 +9,7 @@ import rocks.che.elections.logic.Gamestate
 import rocks.che.elections.logic.inActivityChange
 import rocks.che.elections.logic.loadQuotes
 
-class NewGameActivity: DefaultActivity() {
+class NewGameActivity : DefaultActivity() {
     private lateinit var view: NewGameView
 
     override fun onCreate(savedInstanceState: Bundle?) {

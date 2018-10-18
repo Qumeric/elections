@@ -33,7 +33,7 @@ class HammerGameActivity : MiniGameActivity() {
                 return
             }
         }
-        val timeToHide = (5000 * (1 + Random().nextDouble()) /sqrt(5+score.toDouble())).toLong()
+        val timeToHide = (5000 * (1 + Random().nextDouble()) / sqrt(5 + score.toDouble())).toLong()
         handler.postDelayed({ createEnemy(row, col) }, timeToHide)
     }
 
@@ -48,7 +48,7 @@ class HammerGameActivity : MiniGameActivity() {
             kill()
         }
 
-        val timeToStay = (7000 * (1 + Random().nextDouble()) /sqrt(5+score.toDouble())).toLong()
+        val timeToStay = (7000 * (1 + Random().nextDouble()) / sqrt(5 + score.toDouble())).toLong()
         scaleView(elem, 1f, 0.2f, duration = timeToStay, pivotY = 1f)
         handler.postDelayed({ removeEnemy(row, col) }, timeToStay)
     }
@@ -61,25 +61,25 @@ class HammerGameActivity : MiniGameActivity() {
         MusicManager.instance.play(this, R.raw.hammer_music)
 
         drawInformationDialog(
-                getString(R.string.hammer_info_title),
-                getString(R.string.hammer_info_message),
-                {
-                    for (row in 0 until view.rowCnt) {
-                        (0 until view.colCnt).forEach {
-                            handler.postDelayed({ createEnemy(row, it) }, (5000 * Random().nextDouble()).toLong())
-                        }
+            getString(R.string.hammer_info_title),
+            getString(R.string.hammer_info_message),
+            {
+                for (row in 0 until view.rowCnt) {
+                    (0 until view.colCnt).forEach {
+                        handler.postDelayed({ createEnemy(row, it) }, (5000 * Random().nextDouble()).toLong())
                     }
-                },
-                view.ankoContext)
+                }
+            },
+            view.ankoContext)
     }
 
     override fun lose() {
         handler.removeCallbacksAndMessages(null)
         drawInformationDialog(
-                getString(R.string.catcher_end_title),
-                getString(R.string.catcher_end_message_template).format(score),
-                { super.lose() },
-                view.ankoContext
+            getString(R.string.catcher_end_title),
+            getString(R.string.catcher_end_message_template).format(score),
+            { super.lose() },
+            view.ankoContext
         )
     }
 }

@@ -13,7 +13,7 @@ import rocks.che.elections.helpers.gameTextView
 import rocks.che.elections.helpers.konfettiView
 import rocks.che.elections.logic.inActivityChange
 
-class EndGameView(val isMutin: Boolean = false) : DefaultView<EndGameActivity> {
+class EndGameView(val isMutin: Boolean = false, val isWon: Boolean = true) : DefaultView<EndGameActivity> {
     private lateinit var ankoContext: AnkoContext<EndGameActivity>
 
     @SuppressLint("RtlHardcoded")
@@ -21,17 +21,6 @@ class EndGameView(val isMutin: Boolean = false) : DefaultView<EndGameActivity> {
         ankoContext = ui
 
         frameLayout {
-            konfettiView {
-                build().addColors(Color.YELLOW, Color.GREEN, Color.MAGENTA)
-                    .setDirection(0.0, 359.0)
-                    .setSpeed(1f, 5f)
-                    .setFadeOutEnabled(true)
-                    .setTimeToLive(2000L)
-                    .addShapes(Shape.RECT, Shape.CIRCLE)
-                    .addSizes(Size(12))
-                    .setPosition(-50f, this.width + 50f, -50f, -50f)
-                    .streamFor(300, 5000L)
-            }
             verticalLayout {
                 gravity = Gravity.CENTER
                 weightSum = 1f
@@ -45,10 +34,18 @@ class EndGameView(val isMutin: Boolean = false) : DefaultView<EndGameActivity> {
                         width = matchParent
                     }
                     gameTextView(12) {
-                        textResource = if (isMutin) {
-                            R.string.endgame_text
+                        textResource = if (isWon) {
+                            if (!isMutin) {
+                                R.string.endgame_text
+                            } else {
+                                R.string.endgame_text_mutin
+                            }
                         } else {
-                            R.string.endgame_text_mutin
+                            if (isMutin) {
+                                R.string.end_game_lose_mutin
+                            } else {
+                                R.string.end_game_lose_common
+                            }
                         }
                     }.lparams {
                         width = matchParent
@@ -59,7 +56,11 @@ class EndGameView(val isMutin: Boolean = false) : DefaultView<EndGameActivity> {
                             inActivityChange = true
                             ctx.startActivity<NewGameActivity>()
                         }
-                        textResource = R.string.try_again
+                        textResource = if (isWon) {
+                            R.string.end_game_keep_winning
+                        } else {
+                            R.string.try_again
+                        }
                     }.lparams {
                         width = matchParent
                         gravity = Gravity.BOTTOM
@@ -78,6 +79,17 @@ class EndGameView(val isMutin: Boolean = false) : DefaultView<EndGameActivity> {
                 y = imgSize / 2.toFloat()
             }.lparams(height = imgSize) {
                 gravity = Gravity.BOTTOM
+            }
+            konfettiView {
+                build().addColors(Color.YELLOW, Color.GREEN, Color.MAGENTA)
+                    .setDirection(0.0, 359.0)
+                    .setSpeed(1f, 5f)
+                    .setFadeOutEnabled(true)
+                    .setTimeToLive(2000L)
+                    .addShapes(Shape.RECT, Shape.CIRCLE)
+                    .addSizes(Size(12))
+                    .setPosition(-50f, this.width + 50f, -50f, -50f)
+                    .streamFor(300, 5000L)
             }
         }
     }

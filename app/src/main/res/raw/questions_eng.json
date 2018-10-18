@@ -1,0 +1,2370 @@
+{
+  "media": [
+    {
+      "statement": "Which kind of cultural phenomena do you prefer?",
+      "answers": [
+        {
+          "statement": "More classic, rather than modern.",
+          "media": 2
+        },
+        {
+          "statement": "More modern, rather than classic.",
+          "media": 2
+        }
+      ]
+    },
+    {
+      "statement": "Which kind of education is suitable for a politician?",
+      "answers": [
+        {
+          "statement": "Politician.",
+          "media": 3
+        },
+        {
+          "statement": "Economist.",
+          "media": 3
+        },
+        {
+          "statement": "Sociologist.",
+          "media": -3
+        },
+        {
+          "statement": "Any natural science.",
+          "media": 1
+        },
+        {
+          "statement": "No preference.",
+          "media": 1
+        }
+      ]
+    },
+    {
+      "statement": "Do you think that same-sex couples have rights to adopt children?",
+      "answers": [
+        {
+          "statement": "Yes.",
+          "media": 5,
+          "workers": -2,
+          "military": -1,
+          "business": 3,
+          "foreign": 2,
+          "authority": -2
+        },
+        {
+          "statement": "No.",
+          "media": 2,
+          "workers": 1,
+          "military": 2,
+          "business": -1,
+          "foreign": -1,
+          "authority": 2
+        }
+      ]
+    },
+    {
+      "statement": "Does culture do influence on modern youth?",
+      "answers": [
+        {
+          "statement": "Yes.",
+          "workers": 2,
+          "military": 1,
+          "business": 3,
+          "authority": 1
+        },
+        {
+          "statement": "No.",
+          "media": -1,
+          "military": -1,
+          "business": 1,
+          "authority": -1
+        }
+      ]
+    },
+    {
+      "statement": "Do you think that the knowledge of history is important for a person?",
+      "answers": [
+        {
+          "statement": "Yes, definitely.",
+          "media": 1,
+          "workers": 2,
+          "military": 1
+        },
+        {
+          "statement": "Perhaps, but I would not say that this kind of knowledge is of first importance.",
+          "media": 2,
+          "business": 2
+        },
+        {
+          "statement": "No, they are absolutely useless.",
+          "media": 2,
+          "workers": -2,
+          "military": -1
+        }
+      ]
+    },
+    {
+      "statement": "Which kind of government would you like to have in our country?",
+      "answers": [
+        {
+          "statement": "Monarchy.",
+          "media": 2,
+          "workers": -5,
+          "military": -1,
+          "business": -1,
+          "foreign": 2
+        },
+        {
+          "statement": "Republic.",
+          "media": 4,
+          "workers": 4,
+          "military": 1,
+          "foreign": 1
+        },
+        {
+          "statement": "Conservatism.",
+          "media": -2,
+          "workers": -4,
+          "military": -2,
+          "business": -3
+        },
+        {
+          "statement": "Liberalism.",
+          "media": 5,
+          "workers": 5,
+          "military": 5,
+          "business": 7,
+          "foreign": 3,
+          "authority": -1
+        },
+        {
+          "statement": "Radicalism.",
+          "media": -3,
+          "authority": -2
+        }
+      ]
+    },
+    {
+      "statement": "Which kind of policy, to your mind,the State Authorities carry out in the framework of the \"Healthy Lifestyle\" project?",
+      "answers": [
+        {
+          "statement": "Active.",
+          "media": 1,
+          "workers": 1,
+          "military": -2,
+          "authority": 3
+        },
+        {
+          "statement": "Passive.",
+          "media": 3,
+          "workers": -1,
+          "military": -1,
+          "authority": -3
+        }
+      ]
+    },
+    {
+      "statement": "Do you agree with the internal policy of the state?",
+      "answers": [
+        {
+          "statement": "Yes.",
+          "media": -3,
+          "workers": -6,
+          "military": -4,
+          "authority": 1
+        },
+        {
+          "statement": "No.",
+          "media": 2,
+          "workers": 2,
+          "military": 1,
+          "business": 3,
+          "foreign": 2,
+          "authority": -3
+        }
+      ]
+    },
+    {
+      "statement": "Which reason of divorces do you consider the most common?",
+      "answers": [
+        {
+          "statement": "Material-domestic problems.",
+          "workers": 2,
+          "military": 3
+        },
+        {
+          "statement": "Psychological problems.",
+          "media": 2,
+          "workers": -2,
+          "military": -1
+        },
+        {
+          "statement": "Financial difficulties.",
+          "media": -1,
+          "workers": 2,
+          "military": -1,
+          "authority": -2
+        }
+      ]
+    },
+    {
+      "statement": "What was better in Union, than now?",
+      "answers": [
+        {
+          "statement": "There was social justice.",
+          "media": -2,
+          "workers": 4,
+          "military": 1,
+          "business": -3,
+          "foreign": 2,
+          "authority": -1
+        },
+        {
+          "statement": "United national idea.",
+          "media": -2,
+          "authority": -2
+        },
+        {
+          "statement": "Free medicine, education and accommodation.",
+          "media": 2,
+          "workers": 5,
+          "military": 3,
+          "authority": -2
+        }
+      ]
+    },
+    {
+      "statement": "What was worse in Union, than now?",
+      "answers": [
+        {
+          "statement": "Lots of people lived poorly.",
+          "media": 2,
+          "authority": 4
+        },
+        {
+          "statement": "Deficiency of high quality goods and services.",
+          "media": 4,
+          "authority": 2
+        }
+      ]
+    },
+    {
+      "statement": "How do you think the government should regulate religious norms?",
+      "answers": [
+        {
+          "statement": "In no way.",
+          "media": 5,
+          "workers": 3,
+          "military": 1,
+          "business": -4,
+          "foreign": 2,
+          "authority": -1
+        },
+        {
+          "statement": "Government must keep religion under all-encompassing control.",
+          "media": 2,
+          "workers": -2,
+          "military": -1,
+          "business": 5,
+          "foreign": 2
+        }
+      ]
+    },
+    {
+      "statement": "Do you consider possible examination of personal qualities (merits, awards, etc.) of the defendant in making decisions by the judge, if it can affect the penalty?",
+      "answers": [
+        {
+          "statement": "Yes.",
+          "media": -2
+        },
+        {
+          "statement": "No, the law should be equal for everybody!",
+          "media": 2
+        }
+      ]
+    },
+    {
+      "statement": "Do you agree that culture shapes the policy of the state?",
+      "answers": [
+        {
+          "statement": "Yes.",
+          "media": 5
+        },
+        {
+          "statement": "No.",
+          "media": -1
+        }
+      ]
+    },
+    {
+      "statement": "How do you feel about fighting for the purity of your native language?",
+      "answers": [
+        {
+          "statement": "I agree that it is necessary.",
+          "media": 2,
+          "workers": 2,
+          "military": 1,
+          "business": 1,
+          "foreign": 2
+        },
+        {
+          "statement": "It is absolutely not necessary.",
+          "media": 3,
+          "workers": -2,
+          "military": -1,
+          "foreign": 2
+        }
+      ]
+    },
+    {
+      "statement": "How do you feel about lynching (massacre without judging and investigation of a person, convicted of a crime)?",
+      "answers": [
+        {
+          "statement": "Negative. I think it's amorally.",
+          "media": 2,
+          "workers": 2,
+          "military": -1,
+          "foreign": 2
+        },
+        {
+          "statement": "I believe that this is possible, but under certain conditions.",
+          "media": -5,
+          "workers": -2,
+          "military": 1,
+          "business": -1,
+          "foreign": -2
+        }
+      ]
+    },
+    {
+      "statement": "What social norms, in your opinion, are most important in the sphere of social relations?",
+      "answers": [
+        {
+          "statement": "Norms of law.",
+          "media": 4
+        },
+        {
+          "statement": "Norms of morals.",
+          "media": 5
+        },
+        {
+          "statement": "Political norms.",
+          "media": -2
+        },
+        {
+          "statement": "Religious norms.",
+          "media": 2
+        }
+      ]
+    },
+    {
+      "statement": "How do you feel about past rallies across the country?",
+      "answers": [
+        {
+          "statement": "Positively. This is the engine of democracy.",
+          "media": 2,
+          "workers": 2,
+          "military": -1,
+          "business": 3,
+          "foreign": 7,
+          "authority": -2
+        },
+        {
+          "statement": "Negative. All the same, nothing will change. ",
+          "media": -2,
+          "workers": -6,
+          "military": -4,
+          "business": -3,
+          "foreign": -2,
+          "authority": 1
+        }
+      ]
+    },
+    {
+      "statement": "Считаете ли Вы, что можете повлиять на сегодняшний ход политических событий в нашей стране?",
+      "answers": [
+        {
+          "statement": "Да, считаю.",
+          "media": 2,
+          "authority": -1
+        },
+        {
+          "statement": "Могу повлиять не значительно.",
+          "media": 3,
+          "foreign": -2
+        },
+        {
+          "statement": "Нет.",
+          "media": -1,
+          "foreign": -2,
+          "authority": -3
+        }
+      ]
+    },
+    {
+      "statement": "Do you have a habit of watching / reading / listening to news?",
+      "answers": [
+        {
+          "statement": "Oh sure.",
+          "media": 2,
+          "authority": 1
+        },
+        {
+          "statement": "No.",
+          "media": -2
+        }
+      ]
+    },
+    {
+      "statement": "What sources of information about politics do you consider reliable?",
+      "answers": [
+        {
+          "statement": "Internet.",
+          "media": 2,
+          "workers": -2,
+          "military": 1,
+          "business": 3,
+          "foreign": 2
+        },
+        {
+          "statement": "Television.",
+          "media": -2,
+          "workers": 2,
+          "military": -1,
+          "business": -3,
+          "foreign": -2,
+          "authority": 2
+        }
+      ]
+    },
+    {
+      "statement": "How strong is our country in your opinion?",
+      "answers": [
+        {
+          "statement": "We are a mighty power.",
+          "media": -2,
+          "workers": 2,
+          "military": 1,
+          "business": -3,
+          "foreign": 2,
+          "authority": 2
+        },
+        {
+          "statement": "At the moment, we do not direct our strength in the right direction.",
+          "media": 2,
+          "workers": 5,
+          "military": 3,
+          "business": 5,
+          "foreign": -1
+        }
+      ]
+    },
+    {
+      "statement": "How do you assess your opponents in the election race?",
+      "answers": [
+        {
+          "statement": "I think some do not have the experience and knowledge to become a president.",
+          "media": 2,
+          "workers": 2,
+          "military": 1,
+          "peaceful": -2
+        },
+        {
+          "statement": "Most of them are obsessed with power and self-interest.",
+          "media": 2,
+          "workers": 5,
+          "military": 3,
+          "business": 3,
+          "foreign": 2,
+          "positive": -2,
+          "peaceful": -1
+        }
+      ]
+    },
+    {
+      "statement": "Are you going to transfer all large factories outside the city in order to improve the ecological situation in the capital.",
+      "answers": [
+        {
+          "statement": "Yes, this will require considerable investments, but the deplorable state of the environment does not allow saving on this.",
+          "media": 2,
+          "workers": 3,
+          "military": 3,
+          "business": 7,
+          "foreign": 2
+        },
+        {
+          "statement": "No, the most harmful enterprises are already outside of the capital, and we should rationally use the state budget.",
+          "media": -1,
+          "workers": -8,
+          "military": -4,
+          "business": -2,
+          "foreign": 2
+        }
+      ]
+    },
+    {
+      "statement": "Distance learning from schoolchildren, for or against?",
+      "answers": [
+        {
+          "statement": "In the age of the Internet, distance learning must flourish. Children should spend time on the Internet with benefit. I support the idea of distance learning in schools.",
+          "media": 2,
+          "workers": 2,
+          "military": 1,
+          "business": 3,
+          "authority": -1
+        },
+        {
+          "statement": "From the \"old\" school, in the understanding of any citizen of our country, there is almost nothing left, even diaries became electronic. School gives children not only knowledge, but also interaction with each other.",
+          "media": 2,
+          "liberal": -4
+        }
+      ]
+    },
+    {
+      "statement": "Is extremism expected?",
+      "answers": [
+        {
+          "statement": "Yes, because people are limited in freedom of choice.",
+          "media": 2,
+          "workers": -2,
+          "military": -1,
+          "business": 1,
+          "foreign": 2,
+          "liberal": 6
+        },
+        {
+          "statement": "No, extremists are inadequate people with frightening values, there are very few such people in our country.",
+          "media": -2,
+          "workers": 2,
+          "military": 1,
+          "business": 3,
+          "foreign": 2,
+          "liberal": -2
+        }
+      ]
+    },
+    {
+      "statement": "How to reduce juvenile delinquency?",
+      "answers": [
+        {
+          "statement": "Reduce the age of criminal responsibility.",
+          "media": 6,
+          "authority": -2
+        },
+        {
+          "statement": "Introduce special penalties for minors.",
+          "media": 2,
+          "military": 5,
+          "authority": -2
+        },
+        {
+          "statement": "Ensure full employment of schoolchildren and take it under close supervision.",
+          "media": 2,
+          "workers": 2,
+          "military": 1,
+          "foreign": 2
+        }
+      ]
+    },
+    {
+      "statement": "Is it worth ignoring rallies?",
+      "answers": [
+        {
+          "statement": "Some rallies are not only that are illegal, but also meaningless. A person, going out into the street, should not just express his opinion, but also be able to argue his.",
+          "media": -1,
+          "authority": 1,
+          "liberal": -2,
+          "peaceful": -2
+        },
+        {
+          "statement": "Do not ignore the rallies, since rallies are a signal that something unacceptable is going on. It is necessary to listen to the opinion of the people.",
+          "media": 4,
+          "workers": 1,
+          "military": 1,
+          "business": 3,
+          "foreign": 7,
+          "liberal": 4
+        },
+        {
+          "statement": "Rallies are foolish events for fans of noise and disorder.",
+          "media": -2
+        }
+      ]
+    },
+    {
+      "statement": "What problems in the sphere of culture are most relevant, in your opinion?",
+      "answers": [
+        {
+          "statement": "Non-interest of citizens in self-development.",
+          "media": 7,
+          "positive": -1
+        },
+        {
+          "statement": "Orientation on a narrow circle of enlightened audience.",
+          "media": -1,
+          "authority": -1
+        },
+        {
+          "statement": "Invalid values.",
+          "media": 2,
+          "authority": -2
+        }
+      ]
+    },
+    {
+      "statement": "From what do you think is the question to start your work for a person who just was elected as a president?",
+      "answers": [
+        {
+          "statement": "With the verification of the performance of all structures.",
+          "media": 4,
+          "workers": 5,
+          "military": 1,
+          "business": 3,
+          "foreign": 2,
+          "authority": -2
+        },
+        {
+          "statement": "From communication with citizens.",
+          "media": 2,
+          "liberal": 2
+        },
+        {
+          "statement": "From direct acquaintance with the heads of the leading countries.",
+          "media": 5,
+          "foreign": 8
+        }
+      ]
+    },
+    {
+      "statement": "What kind of youth do you see in 5 years if you come to power?",
+      "answers": [
+        {
+          "statement": "Free, actively enlightened, interested in self-realization.",
+          "media": 1,
+          "positive": 2
+        },
+        {
+          "statement": "Involved in social and political activities, defending their rights.",
+          "media": 5
+        }
+      ]
+    },
+    {
+      "statement": "Do you like competition and a sense of competition?",
+      "answers": [
+        {
+          "statement": "Yes.",
+          "media": 2,
+          "workers": 2,
+          "military": 1,
+          "business": 3,
+          "foreign": 2
+        },
+        {
+          "statement": "No.",
+          "media": -5,
+          "business": -4,
+          "foreign": -2
+        }
+      ]
+    },
+    {
+      "statement": "What attracts you most to the presidency?",
+      "answers": [
+        {
+          "statement": "Power and importance.",
+          "media": -2,
+          "workers": -2,
+          "military": -1,
+          "foreign": -2
+        },
+        {
+          "statement": "The opportunity to change the state for the better.",
+          "media": 2,
+          "workers": 2,
+          "military": 1,
+          "business": 3,
+          "foreign": 2,
+          "authority": -1
+        }
+      ]
+    },
+    {
+      "statement": "What is our country for you?",
+      "answers": [
+        {
+          "statement": "The most powerful state.",
+          "media": -1,
+          "workers": 2,
+          "military": 1,
+          "business": -3,
+          "foreign": -5,
+          "authority": 1
+        },
+        {
+          "statement": "A state with great potential. Everything is ahead.",
+          "media": 2,
+          "workers": 5,
+          "military": -2,
+          "business": 3,
+          "foreign": 2
+        }
+      ]
+    },
+    {
+      "statement": "Which foreign policy issue is the most difficult to solve, in your opinion?",
+      "answers": [
+        {
+          "statement": "Resource Sharing.",
+          "media": -3,
+          "foreign": -2
+        },
+        {
+          "statement": "Economic disagreements.",
+          "media": 5,
+          "workers": 2,
+          "military": 5,
+          "business": 7,
+          "foreign": 4
+        }
+      ]
+    },
+    {
+      "statement": "Do not you think that it's worth to lower the minimum age for marriage?",
+      "answers": [
+        {
+          "statement": "This option can be considered in connection with changing trends all around the world.",
+          "media": 2,
+          "workers": -3,
+          "military": -2,
+          "business": 4,
+          "foreign": 2
+        },
+        {
+          "statement": "No, this will negatively affect the younger generation.",
+          "media": -1,
+          "workers": 2,
+          "military": 1,
+          "business": -3
+        }
+      ]
+    },
+    {
+      "statement": "How do you propose to increase the popularity of elder cities of our country?",
+      "answers": [
+        {
+          "statement": "Make traveling around the country cheaper than beyond its limits.",
+          "media": 3,
+          "workers": -3
+        },
+        {
+          "statement": "Conduct an advertising campaign.",
+          "media": 3,
+          "workers": 2,
+          "military": 1,
+          "business": 7
+        }
+      ]
+    },
+    {
+      "statement": "What do you do in your spare time?",
+      "answers": [
+        {
+          "statement": "The politician does not have spare time.",
+          "media": 3
+        },
+        {
+          "statement": "I prefer travelling around the country.",
+          "media": 3
+        },
+        {
+          "statement": "I read various literature and watch films.",
+          "media": 2
+        },
+        {
+          "statement": "I spend this time with my family.",
+          "media": 3
+        }
+      ]
+    },
+    {
+      "statement": "What inspires you to work?",
+      "answers": [
+        {
+          "statement": "An example of other political and public figures.",
+          "media": 4,
+          "foreign": 2
+        },
+        {
+          "statement": "Love and respect for the homeland.",
+          "media": 2,
+          "workers": 5,
+          "military": 3,
+          "business": 3,
+          "foreign": 2
+        }
+      ]
+    },
+    {
+      "statement": "How does your family relate to your profession?",
+      "answers": [
+        {
+          "statement": "They fully support my choice.",
+          "media": 1
+        },
+        {
+          "statement": "Worrying about my safety and busyness.",
+          "media": 2
+        }
+      ]
+    },
+    {
+      "statement": "How would you solve the problem of homeless animals?",
+      "answers": [
+        {
+          "statement": "Definitely put to sleep, they do not live, but just suffer in this world.",
+          "media": -2,
+          "foreign": -5
+        },
+        {
+          "statement": "Sterilize.This will reduce their number on the streets.",
+          "media": 4,
+          "foreign": 2,
+          "workers": 2
+        }
+      ]
+    },
+    {
+      "statement": "Why do many residents of our country seek to live in the capital?",
+      "answers": [
+        {
+          "statement": "People are sure that the capital is a city of possibilities, but this is misleading.",
+          "media": 2,
+          "workers": 4,
+          "military": 2,
+          "business": -5
+        },
+        {
+          "statement": "In the capital there are many abilities necessary for comfortable being.",
+          "media": 2,
+          "workers": -2,
+          "military": -1,
+          "business": 6
+        }
+      ]
+    },
+    {
+      "statement": "What qualities, in your opinion, are unacceptable for the head of state?",
+      "answers": [
+        {
+          "statement": "Fussiness, levity, pettiness.",
+          "workers": 1,
+          "military": 1,
+          "business": 3,
+          "authority": 2
+        },
+        {
+          "statement": "Self-interest, ambitiousness, secrecy.",
+          "media": 2,
+          "workers": 2
+        },
+        {
+          "statement": "Excessive softness, passivity, self-flagellation.",
+          "media": 2,
+          "military": 2
+        }
+      ]
+    },
+    {
+      "statement": "How to increase the literacy of the population?",
+      "answers": [
+        {
+          "statement": "To impose penalties for grammatical and punctuation errors in documents and for verbal errors in speeches at conferences, etc..",
+          "media": 2,
+          "foreign": 4,
+          "workers": -4,
+          "business": 2
+        },
+        {
+          "statement": "Introduce an annual exam in Russian with consequent sanctions",
+          "media": 2,
+          "workers": -2,
+          "business": -1
+        },
+        {
+          "statement": "Attract people to read books.",
+          "media": 2,
+          "workers": 3
+        }
+      ]
+    },
+    {
+      "statement": "How do you feel about pop stars who try themselves in the role of politicians?",
+      "answers": [
+        {
+          "statement": "Just self-PR.",
+          "media": 1,
+          "authority": 5
+        },
+        {
+          "statement": "I think they also have the right to vote in big politics.",
+          "media": -2,
+          "authority": -3
+        },
+        {
+          "statement": "They are closer to the people than half of officials, such people should be among us.",
+          "media": 7,
+          "authority": 3
+        }
+      ]
+    },
+    {
+      "statement": "Is it worth for all the central channels to show exclusively domestic production of films, serials, shows, etc.?",
+      "answers": [
+        {
+          "statement": "Yes, they are necessary for instilling in citizens true values.",
+          "media": -2,
+          "authority": -2
+        },
+        {
+          "statement": "No, people should have a full choice.",
+          "media": 5,
+          "foreign": 4
+        },
+        {
+          "statement": "No, many foreign programs do not have a worthy replacement.",
+          "media": 4
+        }
+      ]
+    },
+    {
+      "statement": "What would you say if you were offered to move to a parliamentary republic?",
+      "answers": [
+        {
+          "statement": "In our country this would not have taken root, like a royal monarchy in US",
+          "media": -2,
+          "foreign": -4
+        },
+        {
+          "statement": "I think this is all going.",
+          "media": 3,
+          "foreign": 4
+        }
+      ]
+    },
+    {
+      "statement": "What do you think about the high crime rate in some suburbs of Moscow?",
+      "answers": [
+        {
+          "statement": "Somewhere it will always be better, somewhere worse, but we will try to maintain order everywhere.",
+          "media": -1,
+          "workers": 2
+        },
+        {
+          "statement": "It's definitely time to introduce special modes here.",
+          "media": 3,
+          "workers": 3
+        },
+        {
+          "statement": "This can not but frighten, but it has historically happened. The peculiarities of these areas.",
+          "media": -2,
+          "workers": -3
+        }
+      ]
+    },
+    {
+      "statement": "Should we teach sex education at school?",
+      "answers": [
+        {
+          "statement": "I do not consider this necessary.",
+          "media": -1
+        },
+        {
+          "statement": "Lessons of sex education are necessary.",
+          "media": 2
+        }
+      ]
+    },
+    {
+      "statement": "How do you feel about the attention of the press to your person?",
+      "answers": [
+        {
+          "statement": "Negative.",
+          "media": 2,
+          "positive": -2
+        },
+        {
+          "statement": "Neutral, the collection of information is the work of the press, they are not collected in different ways.",
+          "media": 3
+        }
+      ]
+    },
+    {
+      "statement": "How is the situation with Russian medicine today?",
+      "answers": [
+        {
+          "statement": "Average, compared to other countries.",
+          "media": 5,
+          "foreign": 1,
+          "authority": -2
+        },
+        {
+          "statement": "Excellent, lots of new equipment.",
+          "media": 5,
+          "authority": 1,
+          "positive": 1
+        },
+        {
+          "statement": "It is very bad. There are many things to change and improve.",
+          "media": 5,
+          "authority": -4
+        }
+      ]
+    },
+    {
+      "statement": "The most important mistakes of the previous president?",
+      "answers": [
+        {
+          "statement": "Too much time has been given to not significant problems.",
+          "media": 4
+        },
+        {
+          "statement": "I can not point at someone else's mistakes.",
+          "media": 4
+        },
+        {
+          "statement": "The previous president made a number of mistakes that are amenable to change, I am ready to correct everything.",
+          "media": 4
+        }
+      ]
+    },
+    {
+      "statement": "\"Freedom of speech\" is it true in out country?",
+      "answers": [
+        {
+          "statement": "Yes, every citizen expresses his opinion about the current state of the country in free form.",
+          "media": 5,
+          "liberal": -2
+        },
+        {
+          "statement": "No, the definition of \"Freedom of speech\" in our country is treated differently.",
+          "media": 2
+        }
+      ]
+    },
+    {
+      "statement": "If you were a president, would you forbid abortion?",
+      "answers": [
+        {
+          "statement": "From the government point of view, the adoption of such laws is connected with the demographic situation in the country.No, I would not prohibit abortion and left everything as it is.",
+          "media": 4,
+          "authority": 3
+        },
+        {
+          "statement": "Abortions are murders, of course i would forbid them.",
+          "media": 6,
+          "peaceful": -5
+        },
+        {
+          "statement": "This action is a choice that everyone must take.",
+          "media": 4,
+          "liberal": 2
+        }
+      ]
+    }
+  ],
+  "workers": [
+    {
+      "statement": "Are there any episodes in your life which you keep as a secret and would prefer nobody to know about them?",
+      "answers": [
+        {
+          "statement": "My reputation is clean.",
+          "media": -2
+        },
+        {
+          "statement": "Everyone in life makes mistakes and learns from them, maybe something was wrong, but I never acted within the law.",
+          "media": 4
+        },
+        {
+          "statement": "I have, there are no people with a clean reputation.",
+          "media": 5
+        }
+      ]
+    },
+    {
+      "statement": "Are you going to start your own blog about politics in the social network instagram?",
+      "answers": [
+        {
+          "statement": "I'm already leading a personal profile, now I dilute it with political excerpts and reflections.",
+          "media": 3,
+          "foreign": 2
+        },
+        {
+          "statement": "No, this network is absolutely not suitable for serious articles.",
+          "media": -1,
+          "foreign": -2
+        },
+        {
+          "statement": "Yes, in the modern world this is a very important component of political life.",
+          "media": 3,
+          "foreign": 3
+        }
+      ]
+    },
+    {
+      "statement": "What is your party for you?",
+      "answers": [
+        {
+          "statement": "They are my family.",
+          "media": -1,
+          "workers": 1,
+          "authority": -1
+        },
+        {
+          "statement": "Professionals of their business.",
+          "media": 2,
+          "authority": 3
+        },
+        {
+          "statement": "People close to the spirit, on whom you can rely.",
+          "media": 2,
+          "authority": 1
+        }
+      ]
+    },
+    {
+      "statement": "How to reduce the number of domestic violence?",
+      "answers": [
+        {
+          "statement": "I do not think that this is a common problem these days.",
+          "liberal": -6,
+          "media": 2,
+          "authority": 1
+        },
+        {
+          "statement": "Sessions of qualified psychologists are necessary for families with similar problems.",
+          "media": 2
+        },
+        {
+          "statement": "It is necessary to increase the criminal punishment for the relevant article.",
+          "media": 4,
+          "authority": 2
+        }
+      ]
+    },
+    {
+      "statement": "How emotional are you?",
+      "answers": [
+        {
+          "statement": "I am always calm, I control emotions.",
+          "media": 4
+        },
+        {
+          "statement": "It is able, of course, to experience anger, joy, grief, but it's all within the reasonable.",
+          "media": 5,
+          "workers": 4
+        },
+        {
+          "statement": "I never thought about it, apparently there was no need, so everything is in order.",
+          "media": -1
+        }
+      ]
+    },
+    {
+      "statement": "Is it necessary to teach any non-ordinary subjects in schools?",
+      "answers": [
+        {
+          "statement": "Not really extraordinary, I would introduce more relevant.",
+          "media": 6,
+          "business": 3,
+          "foreign": 2
+        },
+        {
+          "statement": "Perhaps, as an experiment, several schools could be tried.",
+          "media": 2,
+          "foreign": 2
+        },
+        {
+          "statement": "I do not see the point in this: the school is only the first step in education.",
+          "media": -3,
+          "workers": 2
+        }
+      ]
+    },
+    {
+      "statement": "What is lacking in modern Russia?",
+      "answers": [
+        {
+          "statement": "Ability to make decisive changes.",
+          "media": 4,
+          "military": 1,
+          "authority": -3
+        },
+        {
+          "statement": "Listen more to your citizens.",
+          "media": 4,
+          "workers": 6
+        },
+        {
+          "statement": "Open and honest politics and economics.",
+          "media": 3,
+          "business": 5
+        }
+      ]
+    },
+    {
+      "statement": "Is it worth responding to provocations, in your opinion?",
+      "answers": [
+        {
+          "statement": "You can not break down, but you should not give yourself offense either.",
+          "media": 5,
+          "foreign": 4,
+          "military": 2
+        },
+        {
+          "statement": "It is always necessary to make it clear that we can stand up for ourselves and fight back.",
+          "media": 4,
+          "military": 3,
+          "foreign": -1
+        },
+        {
+          "statement": "Only those who are not ripe for responsible affairs are responsible for provocations.",
+          "media": 1,
+          "foreign": 2,
+          "military": 2
+        }
+      ]
+    },
+    {
+      "statement": "That you answered if you to you suggested to pass to the parliamentary republic?",
+      "answers": [
+        {
+          "statement": "In our country it would not get accustomed as the royal monarchy in states.",
+          "media": -2,
+          "authority": 4
+        },
+        {
+          "statement": "I think, to it all also goes",
+          "media": 3,
+          "workers": 4,
+          "authority": 4
+        }
+      ]
+    },
+    {
+      "statement": "Whether it is worth reducing the number of fast food restaurants?",
+      "answers": [
+        {
+          "statement": "Each person himself chooses as what to eat if his soul lies to fast food, then why to deprive of it pleasure.",
+          "media": 3,
+          "workers": 3,
+          "foreign": 3
+        },
+        {
+          "statement": "Yes, their profuseness stimulates citizens to spend money not for healthy food, and for fast-available.",
+          "media": 5,
+          "foreign": 3,
+          "workers": 5
+        }
+      ]
+    },
+    {
+      "statement": "What do you think of Pyotr's reforms |?",
+      "answers": [
+        {
+          "statement": "I respect his persistence, only thanks to these reforms the Russian Empire made then huge jump in development.",
+          "media": 2,
+          "military": 3
+        },
+        {
+          "statement": "I consider that it was too categorical, imposing to people that to do to them and how to look.",
+          "media": 4
+        },
+        {
+          "statement": "I think, its methods are relevant to this day: to adopt all best at the West and to enter it on weekdays our people.",
+          "media": 5,
+          "workers": 3,
+          "authority": -3
+        }
+      ]
+    },
+    {
+      "statement": "Whether it is worth broadening the city still?",
+      "answers": [
+        {
+          "statement": "No, city already rather big. It is impossible to make the capital a quarter of the country.",
+          "media": 2,
+          "business": 2
+        },
+        {
+          "statement": "I think and. Some areas should be attached for a long time.",
+          "media": 4,
+          "foreign": 4,
+          "workers": 3
+        }
+      ]
+    },
+    {
+      "statement": "What do you test when you represent yourself at presidential post?",
+      "answers": [
+        {
+          "statement": "Boundless happiness.",
+          "media": 5,
+          "business": 3
+        },
+        {
+          "statement": "Huge responsibility.",
+          "media": 3,
+          "workers": 3
+        },
+        {
+          "statement": "Desire to work.",
+          "media": 4
+        }
+      ]
+    },
+    {
+      "statement": "What is an indicator of well done work of the president?",
+      "answers": [
+        {
+          "statement": "Recognition of the people.",
+          "media": 4,
+          "workers": 3
+        },
+        {
+          "statement": "Lack of the serious conflicts in domestic and foreign policy.",
+          "media": 2,
+          "foreign": 4
+        },
+        {
+          "statement": "Rapid development and prosperity of the country.",
+          "media": 3,
+          "workers": 4,
+          "business": 3
+        }
+      ]
+    },
+    {
+      "statement": "Would you like that you about you wrote the book?",
+      "answers": [
+        {
+          "statement": "Yes, my example could inspire many people.",
+          "media": 4,
+          "workers": 2
+        },
+        {
+          "statement": "I consider it excessive vanity.",
+          "media": 5,
+          "workers": 3
+        },
+        {
+          "statement": "Maybe then I will write the autobiography, but only when I achieve success.",
+          "media": 6,
+          "authority": 2
+        }
+      ]
+    },
+    {
+      "statement": "Whom did you dream to become when were a child?",
+      "answers": [
+        {
+          "statement": "Astronaut",
+          "media": -5
+        },
+        {
+          "statement": "Doctor",
+          "media": 2
+        },
+        {
+          "statement": "Actor",
+          "media": 3,
+          "military": -4,
+          "foreign": 1
+        },
+        {
+          "statement": "President",
+          "media": 5,
+          "foreign": 1
+        }
+      ]
+    },
+    {
+      "statement": "What do you think of rest abroad?",
+      "answers": [
+        {
+          "statement": "It is fine if there is an opportunity to be chosen to other countries for expansion of an outlook.",
+          "media": 2,
+          "foreign": 2,
+          "authority": -3
+        },
+        {
+          "statement": "I consider that in our country more than enough vacation spots to which foreign resorts can envy.",
+          "media": 6,
+          "authority": 6,
+          "foreign": -2
+        },
+        {
+          "statement": "I do not think that it is necessary to spend so much money for rest. Quite perhaps remarkably to spend it at home with family.",
+          "media": 3,
+          "workers": 6
+        }
+      ]
+    },
+    {
+      "statement": "Why you choose policy, but not business?",
+      "answers": [
+        {
+          "statement": "Without policy there will not be able to be also a business.",
+          "media": 2,
+          "business": -2
+        },
+        {
+          "statement": "In business there are too much people who act only in the interests.",
+          "media": 4,
+          "workers": 2,
+          "business": -4
+        },
+        {
+          "statement": "It was always closer to me to operate, than to sell.",
+          "media": 2
+        }
+      ]
+    },
+    {
+      "statement": "It is necessary to enter special leisure programs?",
+      "answers": [
+        {
+          "statement": "I do not think that it is so sharply standing question now.",
+          "media": -5,
+          "workers": -3
+        },
+        {
+          "statement": "Unless for separate groups. For pensioners, for example.",
+          "media": 4,
+          "workers": 5
+        },
+        {
+          "statement": "Specially trained and prepared people deal with these issues.",
+          "media": 2,
+          "workers": -1
+        }
+      ]
+    },
+    {
+      "statement": "Your relation to religion?",
+      "answers": [
+        {
+          "statement": "Neutral",
+          "media": 1
+        },
+        {
+          "statement": "Positive",
+          "media": 1
+        },
+        {
+          "statement": "Negative",
+          "media": 6
+        }
+      ]
+    },
+    {
+      "statement": "You like to spend time culturally?",
+      "answers": [
+        {
+          "statement": "Yes, I visit theaters, concerts and exhibitions.",
+          "media": 4,
+          "foreign": 2
+        },
+        {
+          "statement": "I prefer to have a rest at home in the bosom of the family, seldom somewhere I leave.",
+          "media": 2,
+          "foreign": 1
+        }
+      ]
+    },
+    {
+      "statement": "You have a favourite among current presidents of other countries?",
+      "answers": [
+        {
+          "statement": "No",
+          "media": 4,
+          "authority": -1
+        },
+        {
+          "statement": "Such there is a lot of.",
+          "media": -5,
+          "workers": -3,
+          "authority": 2
+        }
+      ]
+    },
+    {
+      "statement": "Reducing age of obtaining the driving license up to 16 years, how in the USA?",
+      "answers": [
+        {
+          "statement": "Categorically against. It is heavy responsibility.",
+          "media": 3,
+          "foreign": -2,
+          "peaceful": -5
+        },
+        {
+          "statement": "It is the excellent idea. At us many are able to drive from a school bench.",
+          "media": 5,
+          "foreign": 3
+        },
+        {
+          "statement": "I do not think that it is the good idea. I assume, also feel sorry for U.S. authorities about so low restriction.",
+          "media": 2,
+          "foreign": -2
+        }
+      ]
+    },
+    {
+      "statement": "You have addictions?",
+      "answers": [
+        {
+          "statement": "Were, but I got rid of them long ago.",
+          "media": 4
+        },
+        {
+          "statement": "Never was.",
+          "media": -2
+        },
+        {
+          "statement": "Is",
+          "media": 5
+        }
+      ]
+    },
+    {
+      "statement": "Do you watch trends?",
+      "answers": [
+        {
+          "statement": "No, trends quickly change, I behind them am not in time.",
+          "media": -5
+        },
+        {
+          "statement": "Yes, I try to be in time behind innovations.",
+          "media": 5
+        }
+      ]
+    },
+    {
+      "statement": "What for you the homeland?",
+      "answers": [
+        {
+          "statement": "The country where was born and grew.",
+          "media": 4,
+          "authority": 2
+        },
+        {
+          "statement": "The place to which there is a wish to come back.",
+          "media": 1,
+          "authority": 2
+        },
+        {
+          "statement": "The homeland where there is a wish to settle down and live the rest of days.",
+          "media": 4,
+          "workers": 5,
+          "authority": 2
+        }
+      ]
+    },
+    {
+      "statement": "What do you think of same-sex marriages?",
+      "answers": [
+        {
+          "statement": "We live in the modern world, everyone has an option.",
+          "media": 5,
+          "authority": -4,
+          "foreign": 5,
+          "workers": -4,
+          "peaceful": 2
+        },
+        {
+          "statement": "Business of fashion, in my opinion. People so self-express.",
+          "media": 5,
+          "foreign": 2
+        },
+        {
+          "statement": "It is a disease of the last generations. Absolutely incorrect values.",
+          "media": -6,
+          "foreign": -2,
+          "peaceful": -4
+        }
+      ]
+    },
+    {
+      "statement": "Point out your weaknesses?",
+      "answers": [
+        {
+          "statement": "I do not have them.",
+          "media": -5,
+          "authority": 2
+        },
+        {
+          "statement": "Laziness, inconstancy.",
+          "media": -2
+        },
+        {
+          "statement": "I go in cycles on same much, I cannot quickly will switch from one business to another.",
+          "media": 4
+        }
+      ]
+    }
+  ],
+  "business": [
+    {
+      "statement": "There is in a civil marriage a liability?",
+      "answers": [
+        {
+          "statement": "Yes",
+          "media": -1,
+          "foreign": -1,
+          "authority": -1
+        },
+        {
+          "statement": "No",
+          "media": 3
+        }
+      ]
+    },
+    {
+      "statement": "What do you understand as corruption?",
+      "answers": [
+        {
+          "statement": "Bribery",
+          "media": 2
+        },
+        {
+          "statement": "Use of public funds for personal reasons.",
+          "media": 4,
+          "authority": -1
+        },
+        {
+          "statement": "Extortion",
+          "media": 4
+        }
+      ]
+    },
+    {
+      "statement": "How you think for the last 3–4 years corruption level in the country changed?",
+      "answers": [
+        {
+          "statement": "Unfortunately, corruption became much more.",
+          "media": 6,
+          "foreign": -2,
+          "workers": -4,
+          "authority": -5
+        },
+        {
+          "statement": "No, everything remained at the same level.",
+          "media": -4,
+          "workers": -4,
+          "authority": -1
+        }
+      ]
+    },
+    {
+      "statement": "What do you think of the salaries of deputies?",
+      "answers": [
+        {
+          "statement": "The salaries of deputies too high, them it is necessary to lower.",
+          "media": 6,
+          "workers": 5,
+          "authority": -3
+        },
+        {
+          "statement": "The salaries of deputies quite correspond to their duties.",
+          "media": 2,
+          "workers": -4,
+          "authority": 3
+        }
+      ]
+    },
+    {
+      "statement": "Do you believe that corruption will be won?",
+      "answers": [
+        {
+          "statement": "Yes.",
+          "media": 4,
+          "workers": 4
+        },
+        {
+          "statement": "No",
+          "media": -2,
+          "workers": -6,
+          "authority": -1
+        }
+      ]
+    },
+    {
+      "statement": "You consider that it is necessary to toughen control measures of business processes?",
+      "answers": [
+        {
+          "statement": "Yes, I consider, it is worth imposing more severe sanctions against people who illegally profit on the consumer.",
+          "media": 4,
+          "workers": 4,
+          "business": -4
+        },
+        {
+          "statement": "There are, in my opinion, in the sphere of business no already enough sanctions against violators.",
+          "media": 4,
+          "workers": -1,
+          "business": 5
+        }
+      ]
+    },
+    {
+      "statement": "It is worth making training in high school paid?",
+      "answers": [
+        {
+          "statement": "Yes. It has to begin an incentive to young people to study.",
+          "media": -4,
+          "workers": -2
+        },
+        {
+          "statement": "Why is also not present. Maybe then more teenagers will go to colleges and to study directly by profession.",
+          "media": 3,
+          "workers": -2
+        },
+        {
+          "statement": "No, it is absurdity. Everyone has the right for free education.",
+          "media": 3,
+          "workers": 5
+        }
+      ]
+    },
+    {
+      "statement": "It is worth increasing administrative penalties?",
+      "answers": [
+        {
+          "statement": "Yes, increase in penalties will reduce the number of violations.",
+          "media": -3,
+          "workers": -2,
+          "business": -2
+        },
+        {
+          "statement": "No, increase in penalties does not influence the potential violator of the law in any way.",
+          "media": 4,
+          "liberal": 2
+        }
+      ]
+    },
+    {
+      "statement": "It is worth adopting the law on sale of alcoholic and tobacco products to persons of 21 year?",
+      "answers": [
+        {
+          "statement": "Is not present. In it there is no sense.",
+          "business": 3,
+          "media": 2
+        },
+        {
+          "statement": "Yes. Average age of the people having alcoholism decreased.",
+          "media": 4,
+          "authority": 1
+        }
+      ]
+    }
+  ],
+  "military": [
+    {
+      "statement": "You agree with a statement \"Strong army - the strong country\"?",
+      "answers": [
+        {
+          "statement": "Yes.",
+          "media": -2,
+          "military": 5,
+          "authority": 3
+        },
+        {
+          "statement": "No",
+          "media": 4,
+          "military": -2,
+          "authority": -1
+        },
+        {
+          "statement": "I find it difficult to answer.",
+          "media": 2
+        }
+      ]
+    },
+    {
+      "statement": "You are proud of armed forces of the country?",
+      "answers": [
+        {
+          "statement": "Yes.",
+          "media": 2,
+          "military": 4,
+          "authority": 4
+        },
+        {
+          "statement": "Rather yes, than is not present.",
+          "media": 1,
+          "military": 1,
+          "authority": 1
+        },
+        {
+          "statement": "No",
+          "media": 7,
+          "military": -4,
+          "authority": -1
+        }
+      ]
+    },
+    {
+      "statement": "How you think whether carry out the states of a condition of international treaties on disarmament?",
+      "answers": [
+        {
+          "statement": "I think that carry out. It is favorable to all states.",
+          "media": 2,
+          "authority": 2
+        },
+        {
+          "statement": "It is rather yes, though to most the governments such contracts are inconvenient.",
+          "media": 1,
+          "foreign": 1,
+          "authority": 1
+        },
+        {
+          "statement": "No, I think that many states secretly continue arms.",
+          "media": 4,
+          "authority": -2
+        }
+      ]
+    },
+    {
+      "statement": "The army is capable to protect the country in case of military attack?",
+      "answers": [
+        {
+          "statement": "No",
+          "media": -7,
+          "foreign": -2,
+          "workers": -6,
+          "military": -5,
+          "authority": -5
+        },
+        {
+          "statement": "Yes, but only from rather weak aggressor.",
+          "media": 2,
+          "foreign": 2,
+          "military": -2,
+          "authority": -2
+        },
+        {
+          "statement": "Yes, will easily beat any opponent.",
+          "media": 6,
+          "workers": 4,
+          "military": 5,
+          "authority": 3
+        }
+      ]
+    },
+    {
+      "statement": "What do you think of service under the contract?",
+      "answers": [
+        {
+          "statement": "Positively",
+          "media": 4,
+          "authority": -1
+        },
+        {
+          "statement": "Negatively",
+          "media": 2,
+          "authority": -2
+        }
+      ]
+    },
+    {
+      "statement": "What yy armies of the country would give an assessment?",
+      "answers": [
+        {
+          "statement": "Perfectly",
+          "media": 4,
+          "authority": 4
+        },
+        {
+          "statement": "Well",
+          "media": 2,
+          "authority": 2
+        },
+        {
+          "statement": "Well",
+          "media": -2,
+          "authority": 1
+        },
+        {
+          "statement": "Unsatisfactorily",
+          "media": -4,
+          "authority": -1
+        }
+      ]
+    },
+    {
+      "statement": "You consider that military service cultivates in the man such qualities how responsibility, punctuality, determination, courage, endurance?",
+      "answers": [
+        {
+          "statement": "Yes.",
+          "media": 2,
+          "foreign": 4,
+          "authority": 1
+        },
+        {
+          "statement": "No",
+          "media": -3,
+          "authority": -2
+        }
+      ]
+    },
+    {
+      "statement": "You agree with active intervention of our troops in the internal conflicts of other countries?",
+      "answers": [
+        {
+          "statement": "Yes, I consider, our country needs to support those who not in forces independently to protect the interests.",
+          "media": 6,
+          "foreign": 4,
+          "military": 4,
+          "authority": -2
+        },
+        {
+          "statement": "No, I consider, our country should not participate in the similar conflicts because consequences can be unpredictable.",
+          "media": 5,
+          "military": -2
+        }
+      ]
+    },
+    {
+      "statement": "How you consider what probability to find good work with the help of the Internet?",
+      "answers": [
+        {
+          "statement": "Very high probability.",
+          "media": 4,
+          "workers": 4
+        },
+        {
+          "statement": "Not high probability.",
+          "media": 1,
+          "workers": -2
+        },
+        {
+          "statement": "Any",
+          "media": 2,
+          "workers": -5,
+          "authority": -1
+        }
+      ]
+    },
+    {
+      "statement": "Influences, in your opinion, successful employment that factor whether well the student studied in HIGHER EDUCATION INSTITUTION?",
+      "answers": [
+        {
+          "statement": "Yes.",
+          "media": 3,
+          "workers": -3
+        },
+        {
+          "statement": "No",
+          "media": 5,
+          "workers": 3
+        }
+      ]
+    },
+    {
+      "statement": "You consider that for a solution of the problem of incompetence of young doctors, it is worth dealing more carefully with a corruption issue in the institutions training future experts?",
+      "answers": [
+        {
+          "statement": "Yes, rumors about corruption in these educational institutions are only confirmed by inability of young specialists to qualitatively perform the work.",
+          "media": 6,
+          "peaceful": -2
+        },
+        {
+          "statement": "No, incompetence of these doctors can be explained only with poor quality of training in these institutions.",
+          "media": 4,
+          "foreign": -3,
+          "authority": 1
+        }
+      ]
+    },
+    {
+      "statement": "Why material problems concern citizens more, than a year ago?",
+      "answers": [
+        {
+          "statement": "Most likely citizens do not accept the average salary and it is necessary to deal with this problem.",
+          "media": 4,
+          "workers": 5
+        },
+        {
+          "statement": "Residents of our country have always not enough money.",
+          "media": -6,
+          "workers": -4
+        }
+      ]
+    }
+  ],
+  "foreign": [
+    {
+      "statement": "What changes you would bring in the list of public holidays?",
+      "answers": [
+        {
+          "statement": "Would add one more day off in honor of a Victory Day instead of May first. This holiday is not relevant any more.",
+          "media": 5,
+          "military": 5,
+          "workers": 2
+        },
+        {
+          "statement": "Would add some modern holiday.",
+          "media": 7,
+          "foreign": 2
+        },
+        {
+          "statement": "Our public holidays ideally display spirit of our people therefore I do not see sense something to change.",
+          "media": 6,
+          "workers": 3,
+          "authority": 4
+        }
+      ]
+    },
+    {
+      "statement": "What quality you appreciate in subordinates most of all?",
+      "answers": [
+        {
+          "statement": "Resourcefulness",
+          "media": 2,
+          "business": 2
+        },
+        {
+          "statement": "Fidelity",
+          "media": 4,
+          "workers": 2
+        },
+        {
+          "statement": "Firmness",
+          "media": -4
+        }
+      ]
+    },
+    {
+      "statement": "How you plan to fight against unemployment?",
+      "answers": [
+        {
+          "statement": "To introduce a penalty for parasitism.",
+          "media": 7,
+          "authority": 3,
+          "foreign": -4,
+          "workers": -5
+        },
+        {
+          "statement": "Those who do not want to work, already to force nothing.",
+          "media": 4,
+          "workers": -2
+        },
+        {
+          "statement": "To enter the state support to workers of the lowest link.",
+          "media": 6,
+          "foreign": 3,
+          "workers": 3,
+          "authority": 3
+        }
+      ]
+    },
+    {
+      "statement": "In your opinion what would help to improve a demographic situation in the country?",
+      "answers": [
+        {
+          "statement": "Salary increase for worthy providing the child.",
+          "media": 5,
+          "workers": 5,
+          "authority": -2
+        },
+        {
+          "statement": "Improvement of housing.",
+          "media": 3,
+          "workers": 3,
+          "authority": -3
+        },
+        {
+          "statement": "Motivational advertising.",
+          "media": 3
+        }
+      ]
+    },
+    {
+      "statement": "In the country a heavy ecological situation?",
+      "answers": [
+        {
+          "statement": "Yes, heavy.",
+          "media": 5,
+          "workers": -4,
+          "foreign": -3,
+          "authority": -5
+        },
+        {
+          "statement": "No, not heavy.",
+          "media": 2,
+          "workers": 2,
+          "authority": 1
+        },
+        {
+          "statement": "Stable",
+          "media": 4,
+          "workers": 2
+        }
+      ]
+    },
+    {
+      "statement": "You know about a demographic situation in other countries?",
+      "answers": [
+        {
+          "statement": "Yes.",
+          "foreign": 2,
+          "authority": 1
+        },
+        {
+          "statement": "No",
+          "media": 2,
+          "foreign": -2
+        },
+        {
+          "statement": "To me all the same.",
+          "media": 6,
+          "foreign": -2,
+          "authority": -3
+        }
+      ]
+    },
+    {
+      "statement": "How you think, in the next several years it is possible to increase birth rate?",
+      "answers": [
+        {
+          "statement": "Perhaps",
+          "media": 3,
+          "foreign": 1,
+          "authority": -1
+        },
+        {
+          "statement": "It is impossible",
+          "media": -6,
+          "authority": -3
+        }
+      ]
+    },
+    {
+      "statement": "What factors influence social inequality?",
+      "answers": [
+        {
+          "statement": "Financial position",
+          "media": 4,
+          "foreign": -1,
+          "authority": -1
+        },
+        {
+          "statement": "Nationality",
+          "foreign": -2,
+          "media": 6
+        },
+        {
+          "statement": "Social roles (father, doctor, political figure)",
+          "media": 5,
+          "authority": -4
+        }
+      ]
+    },
+    {
+      "statement": "What policy for immigrants you would support?",
+      "answers": [
+        {
+          "statement": "Policy of improvement of social living conditions of migrants and their full legalization.",
+          "media": 6,
+          "foreign": 5,
+          "authority": 2
+        },
+        {
+          "statement": "He agrees with the operating policy for migrants.",
+          "media": 4,
+          "authority": 2
+        },
+        {
+          "statement": "To the politician of toughening of control of migration flows (introduction of visa control, quotas at employment, etc.)",
+          "media": 7,
+          "foreign": -4,
+          "authority": 1
+        }
+      ]
+    },
+    {
+      "statement": "You consider that the modern person needs to inquire in a political situation in the country and the world?",
+      "answers": [
+        {
+          "statement": "Yes, it is obligatory.",
+          "media": 2,
+          "foreign": 2,
+          "authority": 2
+        },
+        {
+          "statement": "It is the personal choice of everyone.",
+          "media": 4
+        },
+        {
+          "statement": "Not necessarily.",
+          "media": 2
+        }
+      ]
+    },
+    {
+      "statement": "What do you think of that the country completely passed to self-sufficiency with all necessary products?",
+      "answers": [
+        {
+          "statement": "I consider it the remarkable idea promoting formation of our country by the self-sufficient and independent state.",
+          "media": 4,
+          "foreign": -2,
+          "workers": 4,
+          "business": 7
+        },
+        {
+          "statement": "In my opinion, some production nevertheless will not manage to be replaced with the Russian analog in any way, and their disappearance from counters will cause only a discontent wave.",
+          "media": 3,
+          "foreign": 2,
+          "business": -4
+        }
+      ]
+    },
+    {
+      "statement": "You agree that it is worth developing the program of training in exchange?",
+      "answers": [
+        {
+          "statement": "Yes, our children need to get acquainted with the culture of other countries to have the best idea of this world, and also to gain knowledge of programs in which these or those countries are in the lead.",
+          "media": 5,
+          "foreign": 4,
+          "peaceful": 2
+        },
+        {
+          "statement": "No, children have to study in the native land, besides knowledge they need to impart love for the country.",
+          "media": 5,
+          "foreign": -4,
+          "peaceful": -1
+        }
+      ]
+    },
+    {
+      "statement": "American way of life: aspiration to equality and tolerance. FOR OR AGAINST?",
+      "answers": [
+        {
+          "statement": "FOR. In America it is paid to the person much attention - it is correct.",
+          "media": 7,
+          "foreign": 6,
+          "liberal": 4,
+          "peaceful": 2
+        },
+        {
+          "statement": "AGAINST. In America pay excessive attention to human rights.",
+          "media": -6,
+          "foreign": -6
+        }
+      ]
+    },
+    {
+      "statement": "Several leading countries of the world for the fastest space exploration have to unite?",
+      "answers": [
+        {
+          "statement": "Of course, yes. Together it will be possible to achieve desirable result rather.",
+          "media": 5,
+          "foreign": 4
+        },
+        {
+          "statement": "I do not think. Everyone will try to please needs of the country all the same.",
+          "media": -4,
+          "foreign": -3
+        },
+        {
+          "statement": "It is possible to try as an experiment.",
+          "media": 3,
+          "foreign": 3
+        }
+      ]
+    },
+    {
+      "statement": "What policy of the country seems to you the most successful and acceptable?",
+      "answers": [
+        {
+          "statement": "Great Britain.",
+          "media": 2,
+          "foreign": 1
+        },
+        {
+          "statement": "USA",
+          "media": 5,
+          "foreign": 3
+        },
+        {
+          "statement": "Germany",
+          "media": -3,
+          "foreign": -4
+        },
+        {
+          "statement": "Russia",
+          "media": 4,
+          "foreign": 5
+        }
+      ]
+    },
+    {
+      "statement": "At the moment in our country there are problems connected with ecology?",
+      "answers": [
+        {
+          "statement": "Certainly, it is necessary to fight with them competently and gradually.",
+          "media": 4,
+          "foreign": 4
+        },
+        {
+          "statement": "At the moment in our country there are no problems with ecology.",
+          "media": -5,
+          "foreign": -1
+        }
+      ]
+    },
+    {
+      "statement": "How you plan to improve the relations with the European countries?",
+      "answers": [
+        {
+          "statement": "Programs of exchange of students and experts can improve mutual understanding.",
+          "media": 4,
+          "foreign": 5,
+          "business": 3
+        },
+        {
+          "statement": "I plan to react to their criticism and sanctions that we were not called by the country aggressor more softly.",
+          "media": 6,
+          "foreign": 6
+        },
+        {
+          "statement": "I will conduct tough policy \"both you to us, and we to you\". Any exceptions.",
+          "media": -4,
+          "military": 2,
+          "foreign": -4
+        }
+      ]
+    },
+    {
+      "statement": "What your attitude towards migrants?",
+      "answers": [
+        {
+          "statement": "We are always ready to come to the rescue to those who need it.",
+          "foreign": 6,
+          "workers": 3,
+          "media": 5
+        },
+        {
+          "statement": "If it does not turn into mass confluence of people in one point of the country for the sake of profit, then is neutral.",
+          "media": 5,
+          "foreign": 3,
+          "workers": 3
+        },
+        {
+          "statement": "I do not consider that we have to adjust so good-natured life of those who run from problems, especially to damage of own citizens.",
+          "media": -4,
+          "workers": 5,
+          "foreign": -4
+        }
+      ]
+    }
+  ]
+}

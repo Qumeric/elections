@@ -15,7 +15,7 @@ abstract class OnSwipeTouchListener(ctx: Context) : OnTouchListener {
     }
 
     override fun onTouch(v: View, event: MotionEvent): Boolean {
-        v.performClick() // FIXME check
+        v.performClick()
         return gestureDetector.onTouchEvent(event)
     }
 

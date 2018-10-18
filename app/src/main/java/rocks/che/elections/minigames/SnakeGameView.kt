@@ -13,7 +13,7 @@ class SnakeGameView(private val onTouchListener: View.OnTouchListener) : AnkoCom
     lateinit var layout: GridLayout
     lateinit var scoreText: TextView
 
-    val rowCnt = 30
+    val rowCnt = 33
     val colCnt = 20
 
     override fun createView(ui: AnkoContext<SnakeGameActivity>) = with(ui) {

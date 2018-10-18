@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="yesButton" type="id" />
-    <item name="noButton" type="id" />
-    <item name="scorebar" type="id" />
     <item name="moving_image_layout" type="id" />
     <item name="poll_indicator" type="id" />
 </resources>

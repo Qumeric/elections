@@ -51,7 +51,7 @@ class ChangeView(private val oldOpinions: Map<String, Int> = mapOf(), val gs: Ga
 
                     var delta = opinion - oldOpinions[group]!!
 
-                    gameTextView(10) {
+                    gameTextView(8) {
                         text = "%s: %d(%s)".format(group.toMaybeRussian(resources.configuration.locale.toString()), maxOf(0, opinion), Formatter().format(Locale.US, "%+d", delta))
                     }.lparams {
                         horizontalMargin = dip(15)

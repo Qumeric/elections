@@ -105,7 +105,7 @@ class MusicManager private constructor() {
         if (oldPlayers.size > 0) {
             stop()
             mMediaPlayer = oldPlayers.last()
-            oldPlayers.removeAt(oldPlayers.size-1)
+            oldPlayers.removeAt(oldPlayers.size - 1)
             play()
         }
     }
@@ -113,7 +113,7 @@ class MusicManager private constructor() {
     companion object {
         private var mInstance: MusicManager? = null
         var volume: Float = 0.2f
-            set(v: Float) {
+            set(v) {
                 field = maxOf(0f, minOf(v, 1f))
             }
 

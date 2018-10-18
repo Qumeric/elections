@@ -28,15 +28,15 @@ class ChangeActivity : DefaultActivity() {
         view.setContentView(this)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
-        super.onActivityResult(requestCode, resultCode, data);
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == gameRequestCode && resultCode == Activity.RESULT_OK) {
-            val prize = data.getIntExtra("money", 0)
+            val prize = data!!.getIntExtra("money", 0)
             gs.money += prize
 
             val intent = Intent(this, PollActivity::class.java)
-            intent.putExtra("gamestate", gs);
+            intent.putExtra("gamestate", gs)
             inActivityChange = true
             startActivity(intent)
         }

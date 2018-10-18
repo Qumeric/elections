@@ -10,9 +10,10 @@ import org.jetbrains.anko.sdk25.listeners.onClick
 import rocks.che.elections.helpers.DefaultView
 import rocks.che.elections.helpers.cardView
 import rocks.che.elections.helpers.gameTextView
+import rocks.che.elections.helpers.toMaybeRussian
 import rocks.che.elections.logic.*
 
-class ChooseCandidateView(val secretUnlocked: Boolean = false) : DefaultView<ChooseCandidateActivity> {
+class ChooseCandidateView(private val secretUnlocked: Boolean = false) : DefaultView<ChooseCandidateActivity> {
     private lateinit var ankoContext: AnkoContext<ChooseCandidateActivity>
 
     override fun createView(ui: AnkoContext<ChooseCandidateActivity>) = with(ui) {
@@ -59,7 +60,7 @@ class ChooseCandidateView(val secretUnlocked: Boolean = false) : DefaultView<Cho
                                         gravity = Gravity.END
                                         for ((group, value) in candidate.opinions) {
                                             gameTextView {
-                                                text = "%s: %d".format(group, value)
+                                                text = "%s: %d".format(group.toMaybeRussian(ctx.configuration.locale.toString()), value)
                                             }
                                         }
                                     }
@@ -78,12 +79,12 @@ class ChooseCandidateView(val secretUnlocked: Boolean = false) : DefaultView<Cho
                                         onClick {
                                             inActivityChange = true
                                             ctx.startActivity<HighlightsActivity>("gamestate" to Gamestate(candidate,
-                                                    candidates as MutableList<Candidate>, loadQuestions(resources)))
+                                                candidates as MutableList<Candidate>, loadQuestions(resources)))
                                         }
                                     } else {
                                         backgroundResource = R.color.gray
                                         onClick {
-                                            snackbar(this@verticalLayout, R.string.need_unblock)
+                                            this@verticalLayout.snackbar(R.string.need_unblock)
                                         }
                                     }
                                 }.lparams {
@@ -94,7 +95,7 @@ class ChooseCandidateView(val secretUnlocked: Boolean = false) : DefaultView<Cho
                                 TextViewCompat.setAutoSizeTextTypeWithDefaults(b, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM)
                             }.lparams(width = matchParent, height = matchParent)
                             if (candidate.resource == R.drawable.candidate_navalny && !secretUnlocked) {
-                                view {
+                                imageView {
                                     backgroundResource = R.color.black
                                     alpha = 0.5f
                                 }.lparams(width = matchParent, height = matchParent)

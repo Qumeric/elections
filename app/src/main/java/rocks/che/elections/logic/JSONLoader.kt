@@ -5,6 +5,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 import rocks.che.elections.R
 import rocks.che.elections.helpers.candidateResourceNameToResource
+import rocks.che.elections.helpers.isRussian
 
 fun loadCandidate(json: JSONObject, isPlayer: Boolean = false): Candidate {
     val basicStats = json.getJSONObject("basicStats")
@@ -32,7 +33,8 @@ fun loadCandidate(json: JSONObject, isPlayer: Boolean = false): Candidate {
 fun loadCandidates(json: JSONArray) = (0 until json.length()).map { loadCandidate(json.getJSONObject(it)) }
 
 fun loadCandidates(resources: Resources): List<Candidate> {
-    val jsonString = resources.openRawResource(R.raw.candidates)
+    val isRus = isRussian(resources)
+    val jsonString = resources.openRawResource(if (isRus) R.raw.candidates else R.raw.candidates_eng)
         .bufferedReader().use { it.readText() }
     return loadCandidates(JSONArray(jsonString))
 }
@@ -68,13 +70,15 @@ fun loadQuestions(json: JSONObject): Questions {
 }
 
 fun loadQuestions(resources: Resources): Questions {
-    val jsonString = resources.openRawResource(R.raw.questions)
+    val isRus = isRussian(resources)
+    val jsonString = resources.openRawResource(if (isRus) R.raw.questions else R.raw.questions_eng)
         .bufferedReader().use { it.readText() }
     return loadQuestions(JSONObject(jsonString))
 }
 
 fun loadQuotes(resources: Resources): List<Quote> {
-    val jsonString = resources.openRawResource(R.raw.quotes)
+    val isRus = isRussian(resources)
+    val jsonString = resources.openRawResource(if (isRus) R.raw.quotes else R.raw.quotes_eng)
         .bufferedReader().use { it.readText() }
     val jsonQuotes = JSONArray(jsonString)
 
