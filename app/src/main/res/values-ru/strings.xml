@@ -84,4 +84,8 @@
         Валерий Черепанов \@qumeric\nАлексеев Алексей \@chad_vicious\nБашкин Артём \@artiombash\nБоев Вячеслав \@slavaboev\nМанкевич Елизавета \@lizzzalee\nЖилина Анна \@_justwitch_\n\nРесурсы, которые были задействованы:\nwww.flaticon.com\nfreesound.org\nwav-library.net
     </string>
     <string name="score_template">Баллы: %d</string>
+    <string name="game_logo">Лого игры</string>
+    <string name="play_button">Кнопка плей</string>
+    <string name="info_button">Кнопка с вопросительным знаком</string>
+    <string name="quote">Цитата</string>
 </resources>

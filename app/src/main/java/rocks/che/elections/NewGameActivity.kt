@@ -1,19 +1,19 @@
 package rocks.che.elections
 
 import android.os.Bundle
+import android.view.View
 import im.delight.android.audio.MusicManager
-import org.jetbrains.anko.setContentView
-import org.jetbrains.anko.startActivity
+import kotlinx.android.synthetic.main.activity_new_game.*
+import org.jetbrains.anko.*
 import rocks.che.elections.helpers.DefaultActivity
 import rocks.che.elections.logic.Gamestate
 import rocks.che.elections.logic.inActivityChange
 import rocks.che.elections.logic.loadQuotes
 
 class NewGameActivity : DefaultActivity() {
-    private lateinit var view: NewGameView
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_new_game)
 
         val gamestate = Gamestate.loadGame()
         if (gamestate != null) {
@@ -23,8 +23,23 @@ class NewGameActivity : DefaultActivity() {
 
         val quote = loadQuotes(resources).shuffled().first()
 
-        view = NewGameView(quote)
-        view.setContentView(this)
+        quoteTV.text = "%s: %s".format(quote.author, quote.text)
+
         MusicManager.instance.play(this, R.raw.main_music)
+    }
+
+    fun play(v: View) {
+        inActivityChange = true
+        alert(getString(R.string.welcome_text), getString(R.string.welcome)) {
+            yesButton { startActivity<ChooseCandidateActivity>() }
+            noButton {  }
+        }.show()
+    }
+
+    // TODO: test to see if it works
+    fun showInfo(v: View) = {
+        alert(getString(R.string.info_title), getString(R.string.info_message)) {
+            yesButton { }
+        }.show()
     }
 }

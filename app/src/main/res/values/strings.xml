@@ -104,4 +104,8 @@
     <string name="info_title">Developers</string>
     <string name="info_message">\@qumeric\n\@chad_vicious\n\@artiombash\n\@slavaboev\n\@lizzzalee\n\@_justwitch_\n\nResources:\nwww.flaticon.com\nfreesound.org\nwav-library.net
     </string>
+    <string name="game_logo">Game logo</string>
+    <string name="play_button">Play button</string>
+    <string name="info_button">A button with a question mark</string>
+    <string name="quote">Quote</string>
 </resources>

@@ -8,6 +8,7 @@ import im.delight.android.audio.SoundManager
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.alert
+import org.jetbrains.anko.yesButton
 import rocks.che.elections.R
 import rocks.che.elections.logic.inActivityChange
 
@@ -40,10 +41,7 @@ abstract class DefaultActivity : AppCompatActivity(), AnkoLogger {
             .forEach { soundManager!!.load(it) }
     }
 
-    fun playSound(res: Int) {
-        if (soundManager != null)
-            soundManager!!.play(res)
-    }
+    fun playSound(res: Int) = soundManager?.play(res)
 
     override fun onPause() {
         super.onPause()
@@ -67,7 +65,7 @@ abstract class DefaultActivity : AppCompatActivity(), AnkoLogger {
             title = _title
             message = _message
             isCancelable = false
-            positiveButton(R.string.yes_button) {
+            yesButton {
                 run()
             }
 
