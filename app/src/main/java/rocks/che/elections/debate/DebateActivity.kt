@@ -19,15 +19,15 @@ class DebateActivity : DefaultActivity() {
     private val opponentDistribution = mutableMapOf<String, Int>()
     private lateinit var gs: Gamestate
     val maxMinutes = 60
-    var groupMinutes = maxMinutes / 2
-    var opponentMinutes = maxMinutes - groupMinutes
+    private var groupMinutes = maxMinutes / 2
+    private var opponentMinutes = maxMinutes - groupMinutes
 
     fun setGroupDistribution(d: List<Int>) =
         gs.questions.all.keys.withIndex().forEach { (i, k) -> groupDistribution[k] = d[i] }
 
     //FIXME order dependent...
     fun setOpponentDistribution(d: List<Int>) =
-        gs.candidates.filter { it.resource != gs.candidate.resource }.withIndex().forEach { (i, c) ->
+        gs.candidates.asSequence().filter { it.resource != gs.candidate.resource }.withIndex().forEach { (i, c) ->
             opponentDistribution[c.name] = d[i]
         }
 

@@ -7,7 +7,7 @@ import rocks.che.elections.R
 import rocks.che.elections.helpers.DefaultView
 import rocks.che.elections.helpers.gameTextView
 
-class DebateViewStart(val candidateResource: Int = 0) : DefaultView<DebateActivity> {
+class DebateViewStart(private val candidateResource: Int = 0) : DefaultView<DebateActivity> {
     private lateinit var ankoContext: AnkoContext<DebateActivity>
 
     override fun createView(ui: AnkoContext<DebateActivity>) = with(ui) {

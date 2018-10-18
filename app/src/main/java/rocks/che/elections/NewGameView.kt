@@ -8,7 +8,7 @@ import rocks.che.elections.helpers.gameTextView
 import rocks.che.elections.logic.Quote
 import rocks.che.elections.logic.inActivityChange
 
-class NewGameView(val quote: Quote = Quote("quote text", "author")) : DefaultView<NewGameActivity> {
+class NewGameView(private val quote: Quote = Quote("quote text", "author")) : DefaultView<NewGameActivity> {
     private lateinit var ankoContext: AnkoContext<NewGameActivity>
 
     override fun createView(ui: AnkoContext<NewGameActivity>) = with(ui) {

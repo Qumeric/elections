@@ -13,7 +13,7 @@ import rocks.che.elections.helpers.gameTextView
 import rocks.che.elections.helpers.konfettiView
 import rocks.che.elections.logic.inActivityChange
 
-class EndGameView(val isMutin: Boolean = false, val isWon: Boolean = true) : DefaultView<EndGameActivity> {
+class EndGameView(private val isMutin: Boolean = false, private val isWon: Boolean = true) : DefaultView<EndGameActivity> {
     private lateinit var ankoContext: AnkoContext<EndGameActivity>
 
     @SuppressLint("RtlHardcoded")

@@ -16,8 +16,6 @@ package im.delight.android.audio
  * limitations under the License.
  */
 
-// All code was converted to Kotlin using Android Studio built-in tool
-
 import android.content.Context
 import android.media.MediaPlayer
 
@@ -59,29 +57,23 @@ class MusicManager private constructor() {
             mMediaPlayer!!.setOnCompletionListener { mp ->
                 // if the instance is set
                 if (mp != null) {
-                    // release the resources
                     mp.release()
 
-                    // unset the reference
                     mMediaPlayer = null
                 }
             }
 
-            // start playback
             mMediaPlayer!!.start()
         }
     }
 
-    fun stop() {
+    private fun stop() {
         try {
             mMediaPlayer?.stop()
         } catch (e: Exception) {
         }
 
-        // release the resources
         mMediaPlayer?.release()
-
-        // unset the reference
         mMediaPlayer = null
     }
 
@@ -89,7 +81,6 @@ class MusicManager private constructor() {
         try {
             mMediaPlayer?.pause()
         } catch (e: Exception) {
-
         }
     }
 
@@ -97,7 +88,6 @@ class MusicManager private constructor() {
         try {
             mMediaPlayer?.start()
         } catch (e: Exception) {
-
         }
     }
 

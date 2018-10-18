@@ -76,8 +76,8 @@ class HammerGameActivity : MiniGameActivity() {
     override fun lose() {
         handler.removeCallbacksAndMessages(null)
         drawInformationDialog(
-            getString(R.string.catcher_end_title),
-            getString(R.string.catcher_end_message_template).format(score),
+            getString(R.string.hammer_end_title),
+            getString(R.string.hammer_end_message_template).format(score),
             { super.lose() },
             view.ankoContext
         )

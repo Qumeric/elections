@@ -4,14 +4,16 @@ import android.content.Context
 import android.content.res.Resources
 import android.graphics.RectF
 import android.graphics.Typeface
-import android.support.v4.content.ContextCompat
-import android.support.v4.widget.TextViewCompat
-import android.support.v7.widget.AppCompatTextView
-import android.support.v7.widget.CardView
+import androidx.core.content.ContextCompat
+import androidx.core.widget.TextViewCompat
+import androidx.appcompat.widget.AppCompatTextView
+import androidx.cardview.widget.CardView
 import android.view.View
 import android.view.ViewManager
 import android.view.animation.Animation
 import android.view.animation.ScaleAnimation
+import androidx.annotation.StringRes
+import com.google.android.material.snackbar.Snackbar
 import com.robinhood.spark.SparkAdapter
 import com.robinhood.spark.SparkView
 import nl.dionsegijn.konfetti.KonfettiView
@@ -42,7 +44,7 @@ inline fun ViewManager.sparkView(init: SparkView.() -> Unit): SparkView =
     ankoView({ SparkView(it) }, theme = 0, init = init)
 
 inline fun ViewManager.cardView(init: CardView.() -> Unit): CardView =
-    ankoView({ CardView(it) }, theme = R.style.CardView, init = init)
+    ankoView({ CardView(it) }, theme = R.style.Widget_MaterialComponents_CardView, init = init) // FIXME very strange
 
 inline fun ViewManager.gifImageView(init: GifImageView.() -> Unit): GifImageView =
     ankoView({ GifImageView(it) }, theme = 0, init = init)
@@ -105,10 +107,6 @@ val candidateResourceNameToResource = mapOf(
     "candidate_yavlinsky" to R.drawable.candidate_yavlinsky
 )
 
-const val h1TextSize = 20
-const val h2TextSize = 16
-const val ordinaryTextSize = 10
-
 fun scaleView(v: View, startScale: Float = 0f, endScale: Float = 1f, duration: Long = 2500,
               pivotX: Float = 0.5f, pivotY: Float = 0.5f) {
     val anim = ScaleAnimation(
@@ -142,3 +140,7 @@ fun String.toMaybeRussian(locale: String): String {
     }
     return this
 }
+
+fun View.snackbar(@StringRes message: Int) = Snackbar
+    .make(this, message, Snackbar.LENGTH_SHORT)
+    .apply { show() }

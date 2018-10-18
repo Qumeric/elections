@@ -82,7 +82,7 @@ class RacesGameActivity : MiniGameActivity() {
             { start() }, view.ankoContext)
     }
 
-    fun win() {
+    private fun win() {
         score = (score * 1.25).toInt()
         lose()
     }

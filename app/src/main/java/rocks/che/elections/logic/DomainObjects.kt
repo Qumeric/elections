@@ -78,7 +78,7 @@ data class Answer(val statement: String, val impact: HashMap<String, Int>) : Par
 
 @Parcelize
 class Questions(val all: HashMap<String, MutableList<Question>>,
-                val answered: HashMap<String, Int> = groupToResource.keys.associateBy({ it }, { 0 }) as HashMap) : Parcelable {
+                private val answered: HashMap<String, Int> = groupToResource.keys.associateBy({ it }, { 0 }) as HashMap) : Parcelable {
     init {
         all.values.forEach { it.shuffle() }
     }
@@ -99,7 +99,7 @@ class Gamestate(val candidate: Candidate, val candidates: MutableList<Candidate>
     val isPollTime get() = step != 0 && step % pollFrequency == 0
     val worst get() = candidates.min()
     val isWorst get() = worst!!.resource == candidate.resource
-    val isBest get() = candidates.max()!!.resource == candidate.resource
+    private val isBest get() = candidates.max()!!.resource == candidate.resource
     val isWon get() = candidates.size == 2 && isBest
 
     init {

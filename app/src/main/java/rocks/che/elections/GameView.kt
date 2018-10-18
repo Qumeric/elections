@@ -1,16 +1,12 @@
 package rocks.che.elections
 
-import android.support.v7.widget.AppCompatTextView
+import androidx.appcompat.widget.AppCompatTextView
 import android.view.Gravity
 import android.widget.TextView
 import com.pixplicity.easyprefs.library.Prefs
 import org.jetbrains.anko.*
-import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.sdk25.listeners.onClick
-import rocks.che.elections.helpers.DefaultView
-import rocks.che.elections.helpers.gameTextView
-import rocks.che.elections.helpers.groupToResource
-import rocks.che.elections.helpers.toMaybeRussian
+import rocks.che.elections.helpers.*
 import rocks.che.elections.logic.Gamestate
 import rocks.che.elections.logic.inActivityChange
 
@@ -94,7 +90,7 @@ class GameView(val gs: Gamestate) : DefaultView<GameActivity> {
                                     if (!ui.owner.buyGroupPoints(group)) {
                                         ankoContext.view.snackbar(R.string.not_enough_money)
                                     }
-                                    moneyTextView.text = gs.money.toString() + "$"
+                                    moneyTextView.text = "%d$".format(gs.money)
                                     groupViews[group]!!.text = "%s: %d".format(group.toMaybeRussian(resources.configuration.locale.toString()), gs.candidate.opinions[group]!!)
                                 }
                             }
@@ -124,7 +120,7 @@ class GameView(val gs: Gamestate) : DefaultView<GameActivity> {
                     }
                     space().lparams { width = dip(30) }
                     moneyTextView = gameTextView(14, color = R.color.olive) {
-                        text = gs.money.toString() + "$"
+                        text = "%d$".format(gs.money)
                     }
                 }.lparams(height = matchParent, width = 0, weight = 0.5f)
                 linearLayout {
@@ -132,7 +128,7 @@ class GameView(val gs: Gamestate) : DefaultView<GameActivity> {
                     themedImageButton(theme = R.style.button) {
                         backgroundResource = R.drawable.round_button
                         imageResource = R.drawable.ic_logout
-                        onClick {
+                        onClick { _ ->
                             alert(R.string.end_game_dialog_message, R.string.end_game_dialog_title) {
                                 positiveButton(R.string.yes_button) {
                                     Prefs.remove("gamestate")

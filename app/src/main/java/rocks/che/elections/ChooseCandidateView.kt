@@ -1,16 +1,12 @@
 package rocks.che.elections
 
 import android.graphics.Typeface
-import android.support.v4.widget.TextViewCompat
+import androidx.core.widget.TextViewCompat
 import android.view.Gravity
 import android.widget.GridLayout
 import org.jetbrains.anko.*
-import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.sdk25.listeners.onClick
-import rocks.che.elections.helpers.DefaultView
-import rocks.che.elections.helpers.cardView
-import rocks.che.elections.helpers.gameTextView
-import rocks.che.elections.helpers.toMaybeRussian
+import rocks.che.elections.helpers.*
 import rocks.che.elections.logic.*
 
 class ChooseCandidateView(private val secretUnlocked: Boolean = false) : DefaultView<ChooseCandidateActivity> {

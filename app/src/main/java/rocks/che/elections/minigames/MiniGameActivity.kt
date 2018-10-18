@@ -70,7 +70,7 @@ abstract class MiniGameActivity : DefaultActivity() {
             mi.imageFrame.x -= mi.speed
 
             if (mi.onAppear != null && mi.imageFrame.x < displayMetrics.widthPixels.toFloat()) {
-                Log.d("shit", "imgf.width: %d".format(mi.imageView.width))
+                Log.d("shit", "img.width: %d".format(mi.imageView.width))
                 mi.onAppear!!.invoke(mi.imageFrame.x + mi.imageView.width)
                 mi.onAppear = null
             }
@@ -90,12 +90,6 @@ abstract class MiniGameActivity : DefaultActivity() {
 
         handler.postDelayed({ updateMovingImages() }, (1000 / frameRate).toLong())
     }
-
-    protected fun doEach(f: () -> Unit, t: () -> Double) {
-        handler.postDelayed({ f(); doEach(f, t) }, (t() + 0.5).toLong())
-    }
-
-    protected fun doEach(f: () -> Unit, t: Double = 1000.0) = doEach(f, { t })
 
     protected fun useMovingImages(mvg: ViewGroup) {
         movingViewGroup = mvg

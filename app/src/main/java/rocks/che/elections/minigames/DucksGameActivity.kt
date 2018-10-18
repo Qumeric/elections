@@ -4,7 +4,6 @@ import android.graphics.Rect
 import android.os.Bundle
 import android.widget.ImageView
 import im.delight.android.audio.MusicManager
-import org.jetbrains.anko.ctx
 import org.jetbrains.anko.dip
 import org.jetbrains.anko.displayMetrics
 import org.jetbrains.anko.setContentView
@@ -83,6 +82,7 @@ class DucksGameActivity : MiniGameActivity() {
 
         val coef = 0.1
 
+        // FIXME is this useless?
         chRC.bottom = chRC.centerY() + (chRC.bottom - chRC.centerY()) * coef.toInt()
         chRC.top = chRC.centerY() + (chRC.top - chRC.centerY()) * coef.toInt()
         chRC.left = chRC.centerX() + (chRC.left - chRC.centerX()) * coef.toInt()

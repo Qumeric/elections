@@ -1,21 +1,17 @@
 package rocks.che.elections.debate
 
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 import android.view.Gravity
 import android.widget.Button
 import android.widget.TextView
 import org.jetbrains.anko.*
-import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.sdk25.listeners.onClick
 import org.jetbrains.anko.sdk25.listeners.onSeekBarChangeListener
 import rocks.che.elections.R
-import rocks.che.elections.helpers.DefaultView
-import rocks.che.elections.helpers.gameTextView
-import rocks.che.elections.helpers.groupToResource
-import rocks.che.elections.helpers.toMaybeRussian
+import rocks.che.elections.helpers.*
 import rocks.che.elections.logic.Questions
 
-class DebateViewGroups(val minutes: Int = 60, val questions: Questions = Questions(hashMapOf())) : DefaultView<DebateActivity> {
+class DebateViewGroups(private val minutes: Int = 60, val questions: Questions = Questions(hashMapOf())) : DefaultView<DebateActivity> {
     private lateinit var ankoContext: AnkoContext<DebateActivity>
     private lateinit var nextButton: Button
     private val amounts = mutableListOf<TextView>()
@@ -70,21 +66,20 @@ class DebateViewGroups(val minutes: Int = 60, val questions: Questions = Questio
                             thumb = ContextCompat.getDrawable(ctx, R.drawable.seek)
                             progressDrawable = ContextCompat.getDrawable(ctx, R.drawable.seek_style)
                             max = minutes
-                            val p = pos // capture value
                             onSeekBarChangeListener {
-                                onProgressChanged({ sb, progress, _ ->
+                                onProgressChanged { sb, progress, _ ->
                                     var spendMinutes = (0 until amountVals.size)
-                                        .filter { it != p }
+                                        .filter { it != pos }
                                         .sumBy { amountVals[it] }
 
                                     sb!!.progress = Math.min(max - spendMinutes, progress)
-                                    amountVals[p] = sb.progress
+                                    amountVals[pos] = sb.progress
 
                                     spendMinutes += sb.progress
 
                                     minutesTextView.text = ctx.getString(R.string.debate_minutes_left_template).format(max - spendMinutes)
-                                    amounts[p].text = sb.progress.toString()
-                                })
+                                    amounts[pos].text = sb.progress.toString()
+                                }
                             }
                         }.lparams(width = dip(200))
                     }.lparams {

@@ -78,7 +78,7 @@ class ChangeView(private val oldOpinions: Map<String, Int> = mapOf(), val gs: Ga
                 onClick {
                     if (gs.isPollTime) {
                         gs.nextDebates = !gs.nextDebates
-                        debug("it is poll time and nextdebates is %b".format(gs.nextDebates))
+                        debug("it is poll time and next debates is %b".format(gs.nextDebates))
                         if (gs.nextDebates) {
                             val intent = when (gs.candidate.resource) {
                                 R.drawable.candidate_navalny -> Intent(ui.owner, RunnerGameActivity::class.java)

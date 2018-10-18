@@ -21,7 +21,7 @@ class RacesGameView(val candidates: ArrayList<Candidate>) : AnkoComponent<RacesG
 
     val opponentHorses = mutableListOf<ImageView>()
 
-    val candidateToHorse = mapOf(
+    private val candidateToHorse = mapOf(
         R.drawable.candidate_putin to R.drawable.races_horse_putin,
         R.drawable.candidate_navalny to R.drawable.races_horse_navalny,
         R.drawable.candidate_grudinin to R.drawable.races_horse_grudinin,
@@ -79,7 +79,7 @@ class RacesGameView(val candidates: ArrayList<Candidate>) : AnkoComponent<RacesG
                     }
                 }.lparams(height = matchParent, width = matchParent)
                 var ssum = 70
-                for ((i, c) in candidates.filter { it.resource != R.drawable.candidate_sobchak }.withIndex()) {
+                for ((i, c) in candidates.asSequence().filter { it.resource != R.drawable.candidate_sobchak }.withIndex().toList()) {
                     relativeLayout {
                         gravity = Gravity.BOTTOM
                         val h = imageView {

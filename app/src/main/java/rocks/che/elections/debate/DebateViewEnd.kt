@@ -10,8 +10,8 @@ import rocks.che.elections.helpers.gameTextView
 import rocks.che.elections.helpers.toMaybeRussian
 import rocks.che.elections.logic.Candidate
 
-class DebateViewEnd(val candidate: Candidate, val winGroup: String? = "Winner",
-                    val loseGroup: String? = "Loser", val attackResult: String? = "Opponent") : DefaultView<DebateActivity> {
+class DebateViewEnd(val candidate: Candidate, private val winGroup: String? = "Winner",
+                    private val loseGroup: String? = "Loser", private val attackResult: String? = "Opponent") : DefaultView<DebateActivity> {
     private lateinit var ankoContext: AnkoContext<DebateActivity>
 
     @SuppressLint("RtlHardcoded")
@@ -46,10 +46,10 @@ class DebateViewEnd(val candidate: Candidate, val winGroup: String? = "Winner",
                             imageResource = R.drawable.ic_add
                         }.lparams { rightPadding = dip(5) }
                         gameTextView(10) {
-                            if (winGroup != null) {
-                                text = ctx.getString(R.string.debate_good_group_template).format(winGroup.toMaybeRussian(resources.configuration.locale.toString()))
+                            text = if (winGroup != null) {
+                                ctx.getString(R.string.debate_good_group_template).format(winGroup.toMaybeRussian(resources.configuration.locale.toString()))
                             } else {
-                                text = ctx.getString(R.string.debate_good_group_template).format("-")
+                                ctx.getString(R.string.debate_good_group_template).format("-")
                             }
                         }
                     }.lparams { leftMargin = dip(30); topMargin = dip(10) }

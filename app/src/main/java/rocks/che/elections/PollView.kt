@@ -1,8 +1,8 @@
 package rocks.che.elections
 
 import android.graphics.drawable.GradientDrawable
-import android.support.v4.content.ContextCompat
-import android.support.v4.content.ContextCompat.getColor
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getColor
 import android.view.Gravity
 import android.widget.GridLayout
 import org.jetbrains.anko.*
@@ -45,7 +45,7 @@ class PollView(private val h: Map<Int, List<Double>> = mapOf(), val gs: Gamestat
                     backgroundResource = R.color.silver
                     for ((c, hd) in h) {
                         val sv = sparkView {}
-                        sv.adapter = MyAdapter(FloatArray(hd.size, { j -> hd[j].toFloat() }))
+                        sv.adapter = MyAdapter(FloatArray(hd.size) { j -> hd[j].toFloat() })
                         sv.lineColor = getColor(ctx, candidateToColor[c]!!)
                     }
                 }.lparams {

@@ -103,7 +103,7 @@ class RunnerGameActivity : MiniGameActivity() {
         handler.postDelayed({ flightUpdate(jumpedFrom) }, 20)
     }
 
-    var wallsInRow = 0
+    private var wallsInRow = 0
     private fun buildKremlinWall(x: Float = displayMetrics.widthPixels.toFloat()) {
         var drawable = R.drawable.runner_kremlin_wall
         when {
@@ -152,7 +152,7 @@ class RunnerGameActivity : MiniGameActivity() {
         handler.removeCallbacksAndMessages(null)
         drawInformationDialog(
             getString(R.string.runner_end_title),
-            getString(R.string.runner_end_message_template).format(score),
+            resources.getQuantityString(R.plurals.runner_end_message_template, score, score),
             { super.lose() },
             view.ankoContext
         )

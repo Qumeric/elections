@@ -1,7 +1,7 @@
 package rocks.che.elections.helpers
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.view.WindowManager
 import im.delight.android.audio.MusicManager
 import im.delight.android.audio.SoundManager

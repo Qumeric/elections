@@ -40,7 +40,7 @@ class SnakeGameActivity : MiniGameActivity() {
         NORTH, SOUTH, WEST, EAST
     }
 
-    val appleCount = 3
+    private val appleCount = 3
 
     private lateinit var view: SnakeGameView
 

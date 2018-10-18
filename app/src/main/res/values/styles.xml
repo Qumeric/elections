@@ -12,10 +12,6 @@
         <item name="cardElevation">4dp</item>
     </style>
 
-    <style name="blue_space" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:background">@color/blue</item>
-    </style>
-
     <style name="AlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>

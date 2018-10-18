@@ -13,9 +13,6 @@
     <string name="need_unblock">You have to unblock this candidate first</string>
     <string name="your_candidate">Your candidate</string>
     <string name="poll_results_template">Poll results on week %d</string>
-    <string name="logo" translatable="false">
-        <font color='#EE0000'>В</font>ремя\n<font color='#EE0000'>В</font>ыбирать\n<font color='#EE0000'>П</font>резидента
-    </string>
     <string name="you">you</string>
     <string name="pick_twice">You cannot pick the same category twice in a row</string>
 
@@ -45,14 +42,17 @@
     <string name="ducks_end_message_template">
         You have scored %d points
     </string>
+
     <string name="runner_info_title">
         The SIZO redemption
     </string>
     <string name="runner_info_message">Don\'t stumble! Your task is to jump over all police cars.</string>
     <string name="runner_end_title">Minigame is finished</string>
-    <string name="runner_end_message_template">
-        You have scored %d points
-    </string>
+    <plurals name="runner_end_message_template">
+        <item quantity="one">You have scored %d point.</item>
+        <item quantity="other">You have scored %d points.</item>
+    </plurals>
+
     <string name="catcher_info_title">Klubnikin\'s sovkhoz</string>
     <string name="catcher_info_message">Move the cart and gather strawberries. Only 5 misses are allowed.</string>
     <string name="catcher_end_title">Minigame is finished</string>
@@ -73,7 +73,6 @@
         You have scored %d points
     </string>
     <string name="day_template">Week: %d</string>
-    <string name="dialog_button_close">Close</string>
     <string name="no_button">No</string>
     <string name="yes_button">Yes</string>
     <string name="try_again">Play again</string>
@@ -81,7 +80,7 @@
     <string name="choose_candidate">Choose candidate</string>
     <string name="choose_category">Select category</string>
     <string name="endgame_text">You had a decent campaign but you-know-who has won</string>
-    <string name="endgame_text_mutin">You have won the election with 146% advantage</string>
+    <string name="endgame_text_mutin">You have won the election with 146\% advantage</string>
     <string name="debate_description">You can spend time to improve your rating</string>
     <string name="debate_choose_description">Allocate time between groups and opponents</string>
     <string name="debate_groups">Allocate time to refer to groups</string>
@@ -95,8 +94,6 @@
     <string name="hammer_info_message">Don\'t let them float. Tap your opponents when they do. Only 5 misses are allowed</string>
     <string name="end_game_lose_common">Unfortunately, you have lost. Your opponents have been stronger.</string>
     <string name="end_game_lose_mutin">Unfortunately, you have lost. Try to go through the election campaign again.</string>
-    <string name="exit_game">Exit game</string>
-    <string name="finish">Finish</string>
     <string name="welcome">Welcome</string>
     <string name="welcome_text">
         Welcome to the game, where everyone can try himself as a presidential candidate!

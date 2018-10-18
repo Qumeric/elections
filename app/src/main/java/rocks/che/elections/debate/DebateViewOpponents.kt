@@ -1,18 +1,18 @@
 package rocks.che.elections.debate
 
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 import android.view.Gravity
 import android.widget.TextView
 import org.jetbrains.anko.*
-import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.sdk25.listeners.onClick
 import org.jetbrains.anko.sdk25.listeners.onSeekBarChangeListener
 import rocks.che.elections.R
 import rocks.che.elections.helpers.DefaultView
 import rocks.che.elections.helpers.gameTextView
+import rocks.che.elections.helpers.snackbar
 import rocks.che.elections.logic.Candidate
 
-class DebateViewOpponents(val minutes: Int = 40, val candidates: List<Candidate> = listOf()) : DefaultView<DebateActivity> {
+class DebateViewOpponents(private val minutes: Int = 40, val candidates: List<Candidate> = listOf()) : DefaultView<DebateActivity> {
     private lateinit var ankoContext: AnkoContext<DebateActivity>
     private val amounts = mutableListOf<TextView>()
     private val amountVals = mutableListOf<Int>()
@@ -63,7 +63,7 @@ class DebateViewOpponents(val minutes: Int = 40, val candidates: List<Candidate>
                             progressDrawable = ContextCompat.getDrawable(ctx, R.drawable.seek_style)
                             max = minutes
                             onSeekBarChangeListener {
-                                onProgressChanged({ sb, progress, _ ->
+                                onProgressChanged { sb, progress, _ ->
                                     var spendMinutes = (0 until amountVals.size)
                                         .filter { it != pos }
                                         .sumBy { amountVals[it] }
@@ -75,7 +75,7 @@ class DebateViewOpponents(val minutes: Int = 40, val candidates: List<Candidate>
 
                                     minutesTextView.text = ctx.getString(R.string.debate_minutes_left_template).format(max - spendMinutes)
                                     amounts[pos].text = sb.progress.toString()
-                                })
+                                }
                             }
                         }.lparams(width = dip(200))
                     }.lparams {

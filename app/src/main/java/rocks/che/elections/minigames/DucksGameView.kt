@@ -1,6 +1,6 @@
 package rocks.che.elections.minigames
 
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 import android.view.Gravity
 import android.widget.ImageView
 import android.widget.LinearLayout

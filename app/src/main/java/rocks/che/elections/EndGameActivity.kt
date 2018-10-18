@@ -8,7 +8,7 @@ import rocks.che.elections.helpers.DefaultActivity
 import rocks.che.elections.logic.Gamestate
 import rocks.che.elections.logic.secretFilename
 
-class EndGameActivity() : DefaultActivity() {
+class EndGameActivity : DefaultActivity() {
     private lateinit var view: EndGameView
 
     override fun onCreate(savedInstanceState: Bundle?) {
