@@ -90,7 +90,7 @@ class GameView(val gs: Gamestate) : DefaultView<GameActivity> {
                                     if (!ui.owner.buyGroupPoints(group)) {
                                         ankoContext.view.snackbar(R.string.not_enough_money)
                                     }
-                                    moneyTextView.text = "%d$".format(gs.money)
+                                    moneyTextView.text = "${gs.money}$"
                                     groupViews[group]!!.text = "%s: %d".format(group.toMaybeRussian(resources.configuration.locale.toString()), gs.candidate.opinions[group]!!)
                                 }
                             }

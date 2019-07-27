@@ -4,14 +4,17 @@ import android.content.Context
 import android.content.res.Resources
 import android.graphics.RectF
 import android.graphics.Typeface
+import android.util.AttributeSet
 import androidx.core.content.ContextCompat
 import androidx.core.widget.TextViewCompat
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.cardview.widget.CardView
 import android.view.View
+import android.view.ViewGroup
 import android.view.ViewManager
 import android.view.animation.Animation
 import android.view.animation.ScaleAnimation
+import android.widget.FrameLayout
 import androidx.annotation.StringRes
 import com.google.android.material.snackbar.Snackbar
 import com.robinhood.spark.SparkAdapter
@@ -43,8 +46,127 @@ inline fun ViewManager.squareGridLayout(init: SquareGridLayout.() -> Unit): Squa
 inline fun ViewManager.sparkView(init: SparkView.() -> Unit): SparkView =
     ankoView({ SparkView(it) }, theme = 0, init = init)
 
-inline fun ViewManager.cardView(init: CardView.() -> Unit): CardView =
-    ankoView({ CardView(it) }, theme = R.style.Widget_MaterialComponents_CardView, init = init) // FIXME very strange
+// copied from anko _FrameLayout
+open class _CardView(ctx: Context): CardView(ctx) {
+    inline fun <T: View> T.lparams(
+        c: Context?,
+        attrs: AttributeSet?,
+        init: LayoutParams.() -> Unit
+    ): T {
+        val layoutParams = LayoutParams(c!!, attrs!!)
+        layoutParams.init()
+        this@lparams.layoutParams = layoutParams
+        return this
+    }
+
+    inline fun <T: View> T.lparams(
+        c: Context?,
+        attrs: AttributeSet?
+    ): T {
+        val layoutParams = LayoutParams(c!!, attrs!!)
+        this@lparams.layoutParams = layoutParams
+        return this
+    }
+
+    inline fun <T: View> T.lparams(
+        width: Int = ViewGroup.LayoutParams.WRAP_CONTENT,
+        height: Int = ViewGroup.LayoutParams.WRAP_CONTENT,
+        init: LayoutParams.() -> Unit
+    ): T {
+        val layoutParams = LayoutParams(width, height)
+        layoutParams.init()
+        this@lparams.layoutParams = layoutParams
+        return this
+    }
+
+    inline fun <T: View> T.lparams(
+        width: Int = ViewGroup.LayoutParams.WRAP_CONTENT,
+        height: Int = ViewGroup.LayoutParams.WRAP_CONTENT
+    ): T {
+        val layoutParams = LayoutParams(width, height)
+        this@lparams.layoutParams = layoutParams
+        return this
+    }
+
+    inline fun <T: View> T.lparams(
+        width: Int = ViewGroup.LayoutParams.WRAP_CONTENT,
+        height: Int = ViewGroup.LayoutParams.WRAP_CONTENT,
+        gravity: Int,
+        init: LayoutParams.() -> Unit
+    ): T {
+        val layoutParams = LayoutParams(width, height, gravity)
+        layoutParams.init()
+        this@lparams.layoutParams = layoutParams
+        return this
+    }
+
+    inline fun <T: View> T.lparams(
+        width: Int = ViewGroup.LayoutParams.WRAP_CONTENT,
+        height: Int = ViewGroup.LayoutParams.WRAP_CONTENT,
+        gravity: Int
+    ): T {
+        val layoutParams = LayoutParams(width, height, gravity)
+        this@lparams.layoutParams = layoutParams
+        return this
+    }
+
+    inline fun <T: View> T.lparams(
+        source: ViewGroup.LayoutParams?,
+        init: LayoutParams.() -> Unit
+    ): T {
+        val layoutParams = LayoutParams(source!!)
+        layoutParams.init()
+        this@lparams.layoutParams = layoutParams
+        return this
+    }
+
+    inline fun <T: View> T.lparams(
+        source: ViewGroup.LayoutParams?
+    ): T {
+        val layoutParams = LayoutParams(source!!)
+        this@lparams.layoutParams = layoutParams
+        return this
+    }
+
+    inline fun <T: View> T.lparams(
+        source: ViewGroup.MarginLayoutParams?,
+        init: LayoutParams.() -> Unit
+    ): T {
+        val layoutParams = LayoutParams(source!!)
+        layoutParams.init()
+        this@lparams.layoutParams = layoutParams
+        return this
+    }
+
+    inline fun <T: View> T.lparams(
+        source: ViewGroup.MarginLayoutParams?
+    ): T {
+        val layoutParams = LayoutParams(source!!)
+        this@lparams.layoutParams = layoutParams
+        return this
+    }
+
+    inline fun <T: View> T.lparams(
+        source: LayoutParams?,
+        init: LayoutParams.() -> Unit
+    ): T {
+        val layoutParams = LayoutParams(source!!)
+        layoutParams.init()
+        this@lparams.layoutParams = layoutParams
+        return this
+    }
+
+    inline fun <T: View> T.lparams(
+        source: LayoutParams?
+    ): T {
+        val layoutParams = LayoutParams(source!!)
+        this@lparams.layoutParams = layoutParams
+        return this
+    }
+}
+
+inline fun ViewManager.cardView(init: _CardView.() -> Unit): CardView =
+    ankoView({ _CardView(it) }, theme = R.style.Widget_MaterialComponents_CardView, init = init) // FIXME very strange
 
 inline fun ViewManager.gifImageView(init: GifImageView.() -> Unit): GifImageView =
     ankoView({ GifImageView(it) }, theme = 0, init = init)
