@@ -45,7 +45,7 @@ class GameView(val gs: Gamestate) : DefaultView<GameActivity> {
                             if (gs.lastGroup != group) {
                                 gs.lastGroup = group
                                 inActivityChange = true
-                                ctx.startActivity<QuestionActivity>("question" to gs.questions.get(group),
+                                ctx.startActivity<QuestionActivity>("question" to gs.questions[group],
                                     "group" to group, "gamestate" to gs)
                             } else {
                                 this@linearLayout.snackbar(R.string.pick_twice)
@@ -63,7 +63,7 @@ class GameView(val gs: Gamestate) : DefaultView<GameActivity> {
                             if (gs.lastGroup != group) {
                                 gs.lastGroup = group
                                 inActivityChange = true
-                                ctx.startActivity<QuestionActivity>("question" to gs.questions.get(group),
+                                ctx.startActivity<QuestionActivity>("question" to gs.questions[group],
                                     "group" to group, "gamestate" to gs)
                             } else {
                                 this@linearLayout.snackbar(R.string.pick_twice)
@@ -119,7 +119,7 @@ class GameView(val gs: Gamestate) : DefaultView<GameActivity> {
                     }
                     space().lparams { width = dip(30) }
                     moneyTextView = gameTextView(14, color = R.color.olive) {
-                        text = "%d$".format(gs.money)
+                        text = "${gs.money}$"
                     }
                 }.lparams(height = matchParent, width = 0, weight = 0.5f)
                 linearLayout {

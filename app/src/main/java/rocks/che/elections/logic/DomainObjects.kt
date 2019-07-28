@@ -79,12 +79,13 @@ data class Answer(val statement: String, val impact: HashMap<String, Int>) : Par
 
 @Parcelize
 class Questions(val all: HashMap<String, MutableList<Question>>,
-                private val answered: HashMap<String, Int> = groupToResource.keys.associateBy({ it }, { 0 }) as HashMap) : Parcelable {
+                private val answered: MutableMap<String, Int> = groupToResource.keys.associateWith { 0 }.toMutableMap()
+) : Parcelable {
     init {
         all.values.forEach { it.shuffle() }
     }
 
-    fun get(group: String): Question {
+    operator fun get(group: String): Question {
         val ptr = answered[group]!!
         answered[group] = (ptr + 1) % all[group]!!.size
         return all[group]!![answered[group]!!]

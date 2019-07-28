@@ -10,14 +10,14 @@ import org.jetbrains.anko.sdk25.listeners.onClick
 import rocks.che.elections.helpers.*
 import rocks.che.elections.logic.*
 
-fun _LinearLayout.header() = verticalLayout {
+fun _LinearLayout.header(weight: Float) = verticalLayout {
     gravity = Gravity.CENTER
     gameTextView(20) {
         textResource = R.string.choose_candidate
     }
-}.lparams(height = matchParent, weight = 0.9f)
+}.lparams(height = 0, width = matchParent, weight = weight)
 
-fun _LinearLayout.candidateGrid(ctx: Context) = gridLayout {
+fun _LinearLayout.candidateGrid(ctx: Context, weight: Float) = gridLayout {
     rowCount = 3
     columnCount = 2
     alignmentMode = GridLayout.ALIGN_MARGINS
@@ -37,24 +37,46 @@ fun _LinearLayout.candidateGrid(ctx: Context) = gridLayout {
             rowSpec = GridLayout.spec(row, 1f)
         }
     }
-}.lparams(width = matchParent, height = matchParent, weight = 0.1f)
+}.lparams(width = matchParent, height = 0, weight = 0.9f)
 
-fun _LinearLayout.candidateButton(
-    ctx: Context, candidate: Candidate, candidates: List<Candidate>) = button {
+fun _GridLayout.candidateCard(
+    ctx: Context, candidate: Candidate, candidates: List<Candidate>) = cardView {
+    verticalLayout {
+        weightSum = 1f
+        candidateInfo(ctx, candidate, 0.8f)
+        candidateButton(ctx, candidate, 0.2f).onClick {
+            if (!candidate.isLocked) {
+                inActivityChange = true
+                ctx.startActivity<HighlightsActivity>("gamestate" to Gamestate(candidate,
+                    candidates as MutableList<Candidate>, loadQuestions(resources)))
+            }
+        }
+    }.lparams(width = matchParent, height = matchParent)
+    if (candidate.isLocked) {
+        lockOverlay()
+    }
+}
+
+fun _LinearLayout.candidateInfo(ctx: Context, candidate: Candidate, weight: Float) {
+    linearLayout {
+        gravity = Gravity.CENTER
+        imageView(candidate.resource).lparams(width = dip(80))
+        verticalLayout {
+            gravity = Gravity.END
+            for ((group, value) in candidate.opinions) {
+                gameTextView(text = "${group.toMaybeRussian(ctx.configuration.locale.toString())}: $value")
+            }
+        }
+    }.lparams(weight = weight, height = 0, width = matchParent)
+}
+
+fun _LinearLayout.candidateButton(ctx: Context, candidate: Candidate, weight: Float) = button {
     text = candidate.name
     typeface = Typeface.createFromAsset(ctx.assets, "mfred.ttf")
     textSize = 20f
-    if (candidate.isLocked) {
-        backgroundResource = R.color.gray
-    } else {
-        backgroundResource = R.color.blue
-        onClick {
-            inActivityChange = true
-            ctx.startActivity<HighlightsActivity>("gamestate" to Gamestate(candidate,
-                candidates as MutableList<Candidate>, loadQuestions(resources)))
-        }
-    }
-}.lparams(width = matchParent, height = 0, weight = 0.2f)
+    backgroundResource = if (candidate.isLocked) R.color.gray else R.color.blue
+    TextViewCompat.setAutoSizeTextTypeWithDefaults(this, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM)
+}.lparams(width = matchParent, height = 0, weight = weight)
 
 fun _CardView.lockOverlay() {
     imageView {
@@ -66,32 +88,6 @@ fun _CardView.lockOverlay() {
     }.lparams(width = dip(50), height = dip(50), gravity = Gravity.CENTER)
 }
 
-// TODO too many parameters passed
-fun _GridLayout.candidateCard(
-    ctx: Context, candidate: Candidate, candidates: List<Candidate>) = cardView {
-    verticalLayout {
-        gravity = Gravity.CENTER
-        linearLayout {
-            gravity = Gravity.CENTER
-            imageView(candidate.resource).lparams(width = dip(80))
-            verticalLayout {
-                gravity = Gravity.END
-                for ((group, value) in candidate.opinions) {
-                    gameTextView {
-                        text = "${group.toMaybeRussian(ctx.configuration.locale.toString())}: $value"
-                    }
-                }
-            }
-        }.lparams(weight = 0.8f, height = 0, width = matchParent)
-
-        val b = candidateButton(ctx, candidate, candidates)
-        TextViewCompat.setAutoSizeTextTypeWithDefaults(b, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM)
-    }.lparams(width = matchParent, height = matchParent)
-    if (candidate.isLocked) {
-        lockOverlay()
-    }
-}
-
 class ChooseCandidateView() : DefaultView<ChooseCandidateActivity> {
     private lateinit var ankoContext: AnkoContext<ChooseCandidateActivity>
 
@@ -100,11 +96,9 @@ class ChooseCandidateView() : DefaultView<ChooseCandidateActivity> {
 
         verticalLayout {
             weightSum = 1f
-            gravity = Gravity.CENTER
 
-            header()
-
-            candidateGrid(ctx)
+            header(0.1f)
+            candidateGrid(ctx, 0.9f)
         }
     }
 }

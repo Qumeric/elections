@@ -130,19 +130,11 @@ open class _CardView(ctx: Context): CardView(ctx) {
     }
 
     inline fun <T: View> T.lparams(
-        source: ViewGroup.MarginLayoutParams?,
+        source: MarginLayoutParams?,
         init: LayoutParams.() -> Unit
     ): T {
         val layoutParams = LayoutParams(source!!)
         layoutParams.init()
-        this@lparams.layoutParams = layoutParams
-        return this
-    }
-
-    inline fun <T: View> T.lparams(
-        source: ViewGroup.MarginLayoutParams?
-    ): T {
-        val layoutParams = LayoutParams(source!!)
         this@lparams.layoutParams = layoutParams
         return this
     }
@@ -176,38 +168,28 @@ inline fun ViewManager.konfettiView(init: KonfettiView.() -> Unit): KonfettiView
     ankoView({ KonfettiView(it) }, theme = 0, init = init)
 
 inline fun ViewManager.gameTextView(size: Int? = null, color: Int? = null, text: String? = null, autoResize: Boolean = true,
-                                    init: AppCompatTextView.() -> Unit): AppCompatTextView = ankoView(
+                                    init: AppCompatTextView.() -> Unit = {}): AppCompatTextView = ankoView(
     {
-        val tv = AppCompatTextView(it)
-        tv.typeface = Typeface.createFromAsset(it.assets, "mfred.ttf")
-        tv.textAlignment = View.TEXT_ALIGNMENT_CENTER
-        if (color != null) tv.textColor = ContextCompat.getColor(it, color)
-        if (text != null) tv.text = text
-        if (size != null) tv.textSize = size * 2.5f // FIXME shouldn't have a constant
-        else if (autoResize) TextViewCompat.setAutoSizeTextTypeWithDefaults(tv, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM)
-        tv.elevation = 100f
-        tv
+        AppCompatTextView(it).apply {
+            this.typeface = Typeface.createFromAsset(it.assets, "mfred.ttf")
+            this.textAlignment = View.TEXT_ALIGNMENT_CENTER
+            if (color != null) this.textColor = ContextCompat.getColor(it, color)
+            this.text = text
+            if (size != null) this.textSize = size * 2.5f // FIXME shouldn't have a constant
+            else if (autoResize) TextViewCompat.setAutoSizeTextTypeWithDefaults(this, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM)
+            this.elevation = 100f
+        }
     }, theme = 0, init = init)
 
 
 class MyAdapter(private val yData: FloatArray) : SparkAdapter() {
-    override fun getCount(): Int {
-        return yData.size
-    }
+    override fun getCount(): Int = yData.size
+    override fun getItem(index: Int): Any? = yData[index]
+    override fun getY(index: Int): Float = yData[index]
 
-    override fun getItem(index: Int): Any? {
-        return yData[index]
-    }
-
-    override fun getY(index: Int): Float {
-        return yData[index]
-    }
-
-    override fun getDataBounds(): RectF {
-        val bounds = super.getDataBounds()
-        bounds.bottom = 100f
-        bounds.top = 0f
-        return bounds
+    override fun getDataBounds(): RectF = super.getDataBounds().apply {
+        bottom = 100f
+        top = 0f
     }
 }
 
