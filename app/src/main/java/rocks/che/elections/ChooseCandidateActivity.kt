@@ -12,7 +12,7 @@ class ChooseCandidateActivity : DefaultActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        view = ChooseCandidateView(Prefs.contains(secretFilename))
+        view = ChooseCandidateView()
         view.setContentView(this)
     }
 }

@@ -27,6 +27,7 @@ import org.jetbrains.anko.custom.ankoView
 import org.jetbrains.anko.textColor
 import pl.droidsonroids.gif.GifImageView
 import rocks.che.elections.R
+import java.util.*
 import kotlin.math.min
 
 class SquareGridLayout(ctx: Context) : _GridLayout(ctx) {
@@ -251,7 +252,7 @@ fun isRussian(locale: String): Boolean {
 
 fun String.toMaybeRussian(locale: String): String {
     if (isRussian(locale)) {
-        return when (this.toLowerCase()) {
+        return when (this.toLowerCase(Locale.US)) {
             "military" -> "военные"
             "foreign" -> "мир"
             "media" -> "пресса"

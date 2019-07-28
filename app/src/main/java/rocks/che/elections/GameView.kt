@@ -19,7 +19,6 @@ class GameView(val gs: Gamestate) : DefaultView<GameActivity> {
         ankoContext = ui
 
         verticalLayout {
-            gravity = Gravity.CENTER
             verticalLayout {
                 backgroundColorResource = R.color.black
                 background.alpha = 33

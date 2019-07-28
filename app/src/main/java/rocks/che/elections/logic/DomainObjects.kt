@@ -22,7 +22,8 @@ class Opinions : HashMap<String, Int>() {
 @Parcelize
 class Candidate(val name: String, val perks: List<String>,
                 val resource: Int, val opinions: Opinions,
-                val history: MutableList<Double>, var boost: Float = 0f) : Comparable<Candidate>, Parcelable {
+                val history: MutableList<Double>, var boost: Float = 0f,
+                val isLocked: Boolean) : Comparable<Candidate>, Parcelable {
     val generalOpinion get() = maxOf(0.0, opinions.values.sum().toDouble() / opinions.size + boost)
 
     init {
@@ -152,4 +153,5 @@ class Gamestate(val candidate: Candidate, val candidates: MutableList<Candidate>
     }
 }
 
+// TODO remove it
 var inActivityChange = false

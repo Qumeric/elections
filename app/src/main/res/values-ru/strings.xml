@@ -15,7 +15,6 @@
     <string name="end_game_dialog_message">Вы уверены что хотите закончить эту игру и начать новую?</string>
     <string name="not_enough_money">Недостаточно денег!</string>
     <string name="congratulations">Поздравляем!</string>
-    <string name="need_unblock">Сначала вы должны разблокировать этого кандидата</string>
     <string name="your_candidate">Ваш кандидат</string>
     <string name="endgame_text">Поздравляем! Вы победили в честной борьбе! Попробуйте сыграть за других кандидатов.</string>
     <string name="endgame_text_mutin">Вы победили! Это было несложно, правда? Сыграйте за других кандидатов!</string>

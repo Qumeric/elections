@@ -1,6 +1,7 @@
 package rocks.che.elections.logic
 
 import android.content.res.Resources
+import com.pixplicity.easyprefs.library.Prefs
 import org.json.JSONArray
 import org.json.JSONObject
 import rocks.che.elections.R
@@ -13,6 +14,7 @@ fun loadCandidate(json: JSONObject, isPlayer: Boolean = false): Candidate {
     val jsonPerks = json.getJSONArray("perks")
     val jsonHistory = json.getJSONArray("history")
 
+    val name = json.getString("name")
     val opinions = Opinions()
     val levels = mutableMapOf<String, Int>()
     val perks = (0 until jsonPerks.length()).map { jsonPerks.getString(it) }
@@ -22,12 +24,14 @@ fun loadCandidate(json: JSONObject, isPlayer: Boolean = false): Candidate {
 
     val boost = if (isPlayer) 0f else json.getDouble("boost").toFloat()
 
+    val isLocked = name in listOf("Ovalny", "ОвальныЙ") && !Prefs.contains(secretFilename)
+
     basicLevels.keys().forEach { levels[it] = basicLevels.getInt(it) }
     return Candidate(
-        json.getString("name"),
+        name,
         perks,
         candidateResourceNameToResource[json.getString("imgResource")]!!,
-        opinions, history, boost)
+        opinions, history, boost, isLocked)
 }
 
 fun loadCandidates(json: JSONArray) = (0 until json.length()).map { loadCandidate(json.getJSONObject(it)) }

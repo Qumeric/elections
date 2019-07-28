@@ -10,7 +10,6 @@
     <string name="end_game_keep_winning">Keep winning</string>
     <string name="not_enough_money">Not enough money!</string>
     <string name="congratulations">Congratulations!</string>
-    <string name="need_unblock">You have to unblock this candidate first</string>
     <string name="your_candidate">Your candidate</string>
     <string name="poll_results_template">Poll results on week %d</string>
     <string name="you">you</string>
