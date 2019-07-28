@@ -35,11 +35,4 @@ class NewGameActivity : DefaultActivity() {
             noButton {  }
         }.show()
     }
-
-    // TODO: test to see if it works
-    fun showInfo(v: View) = {
-        alert(getString(R.string.info_title), getString(R.string.info_message)) {
-            yesButton { }
-        }.show()
-    }
 }

@@ -35,18 +35,6 @@
         app:layout_constraintTop_toBottomOf="@+id/logo"
         app:srcCompat="@drawable/ic_play" />
 
-    <ImageView
-        android:id="@+id/infoBtn"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:contentDescription="@string/info_button"
-        android:onClick="showInfo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_question" />
-
     <TextView
         android:id="@+id/quoteTV"
         android:layout_width="wrap_content"
